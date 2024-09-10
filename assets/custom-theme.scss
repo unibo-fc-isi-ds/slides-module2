@@ -27,7 +27,7 @@
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono');
 // @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono');
 
-// $backgroundColor: #fff;
+$backgroundColor: #fff;
 
 // $mainColor: #000;
 // $headingColor: #111;
@@ -260,14 +260,14 @@ kbd {
 	background-position: 0.45% 99.2%;
 	background-size: 15%;
 	background-clip: border-box;
-	border-radius: 30px;
-	border-style: solid;
-	border-color: $detailBackgroundColor;
-	border-width: 0.3em;
+	// border-radius: 30px;
+	// border-style: solid;
+	// border-color: $detailBackgroundColor;
+	// border-width: 0.3em;
 }
 
 .reveal .slide-background:after {
-	content: "Authors - Title - Venue Year";
+	// content: "Authors - Title - Venue Year";
 	position: absolute;
 	bottom: 2.5%;
 	right: 6%;
@@ -277,9 +277,9 @@ kbd {
   }
 
 
-  // Multicolumn styling
+// Multicolumn styling
 
-  .reveal div.col {
+.reveal div.col {
 	// draw a red border
 	// border: 1px solid red;
 	text-align: left;
