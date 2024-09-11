@@ -8,7 +8,7 @@
     1. [Miscellanea](./misc/)
 
 * Case Studies
-    - [PONG](https://en.wikipedia.org/wiki/Pong)
+    - [PONG](./pong/)
         1. [Game Loop](./pong/loop/)
         1. [Game Model](./pong/model/)
         1. [I/O](./pong/io/)

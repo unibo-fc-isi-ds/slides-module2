@@ -12,7 +12,9 @@
         cond (or (strings.HasSuffix $path ".kt") (strings.HasSuffix $path ".kts")) "kotlin" (
             cond (strings.HasSuffix $path ".yml") "yaml" (
                 cond (strings.HasSuffix $path ".md") "markdown" (
-                    replaceRE "^.*\\.(\\w+)$" "$1" $path
+                    cond (strings.HasSuffix $path ".py") "python" (
+                        replaceRE "^.*\\.(\\w+)$" "$1" $path
+                    )
                 )
             )
         )
