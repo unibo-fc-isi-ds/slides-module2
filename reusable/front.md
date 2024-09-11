@@ -1,12 +1,10 @@
 # {{<course_name>}}
 
-## Module 2
-
-### {{<academic_year>}}
+## {{<academic_year>}}
 
 <br>
 
-#### Prof. {{<gc>}}, Tutor: {{<mm>}}
+### Prof. {{<gc>}}, Tutor: {{<mm>}}
 
 <br>
 

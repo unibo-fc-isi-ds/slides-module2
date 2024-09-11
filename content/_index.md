@@ -10,4 +10,9 @@ aliases = [
 
 +++
 
-{{% import path="reusable/header-course.md" %}}
+{{% import path="reusable/front.md" %}}
+
+---
+
+{{% load path="content/toc/_index.md" from="12" %}}
+
