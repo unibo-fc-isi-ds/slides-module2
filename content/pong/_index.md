@@ -20,7 +20,7 @@ aliases = [
 
 <https://en.wikipedia.org/wiki/Pong>
 
-![Pong screenshot](https://en.wikipedia.org/wiki/Pong#/media/File:Pong_Game_Test2.gif)
+![Pong screenshot](https://upload.wikimedia.org/wikipedia/commons/6/62/Pong_Game_Test2.gif)
 
 ---
 
@@ -63,15 +63,39 @@ in order to exemplify the _development_ of a distributed system _project_.
 - A **game loop** is the main logic cycle of most video-games
 
 - It continuously runs while the game is active, managing the following aspects:
-  1. **Processing user input** (e.g., keyboard, mouse, gamepad)
-  2. **Updating the game state** (e.g., moving objects in the virtual space)
-  3. **Rendering the game** (e.g., drawing the game world on the screen)
-  4. **Simulating the passage of time** in the game (e.g., moving objects even in absence of inputs)
+    1. **Processing user input** (e.g., keyboard, mouse, gamepad)
+    2. **Updating the game state** (e.g., moving objects in the virtual space)
+    3. **Rendering the game** (e.g., drawing the game world on the screen)
+    4. **Simulating the passage of time** in the game (e.g., moving objects even in absence of inputs)
 
-- The game loop ensures smooth gameplay and real-time interaction
+- Most commonly, some _wait_ is introduced at the end of each cycle 
+    + to control the game's frame rate
 
 ---
 
+## The Game Loop in PyGame
 
+{{<code path="content/pong/example1_game_loop.py">}}
+
+full example [on GitHub]({{<github-url repo="lab-snippets" path="snippets/lab1/example1_game_loop.py">}})
 
 {{%/section%}}
+
+---
+
+## Clean Code Recommendations
+
+1. Better to explicitly represent _game objects_ in the code
+    - __Game Object__ $\approx$ any entity that may appear in the game world (e.g. the circle)
+        + interesting aspects: _size_, _position_ , _speed_, _name_, etc.
+        + may have methods to _update_ its state
+    - the _overall_ **game state** consists of _all_ game objects therein contained
+        + $\Rightarrow$ update the game $\equiv$ update _each_ game objects
+
+{{%code path="content/pong/example2_game_object.py"%}}
+
+full example [on GitHub]({{<github-url repo="lab-snippets" path="snippets/lab1/example2_game_object.py">}})
+
+
+---
+
