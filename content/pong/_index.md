@@ -36,6 +36,37 @@ in order to exemplify the _development_ of a distributed system _project_.
 
 ---
 
+## Spoiler
+
+Here's an overview of the final result:
+
+{{% multicol %}}
+{{% col %}}
+![`dpongpy` screenshot](dpongpy.png)
+{{% /col %}}
+{{% col %}}
+Source code at: <{{<github-url repo="dpongpy">}}>
+
+Go on, play with it!
+
+```bash
+git clone {{<github-url repo="dpongpy">}}
+cd dpongpy
+# may require pip install -r requirements.txt if poetry is missing
+poetry install
+poetry run python -m dpongpy --mode local
+```
+
+<br>
+
+Default key bindings:
+- _Left_ paddle: __WASD__
+- _Right_ paddle: __Arrow keys__
+{{% /col %}}
+{{% /multicol %}}
+
+---
+
 ## What is PyGame?
 
 - **PyGame** is a popular Python library for writing simple games
@@ -46,7 +77,6 @@ in order to exemplify the _development_ of a distributed system _project_.
 
 - Lightweight, portable, and easy to install
     + `pip install pygame` (better to use a virtual environment)
-
 
 ---
 
@@ -289,6 +319,46 @@ full example [on GitHub]({{<github-url repo="lab-snippets" path="snippets/lab1/e
 {{< slide id="model" >}}
 
 ## Pong Model
+
+---
+
+### Let's infer a model from the view (pt. 1)
+
+![Pong view for 4 players](dpongpy4.png)
+
+- up to 4 _paddles_ for as many __players__
+- a _ball_ that _bounces off_ the paddles and the _walls_
+
+---
+
+### Let's infer a model from the view (pt. 2)
+
+{{% multicol %}}
+{{% col %}}
+![Detail on the visible and invisible aspects of the Pong model](./model.svg)
+{{% /col %}}
+{{% col %}}
+<br>
+
+`Pong` game model comphrehends:
+1. `GameObject`: _visible_ entity in the game
+    - relevant properties: `name`, `position`, `size`, \*`speed`\*, `bounding_box`
+        * `position`, `size`, and \*`speed`\* are `Vector2` instances
+    - particular cases: `Paddle`, `Ball`
+        * `Paddle` instances are assigned to one `side` (_property_) of the screen
+            + 4 possible _sides_ for as many `Direction`s: `UP`, `DOWN`, `LEFT`, `RIGHT`
+            + each paddle corresponds to a different _player_
+                - to support _local_ **multiplayer**, different _key bindings_ are needed
+2. `Board`: the plane upon which the game is played (black _rectangle_ in the figure)
+    - relevant properties: `size`, `walls`
+    - `Wall`: _invisible_ entity that _reflects_ the `Ball` when hit
+
+3. Ancillary classes: `Vector2`, `Rectangle`, `Direction`
+    - `Vector2` _utility_ class from PyGame, representing a _2D vector_
+    - `Rectangle` _utility_ class, representing a _rectangle_, supporting __collision detection__
+    - `Direction` is an _enumeration_ of 4 possible directions + `NONE` (lack of direction)
+{{% /col %}}
+{{% /multicol %}}
 
 {{%/section%}}
 
