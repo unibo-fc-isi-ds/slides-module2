@@ -371,11 +371,11 @@ left to right direction
 package "dpongpy.model" { 
 
     enum Direction {
-        + NONE
-        + LEFT
-        + UP
-        + RIGHT
-        + DOWN
+        + {static} NONE
+        + {static} LEFT
+        + {static} UP
+        + {static} RIGHT
+        + {static} DOWN
         --
         + is_vertical: bool
         + is_horizontal: bool
@@ -502,6 +502,9 @@ Pong "1" *-- "1" Random
 
 {{</plantuml>}}
 
+code [on GitHub]({{<github-url repo="dpongpy" path="dpongpy/model.py">}})
+
+
 ---
 
 ## Let's infer a model from the view (pt. 4)
@@ -597,15 +600,124 @@ Facilities of the `Pong` class, to __animate__ the game:
 
 {{%/section%}}
 
+<!-- Maybe discuss sizing? -->
+
 ---
 
 {{%section%}}
 
 {{< slide id="io" >}}
 
-## Pong I/O
+# Pong I/O
 
-### Input handling and Rendering
+---
+
+## Input handling and Control (pt. 1)
+
+In the general case, `Paddle`s are moved by players, via the _keyboard_
++ when players are __distributed__, the _keyboards_ are __different__
+    * so __key bindings__ _can_ be the _same_ for all players (but still _customisable_)
+
++ when players are __local__, there's only __one__ keyboard
+    * so __key bindings__ _must_ be _different_ for each player
+
+---
+
+## Input handling and Control (pt. 2)
+
+{{< plantuml width="85%" >}}
+
+left to right direction
+
+package "pygame.event" {
+    class Event {
+        + type: int
+        + dict: dict
+    }
+}
+
+package "dpongpy.controller" {
+    class ActionMap {
+        + move_up: int
+        + move_down: int
+        + move_left: int
+        + move_right: int
+        + quit: int
+        + name: str
+    }
+
+    enum PlayerAction {
+        + {static} MOVE_UP
+        + {static} MOVE_DOWN
+        + {static} MOVE_RIGHT
+        + {static} MOVE_LEFT
+        + {static} STOP
+        + {static} QUIT
+    }
+
+    enum ControlEvent {
+        + {static} PLAYER_JOIN
+        + {static} PLAYER_LEAVE
+        + {static} GAME_START
+        + {static} GAME_OVER
+        + {static} PADDLE_MOVE
+        + {static} TIME_ELAPSED
+    }
+
+    interface InputHandler {
+        + create_event(event, **kwargs)
+        + post_event(event, **kwargs)
+        ..
+        + key_pressed(key: int)
+        + key_released(key: int)
+        + time_elapsed(dt: float)
+        ..
+        + handle_inputs(dt: float)
+    }
+
+    interface EventHandler {
+        + handle_events()
+        ..
+        + on_player_join(pong: Pong, paddle):
+        + on_player_leave(pong: Pong, paddle):
+        + on_game_start(pong: Pong):
+        + on_game_over(pong: Pong):
+        + on_paddle_move(pong: Pong, paddle, direction):
+        + on_time_elapsed(pong: Pong, dt):
+    }
+}
+
+package "dpongpy.model" {
+    class Pong {
+        stuff
+    }
+}
+
+ActionMap <.. InputHandler: processes
+Event <.. InputHandler: processes
+InputHandler ..> PlayerAction: selects\nbased on\nActionMap\nand\nEvent
+InputHandler ..> ControlEvent: generates
+PlayerAction <.. ControlEvent: wraps
+ControlEvent <.. EventHandler: processes
+EventHandler ..> Pong: updates\nbased on\nControlEvent
+
+
+{{< /plantuml >}}
+
++ each __player__ is associated to a `Paddle` and to an `ActionMap` to _govern_ that `Paddle`
++ an `ActionMap` is a _dictionary_ mapping _key codes_ to `PlayerAction`s
+    * e.g. `pygame.K_UP` $\rightarrow$ `MOVE_UP`, `pygame.K_DOWN` $\rightarrow$ `MOVE_DOWN` for _right_ paddle (arrow keys)
+    * e.g. `pygame.K_w` $\rightarrow$ `MOVE_UP`, `pygame.K_s` $\rightarrow$ `MOVE_DOWN` for _left_ paddle (WASD keys)
++ `PlayerAction`s are one particular _sort_ of `ControlEvent`s that may occur in the game
+    * e.g. `GAME_START`, `PADDLE_MOVE`, `TIME_ELAPSED`, etc.
++ `ControlEvent`s are _custom_ PyGame events which _animate_ the game
+    * each event instance is _parametric_ (i.e. may carry additional _data_)
+        * e.g. `PADDLE_MOVE` carries the information about _which_ `Paddle` is moving and _where_ it is moving
+
+
+---
+
+## Rendering
 
 {{%/section%}}
 
