@@ -318,11 +318,11 @@ full example [on GitHub]({{<github-url repo="lab-snippets" path="snippets/lab1/e
 
 {{< slide id="model" >}}
 
-## Pong Model
+# Pong Model
 
 ---
 
-### Let's infer a model from the view (pt. 1)
+## Let's infer a model from the view (pt. 1)
 
 ![Pong view for 4 players](dpongpy4.png)
 
@@ -331,7 +331,7 @@ full example [on GitHub]({{<github-url repo="lab-snippets" path="snippets/lab1/e
 
 ---
 
-### Let's infer a model from the view (pt. 2)
+## Let's infer a model from the view (pt. 2)
 
 {{% multicol %}}
 {{% col %}}
@@ -340,7 +340,7 @@ full example [on GitHub]({{<github-url repo="lab-snippets" path="snippets/lab1/e
 {{% col %}}
 <br>
 
-`Pong` game model comphrehends:
+`Pong` game model comprehends:
 1. `GameObject`: _visible_ entity in the game
     - relevant properties: `name`, `position`, `size`, \*`speed`\*, `bounding_box`
         * `position`, `size`, and \*`speed`\* are `Vector2` instances
@@ -359,6 +359,241 @@ full example [on GitHub]({{<github-url repo="lab-snippets" path="snippets/lab1/e
     - `Direction` is an _enumeration_ of 4 possible directions + `NONE` (lack of direction)
 {{% /col %}}
 {{% /multicol %}}
+
+---
+
+## Let's infer a model from the view (pt. 3)
+
+{{<plantuml>}}
+
+left to right direction
+
+package "dpongpy.model" { 
+
+    enum Direction {
+        + NONE
+        + LEFT
+        + UP
+        + RIGHT
+        + DOWN
+        --
+        + is_vertical: bool
+        + is_horizontal: bool
+        + {static} values(): list[Direction]
+    }
+
+    interface Sized {
+        +size: Vector2
+        +width: float
+        +height: float
+    }
+
+    interface Positioned {
+        +position: Vector2
+        +x: float
+        +y: float
+    }
+
+    class Rectangle {
+        + top_left: Vector2
+        + top_right: Vector2
+        + bottom_right: Vector2
+        + bottom_left: Vector2
+        + top: float
+        + bottom: float
+        + left: float
+        + right: float
+        + corners -> list[Vector2]
+        + overlaps(other: Rectangle) -> bool
+        + is_inside(other: Rectangle) -> bool
+        + intersection_with(other: Rectangle) -> Rectangle
+        + hits(other: Rectangle) -> dict[Direction, float]
+    }
+
+    Rectangle --|> Sized
+    Rectangle --|> Positioned
+
+    class GameObject {
+        + name: str
+        + speed: Vector2
+        + bounding_box: Rectangle
+        + update(dt: float)
+        + override(other: GameObject)
+    }
+
+    GameObject --|> Sized
+    GameObject --|> Positioned
+    GameObject "1" *-- "1" Rectangle
+
+    class Paddle {
+        + side: Direction
+    }
+
+    Paddle --|> GameObject
+    Paddle "1" *-- "1" Direction
+
+    class Ball
+    Ball --|> GameObject
+
+    class Board {
+        + walls: dict[Direction, GameObject]
+    }
+
+    Board --|> Sized
+    Board "1" *-- "4" Direction
+    Board "1" *-- "4" GameObject
+
+    class Pong {
+        + config: Config
+        + random: Random
+        + ball: Ball
+        + paddles: list[Paddle]
+        + board: Board
+        + updates: int
+        + time: float
+        --
+        + reset_ball(speed: Vector2 = None)
+        + add_paddle(side: Direction, paddle: Paddle = None)
+        + paddle(side: Direction): Paddle
+        + has_paddle(side: Direction): bool
+        + remove_paddle(self, Direction)
+        --
+        + update(dt: float)
+        + move_paddle(paddle: int|Direction, direction: Direction)
+        + stop_paddle(paddle: int|Direction):
+        + override(self, other: Pong):
+        - _handle_collisions(subject, objects)
+    }
+
+    'Pong --|> Sized
+    Pong "1" *-- "1" Ball
+    Pong "1" *-- "4" Paddle
+    Pong "1" *-- "1" Board
+    Pong "1" *-- "1" Config
+
+    note top of Pong
+        model class
+    end note
+
+    class Config {
+        + paddle_ratio: Vector2
+        + ball_ratio: float
+        + ball_speed_ratio: float
+        + paddle_speed_ratio: float
+        + paddle_padding: float
+    }
+}
+
+package "random" {
+    class Random {
+        + uniform(a: float, b: float): float
+    }
+}
+
+package "pygame" {
+    class Vector2 {
+        +x: float
+        +y: float
+    }
+}
+
+Rectangle "1" *-l- "6" Vector2
+Pong "1" *-- "1" Random
+
+{{</plantuml>}}
+
+---
+
+## Let's infer a model from the view (pt. 4)
+
+Facilities of the `Pong` class, to __configure__ the game:
+- `reset_ball(speed=None)`: _re-locates_ the `Ball` at the _center_ of the `Board`, setting its `speed` _vector_ to the given value 
+    + _random_ speed _direction_ is provided if `speed` is `None`
+- `add_paddle(side, paddle=None)`: _assigns_ a `Paddle` to the `Pong`, at the given `side` (if not already present)
+    + the `Paddle` is created from scratch if `paddle` is `None`
+        * in this case, the paddle is _centered_ on the `side` of the `Board`
+- `paddle(side)`: _retrieves_ the `Paddle` at the given `side`
+- `has_paddle(side)`: _checks_ if a `Paddle` is present at the given `side`
+- `remove_paddle(side)`: _removes_ the `Paddle` at the given `side`
+
+Facilities of the `Pong` class, to __animate__ the game:
+- `update(dt)`: _updates_ the game state, _moving_ the `Ball` and the `Paddles` according to the given time _delta_
+    + computes _collisions_ between the `Ball` and the `Paddles` and the `Walls`
+        * uses `_handle_collisions` method to the purpose
+- `move_paddle(side, direction)`: _moves_ the selected `Paddle` in the given `direction` by setting its `speed` _vector_ accordingly
+    + `paddle` can either be an `int` (index of the `Paddle` in the `paddles` list) or a `Direction` (side of the `Paddle`)
+    + _left_ and _right_ paddles can only move _up_ and _down_, respectively
+    + _up_ and _down_ paddles can only move _left_ and _right_, respectively
+- `stop_paddle(side)`: _stops_ the selected `Paddle` from moving
+
+--- 
+
+## About collisions
+
+- _Collision detection_ is a crucial aspect of game development
+    + it is the process of _determining_ when two or more game objects _overlap_
+    + it is the basis for _physics simulation_ in games
+
+- In `Pong` collisions are very _simple_, as they simply rely on the game objects' __bounding boxes__
+    + a _bounding box_ the __minimal__ _rectangle_ that _encloses_ the game object
+    + a collision is detected when two bounding boxes _overlap_
+
+- In `Pong` there are 3 sorts of relevant collisions:
+    1. `Ball` vs. `Paddle`
+    2. `Ball` vs. `Wall`
+    3. `Paddle` vs. `Wall`
+
+- __Bouncing__ can simply be achieved by _reversing_ the `Ball`'s speed _vector_ along the _colliding_ axis
+
+---
+
+## Collision detection in `GameObject`s (non overlapping)
+
+![](./collision-1.svg)
+
+---
+
+## Collision detection in `GameObject`s (overlapping)
+
+![](./collision-2.svg)
+
+---
+
+## Collision detection in `GameObject`s (inside)
+
+![](./collision-3.svg)
+
+---
+
+## Bouncing
+
+1. Suppose the `Ball` is close to an obstacle and `update()` is called
+
+![](./bouncing-1.svg)
+
+---
+
+## Bouncing
+
+2. When the position of the `Ball` is updated, it is now _overlapping_ an obstacle (wall, or paddle)
+
+![](./bouncing-2.svg)
+
+---
+
+## Bouncing
+
+3. `Bouncing` = _reversing_ the speed vector along the _colliding_ axis + re-locating the `Ball` outside the obstacle
+
+![](./bouncing-3.svg)
+
+---
+
+## Bouncing
+
+3. Another `update()` call will _move_ the `Ball` _away_ from the obstacle
+
+![](./bouncing-4.svg)
 
 {{%/section%}}
 
