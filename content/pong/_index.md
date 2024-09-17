@@ -612,18 +612,97 @@ Facilities of the `Pong` class, to __animate__ the game:
 
 ---
 
-## Input handling and Control (pt. 1)
+## About Inputs
 
-In the general case, `Paddle`s are moved by players, via the _keyboard_
-+ when players are __distributed__, the _keyboards_ are __different__
-    * so __key bindings__ _can_ be the _same_ for all players (but still _customisable_)
+> __Insight__: _inputs_ are _external_ __data__, representing _events_ that may impact the system state
+> <br> (most _commonly_ corresponding to users' _actions_)
+> <br> (exceptions apply)
 
-+ when players are __local__, there's only __one__ keyboard
-    * so __key bindings__ _must_ be _different_ for each player
+<br>
+
+In a simple video game like Pong, we distinguish between:
+
+- __control events__: corresponding to some _update_ in the _game state_
+- __input events__: _low-level_ events which require some _processing_ to be translated into _control events_
 
 ---
 
-## Input handling and Control (pt. 2)
+## Input handling and Control Events (pt. 1)
+
+### Design questions
+
+1. What __input events__ are _relevant_ for the software, during its execution?
+    - _keyboard_ inputs, in particular __pressures__ and __releases__ of _keys_
+        + pressure should provoke a `Paddle`'s _movement_
+        + release should provoke a `Paddle`'s _stop_
+
+2. What other __control events__ are _relevant_ for the software, during its execution?
+    - __player__ _joining_ or _leaving_ the game (mostly useful in _distributed_ setting)
+    - __game__ _starting_ or _ending_ (mostly useful in _distributed_ setting)
+    - __time__ _passing_ in the game 
+    - __paddle__ _moving_ or _stopping_ 
+
+{{% fragment %}}
+
+### Design choices
+
+* We introduce two _abstractions_ to _handle_ inputs and control events:
+    - `InputHandler` _interprets_ keyboard __input__ events and _generates_ __control events__
+    - `EventHandler` _processes_ __control events__ and _updates_ the game _state_ (`Pong` class) accordingly
+
+{{% /fragment %}}
+
+---
+
+## Input handling and Control Events (pt. 2)
+
+### Important Remark
+
+- Notice the __time passing__ event corresponds to _no user input_
+- This _complicates_ the design
+    * _conceptually_, it implies that the system __evolves__ even in absence of user inputs
+    * _practically_, it implies that the system must be able to __generate__ control events _internally_
+- At the _modelling_ level, this means one more _abstraction_ is needed
+    + the __control loop__ is actually the abstraction that takes care of _time passing_ in the game
+
+{{% fragment %}}
+
+### More design choices
+
+- To keep our design proposal _simple_, we:
+    * consider the _time passing_ event as a _special_ kind of __input__...
+    * ... not really provided by the user, but by the _control_ itself
+    * so, the `InputHandler` is also in charge of _generating_ __time passing__ events
+
+{{% /fragment %}}
+
+---
+
+## Input handling and Control Events (pt. 3)
+
+### Important Remark
+
+- In the general case, `Paddle`s are moved by players, via the _keyboard_
+    + when players are __distributed__, the _keyboards_ are __different__
+        * so __key bindings__ _can_ be the _same_ for all players (but still _customisable_)
+
+    + when players are __local__, there's only __one__ keyboard
+        * so __key bindings__ _must_ be _different_ for each player
+
+{{% fragment %}}
+
+### More design choices
+
+* Useful additional _abstractions_: 
+    - `PlayerAction` _enumerates_ all possible _actions_ a player can perform (on a paddle)
+        + e.g. __move__ _paddle_ in a given `Direction`, __stop__ _paddle_, __quit__ the game
+    - `ActionMap`, associating _key codes_ to `PlayerAction`s
+
+{{% /fragment %}}
+
+---
+
+## Design Proposal (pt. 1)
 
 {{< plantuml width="85%" >}}
 
@@ -714,12 +793,189 @@ EventHandler ..> Pong: updates\nbased on\nControlEvent
     * each event instance is _parametric_ (i.e. may carry additional _data_)
         * e.g. `PADDLE_MOVE` carries the information about _which_ `Paddle` is moving and _where_ it is moving
 
+---
+
+## Design proposal (pt. 2)
+
+### Example of Keyboard Input Processing
+
+![](http://www.plantuml.com/plantuml/svg/bPHFRvj04CNlyob6xY79Ag3QlN684jNqZveq79fMbP3GnaoePPYbx68NMVdkNNPhR6nVUh8qy_Otx9ktljL6DgQjIYZfnQ1Hs2oBNmRpPKCBirGC81T6DJX9IjbHWzC9Iet95A0NI2vAmZSTbQNQu6IXs3Igr2X4ZnC2Qvdd9Raph0mXWFi9ci0nQhbOoO9mKdU5h2YaDR49XOZxNo4kKqP4IpDTJK94w6LMy2N-EN_yyLM8wvraHTrOaJqbGgHyvOPF7Db-_1RX5U1tIosXcwBxTZmzBStWugJs3Y2POX3SeEUX7TYGrgJnAKaPdrjZ58DlzZfBZZ3fFigAaDZnTCh_-kkbJFdevhNIvZ8CmoiX01QggXNR1dxckZMV95ip6u3OiKV527FoUFJqb2qUZ-W53V2zztTkqG-o7kokr9gojZxZv_L8agiD7ub6Mx6ZXWL8DoMhP9sfbyodAHiMSdWL3Ce0pyiZNB7QwFt7l_U9Sol2BI0Y_c-c1eIN9NVp-NsSFJn-ZuK8rx9iQRXqBetiZsnzmHSlVCQp9UVqvw9lptUFn-Bkum_Vh1-Z0yFZEb7t5dlfwpYvCsUKQvopwsPqYmWBOcga8GqZWy8sj8cSHRievlZSfNm8EyoSExFFt0o3rWxorVEXcm7q5ZrBJPWeBX3WK6u1Rwy2rucm3z3-Zo9bxw9zHd1BdBTL-HS0)
 
 ---
 
-## Rendering
+## Design proposal (pt. 3)
+
+### Example of Time Elapsed Processing
+
+![](http://www.plantuml.com/plantuml/svg/PLBBRjGy5DwVf_Wq_wAjrOp-THPLKMSGI4NC0bX5gZpnQHhgiODzCZ0QzIruBfu9so4Yg9jSlildS_5j51raF5Yo_2WGZz1tJmBJ1swbzuwezKw2jxYpldqcohXsdMNyTs9h_NUiXbEd3xoMFZsAQWKTuRmmYCgh2jLh_-hNJsdSPRQ1hHuYcyR5thKCgwFWCQJKgv9bXAZuKLKtwGyrMdyOHk58bB-yOoTuxnBqJZjZEH0PAUebM6Fknde_D6xGCN94AWJYYGRTFkkESJU9jiSSUYO0cAcvMSxSMgcYKUgoSLcbb9m6LgfUHcJPxircSxzz-F3norQfzL7RaQzdYz6Yi-Ky0HDuCMXZB3_qpl2FYqnlvfMakFljsqzANVzZC3F_IlrvfzGaVMdSDD1LgN-5CwZWz4BqRUIHKIgEHCkneR9faCkMQdJiEEYyW2MEzRY--PDHWrt9DDYV6hSCN2ujY__YanNLc0vSCZKCbx08pZ1H7jjUHyREkmv4ItNo_tzL5QR6mH-JIobjhLB8suFVV-LMOkDqs_fW-XGW7lB4VK0xXi2Iz75WDdbo-OQMIqAtxCnuiBy1)
+
+---
+
+## Design proposal (pt. 4)
+
+{{< plantuml >}}
+package "dpongpy.controller" {
+interface EventHandler
+interface InputHandler
+interface Controller {
+    - _pong: Pong
+}
+
+EventHandler <|-d- Controller
+InputHandler <|-d- Controller
+}
+{{< /plantuml >}}
+
+we call `Controller` any entity which acts as both an `EventHandler` and an `InputHandler`
+
+---
+
+## About outputs
+
+> __Insight__: outputs are representations of the _system state_ 
+> <br> that are _perceived_ by the _external world_
+> <br> (most _commonly_ corresponding to _visual_ or _auditory_ _feedback_ for the user)
+
+In our case:
+- the output is just a __rendering__ of the game _state_ on the screen
+- this is possible because we separated _model_, and _control_, so now it's time to separate the _view_
+    * essentially, we're following the [MVC pattern](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller)
+    * where _model_ $\approx$ `Pong`, _control_ $\approx$ `EventHandler` + `InputHandler`
+- if the rendering is updated _frequently enough_, the user _perceives_ the game as _animated_
+    * the "frequently enough" is the _frame rate_ of the game (30-60 fps is common)
+
+---
+
+## Design Proposal
+
+{{% multicol %}}
+{{% col class="col-5" %}}
+{{< plantuml >}}
+@startuml
+package "dpongpy" {
+class Pong
+
+package "view" {
+interface PongView {
+    - _pong: Pong
+    + render()
+}
+
+interface ShowNothingPongView
+
+note top of ShowNothingPongView
+    useful for hiding the game
+end note
+
+interface ScreenPongView {
+    - _screen: Surface
+    + render_ball(ball: Ball)
+    + render_paddles(paddle: Iterable[Paddle])
+    + render_paddle(paddle: Paddle)
+}
+
+PongView <|-d- ScreenPongView
+PongView <|-d- ShowNothingPongView
+}
+
+PongView *-u- Pong
+}
+@enduml
+{{< /plantuml >}}
+{{% /col %}}
+{{% col %}}
+{{% code path="content/pong/view.py" %}}
+
+- notice the `render()` method
+{{% /col %}}
+{{% /multicol %}}
 
 {{%/section%}}
+
+---
+
+{{< slide id="wiring" >}}
+
+# Pong
+
+## Wiring it all together
+
+{{% multicol %}}
+{{% col class="col-3" %}}
+{{< plantuml >}}
+top to bottom direction
+package "dpongpy" {
+class Settings {
+    + config: Config
+    + size: tuple[int]
+    + fps: int
+    + initial_paddles: tuple[Direction]
+}
+
+class PongGame {
+    + settings: Settings
+    + pong: Pong
+    + dt: float
+    + clock: pygame.time.Clock
+    + running: bool
+    + view: PongView
+    + controller: Controller
+    ..
+    + create_view(): PongView
+    + create_controller(): Controller
+    ..
+    + before_run()
+    + after_run()
+    + at_each_run()
+    ..
+    + run()
+    + stop()
+}
+Settings -d[hidden]- PongGame
+}
+{{< /plantuml >}}
+{{% /col %}}
+{{% col text-align="center" %}}
+{{% code path="content/pong/game.py" %}}
+
+notice the implementation of `run()`
+{{% /col %}}
+{{% /multicol %}}
+
+---
+
+{{< slide id="lanunch" >}}
+
+# Pong
+
+## Lancing the game
+
+```bash
+poetry run python -m dpongpy -h                                                                                                                                                                            ✔ 
+pygame 2.6.0 (SDL 2.28.4, Python 3.12.5)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+usage: python -m dpongpy [-h] [--mode {local}] [--side {none,left,up,right,down}] [--keys {wasd,arrows,ijkl,numpad}] [--debug] [--size SIZE SIZE] [--fps FPS]
+
+options:
+  -h, --help            show this help message and exit
+
+mode:
+  --mode {local}, -m {local}
+                        Run the game in local or centralised mode
+
+game:
+  --side {none,left,up,right,down}, -s {none,left,up,right,down}
+                        Side to play on
+  --keys {wasd,arrows,ijkl,numpad}, -k {wasd,arrows,ijkl,numpad}
+                        Keymaps for sides
+  --debug, -d           Enable debug mode
+  --size SIZE SIZE, -S SIZE SIZE
+                        Size of the game window
+  --fps FPS, -f FPS     Frames per second
+```
+
+[GitHub repository]({{<github-url repo="dpongpy">}})
++ minimal launch with `poetry run python -m dpongpy --mode local`
 
 ---
 
