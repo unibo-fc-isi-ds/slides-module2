@@ -381,7 +381,7 @@ clients, servers, brokers, load balancers, caches, databases, queues, masters, w
 
 ## Proxy
 
-![Proxy concept](./proxy.png)
+{{< image src="./proxy.png" height="50" >}}
 
 - __Proxy__ $\equiv$ a server acting as a _gateway_ towards another server
     * it _intercepts_ requests from clients and forwards them to the actual server
