@@ -237,7 +237,7 @@ These definitions cover the essential characteristics of distributed systems:
     - how do _domain entities_ __map to__ _infrastructural components_?
         * e.g. state of a video game on central server, while inputs/representations on clients
         * e.g. where to store messages in an IM app? for how long?
-    - how do components _communicate_? _what_? _which_ __protocols__ do they enact?
+    - how do components _communicate_? _what_? _which_ __interaction patterns__ do they enact?
     - do components need to store data? _what data_? _where_? _when_? _how many **copies**_?
         * in case of network partition, should the system be _available_ or _consistent_?
     - how do components _find_ each other?
@@ -253,7 +253,7 @@ These definitions cover the essential characteristics of distributed systems:
 ## Software Engineering Workflow for _Distributed Systems_
 
 4. __Implementation__:
-    - which _network protocols_ to use?
+    - which __network protocols__ to use?
         * e.g. UDP, TCP, HTTP, WebSockets, gRPC, XMPP, AMQP, MQTT, etc.
     - how should _in-transit data_ be __represented__?
         * e.g. JSON, XML, YAML, Protocol Buffers, etc.
@@ -315,6 +315,8 @@ These definitions cover the essential characteristics of distributed systems:
 
 ---
 
+## Software Engineering Workflow for _Distributed Systems_
+
 9. __Maintenance__:
     - continuous __monitoring__ of _performance_ and _availability_
         * tools and companies exist just for this!
@@ -326,24 +328,24 @@ These definitions cover the essential characteristics of distributed systems:
 
 ---
 
-{{%section%}}
-
 # Nomenclature
 
 ---
 
 ## Infrastructure
 
+- Andrew S. Tanenbaum and Maarten Van Steen - “Distributed Systems: Principles and Paradigms” (2007):
 > The infrastructure of a distributed system comprises the communication mechanisms, middleware, and platforms that allow components, located on different networked computers, to communicate and coordinate their actions.
-> <br/> — Andrew S. Tanenbaum and Maarten Van Steen - “Distributed Systems: Principles and Paradigms” (2007)
 
+- Coulouris, Dollimore, Kindberg - “Distributed Systems: Concepts and Design” (2011):
 > Infrastructure in a distributed system refers to the underlying hardware, software services, and networks that facilitate the integration, execution, and management of distributed components.
-> <br/> — Coulouris, Dollimore, Kindberg - “Distributed Systems: Concepts and Design” (2011)
 
+- Peter Van Roy - “Concepts, Techniques, and Models of Computer Programming” (2004):
 > In distributed systems, infrastructure is the ensemble of hardware and software that provides the necessary support for computation and communication across a network of independent, interacting components.
-> <br/> — Peter Van Roy - “Concepts, Techniques, and Models of Computer Programming” (2004)
 
 ---
+
+{{%section%}}
 
 ## Infrastructural Components
 
@@ -381,7 +383,9 @@ clients, servers, brokers, load balancers, caches, databases, queues, masters, w
 
 ## Proxy
 
-{{< image src="./proxy.png" height="50" >}}
+{{< image src="./proxy.png" height="50vh" >}}
+
+<br>
 
 - __Proxy__ $\equiv$ a server acting as a _gateway_ towards another server
     * it _intercepts_ requests from clients and forwards them to the actual server
@@ -394,7 +398,7 @@ clients, servers, brokers, load balancers, caches, databases, queues, masters, w
 
 ## Load Balancer
 
-![Load Balancer concept](./load-balancer.png)
+{{< image src="./load-balancer.png" height="60vh" alt="Load Balancer concept" >}}
 
 - __Load Balancer__ $\equiv$ a proxy _distributing_ incoming requests among multiple servers
     * according to some _distribution policy_:
@@ -471,5 +475,324 @@ clients, servers, brokers, load balancers, caches, databases, queues, masters, w
 - Common use cases:
     - \[master—worker\] _parallel_ computation
     - \[master—slave\] _replication_ of data
+
+{{%/section%}}
+
+---
+
+{{%section%}}
+
+## Interaction Patterns 
+
+> An __interaction pattern__ describes how different _components_ (nodes, processes, etc.) _communicate_ and _coordinate_ their actions to achieve a common goal. 
+> These patterns define the _flow of messages_, _responsibilities_ of __participants__, and the _timing_ and _sequencing_ of __communications__.
+
+e.g. _request-response_, _publish-subscribe_, _auction_, _etc.
+
+### Key points
+
+- __Participants__: we assume that there are _$N \geq 2$_ participants
+- __Roles__: participants play _well-defined_ roles, most commonly:
+    * __initiator__: the participant _initiating_ the interaction
+    * __responder__: the participant _waiting_ for _some other participant_ to initiate the interaction
+- __Messages__: information _exchanged_ among participants, most commonly containing at least:
+    * __payload__: the actual content of the message
+    * __metadata__: information _about_ the message, e.g. _source_, _destination_, _timestamp_, _conversation id_, etc.
+
+---
+
+## How to represent Interaction Patterns?
+
+1. __Sequence diagrams__: _visual_ representation of the _flow_ of messages between participants
+    * _time_ is _vertical_, _participants_ are _horizontal_
+    * _arrows_ represent _messages_ sent from one participant to another
+    * _lifelines_ represent the _lifetime_ of a participant
+
+![Example of a Sequence Diagram](./diagram-sequence.png)
+
+### Hints
+
+- see explanation at <https://www.uml-diagrams.org/sequence-diagrams.html>
+- use [PlantUML](https://plantuml.com/sequence-diagram) to _automatically_ generate sequence diagrams from textual descriptions
+    + many Web-based picture generators, e.g. [http://www.plantuml.com/plantuml](http://www.plantuml.com/plantuml/uml/SoWkIImgAStDuNBAJrBGjLDmpCbCJbMmKiX8pSd9vt98pKi1IW80)
+
+---
+
+## How to represent Interaction Patterns?
+
+2. __Message flow graphs__: _visual_ representation of the _flow_ of messages 
+    * each _node_ represents a __type__ of _message_ (e.g. _request_, _response_, _notification_, etc.)
+    * each _directed edge_ represents an admissible _reply_ to a _message_
+    * the graph may contain _cycles_, if the pattern allows for _repeated_ interactions, or _resets_
+    * nodes may be represented in different colours/shapes depending on which _role_ sends/receives the message
+
+{{< image src="./user-agent-protocol.svg" width="65vw" link="https://link.springer.com/chapter/10.1007/978-3-031-40878-6_3" >}}
+
+### Hints
+
+- in _OO programming languages_, each message type can be represented as a _class_
+- you may use class diagrams (e.g. in [PlantUML](https://plantuml.com/class-diagram)) to represent them
+- you may also depict the graph otherwise, via graph-drawing tools (e.g. [Graphviz](https://graphviz.org/) or [yEd](https://www.yworks.com/products/yed))
+
+---
+
+## How to represent Interaction Patterns?
+
+3. __State diagrams (a.k.a. state machines)__: _visual_ representation of the _internal state transitions_ of a participant
+    * each _state_ represents a _condition_ of the participant (e.g. before/after a message is sent/received)
+    * each _transition_ represents an _event_ that _changes_ the _state_ of the participant
+        + most commonly, a message _reception_ or _sending_
+    * _initial_ and _final_ states are _special_ states representing the _start_ and _end_ of the interaction
+    * most commonly, there's _one state diagram per participant_
+
+{{% multicol %}}
+{{% col %}}
+{{< image src="./user-state-diagram.svg" width="40vw" link="https://link.springer.com/chapter/10.1007/978-3-031-40878-6_3" >}}
+{{% /col %}}
+{{% col %}}
+{{< image src="./agent-state-diagram.svg" width="40vw" link="https://link.springer.com/chapter/10.1007/978-3-031-40878-6_3" >}}
+{{% /col %}}
+{{% /multicol %}}
+
+### Hints 
+
+- use [PlantUML](https://plantuml.com/state-diagram) to _automatically_ generate state diagrams from textual descriptions
+
+---
+
+## Which representation to use?
+
+- The three representations are _complementary_
+- So you should use them _together_ to _fully_ describe an interaction pattern
+
+<br>
+
+### Further representations may be welcome
+
+1. FIPA's _AUML_ (Agent UML) for agent-based systems 
+    * see <http://www.fipa.org/docs/input/f-in-00077/f-in-00077.pdf>
+1. _BPMN_ (Business Process Model and Notation) for _business_ processes
+    * see <https://en.wikipedia.org/wiki/Business_Process_Model_and_Notation>
+1. UML's _Activity Diagrams_ 
+    * see <https://www.uml-diagrams.org/activity-diagrams.html>
+
+---
+
+## Common Interaction Protocols (pt. 1) 
+
+### Request—Response
+
+The most common and basic pattern for communication between two components
+
+{{% multicol %}}
+{{% col %}}
+{{% plantuml %}}
+hide footbox
+participant Client
+participant Server
+
+
+Client -> Server: Request
+Server -> Client: Response
+{{% /plantuml %}}
+{{% /col %}}
+{{% col %}}
+- 2 roles: __client__ and __server__
+- 2 sorts of messages: __request__ and __response__ 
+- __each__ _request_ is _followed_ by __one__ _response_
+- _client_ is the __initiator__, _server_ is the __responder__
+- _client_ __sends__ the _request_, _server_ __sends__ the _response_
+- _client_ __waits__ for the _response_, _server_ __waits__ for the _request_
+- often used to realise:
+    + _remote procedure calls_ (RPC)
+    + _remote method invocations_ (RMI)
+    + (web) _services_
+
+{{% /col %}}
+{{% /multicol %}}
+
+---
+
+## Common Interaction Protocols (pt. 2) 
+
+### Publish—Subscribe
+
+A simple pattern to spread information among multiple recipients
+
+{{% multicol %}}
+{{% col %}}
+{{% plantuml %}}
+hide footbox
+actor User
+participant Publisher
+participant Subscriber1
+participant Subscriber2
+
+== Subscription Phase ==
+Subscriber1 -> Publisher: subscribe
+activate Publisher
+Publisher --> Subscriber1: confirmation
+deactivate Publisher
+
+Subscriber2 -> Publisher: subscribe
+activate Publisher
+Publisher --> Subscriber2: confirmation
+deactivate Publisher
+
+== Notification Phase ==
+User --> Publisher: Event
+activate Publisher
+Publisher -> Subscriber1: notify Message
+Publisher -> Subscriber2: notify Message
+deactivate Publisher
+{{% /plantuml %}}
+{{% /col %}}
+{{% col %}}
+- 2 roles: __publisher__ and __subscriber__
+- 2 sorts of messages: __subscribe__ and __notify__
+- 2 _phases_ of interaction: __subscription__ and __notification__
+    1. __Subscription__ phase: _subscribers_ __declare__ their _interest_ in _receiving_ message
+        * subscribers are _initiators_ here
+    2. __Notification__ phase: _publishers_ __send__ messages to _subscribers_
+        * messages are _broadcasted_ or _multicasted_ depending on the implementation
+- messages of type _notify_ carry __messages__, commonly representing events
+- messages of type _subscribe_ may carry __topics__, commonly representing the topic of interest (for the subscriber)
+- notice that subscription is, essentially, a _request-response_ pattern
+{{% /col %}}
+{{% /multicol %}}
+
+---
+
+## Common Interaction Protocols (pt. 2) 
+
+### Publish—Subscribe with Broker
+
+Notice that the publisher here is acting as a __broker__
+* one may re-design the pattern with _explicit_ broker
+* this is commonly useful to _decouple_ the _publisher_ from the _subscribers_
+* most commonly, brokers _store_ messages until they are _consumed_
+
+{{% plantuml height="50vh" %}}
+hide footbox
+actor User
+participant Publisher
+participant Broker
+participant Subscriber1
+participant Subscriber2
+participant Subscriber3
+
+== Subscription Phase ==
+Subscriber1 -> Broker: subscribe TopicA
+activate Broker
+Broker --> Subscriber1: confirmation
+deactivate Broker
+
+Subscriber2 -> Broker: subscribe TopicA
+activate Broker
+Broker --> Subscriber2: confirmation
+deactivate Broker
+
+Subscriber3 -> Broker: subscribe TopicB
+activate Broker
+Broker --> Subscriber3: confirmation
+deactivate Broker
+
+== Notification Phase ==
+User --> Publisher: Event
+activate Publisher
+Publisher -> Broker: publish Message\non TopicA
+deactivate Publisher
+activate Broker
+Broker -> Subscriber1: notify Message
+Broker -> Subscriber2: notify Message
+deactivate Broker
+{{% /plantuml %}}
+
+--- 
+
+## Common Interaction Protocols (pt. 2) 
+
+### Unicast vs. Broadcast vs. Multicast
+
+{{< image src="./cast.png" width="60vw" alt="Depiction of the three types of communication" >}}
+
+<br/>
+
+- __Unicast__: _one-to-one_ communication
+- __Broadcast__: _one-to-all_ communication
+- __Multicast__: _one-to-many_ communication
+    * implies a _selection criterion_ for the _many_
+
+---
+
+## Common Interaction Protocols (pt. 3) 
+
+### ContractNet Protocol
+
+A simple protocol for _auctions_ and _negotiations_
+
+{{% multicol %}}
+{{% col %}}
+{{% plantuml %}}
+hide footbox
+participant Initiator
+participant Contractor1
+participant Contractor2
+
+== Call for Proposals ==
+Initiator -> Contractor1: Call for Proposal (CFP)
+activate Initiator
+Initiator -> Contractor2: Call for Proposal (CFP)
+
+== Proposal Submission ==
+Contractor1 -> Initiator: Submit Proposal
+Contractor2 -> Initiator: Submit Proposal
+
+== Proposal Evaluation ==
+Initiator -> Initiator: Evaluate Proposals, choosing the best one
+
+== Award Contract ==
+Initiator -> Contractor1: Award Contract
+activate Contractor1
+Contractor1 -> Initiator: Accept Contract
+
+== Contract Execution ==
+Contractor1 -> Initiator: Return Result
+deactivate Contractor1
+deactivate Initiator
+{{% /plantuml %}}
+{{% /col %}}
+{{% col %}}
+- 2 roles: __initiator__ and __contractor__
+- 5 sorts of messages: __CFP__, __proposal__, __award__, __accept__, __result__
+- 4 _phases_ of interaction:
+    1. __Call for Proposals__: _initiator_ broad- or multi-casts a _request_ a CFP
+        + commonly defining a _deadline_ + _task request_
+    2. __Proposal Submission__: _contractors_ __submit__ proposals to _initiator_
+        + commonly containing _estimated cost_
+    3. __Proposal Evaluation__: _initiator_ __evaluates__ proposals and __chooses__ the best one
+    4. __Award Contract__: _initiator_ __awards__ the contract to the chosen contractor
+        + the chosen contractor __accepts__ the contract
+    5. __Contract Execution__: _contractor_ __executes__ the contract and __returns__ the result
+
+- not shown in the picture:
+    1. lack of proposals (i.e. no contractor)
+    2. no proposal chosen
+    3. _contractor_ may _reject_ the contract
+
+{{% /col %}}
+{{% /multicol %}}
+
+---
+
+## Common Interaction Protocols (pt. 4) 
+
+### Foundation for Intelligent Physical Agents (FIPA)
+
+- FIPA is a _standardization_ body for _agent-based_ systems
+- **Very** rough analogy: _agent_ $\approx$ distributed _component_ in a distributed system
+- FIPA has _standardized_ many _interaction protocols_ for agents
+    * e.g. _contract net_, _request-response_, _subscription_, _auction_, _etc.
+- See <http://www.fipa.org/repository/ips.php3>
 
 {{%/section%}}
