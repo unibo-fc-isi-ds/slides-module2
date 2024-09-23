@@ -482,9 +482,9 @@ clients, servers, brokers, load balancers, caches, databases, queues, masters, w
 
 {{%section%}}
 
-## Interaction Patterns 
+## Interaction Patterns
 
-> An __interaction pattern__ describes how different _components_ (nodes, processes, etc.) _communicate_ and _coordinate_ their actions to achieve a common goal. 
+> An __interaction pattern__ describes how different _components_ (nodes, processes, etc.) _communicate_ and _coordinate_ their actions to achieve a common goal.
 > These patterns define the _flow of messages_, _responsibilities_ of __participants__, and the _timing_ and _sequencing_ of __communications__.
 
 e.g. _request-response_, _publish-subscribe_, _auction_, _etc.
@@ -520,7 +520,7 @@ e.g. _request-response_, _publish-subscribe_, _auction_, _etc.
 
 ## How to represent Interaction Patterns?
 
-2. __Message flow graphs__: _visual_ representation of the _flow_ of messages 
+2. __Message flow graphs__: _visual_ representation of the _flow_ of messages
     * each _node_ represents a __type__ of _message_ (e.g. _request_, _response_, _notification_, etc.)
     * each _directed edge_ represents an admissible _reply_ to a _message_
     * the graph may contain _cycles_, if the pattern allows for _repeated_ interactions, or _resets_
@@ -554,7 +554,7 @@ e.g. _request-response_, _publish-subscribe_, _auction_, _etc.
 {{% /col %}}
 {{% /multicol %}}
 
-### Hints 
+### Hints
 
 - use [PlantUML](https://plantuml.com/state-diagram) to _automatically_ generate state diagrams from textual descriptions
 
@@ -569,16 +569,16 @@ e.g. _request-response_, _publish-subscribe_, _auction_, _etc.
 
 ### Further representations may be welcome
 
-1. FIPA's _AUML_ (Agent UML) for agent-based systems 
+1. FIPA's _AUML_ (Agent UML) for agent-based systems
     * see <http://www.fipa.org/docs/input/f-in-00077/f-in-00077.pdf>
 1. _BPMN_ (Business Process Model and Notation) for _business_ processes
     * see <https://en.wikipedia.org/wiki/Business_Process_Model_and_Notation>
-1. UML's _Activity Diagrams_ 
+1. UML's _Activity Diagrams_
     * see <https://www.uml-diagrams.org/activity-diagrams.html>
 
 ---
 
-## Common Interaction Protocols (pt. 1) 
+## Common Interaction Protocols (pt. 1)
 
 ### Request—Response
 
@@ -598,7 +598,7 @@ Server -> Client: Response
 {{% /col %}}
 {{% col %}}
 - 2 roles: __client__ and __server__
-- 2 sorts of messages: __request__ and __response__ 
+- 2 sorts of messages: __request__ and __response__
 - __each__ _request_ is _followed_ by __one__ _response_
 - _client_ is the __initiator__, _server_ is the __responder__
 - _client_ __sends__ the _request_, _server_ __sends__ the _response_
@@ -613,7 +613,7 @@ Server -> Client: Response
 
 ---
 
-## Common Interaction Protocols (pt. 2) 
+## Common Interaction Protocols (pt. 2)
 
 ### Publish—Subscribe
 
@@ -663,7 +663,7 @@ deactivate Publisher
 
 ---
 
-## Common Interaction Protocols (pt. 2) 
+## Common Interaction Protocols (pt. 2)
 
 ### Publish—Subscribe with Broker
 
@@ -708,9 +708,9 @@ Broker -> Subscriber2: notify Message
 deactivate Broker
 {{% /plantuml %}}
 
---- 
+---
 
-## Common Interaction Protocols (pt. 2) 
+## Common Interaction Protocols (pt. 2)
 
 ### Unicast vs. Broadcast vs. Multicast
 
@@ -725,7 +725,7 @@ deactivate Broker
 
 ---
 
-## Common Interaction Protocols (pt. 3) 
+## Common Interaction Protocols (pt. 3)
 
 ### ContractNet Protocol
 
@@ -785,7 +785,7 @@ deactivate Initiator
 
 ---
 
-## Common Interaction Protocols (pt. 4) 
+## Common Interaction Protocols (pt. 4)
 
 ### Foundation for Intelligent Physical Agents (FIPA)
 
@@ -796,3 +796,302 @@ deactivate Initiator
 - See <http://www.fipa.org/repository/ips.php3>
 
 {{%/section%}}
+
+---
+
+{{% section %}}
+
+# Architecture and Architectural Styles
+
+(recall theory from Module 1's {{< module1-m6 >}})
+
+---
+
+## Recap: Software Architecture vs. Architectural Style
+
+- Roy Fielding (2000):
+> A __software architecture__ is an abstraction of the run-time elements of a software system during some phase of its operation.
+> [...]
+> It is defined by a _configuration_ of __architectural elements__ constrained in their relationships in order to achieve a desired set of _architectural properties_.
+
+
+- Very roughly:
+> __Architectural style__ $\approx$ _patterns_ of architectures which are known to work in practice
+
+### Main architectural styles for distributed systems
+
+* _layered_ architectures
+* _object-based_ architectures
+* _event-based_ architectures
+* _shared data-space_ architectures
+
+---
+
+## Architectural Styles in Practice (pt. 1)
+
+### Layered Architecture (concept)
+
+{{% multicol %}}
+{{% col %}}
+{{< image src="./architecture-layered.png" alt="Layered Architecture" >}}
+{{% /col %}}
+{{% col %}}
++ Which __infrastructural components__?
+    - Each layer is a __server__ (or a _proxy_) for the layer(s) _above_ it
+    - Each layer is a __client__ for the layer(s) _below_ it
+
++ Which __interaction patterns__?
+    - _Request—Response_: (a.k.a. remote procedure call, RPC)
+        * _upper_ layers issue __requests__ to _lower_ layers
+        * _lower_ layers issue __responses__ to _upper_ layers
+    - sometimes, _Publish—Subscribe_:
+        * _upper_ layers _subscribe_ to _lower_ layers
+        * _lower_ layers _notify_ _upper_ layers
+
++ Constraints:
+    - _no cycles_ among layers
+        * i.e. _lower_ layers_ should not contact _upper_ layers
+
++ Example: (Web Services)
+    - [Skyscanner](https://www.skyscanner.net) (looks for flights / hotels)
+        * relying on the Web services of airlines / hotels
+        * relying on the [Booking](https://www.booking.com) portal
+            + all of which have their own _layered_ architecture
+{{% /col %}}
+{{% /multicol %}}
+
+---
+
+## Architectural Styles in Practice (pt. 1)
+
+### Layered Architecture (particular cases)
+
+#### Three-Tier Architecture
+
+{{< image src="./three-tier.webp" alt="Classic three-tier application architecture" >}}
+
+- __Presentation Tier__: responsible for _presenting_ information to the _user_, and _accepting_ user _input_
+- __Application Tier__: responsible for _processing_ user _requests_, and _executing_ business _logic_, __updating system state__
+- __Data Tier__: responsible for _storing_ and _retrieving_ data, and _managing_ data _access_, __persisting system state__
+
+---
+
+## Architectural Styles in Practice (pt. 1)
+
+### Layered Architecture (particular cases)
+
+#### Hexagoal Architecture
+
+{{< image src="./architecture-hexagonal.png" alt="Hexagonal Architecture" >}}
+
+cf. <https://en.wikipedia.org/wiki/Hexagonal_architecture_(software)>
+
+---
+
+## Architectural Styles in Practice (pt. 1)
+
+### Layered Architecture (analysis)
+
+#### Pros
+
+1. **Separation of Concerns**: each layer handles a specific responsibility, making the system easier to understand and maintain.
+
+2. **Modularity**: layers are independent, allowing easier updates, testing, and replacement without affecting the entire system.
+
+3. **Reusability**: common functionality in layers can be reused across different systems or projects.
+
+4. **Scalability**: the system can scale by modifying or optimizing individual layers (e.g., scaling the database or network layer independently).
+
+5. **Maintainability**: bugs or issues can be isolated to specific layers, making troubleshooting simpler.
+
+6. **Abstraction**: layers provide clear abstractions, allowing higher layers to interact with the system without needing to know the internal details of lower layers.
+
+7. **Interoperability**: a well-defined interface between layers promotes compatibility and enables the use of different technologies in each layer.
+
+---
+
+## Architectural Styles in Practice (pt. 1)
+
+### Layered Architecture (analysis)
+
+#### Cons
+
+1. **Performance Overhead**: multiple layers can introduce latency, especially if there are excessive data transformations or processing between layers.
+
+2. **Complexity in Design**: designing and managing multiple layers can increase overall system complexity, particularly in very large systems.
+
+3. **Rigid Structure**: strict layer separation can limit flexibility, making it harder to implement cross-cutting concerns (e.g., logging, security) efficiently.
+
+4. **Duplication of Functionality**: if layers are not carefully defined, functionality can be duplicated across layers, leading to inefficiencies.
+
+5. **Potential for Over-Engineering**: in smaller or simpler systems, using a layered architecture might introduce unnecessary complexity when simpler architectures would suffice.
+
+6. **Difficulty in Layer Communication**: strict adherence to layer boundaries might make certain interactions cumbersome, requiring unnecessary intermediate steps.
+
+---
+
+## Architectural Styles in Practice (pt. 1)
+
+### Layered Architecture (analysis)
+
+#### Personal Opinion of the Teacher
+
+- _Layered_ architectures are _simple_ and _easy_ to _understand_
+- It works well in most cases, you can consider it the _default_ choice
+- Prefer:
+    1. _two-tier_ (3-tier with no real DBMS) architectures for _quick and dirty_ systems
+    2. _three-tier_ architectures for if _flexibility_ is not a primary concern
+    3. _hexagonal_ architectures for systems that may need to _scale_ in _complexity_
+
+---
+
+## Architectural Styles in Practice (pt. 2)
+
+### Object-Based Architecture (concept)
+
+{{% multicol %}}
+{{% col %}}
+{{< image src="./architecture-objectbased.png" alt="Object-Based Architecture" >}}
+{{% /col %}}
+{{% col %}}
++ Which __infrastructural components__?
+    - each is object simultaneously a __client__ and a __server__ for other objects
+
++ Which __interaction patterns__?
+    - _Request—Response_: (a.k.a. remote method invocation, RMI)
+        * _objects_ issue __requests__ to _other objects_
+        * _other objects_ __respond__
+
++ Constraints:
+    - basically none
+
++ Examples:
+    - [Microsoft Component Object Model](https://en.wikipedia.org/wiki/Component_Object_Model) COM
+    - [Java RMI](https://docs.oracle.com/javase/8/docs/technotes/guides/rmi/hello/hello-world.html)
+    - [Common Object Request Broker Architecture](https://en.wikipedia.org/wiki/Common_Object_Request_Broker_Architecture) (CORBA)
+
+{{% /col %}}
+{{% /multicol %}}
+
+---
+
+## Architectural Styles in Practice (pt. 2)
+
+### Object-Based Architecture (analysis)
+
+#### Pros
+
+1. **Encapsulation**: objects encapsulate data and behaviour, making the system more modular and easier to maintain.
+
+2. **Reusability**: objects can be reused across different parts of the system or in different applications, reducing duplication of code.
+
+3. **Modularity**: components are independent and self-contained, allowing easier upgrades, testing, and maintenance.
+
+4. **Clear Interface Definition**: objects interact through well-defined interfaces, making it easier to manage dependencies and interactions between components.
+
+5. **Flexibility**: objects can be distributed across different nodes, enabling flexibility in deployment and scalability in a distributed system.
+
+6. **Language Agnosticism** (e.g., CORBA): some object-based systems (like CORBA) support multi-language environments, allowing developers to use the best language for each component while maintaining system integration.
+
+7. **Dynamic Behaviour**: objects can be created, modified, or destroyed dynamically, allowing more flexible and adaptive systems.
+
+---
+
+## Architectural Styles in Practice (pt. 2)
+
+### Object-Based Architecture (analysis)
+
+#### Cons
+
+1. **Performance Overhead**: the communication between distributed objects, especially over a network, can introduce significant latency and performance overhead.
+
+2. **Complexity in Management**: managing the lifecycle and communication of distributed objects can add complexity, particularly in handling object references, synchronization, and failure recovery.
+
+3. **Difficulty in Debugging**: debugging distributed objects is more complex due to the separation between client and server objects, especially when communication spans across different networks or systems.
+
+4. **Scalability Limitations**: while object-based systems are modular, they may not scale efficiently in very large systems due to the overhead of managing object communication and state.
+
+5. **Security Concerns**: distributed objects expose interfaces that can be exploited if not secured properly, making security management more challenging.
+
+6. **Tight Coupling through Interfaces**: objects often rely on specific interfaces, which can lead to tight coupling between components, reducing flexibility in modifying or replacing objects.
+
+7. **State Management**: maintaining the state of distributed objects can be complex, especially in cases of network failures or when objects need to be synchronized across multiple nodes.
+
+---
+
+## Architectural Styles in Practice (pt. 2)
+
+### Object-Based Architecture (analysis)
+
+#### Personal Opinion of the Teacher
+
+- _Object-based_ architectures were a thing in the 90s and early 2000s
+- They never really took off, and are now mostly _legacy_
+- OOP is good for developing individual _components_, where objects share the same _address space_
+- Inter-object _interactions_ are so _fine-grained_ and _intertwined_ in OOP that adding network in between makes it __unmanageable__
+- Just __don't__ use this when designing a new system
+
+---
+
+## Architectural Styles in Practice (pt. 3)
+
+### Event Based Architecture (concept)
+
+{{% multicol %}}
+{{% col %}}
+{{< image src="./architecture-eventbased.png" alt="Event-Based Architecture" >}}
+{{% /col %}}
+{{% col %}}
++ Which __infrastructural components__?
+    - ???
+
++ Which __interaction patterns__?
+    - ???
+
++ Constraints:
+    - ???
+
++ Examples:
+    - ???
+{{% /col %}}
+{{% /multicol %}}
+
+---
+
+## Architectural Styles in Practice (pt. 4)
+
+### Shared Dataspace Architecture (concept)
+
+{{% multicol %}}
+{{% col %}}
+{{< image src="./architecture-shareddataspace.png" width="40vw" alt="Shared Dataspace Architecture" >}}
+{{% /col %}}
+{{% col %}}
++ Which __infrastructural components__?
+    - ???
+
++ Which __interaction patterns__?
+    - ???
+
++ Constraints:
+    - ???
+
++ Examples:
+    - ???
+{{% /col %}}
+{{% /multicol %}}
+
+{{%/section%}}
+
+---
+
+## Other features you may want to consider
+
+1. Replication
+    - why? fault tolarance, load balancing, consistency, etc.
+
+2. Federation
+
+3. Partitioning
+
+4. Sharding
