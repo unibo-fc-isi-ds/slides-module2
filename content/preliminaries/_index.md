@@ -1043,18 +1043,76 @@ cf. <https://en.wikipedia.org/wiki/Hexagonal_architecture_(software)>
 {{% /col %}}
 {{% col %}}
 + Which __infrastructural components__?
-    - ???
+    - __event bus__ $\approx$ a _broker_ for _events_ OR a set of _brokers_ with a _routing_ mechanism
+    - __servers__ are _producers_ and _consumers_ of _events_
+    - __clients__ commonly just interact with servers, as in _layered_ architectures
 
 + Which __interaction patterns__?
-    - ???
+    - _Request—Response_: client $\leftrightarrow$ server
+    - _Publish-Subscribe_: server $\leftrightarrow$ event bus
 
 + Constraints:
-    - ???
+    - servers do _not_ really _know_ each other...
+    - ... they just know which __event__ _to react_ to or _to produce_
 
-+ Examples:
-    - ???
++ Remarks:
+    - much used in the _industry_ to create __modular__ systems
+        + where _modules_ are realised in different moments/technologies
+
 {{% /col %}}
 {{% /multicol %}}
+
+---
+
+## Architectural Styles in Practice (pt. 3)
+
+### Event Based Architecture (analysis)
+
+#### Pros
+
+1. **Scalability**: event-driven systems can scale more easily as components are decoupled and can handle many events concurrently.
+
+2. **Real-time Processing**: events are processed as they happen, enabling real-time responses and immediate actions.
+
+3. **Loose Coupling**: components are loosely coupled, improving flexibility and allowing independent service updates without affecting the whole system.
+
+4. **Resilience**: fault tolerance is improved, as event producers and consumers are decoupled, reducing the risk of single points of failure.
+
+5. **Asynchronous Communication**: systems can handle tasks asynchronously, improving responsiveness and system performance.
+
+---
+
+## Architectural Styles in Practice (pt. 3)
+
+### Event Based Architecture (analysis)
+
+#### Cons
+
+1. **Complexity**: event-driven systems can be more complex to design, implement, and maintain, particularly with large-scale event flows.
+
+2. **Debugging Challenges**: tracking the flow of events and identifying issues can be difficult, especially in distributed systems with asynchronous operations.
+
+3. **Event Ordering**: ensuring the correct order of event processing can be challenging, especially in distributed systems with multiple consumers.
+
+4. **Latency**: while events are often processed in real-time, network latency or communication issues can delay event delivery or processing.
+
+5. **Data Consistency**: ensuring consistency across different services or systems can be harder in event-driven systems due to asynchronous processing.
+
+6. **Single point of failure**: if the event hub is not properly managed (e.g., no fault-tolerant mechanisms), system may become faulty or unavailable.
+
+---
+
+## Architectural Styles in Practice (pt. 3)
+
+### Event Based Architecture (analysis)
+
+#### Personal Opinion of the Teacher
+
+- **Event-based** architectures are _very_ _popular_ in the _industry_
+- They are also pretty complex to _design_ and _implement_: not at all entry level
+- Future courses in _this master programme_ will cover this in _more detail_
+- Understanding of how _layered_ architectures work is a good _starting point_ for _event-based_ architectures
+    + also because the two styles are often combined
 
 ---
 
@@ -1068,30 +1126,146 @@ cf. <https://en.wikipedia.org/wiki/Hexagonal_architecture_(software)>
 {{% /col %}}
 {{% col %}}
 + Which __infrastructural components__?
-    - ???
+    - _clients_ and _databases_
 
 + Which __interaction patterns__?
-    - ???
+    - _Request—Response_: client _reads/writes_ __data__ from/to database
+    - _Publish-Subscribe_:
+        * support for asynchronous _notifications_ of _data_ changes
+        * support for _streaming_ big query results
 
 + Constraints:
-    - ???
+    - clients only perform _CRUD_ operations on the database
 
 + Examples:
-    - ???
+    - Oracle's [JavaSpaces](https://www.oracle.com/technical-resources/articles/javase/javaspaces.html)
+    - IBM's [TSpaces](https://ieeexplore.ieee.org/abstract/document/5387119)
+    - GigaSpaces's [XAP](https://xap.github.io/)
 {{% /col %}}
 {{% /multicol %}}
+
+---
+
+## Architectural Styles in Practice (pt. 4)
+
+### Shared Dataspace Architecture (analysis)
+
+#### Pros
+
+1. **Decoupled Communication**: clients do not need to interact directly, allowing for more flexible and asynchronous communication.
+
+2. **Simplified Coordination**: by using a shared space, different processes can coordinate without knowing about each other, simplifying synchronization in distributed systems.
+
+3. **Scalability**: components can be added or removed from the system without affecting others, making the architecture inherently scalable.
+
+4. **Fault Tolerance**: since communication happens through a shared space, if one component fails, others can still operate, improving resilience.
+
+5. **Loose Coupling**: different parts of the system are loosely coupled through the shared data space, enabling more flexibility in how the system components interact.
+
+6. **Asynchronous Processing**: processes can post data to the space and move on without waiting for others to consume it, improving system responsiveness and throughput.0
+
+---
+
+## Architectural Styles in Practice (pt. 4)
+
+### Shared Dataspace Architecture (analysis)
+
+#### Cons
+
+1. **Performance Overhead**: accessing a shared space, particularly in a distributed environment, can introduce latency and performance bottlenecks.
+
+2. **Data Consistency Challenges**: ensuring consistency between the data posted in the shared space and its consumers can be difficult, especially with concurrent access.
+
+3. **Concurrency Issues**: managing multiple processes accessing or modifying the same shared data can lead to race conditions and other concurrency issues.
+
+4. **Limited Visibility**: because of the decoupled nature of the system, it can be harder to track or debug the flow of data and interactions between components.
+
+5. **Complexity in Data Management**: house-keeping the shared data space (e.g., cleaning up outdated data, managing space, etc.) adds additional complexity to the system.
+
+6. **Single point of failure**: if the shared space is not properly managed (e.g., no fault-tolerant mechanisms), data may be lost if the space fails or system may become completely unavailable.
+
+---
+
+## Architectural Styles in Practice (pt. 4)
+
+### Event Based Architecture (analysis)
+
+#### Personal Opinion of the Teacher
+
+- **Shared dataspace** architectures only make sense in few _niches_
+- e.g. in _distributed_ __data processing__, where computational burdens are _shared_ among _many_ nodes
+- e.g. when the distributed systems' _state_ is _shared_ among most/all nodes, and _concurrent updates_ are necessary
+    + such as in _distributed databases_ or _distributed file systems_, or in _non-real-time_ __multiplayer__ video games
 
 {{%/section%}}
 
 ---
 
-## Other features you may want to consider
+{{% section %}}
 
-1. Replication
-    - why? fault tolarance, load balancing, consistency, etc.
+## Features Impacting DS Design
 
-2. Federation
+These features impact the infrastructure, interaction patterns, or architecture of DS:
 
-3. Partitioning
+1. __Redundancy__: data, services, or hardware are replicated across multiple nodes or servers to ensure availability in case of failure.
 
-4. Sharding
+2. __Failover__: when a primary node or service fails, a backup (secondary node) takes over.
+
+3. __Checkpoints__ and __Rollback Recovery__: periodically saving the state of a process so that in case of failure, the system can roll back to the last known good state.
+
+4. __Consensus__: achieving agreement between distributed nodes, ensuring consistent decision-making, even in case of failures.
+
+5. __Hearth-beats__: periodic signals sent between nodes to ensure they are alive and responsive.
+
+6. __Timeouts__ and __Retries__: setting timeouts for operations and retrying them in case of failure or unresponsiveness.
+
+7. __Authorization__ and __Authentication__: ensuring that only authorized users or systems can access data or services.
+
+8. __Data Partitioning__: splitting data across multiple nodes to improve performance and scalability, or respect administrative constraints.
+
+---
+
+## About Redundancy
+
+### What
+
+- __Data__: making _copies_ of the data across multiple nodes
+- __Services__: deploying _multiple instances_ of the same service across different nodes
+- __Hardware__: using multiple computers, _storage devices_, or network components
+
+### Why
+
+- __Fault Tolerance__: ensures that the system remains operational even if some components fail
+    + also avoiding _data loss_
+- __Availability__: distributing the load across multiple nodes, reducing the load on each node
+- __Scalability__: easier to _scale_ the system up/down when the load increases/decreases
+
+### How
+
+- __Replication__: copying data or services across multiple nodes
+- \[Data\] __Sharding__ : splitting data into smaller parts and distributing them across multiple nodes
+    * when _all_ nodes have _all_ data, it's called _replication_...
+    * ... when _each_ node has _only_ a _part_ of the data, it's called _sharding_
+
+### Implications
+
+- _Data_ replication $\Rightarrow$ _consistency_ issues $\Rightarrow$ _consensus_ algorithms
+- _Service_ replication $\Rightarrow$ _load balancing_ issues $\Rightarrow$ more complex infrastructure
+- _Service_ replication $\Rightarrow$ _state management_ issues $\Rightarrow$ _state-less_ server + _stateful_ database
+
+---
+
+## About Failover
+
+### What
+
+- __Active-passive__ failover: the backup node become active when the primary fails
+
+- __Active-active__ failover: all replicas are active, and traffic is rerouted in case of failure
+
+### Why
+
+- __Fault Tolerance__: ensures that the system remains operational even the component fail
+
+
+{{% /section %}}
