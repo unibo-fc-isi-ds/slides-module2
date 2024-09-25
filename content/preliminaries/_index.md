@@ -1249,7 +1249,7 @@ These features impact the infrastructure, interaction patterns, or architecture 
 
 ### Implications
 
-- _Data_ replication $\Rightarrow$ _consistency_ issues $\Rightarrow$ _consensus_ algorithms
+- _Data_ replication $\Rightarrow$ _consistency_ issues $\Rightarrow$ _consensus_ algorithms OR _master—slave_ replication
 - _Service_ replication $\Rightarrow$ _load balancing_ issues $\Rightarrow$ more complex infrastructure
 - _Service_ replication $\Rightarrow$ _state management_ issues $\Rightarrow$ _state-less_ server + _stateful_ database
 
@@ -1265,7 +1265,165 @@ These features impact the infrastructure, interaction patterns, or architecture 
 
 ### Why
 
-- __Fault Tolerance__: ensures that the system remains operational even the component fail
+- __Fault Tolerance__ and __Availability__: ensures that the system remains operational even the component fail
 
+### How
+
+- __Load-balancer__ or __proxy__ to reroute traffic to the backup node(s)
+
+### Implications
+
+- Same as in _service replication_
+- Need for a mechanism to _detect_ failures, e.g. __hear-beats__ (see next slides)
+
+---
+
+## About Checkpoints and Rollback Recovery
+
+### What
+
+- __Checkpoints__: saving the state of a process at regular intervals
+    * this is similar to _backups_, but it's most commonly _automatic_
+- __Rollback Recovery__: in case of failure, the system can roll back to the last known good state
+    * again, stress on the _automatic_ part
+
+### Why
+
+- __Fault Tolerance__: it may be hard to prevent some _bad situation_ from happening,
+so this is a way to _recover_ from it when it does
+
+### How
+
+1. by designing your system to be able _snapshot_ its state & _restore_ snapshots upon failures __automatically__
+2. by designing your system to track _variations_ (rather than _states_) and compute the _states_ from the _variations_
+    - e.g. [Command Query Responsibility Segregation](https://martinfowler.com/bliki/CQRS.html) (CQRS)
+
+### Implications
+
+- Requires ad-hoc _modelling_, _architectural_, and _infrastructural_ __decisions__
+
+---
+
+## About Consensus
+
+### What
+
+- A __protocol__ to ensure that some nodes (most commonly _servers_ or _databases_) in a DS agree on a common decision
+    * decision could be _"which operation to perform on data"_ or _"who to elect as a leader"_, etc
+    * even in case of _failures_
+        + e.g. __crashes__: one node stops responding
+        + e.g. __byzantine failures__: one node sends wrong information (either by mistake or deliberately)
+
+### Why
+
+- __Consistency__: ensures that nodes in the system have the same view of the data
+- __Fault Tolerance__: ensures that the system can continue to operate even if some nodes fail
+- __Data Redundancy__: see previous slides
+
+### How
+
+- _Byzantine Fault Tolerant_ (BFT) protocols, e.g. [PBFT](https://www.usenix.org/legacy/publications/library/proceedings/osdi99/full_papers/castro/castro.ps)
+- _Crash Fault Tolerant_ protocols,  e.g. [Paxos](https://en.wikipedia.org/wiki/Paxos_(computer_science)), [Raft](https://en.wikipedia.org/wiki/Raft_(computer_science))
+
+### Implications
+
+- __Complexity__: design is more complex, e.g. clients may need to know _which_ replica(s) to contact
+- __Latency__: in the eyes of _clients_, due to consensus going on _between_ request and response
+
+---
+
+## About Heart-beats, Timeout, Retries
+
+### What
+
+- __Heart-beats__ are _periodic_ signals sent between nodes to ensure they are _alive_ and _responsive_
+    * if a node stops sending heart-beats within _the period_, it's considered _dead_
+    * signal $\approx$ (almost) empty message: only its reception matter 
+- __Timeout__: amount of _time_ necessary to _locally_ mark a _remote operation_ as _failed_ (e.g. node as unreachable)
+- __Retry__: commonly a single failure not enough (e.g. short timeout, bad luck) so better to _retry a few times_
+    <!-- * commonly implies to parameters:  -->
+    * __max retries__: maximum amount of retries before considering an actual failure
+    * __delay__: amount of time to wait before retrying again (may be variable, cf. [exponential back-off](https://en.wikipedia.org/wiki/Exponential_backoff))
+
+### Why
+
+- __Fault Tolerance__: basic mechanism to _detect_ failures, to be able to _react_ to them ASAP  
+
+### How
+
+1. Nodes keep a connection open between them, and send data periodically
+    + alternatively, they send each other messages with no connection
+    + some application may have this feature _built-in_, others may need ad-hoc design 
+2. _Timeout_ + _retrial threshold_ + _retrial delay_ to mark nodes as unreachable
+3. Decide what to do when depending on which and how many nodes are unreachable
+    + e.g. prioritize consistency? prioritize availability?
+
+### Implications
+
+- More complex (and robust) design and implementation
+- __Note__: this is useful also when reliable network protocols (e.g. TCP) are in place
+
+---
+
+## About Authorization and Authentication
+
+### What
+
+1. __Authentication__: letting the nodes of a DS _recognise_ and _distinguish_ themselves from one another
+    + this includes _users' clients_ (a.k.a. identifying the legitimate users of the system)
+
+2. __Authorization__: a server granting (or forbidding) access to resources depending on the identity / role of the _authenticated_ client
+
+### Why
+
+- __Access control__: to control who can (or cannot) do what
+- __Monitoring__: to record who is doing what
+- Prerequisite for many __cyber-security__-related aspects
+
+### How
+
+1. Allow the system to register _legitimate users_ and/or _roles_, endowing them with _credentials_
+1. One or more server is in charge of generating _session tokens_ upon client _request_
+1. Authenticated nodes _include_ session tokens in _any subsequent interaction_
+1. Nodes know how to _verify_ session _tokens_ are __valid__ and _genuine_
+1. Nodes _enforce_ access control depending on the _content of the token_ 
+
+### Implications
+
+- Requires one _authentication server_, possibly backed by a _database_
+- Requires _cryptography_ to handle session tokens
+- Requires _designing_ and _implementing_ some access control mechanism, 
+e.g. [ACLs](https://en.wikipedia.org/wiki/Access-control_list), [RBAC](https://en.wikipedia.org/wiki/Role-based_access_control), etc.
+
+---
+
+## About Data Partitioning
+
+### What
+
+- _Clones_ of the same _functionality_ are deployed, each one covering a _partition_ of the _geographic region_ where the system operates
+    + e.g. amazon**.uk** vs. amazon**.it**, google**.fr** vs. google*.com**, etc.
+- Clones are _not consistent_ among each other, because data is _partitioned_ on a geographical basis
+    + mechanisms are in place to _direct_ users towards _closest_ partition
+
+### Why
+
+- __Fault-tolerance__: one fault in one region does not propagate to others region
+- __Availability__ and __Load-balancing__: divide-and-conquer approach to serve users
+- It is sometimes a mandatory accomplishment due to regulations (cf. [GDPR, art. 44](https://www.privacy-regulation.eu/it/44.htm))
+
+### How
+
+- The same infrastructure is deployed in different places
+- Mechanisms may be present to connect the clones of the system (hence hiding partitioning to users)
+
+### Implications
+
+- Deployment procedures should be _reproducible_ and _parametric_, possibly _automated_
+- Clones should be designed to be aware of the existence of other clones
 
 {{% /section %}}
+
+----
+
+{{% import path="reusable/back.md" %}}
