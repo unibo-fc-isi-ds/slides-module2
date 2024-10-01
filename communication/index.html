@@ -1,0 +1,494 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="utf-8">
+<title>[DS] Communication Mechanisms</title>
+<meta name="description" content="Communication Mechanisms for Distributed Systems">
+<meta name="author" content="Giovanni Ciatto">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><link rel="stylesheet" href="/slides-module2/reveal-js/dist/reset.css">
+<link rel="stylesheet" href="/slides-module2/reveal-js/dist/reveal.css">
+  <link rel="stylesheet" href="/slides-module2/css/custom-theme.min.1b20742b97214d830a9aee59899723c921c39aabc30127443e315315207a1497.css" id="theme"><link rel="stylesheet" href="/slides-module2/highlight-js/solarized-dark.min.css">
+<link href="https://fonts.googleapis.com/css?family=Roboto Mono" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Oxygen Mono" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Ubuntu Mono" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/gh/DanySK/css-blur-animation/blur.css" rel="stylesheet" crossorigin="anonymous">
+<script src="https://kit.fontawesome.com/81ac037be0.js" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://unpkg.com/qr-code-styling@1.5.0/lib/qr-code-styling.js"></script>
+<script src="https://unibo-isi-ds.github.io/slides-module2//plantuml.js"></script>
+
+  </head>
+  <body>
+    
+    <div class="reveal">
+      <div class="slides">
+  
+
+    <section><h1 id="communication-mechanisms-for-distributed-systems">Communication Mechanisms for Distributed Systems</h1>
+<br>
+<h2 id="hahahugoshortcode1s0hbhb">Distributes Systems — Module 2</h2>
+<h3 id="hahahugoshortcode1s1hbhb">A.Y. 2024/2025</h3>
+<h3 id="hahahugoshortcode1s2hbhb"><a href="mailto:giovanni.ciatto@unibo.it">Giovanni Ciatto</a></h3>
+<br>
+<br>
+<p>Compiled on: 2024-10-01
+ — <a href="?print-pdf&amp;pdfSeparateFragments=false"><i class="fa fa-print" aria-hidden="true"></i> printable version</a></p>
+<p><a href="../#/toc"><i class="fa fa-undo" aria-hidden="true"></i> back to ToC</a></p>
+</section><section>
+<h2 id="context">Context</h2>
+<ul>
+<li>
+<p>Distributes systems requires distributed nodes to <em>communicate</em> over the <em>network</em></p>
+</li>
+<li>
+<p>So far, we described communication as <em>“sending messages”</em> between nodes…</p>
+</li>
+<li>
+<p>… but how exactly do we <em>send</em> and <em>receive</em> messages?</p>
+</li>
+<li>
+<p>Okay, we know from our <em>networking</em> course that <strong>network protocols</strong> are the answer…</p>
+<ul>
+<li>e.g. <a href="https://en.wikipedia.org/wiki/Transmission_Control_Protocol">TCP</a> and <a href="https://en.wikipedia.org/wiki/User_Datagram_Protocol">UDP</a></li>
+</ul>
+</li>
+<li>
+<p>But how do we <strong>use</strong> these protocols in our programs, <em>in practice</em>?</p>
+</li>
+</ul>
+</section><section>
+<h2 id="sockets">Sockets</h2>
+<ul>
+<li>
+<p>Most OS support the <a href="https://en.wikipedia.org/wiki/Berkeley_sockets">Berkeley <strong>sockets</strong></a> API…</p>
+</li>
+<li>
+<p>… and virtually all programming languages provide a <em>wrapper</em> around this API</p>
+<ul>
+<li>there including Python, via the <a href="https://docs.python.org/3/library/socket.html"><code>socket</code> module</a></li>
+</ul>
+</li>
+<li>
+<p>Sockets are:</p>
+<ul>
+<li>an <em>ancient</em>, and <em>stable</em> <strong>API</strong> for low-level networking in TCP/UDP (and more)</li>
+<li>very <em>didactic</em>: they require a good understanding of DS fundamentals
+<ul>
+<li>e.g. client/server, or local/remote dichotomies</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>very <em>elementary</em>: higher-level communication abstractions can be built on top of them
+<ul>
+<li>e.g. RPC, <em>HTTP</em>, and virtually any application-level protocol</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2 id="definition">Definition</h2>
+<blockquote>
+<p>A <strong>socket</strong> is an abstract representation for the <em>local</em> endpoint of a network communication path.</p>
+</blockquote>
+
+
+
+
+
+<img src="./sockets.svg" alt="Concept of a socket" style="height: 50vh; max-width: 95vw; max-height: 80vh; object-fit: contain;">
+
+<h3 id="interpretation">Interpretation</h3>
+<p>A <em>process</em>’s gateway towards the network, providing a <strong>full-duplex</strong>,
+<strong>multiplexable</strong>, <em>point-to-point</em> or <em>point-to-<em>multi</em>-point</em> <strong>communication</strong> means towards other
+processes, <em>distributed</em> over the network</p>
+<p>(see next slide)</p>
+</section><section>
+<ul>
+<li>
+<p><strong>distributed processes</strong>: sockets aims at letting processes communicate, so</p>
+<ul>
+<li>multiple processes on the same machine may communicate via sockets too</li>
+<li>the same socket on the same machine may be shared among threads</li>
+</ul>
+</li>
+<li>
+<p><strong>communication</strong>: information exchange is explicit</p>
+<ul>
+<li>data is <em>sent/received</em> via ad-hoc socket methods</li>
+</ul>
+</li>
+<li>
+<p><strong>point-to-point</strong>: each socket mediates the interaction among <em>two (and only two)</em> processes</p>
+<ul>
+<li>as opposed to <strong>point-to-<em>multi</em>point</strong> communication, a socket may communicate with multiple other processes</li>
+</ul>
+</li>
+<li>
+<p><strong>multiplexable</strong>: multiple independent sockets may be created, on different ports</p>
+<ul>
+<li>ports are positive 2-bytes integers in the range from $1$ to $2^{16} - 1$,</li>
+<li>the $1\ldots1023$ range is reserved for well-known protocols</li>
+<li>ports in the rage $1024\ldots2^{16} - 1$ are for custom usage</li>
+</ul>
+</li>
+<li>
+<p><strong>full-duplex</strong>: exchanged data may flow in both verses, simultaneously</p>
+<ul>
+<li>i.e. the receiver may send data while receiving</li>
+<li>i.e. the sender may receive data while sending</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2 id="two-types-of-sockets">Two types of sockets</h2>
+<ul>
+<li>
+<p><strong>stream sockets</strong> allowing the exchange of possibly unlimited <em>streams</em> of bytes</p>
+<ul>
+<li>commonly based on TCP</li>
+<li>commonly operating in a <em>connection</em>-oriented way</li>
+</ul>
+</li>
+<li>
+<p><strong>datagram sockets</strong> allowing the exchange of finite-sized <em>packets</em> of bytes</p>
+<ul>
+<li>commonly based on UDP</li>
+<li>commonly operating in a <em>connectionless</em> way</li>
+</ul>
+</li>
+<li>
+<p>both packets and streams are <em>byte-oriented</em> communication means</p>
+<ul>
+<li>i.e. the <em>unit</em> of communication is the <em>byte</em></li>
+</ul>
+</li>
+<li>
+<p>sockets do not care about the <em>content</em> of the exchanged data</p>
+<ul>
+<li>i.e. it is up to the <em>application</em> to interpret the bytes</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2 id="some-jargon">Some jargon</h2>
+<ul>
+<li>
+<p>Client vs. Server</p>
+<ul>
+<li><em>client</em> socket: the socket initiating the communication</li>
+<li><em>server</em> socket: the socket accepting the communication</li>
+</ul>
+</li>
+<li>
+<p>Local vs. Remote</p>
+<ul>
+<li><em>local</em> socket: the socket on the <em>local</em> machine</li>
+<li><em>remote</em> socket: the socket on the <em>remote</em> machine</li>
+<li>in the eyes of the <em>client</em> socket, the server socket is <em>remote</em>, and vice-versa</li>
+</ul>
+</li>
+<li>
+<p>Address and Port</p>
+<ul>
+<li>the <em>address</em> is the IP address of the machine
+<ul>
+<li>recall that a machine may have <em>multiple</em> IP addresses, one per <em>network interface</em></li>
+</ul>
+</li>
+<li>the <em>port</em> is the port number of the socket</li>
+<li>the <em>address:port</em> pair is the <em>endpoint</em> of the communication path</li>
+</ul>
+</li>
+</ul>
+</section><section>
+
+
+<section data-shortcode-section="">
+<h2 id="datagram-sockets">Datagram sockets</h2>
+<img src="./udp-sockets.svg" alt="Datagram sockets representation" style="height: 50vh; max-width: 95vw; max-height: 80vh; object-fit: contain;">
+<ul>
+<li>Datagram sockets aim at exchanging <em>packets</em> of bytes, called <em>datagrams</em>, among <em>endpoints</em>
+<ul>
+<li><strong>datagram</strong> $\approx$ self-contained packet of a given size
+<ul>
+<li>in <strong>UDP</strong> the upper-bound is <em>64 KiB</em>, i.e. $(2^{16} - 1)$ bytes of <em>maximum datagram size</em></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>No</strong> <em>connection</em> is established between the endpoints
+<ul>
+<li>each datagram send/receive is <em>independent</em> from the others</li>
+</ul>
+</li>
+<li>There is no difference among client and server sockets
+<ul>
+<li>each datagram socket may act as a <em>client</em> or a <em>server</em> in any moment</li>
+</ul>
+</li>
+<li>Each datagram is <em>self-contained</em> can be used to communicate with <strong>many</strong> other sockets
+<ul>
+<li>the <em>address:port</em> pair is specified upon sending <em>each</em> datagram</li>
+<li>$\Rightarrow$ support for <em>broadcast</em> and <em>multicast</em> communication</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h3 id="datagram-sockets-in-python-pt-1">Datagram sockets in Python (pt. 1)</h3>
+<ol>
+<li>
+<p>Python provides a <code>socket</code> <em>module</em>, with a <code>socket</code> <em>class</em></p>
+<ul>
+<li>use the <em>constructor</em> to create a new socket</li>
+<li>the <code>socket</code> class provides methods for <em>sending</em> and <em>receiving</em> datagrams</li>
+</ul>
+</li>
+<li>
+<p>Example of socket <em>creation</em>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">socket</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># create a new datagram socket</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">sock</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">socket</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">socket</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">socket</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">AF_INET</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">socket</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">SOCK_DGRAM</span><span style="color:#000;font-weight:bold">)</span>
+</span></span></code></pre></div><ul>
+<li><code>AF_INET</code> specifies the <em>address family</em> (IPv4)</li>
+<li><code>SOCK_DGRAM</code> specifies the <em>socket type</em> (datagram)</li>
+</ul>
+</li>
+<li>
+<p><em>Before</em> being used, the socket must be <em>bound</em> to a local <em>address</em> and <em>port</em> (in order to <em>receive</em> datagrams)</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># bind the socket to the local address and port</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">sock</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">bind</span><span style="color:#000;font-weight:bold">((</span><span style="color:#4e9a06">'W.X.Y.Z'</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#0000cf;font-weight:bold">12345</span><span style="color:#000;font-weight:bold">))</span>
+</span></span></code></pre></div><ul>
+<li><strong>binding</strong> $\approx$ associating the socket to a local address and port, so that the OS knows where to deliver incoming datagrams</li>
+<li>class <code>socket</code> provides the <code>bind</code> method which accept a <em>single</em> argument, which must be a <em>tuple of two</em> elements, represening one <em>endpoint</em>
+<ul>
+<li>the $1^{st}$ element is the <em>address string</em> (use <code>'0.0.0.0'</code> to bind to <em>all</em> local addresses)</li>
+<li>the $2^{nd}$ element is the <em>port number</em> (use <code>0</code> to let the OS choose a free port)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</section><section>
+<h3 id="datagram-sockets-in-python-pt-2">Datagram sockets in Python (pt. 2)</h3>
+<!-- (let us assume that a costant has been defined as follows:)
+```python
+THRESHOLD_DGRAM_SIZE = 65536
+``` -->
+<div class="container w-100 m-0 p-0">
+    <div class="row "><div class="col col-6" style="text-align: left;"><ol start="4">
+<li>Example of datagram <strong>send</strong>:
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#000">payload</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#4e9a06">'Hello, world!'</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">recipient</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">'A.B.C.D'</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#0000cf;font-weight:bold">54321</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">sock</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">sendto</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">payload</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">encode</span><span style="color:#000;font-weight:bold">(),</span> <span style="color:#000">recipient</span><span style="color:#000;font-weight:bold">)</span>
+</span></span></code></pre></div><ul>
+<li><code>sendto</code> method sends a <em>datagram</em> to a <em>remote recipient</em></li>
+<li>the $1^{st}$ argument is the <em>byte sequence</em> to be sent</li>
+<li>the $2^{nd}$ argument is the recipient endpoint (as a <em>tuple</em>)</li>
+<li>documentation: <a href="https://docs.python.org/3/library/socket.html#socket.socket.sendto">socket.sendto</a></li>
+</ul>
+</li>
+</ol>
+</div>
+<div class="col " style="text-align: left;"><ol start="5">
+<li>Example of datagram <strong>receive</strong>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#000">data</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">sender</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">sock</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">recvfrom</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">bufsize</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#0000cf;font-weight:bold">4096</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">data</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">data</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">decode</span><span style="color:#000;font-weight:bold">()</span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87">print</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">f</span><span style="color:#4e9a06">'Received: "</span><span style="color:#4e9a06">{</span><span style="color:#000">data</span><span style="color:#4e9a06">}</span><span style="color:#4e9a06">" from "</span><span style="color:#4e9a06">{</span><span style="color:#000">sender</span><span style="color:#4e9a06">}</span><span style="color:#4e9a06">"'</span><span style="color:#000;font-weight:bold">)</span>
+</span></span></code></pre></div><ul>
+<li><code>recvfrom</code> method receives a <em>datagram</em> from a <em>remote sender</em></li>
+<li>the $1^{st}$ is the <em>buffer size</em>, according to doc: <em>“a relatively small power of 2”</em>, e.g. 4096</li>
+<li>the method returns a <em>tuple</em> with the <em>received data</em> and the <em>sender endpoint</em>
+<ul>
+<li>the <em>received data</em> is a <em>byte sequence</em></li>
+</ul>
+</li>
+<li>documentation: <a href="https://docs.python.org/3/library/socket.html#socket.socket.recvfrom">socket.recvfrom</a></li>
+</ul>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<ol start="6">
+<li>
+<p>about <em>encoding</em> and <em>decoding</em>:</p>
+<ul>
+<li>sockets send and receive <em>byte sequences</em> (type <code>byte</code>), not <em>strings</em> (type <code>str</code>)</li>
+<li>byte sequences <em>literals</em> can be created via the <code>b</code> prefix, e.g. <code>b'Hello, world!'</code></li>
+<li>the <code>encode</code> and <code>decode</code> methods are used to convert between <em>byte sequences</em> and <em>strings</em>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#000">data</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#4e9a06">b</span><span style="color:#4e9a06">'Hello, world'</span> <span style="color:#8f5902;font-style:italic"># alternatively data = 'Hello, world'.encode()</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">data</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">data</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#204a87">bytes</span><span style="color:#000;font-weight:bold">([</span><span style="color:#0000cf;font-weight:bold">33</span><span style="color:#000;font-weight:bold">])</span> <span style="color:#8f5902;font-style:italic"># append byte 33, corresponding to '!'</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">data</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">data</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">decode</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#8f5902;font-style:italic"># convert to string</span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87">print</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">data</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#8f5902;font-style:italic"># prints 'Hello, world!'</span>
+</span></span></code></pre></div></li>
+<li>default encoding is <a href="https://en.wikipedia.org/wiki/UTF-8">UTF-8</a>, but other encodings are possible</li>
+<li>the <em>encoding</em> and <em>decoding</em> must be <em>consistent</em> among the sender and the receiver</li>
+</ul>
+</li>
+<li>
+<p>the socket must be <em>closed</em> when no longer needed</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#000">sock</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">close</span><span style="color:#000;font-weight:bold">()</span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">try</span><span style="color:#000;font-weight:bold">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">sock</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">sendto</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">...</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">sock</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">recvfrom</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">...</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">except</span> <span style="color:#c00;font-weight:bold">OSError</span> <span style="color:#204a87;font-weight:bold">as</span> <span style="color:#000">e</span><span style="color:#000;font-weight:bold">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87">print</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">f</span><span style="color:#4e9a06">'Any subseqent send/receive will raise: </span><span style="color:#4e9a06">{</span><span style="color:#000">e</span><span style="color:#4e9a06">}</span><span style="color:#4e9a06">'</span><span style="color:#000;font-weight:bold">)</span>
+</span></span></code></pre></div></li>
+</ol>
+
+</section>
+</section><section>
+</section><section>
+<h1 id="lecture-is-over">Lecture is Over</h1>
+<br>
+<p>Compiled on: 2024-10-01
+ — <a href="?print-pdf&amp;pdfSeparateFragments=false"><i class="fa fa-print" aria-hidden="true"></i> printable version</a></p>
+<p><a href="../#/toc"><i class="fa fa-undo" aria-hidden="true"></i> back to ToC</a></p>
+</section>
+
+  
+
+
+</div>
+      
+
+    </div>
+<script type="text/javascript" src="/slides-module2/reveal-hugo/object-assign.js"></script>
+
+<a href="/slides-module2/reveal-js/dist/print/" id="print-location" style="display: none;"></a>
+
+<script type="application/json" id="reveal-hugo-site-params">{"custom_theme":"custom-theme.scss","custom_theme_compile":true,"custom_theme_options":{"enablesourcemap":true,"targetpath":"css/custom-theme.css"},"height":"1080","highlight_theme":"solarized-dark","history":true,"mermaid":[{}],"slide_number":true,"theme":"league","transition":"slide","transition_speed":"fast","width":"1920"}</script>
+<script type="application/json" id="reveal-hugo-page-params">null</script>
+
+<script src="/slides-module2/reveal-js/dist/reveal.js"></script>
+
+
+  
+  
+  <script type="text/javascript" src="/slides-module2/reveal-js/plugin/markdown/markdown.js"></script>
+  
+  <script type="text/javascript" src="/slides-module2/reveal-js/plugin/highlight/highlight.js"></script>
+  
+  <script type="text/javascript" src="/slides-module2/reveal-js/plugin/zoom/zoom.js"></script>
+  
+  <script type="text/javascript" src="/slides-module2/reveal-js/plugin/notes/notes.js"></script>
+  
+  
+  <script type="text/javascript" src="/slides-module2/reveal-js/plugin/notes/notes.js"></script>
+
+
+
+
+<script type="text/javascript">
+  
+  
+  function camelize(map) {
+    if (map) {
+      Object.keys(map).forEach(function(k) {
+        newK = k.replace(/(\_\w)/g, function(m) { return m[1].toUpperCase() });
+        if (newK != k) {
+          map[newK] = map[k];
+          delete map[k];
+        }
+      });
+    }
+    return map;
+  }
+
+  var revealHugoDefaults = { center: true, controls: true, history: true, progress: true, transition: "slide" };
+
+  var revealHugoPlugins = { 
+    plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealZoom ]
+   };
+  var revealHugoSiteParams = JSON.parse(document.getElementById('reveal-hugo-site-params').innerHTML);
+  var revealHugoPageParams = JSON.parse(document.getElementById('reveal-hugo-page-params').innerHTML);
+  
+  var options = Object.assign({},
+    camelize(revealHugoDefaults),
+    camelize(revealHugoSiteParams),
+    camelize(revealHugoPageParams),
+    camelize(revealHugoPlugins));
+  Reveal.initialize(options);
+</script>
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+</script>
+
+<script type="text/javascript" id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
+<script>
+  if (/.*?(\?|&)print-pdf/.test(window.location.toString())) {
+      var ytVideos = document.getElementsByTagName("iframe")
+      for (let i = 0; i < ytVideos.length; i++) {
+          var videoFrame = ytVideos[i]
+          var isYouTube = /^https?:\/\/(www.)youtube\.com\/.*/.test(videoFrame.src)
+          if (isYouTube) {
+              console.log(`Removing ${videoFrame.src}`)
+              var parent = videoFrame.parentElement
+              videoFrame.remove()
+              var p = document.createElement('p')
+              p.append(
+                  document.createTextNode(
+                      "There was an embedded video here, but it is disabled in the printed version of the slides."
+                  )
+              )
+              p.append(document.createElement('br'))
+              p.append(
+                  document.createTextNode(
+                      `Visit instead ${
+                          videoFrame.src
+                      } or ${
+                          videoFrame.src.replace(
+                              /(^https?:\/\/(www.)youtube\.com)\/(embed\/)(\w+).*/,
+                              "https://www.youtube.com/watch?v=$4"
+                          )
+                      }`
+                  )
+              )
+              parent.appendChild(p)
+          }
+      }
+  }
+</script>
+
+
+    
+  
+
+</body></html>
