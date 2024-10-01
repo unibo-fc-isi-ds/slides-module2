@@ -1,4 +1,4 @@
-baseURL = "https://unibo-isi-ds.github.io/slides-module2"
+baseURL = "https://unibo-fc-isi-ds.github.io/slides-module2"
 languageCode = "en-us"
 title = "Distributed Systems — Module 2"
 disableKinds = ["sitemap", "RSS"]
