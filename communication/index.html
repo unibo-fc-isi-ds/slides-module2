@@ -465,7 +465,7 @@ processes, <em>distributed</em> over the network</p>
 </span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">close</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">):</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">__socket</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">close</span><span style="color:#000;font-weight:bold">()</span>
 </span></span></code></pre></div></div>
-<div class="col " style="text-align: left;"><figure id="plantuml-figure-1727967296631166407" class="plantuml" alt="" style="width: 100%;height: 30vh;max-width: 95vw;max-height: 80vh;">
+<div class="col " style="text-align: left;"><figure id="plantuml-figure-1727970316091175114" class="plantuml" alt="" style="width: 100%;height: 30vh;max-width: 95vw;max-height: 80vh;">
 <p>class Peer {
 - __socket: socket
 + peers: set
@@ -479,7 +479,7 @@ processes, <em>distributed</em> over the network</p>
 }</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1727967296631166407");
+    handlePlantumlFigureByID("plantuml-figure-1727970316091175114");
 </script>
 </div>
 </div>
@@ -834,6 +834,60 @@ to stress-test the chat with <em>many</em> messages, and to observe the <em>reli
 <li>UDP is <strong>unreliable</strong>: messages may get <em>lost</em>, <em>delayed</em>, delivered <em>out of order</em>, or <em>duplicated</em>
 <ul>
 <li>let’s focus on this one</li>
+</ul>
+</li>
+</ol>
+
+</section>
+</section><section>
+
+
+<section data-shortcode-section="">
+<h2 id="stream-sockets">Stream sockets</h2>
+<img src="./tcp-sockets.svg" alt="Stream sockets representation" style="height: 50vh; max-width: 95vw; max-height: 80vh; object-fit: contain;">
+<ul>
+<li>Stream sockets aim at exchanging <em>streams</em> of bytes among <em>endpoints</em>
+<ul>
+<li><strong>stream</strong> $\approx$ sequence of bytes with <strong>no</strong> <em>length limitation</em>
+<ul>
+<li>thanks to the TCP protocol, the stream is <em>reliable</em> and <em>ordered</em></li>
+<li>the stream is <strong>directed</strong>: either <em>from</em> the client <em>to</em> the server, or vice versa</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>A <strong>connection</strong> must be established between 2 (<em>and only 2</em>) endpoints
+<ul>
+<li>the connection is <em>full-duplex</em>, i.e. data may flow in both verses, simultaneously</li>
+<li>each connection involves <em>2 streams</em></li>
+</ul>
+</li>
+<li>There is a clear distinction among <em>client</em> and <em>server</em> sockets
+<ul>
+<li>the two sorts of sockets have <em>different</em> functionalities and API</li>
+</ul>
+</li>
+<li>Stream sockets <em>only</em> support <strong>one-to-one</strong> communication
+<ul>
+<li>to communicate with multiple peers, multiple connections must be established</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h3 id="stream-sockets-in-python-pt-1">Stream sockets in Python (pt. 1)</h3>
+<ol>
+<li>
+<p>Python’s <code>socket</code> <em>class</em>, from the <code>socket</code> <em>module</em> works for <em>stream</em> sockets too</p>
+<ul>
+<li>simply initialize them with different <em>socket type</em>:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">socket</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># create a new stream socket</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">sock</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">socket</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">socket</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">socket</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">AF_INET</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">socket</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">SOCK_STREAM</span><span style="color:#000;font-weight:bold">)</span>
+</span></span></code></pre></div><ul>
+<li><code>AF_INET</code> specifies the <em>address family</em> (IPv4)</li>
+<li><code>SOCK_STREAM</code> specifies the <em>socket type</em> (stream)</li>
 </ul>
 </li>
 </ol>
