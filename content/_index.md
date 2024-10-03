@@ -21,7 +21,6 @@ aliases = [
 * General aspects
     1. [About the course](./about/)
     1. [Preliminaries](./preliminaries/)
-    <!-- 1. [Distributed architectures and Protocols](./architectures&protocols/) -->
     1. [Communication mechanisms](./communication/)
     1. [Presentation](./presentation/)
     1. [Testing](./testing/)
