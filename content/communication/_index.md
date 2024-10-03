@@ -680,4 +680,43 @@ Upon receiving this message, a peer should _remove_ the sender from the local li
 
 ---
 
+{{% section %}}
+
+## Stream sockets
+
+{{< image src="./tcp-sockets.svg" alt="Stream sockets representation" height="50vh" >}}
+
+- Stream sockets aim at exchanging _streams_ of bytes among _endpoints_
+    + __stream__ $\approx$ sequence of bytes with __no__ _length limitation_
+        + thanks to the TCP protocol, the stream is _reliable_ and _ordered_
+        + the stream is __directed__: either _from_ the client _to_ the server, or vice versa
+- A __connection__ must be established between 2 (_and only 2_) endpoints
+    + the connection is _full-duplex_, i.e. data may flow in both verses, simultaneously
+    + each connection involves _2 streams_
+- There is a clear distinction among _client_ and _server_ sockets
+    + the two sorts of sockets have _different_ functionalities and API
+- Stream sockets _only_ support __one-to-one__ communication
+    + to communicate with multiple peers, multiple connections must be established
+
+---
+
+### Stream sockets in Python (pt. 1)
+
+1. Python's `socket` _class_, from the `socket` _module_ works for _stream_ sockets too
+    + simply initialize them with different _socket type_:
+
+    ```python
+    import socket
+
+    # create a new stream socket
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    ```
+    + `AF_INET` specifies the _address family_ (IPv4)
+    + `SOCK_STREAM` specifies the _socket type_ (stream)
+
+
+{{% /section %}}
+
+---
+
 {{% import path="reusable/back.md" %}}
