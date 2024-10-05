@@ -22,9 +22,11 @@ aliases = [
     1. [About the course](./about/)
     1. [Preliminaries](./preliminaries/)
     1. [Communication mechanisms](./communication/)
+        - Exercise: [TCP Group Chat](./communication/#/exercise-tcp-group-chat)
     1. [Presentation](./presentation/)
-    1. [Testing](./testing/)
-    1. [Miscellanea](./misc/)
+    1. \[Tentative\] Testing <!-- [Testing](./testing/) -->
+    
+    <!-- [Miscellanea](./misc/) -->
 
 * Case Studies
     - [PONG](./pong/)
