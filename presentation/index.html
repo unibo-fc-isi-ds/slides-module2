@@ -1,0 +1,502 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="utf-8">
+<title>[DS] Presentation Mechanisms</title>
+<meta name="description" content="Presentation Mechanisms for Distributed Systems">
+<meta name="author" content="Giovanni Ciatto">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><link rel="stylesheet" href="/slides-module2/reveal-js/dist/reset.css">
+<link rel="stylesheet" href="/slides-module2/reveal-js/dist/reveal.css">
+  <link rel="stylesheet" href="/slides-module2/css/custom-theme.min.1b20742b97214d830a9aee59899723c921c39aabc30127443e315315207a1497.css" id="theme"><link rel="stylesheet" href="/slides-module2/highlight-js/solarized-dark.min.css">
+<link href="https://fonts.googleapis.com/css?family=Roboto Mono" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Oxygen Mono" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Ubuntu Mono" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/gh/DanySK/css-blur-animation/blur.css" rel="stylesheet" crossorigin="anonymous">
+<script src="https://kit.fontawesome.com/81ac037be0.js" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://unpkg.com/qr-code-styling@1.5.0/lib/qr-code-styling.js"></script>
+<script src="https://unibo-fc-isi-ds.github.io/slides-module2//plantuml.js"></script>
+
+  </head>
+  <body>
+    
+    <div class="reveal">
+      <div class="slides">
+  
+
+    <section><h1 id="presentation-mechanisms-for-distributed-systems">Presentation Mechanisms for Distributed Systems</h1>
+<br>
+<h2 id="hahahugoshortcode1s0hbhb">Distributes Systems — Module 2</h2>
+<h3 id="hahahugoshortcode1s1hbhb">A.Y. 2024/2025</h3>
+<h3 id="hahahugoshortcode1s2hbhb"><a href="mailto:giovanni.ciatto@unibo.it">Giovanni Ciatto</a></h3>
+<br>
+<br>
+<p>Compiled on: 2024-10-07
+ — <a href="?print-pdf&amp;pdfSeparateFragments=false"><i class="fa fa-print" aria-hidden="true"></i> printable version</a></p>
+<p><a href="../#/toc"><i class="fa fa-undo" aria-hidden="true"></i> back to ToC</a></p>
+</section><section>
+<h2 id="context">Context</h2>
+<ul>
+<li>
+<p>Nodes in distributed systems may be implemented in <em>different languages</em> (e.g. C, Java, Python, etc.)</p>
+<ul>
+<li>possibly running on <em>different platforms</em> (e.g. Python, JVM, Node, etc.) and <em>OS</em> (e.g. Windows, Linux, etc.)</li>
+<li>possibly using <em>different data representations conventions</em> (e.g. big-endian, little-endian, etc.)</li>
+</ul>
+</li>
+<li>
+<p>As long as nodes comply to the <strong>same</strong> <em>communication protocols</em> and <em>patterns</em>, technological issues should <em>not</em> be a problem</p>
+<ul>
+<li><strong>presentation</strong> mechanisms are responsible for <em>representing</em> data in a <strong>common format</strong>
+<ul>
+<li>in order to <em>exchange</em> information smoothly between <em>heterogeneous</em> nodes</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>So far all examples have been in <em>Python</em> (for simplicity)…</p>
+<ul>
+<li>so, in practice, the “common format” didn’t need to be <em>explicitly</em> defined</li>
+</ul>
+</li>
+<li>
+<p>… but, in the <em>real world</em>, we need to <em>serialize</em> and <em>deserialize</em> data explicitly into/from a <em>common format</em></p>
+<ul>
+<li>this is the role of <strong>data interchange formats</strong>, such as:
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/JSON">JavaScript Object Notation (JSON)</a> (<em>we will use this one</em>)</li>
+<li><a href="https://en.wikipedia.org/wiki/YAML">Yet Another Markup Language (YAML)</a> (later renamed in “YAML Ain’t Markup Language”)</li>
+<li><a href="https://en.wikipedia.org/wiki/XML">eXtensible Markup Language (XML)</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Type-length-value">Type–length–value (TLV)</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Protocol_Buffers">Protocol Buffers</a></li>
+<li><a href="https://avro.apache.org/">Avro</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2 id="content-of-the-lecture">Content of the lecture</h2>
+<p>A lot of concepts to unpack here:</p>
+<ol>
+<li>
+<p><strong>(De)Serialization</strong>: this is the <em>main goal</em> of this lecture</p>
+<ul>
+<li><em>serialization</em> is the process of converting an object into a stream of characters/bytes</li>
+<li><em>deserialization</em> is the reverse process</li>
+<li>both operations imply a <em>common</em> target/source <strong>data interchange format</strong> (e.g. JSON)</li>
+<li>both operations are _<strong>unavoidable</strong> in distributed systems programming</li>
+</ul>
+</li>
+<li>
+<p><strong>Remote Procedure Call</strong> (RPC): this is a very common <em>interaction pattern</em> in distributed systems</p>
+<ul>
+<li>it allows a client program to <em>invoke</em> a procedure from a remote server</li>
+<li>it implies <strong>(de)serializing</strong> <em>parameters</em> and <em>results</em> of the procedure</li>
+<li>so it’s the perfect <em>example</em> to illustrate how (de)serialization is used <em>in practice</em></li>
+</ul>
+</li>
+<li>
+<p><strong>Authentication</strong>: this is another <em>common</em> concern in distributed systems</p>
+<ul>
+<li>it implies clients providing <em>credentials</em> to servers to <em>prove</em> their identity</li>
+<li>it is commonly <em>implemented</em> by means of <em>RPC</em>…</li>
+<li>… so it’s a good <em>example</em> to illustrate how RPC is used <em>in practice</em></li>
+<li>this is <em>not</em> strictly related to (de)serialization, but it’s a <em>good</em> example of <em>RPC</em>, and it <em>exploits</em> (de)serialization a lot</li>
+</ul>
+</li>
+</ol>
+</section><section>
+
+
+<section data-shortcode-section="">
+<h1 id="information-representation-101">Information Representation 101</h1>
+<h2 id="quick-and-practical-excursus">(quick and practical excursus)</h2>
+</section><section>
+<h2 id="information-representation-recap-pt-1">Information Representation Recap (pt. 1)</h2>
+<ul>
+<li>
+<p>In electronic systems, information is represented as <em>binary data</em></p>
+<ul>
+<li>i.e. sequences of <em>0s</em> and <em>1s</em></li>
+</ul>
+</li>
+<li>
+<p>For many practical reasons, binary sequences are commonly grouped in <em>bytes</em></p>
+<ul>
+<li><em>byte</em> $\equiv$ <em>8 bits</em> $\equiv$ <em>2 hexadecimal digits</em></li>
+<li>e.g. <code>0x00</code>$\equiv$ 0, <code>0x01</code> $\equiv$ 1, <code>0x02</code> $\equiv$ 2, …, <code>0xFF</code> $\equiv$ 255</li>
+</ul>
+</li>
+<li>
+<p>Sequences of <em>bytes</em> can be used to represent many <em>sorts</em> of data, via ad-hoc <strong>conventions</strong></p>
+<ul>
+<li>e.g. <em>ASCII</em> (for text): e.g. <code>0x41</code> $\equiv$ 45 $\equiv$ <code>A</code>  (cf. <a href="https://www.asciitable.com/">ASCII Table</a>)</li>
+<li>e.g. <em>UTF-8</em> (for text): e.g. <code>0xC3A0</code> $\equiv$ 50080 $\equiv$ <code>à</code> (cf. <a href="https://www.utf8-chartable.de/">UTF-8 Table</a>)</li>
+<li>e.g. <em>little-endian</em> (for 32-bit integers): e.g. <code>0x3000</code> $\equiv$ 3 (cf. <a href="https://en.wikipedia.org/wiki/Endianness">Endianness</a>)</li>
+<li>e.g. <em>big-endian</em> (for 32-bit integers): e.g. <code>0x0003</code> $\equiv$ 3 (cf. <a href="https://en.wikipedia.org/wiki/Endianness">Endianness</a>)</li>
+</ul>
+</li>
+<li>
+<p>Conventions $\approx$ data interchange formats</p>
+<ul>
+<li>they define how <em>data</em> is <em>encoded</em> into <em>bytes</em></li>
+<li>they define how <em>bytes</em> should be <em>decoded</em> into <em>data</em></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><strong>The problem</strong>: most programming languages / platforms / OS use <em>different</em> conventions for representing data
+<br> <strong>The solution</strong>: <em>agree</em> on the data format to use for <em>communication</em></p>
+</blockquote>
+<p>corollary: data interchange formats are an <strong>essential</strong> aspect of every interaction pattern / protocol</p>
+</section><section>
+<h2 id="two-broad-categories-of-data-interchange-formats">Two broad categories of data interchange formats</h2>
+<ol>
+<li>
+<p><strong>Text-based</strong> formats: they rely on <em>characters</em> to represent data (<em>we will use these ones</em>)</p>
+<ul>
+<li>e.g. <em>JSON</em>, <em>YAML</em>, <em>XML</em></li>
+<li><strong>human-readable</strong>, <em>easy to debug</em>, <em>easy to parse</em>, possibility to <em>manually</em> edit the data</li>
+<li><em>verbose</em>, <em>inefficient</em> (in terms of space)</li>
+<li>may require tricks to represent <em>binary</em> data (e.g. <em>escape sequences</em>, or <em>base64</em> encoding)</li>
+</ul>
+</li>
+<li>
+<p><strong>Binary</strong> formats: they rely on <em>bytes</em> to represent data</p>
+<ul>
+<li>e.g. <em>Protocol Buffers</em>, <em>Avro</em></li>
+<li><em>compact</em>, <em>efficient</em> (in terms of space)</li>
+<li><em>harder</em> to debug, <em>harder</em> to parse, <em>harder</em> to manually edit the data (commonly require <em>hex editors</em>)</li>
+<li><em>natively</em> support <em>binary</em> data, but can represent <em>text</em> as well</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>But aren’t <em>characters</em> just <em>bytes</em>? Why do we need <em>different</em> formats for <em>text</em> and <em>binary</em> data?</p>
+</blockquote>
+<ul>
+<li>In practice, engineers may prioritize human-readability if saving space is not a concern
+<ul>
+<li>e.g. on the Web</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2 id="characters-vs-bytes-encoding">Characters vs Bytes: Encoding</h2>
+<ul>
+<li>
+<p>Characters are <strong>equivalent</strong> to bytes, according to an <strong>encoding</strong> scheme</p>
+<ul>
+<li>e.g. <em>ASCII</em>, <em>UTF-8</em>, <em>UTF-16</em>, <em>ISO-8859-1</em>, etc.</li>
+</ul>
+</li>
+<li>
+<p><em>ASCII</em> is the <em>oldest</em> encoding scheme, where each character is represented by a <em>single</em> byte (but only 7 bits are used)</p>
+<ul>
+<li>e.g. <code>A</code> $\equiv$ <code>0x41</code>, <code>B</code> $\equiv$ <code>0x42</code>, …, <code>a</code> $\equiv$ <code>0x61</code>, <code>b</code> $\equiv$ <code>0x62</code>, …
+(this is what strings are represented in <em>C</em> and <em>Python 2</em>)</li>
+</ul>
+</li>
+<li>
+<p><em>Unicode</em>: an abstract way to represent information, coming with three different encoding schemes:</p>
+<ul>
+<li>
+<p><em>UTF-8</em> is the <em>most common</em> encoding scheme, where each character is represented by <em>1 to 4</em> bytes</p>
+<ul>
+<li>e.g. <code>A</code> $\equiv$ <code>0x41</code>, <code>B</code> $\equiv$ <code>0x42</code>, …, <code>à</code> $\equiv$ <code>0xC3A0</code>, <code>è</code> $\equiv$ <code>0xC3A8</code>, …
+(this is what strings are represented in <em>Python 3</em>, and most modern programming languages)</li>
+</ul>
+</li>
+<li>
+<p><em>UTF-16</em> is another common encoding scheme, where each character is represented by <em>2 or 4</em> bytes</p>
+<ul>
+<li>e.g. <code>A</code> $\equiv$ <code>0x0041</code>, <code>B</code> $\equiv$ <code>0x0042</code>, …, <code>à</code> $\equiv$ <code>0x00E0</code>, <code>è</code> $\equiv$ <code>0x00E8</code>, …</li>
+</ul>
+</li>
+<li>
+<p><em>UTF-32</em> is another encoding scheme, where each character is represented by <em>4</em> bytes</p>
+<ul>
+<li>e.g. <code>A</code> $\equiv$ <code>0x00000041</code>, <code>B</code> $\equiv$ <code>0x00000042</code>, …, <code>à</code> $\equiv$ <code>0x000000E0</code>, <code>è</code> $\equiv$ <code>0x000000E8</code>, …</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><em>ISO-8859-1</em> is another encoding scheme, where each character is represented by a <em>single</em> byte</p>
+<ul>
+<li>e.g. <code>A</code> $\equiv$ <code>0x41</code>, <code>B</code> $\equiv$ <code>0x42</code>, …, <code>à</code> $\equiv$ <code>0xE0</code>, <code>è</code> $\equiv$ <code>0xE8</code>, …</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><em>Notice</em> that most of these encoding schemes are <em>compatible</em> with <em>ASCII</em> (i.e. the first 128 characters are the same)
+this is why inexperienced programmers <em>often</em> don’t <em>notice</em> the difference between encodings</p>
+</blockquote>
+</section><section>
+<h2 id="encoding-in-python">Encoding in Python</h2>
+<ul>
+<li>
+<p>Python comes with the following <em>built-in</em> types to represent sequences of characters and bytes:</p>
+<ul>
+<li><code>str</code> for <em>textual</em> data (uses <em>UTF-8</em> encoding in Python 3, <em>ASCII</em> in Python 2), literals are of the from <code>"..."</code> or <code>'''...'''</code></li>
+<li><code>bytes</code>for <em>binary</em> data (similar to byte arrays in other languages), literals are of the form <code>b"..."</code> or <code>b'...'</code></li>
+</ul>
+</li>
+<li>
+<p>Python also comes with functions to convert between <em>bytes</em> and <em>strings</em>:</p>
+<ul>
+<li><code>str.encode(ENCODING)</code>: converts a string into a sequence of bytes using the specified <code>ENCODING</code></li>
+<li><code>bytes.decode(ENCODING)</code>: converts a sequence of bytes into a string <code>ENCODING</code></li>
+<li>in both cases, <code>ENCODING</code> is a string representing the encoding scheme to use (e.g. <code>"utf-8"</code>, <code>"ascii"</code>, etc.)</li>
+<li>if not specified, the default encoding is used (e.g. <code>import sys; sys.getdefaultencoding()</code>)</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#000">s</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#4e9a06">"À l'école, l'élève étudiait l'histoire de la Révolution française et les événements marquants de l'été 1789."</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">b</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">s</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">encode</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">'utf-8'</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87">print</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">b</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#8f5902;font-style:italic"># b"\xc3\x80 l'\xc3\xa9cole, l'\xc3\xa9l\xc3\xa8ve \xc3\xa9tudiait l'histoire de la R\xc3\xa9volution fran\xc3\xa7aise et les \xc3\xa9v\xc3\xa9nements marquants de l'\xc3\xa9t\xc3\xa9 1789."</span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87">print</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">b</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">decode</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">'utf-8'</span><span style="color:#000;font-weight:bold">))</span> <span style="color:#8f5902;font-style:italic"># "À l'école, l'élève étudiait l'histoire de la Révolution française et les événements marquants de l'été 1789."</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87">print</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">b</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">decode</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">'ascii'</span><span style="color:#000;font-weight:bold">))</span> <span style="color:#8f5902;font-style:italic"># UnicodeDecodeError: 'ascii' codec can't decode byte 0xc3 in position 0: ordinal not in range(128)</span>
+</span></span></code></pre></div></section><section>
+<h2 id="escape-sequences">Escape sequences</h2>
+<ul>
+<li>
+<p>When using textual encodings, there maybe situations where some characters <em>cannot</em> be <em>directly</em> represented/inserted in a string</p>
+<ul>
+<li>e.g. <em>control characters</em> (e.g. <code>\n</code>, <code>\t</code>, <code>\r</code>, etc.)</li>
+<li>e.g. <em>non-printable characters</em> (e.g. <code>0x00</code>, <code>0x01</code>, etc.)</li>
+</ul>
+</li>
+<li>
+<p>Other than supporting encodings, most <em>programming</em> or <em>data representation languages</em> also support_</p>
+<ul>
+<li><strong>escape sequences</strong> $\approx$ sub-sequences of characters that represent a <em>single</em> character</li>
+</ul>
+</li>
+<li>
+<p>Most commonly:</p>
+<ul>
+<li>there is an <em>escape character</em> (commonly <code>\</code>) that <em>initiates</em> the escape sequence</li>
+<li>what can follow the escape character is <em>technology-dependent</em>, but most languages support the following:
+<ul>
+<li><code>\n</code> $\equiv$ newline</li>
+<li><code>\t</code> $\equiv$ tab</li>
+<li><code>\r</code> $\equiv$ carriage return</li>
+<li><code>\\</code> $\equiv$ backslash (the single <code>\</code> is the escape character, so you need <code>\\</code> to represent a single <code>\</code>)</li>
+<li><code>\"</code> $\equiv$ double quote</li>
+<li><code>\'</code> $\equiv$ single quote</li>
+<li><code>\xHH</code> (or <code>\uHHHH</code>, or <code>\UHHHHHHHH</code>) $\equiv$ byte with hexadecimal value <code>HH</code> (or<code>HHHH</code>, or <code>HHHHHHHH</code>)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Two relevant operations:</p>
+<ul>
+<li><em>escaping</em>: converting a <em>character string</em> into another character string with <em>escape sequences</em> for non-printable characters</li>
+<li><em>unescaping</em>: the other way around</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2 id="escape-sequences-in-python">Escape sequences in Python</h2>
+<p>Function to <em>escape</em> strings:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">escape</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">s</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#204a87">str</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">-&gt;</span> <span style="color:#204a87">str</span><span style="color:#000;font-weight:bold">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">s</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">encode</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">'unicode_escape'</span><span style="color:#000;font-weight:bold">)</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">decode</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">'ascii'</span><span style="color:#000;font-weight:bold">)</span>
+</span></span></code></pre></div><p>Function to <em>unescape</em> strings:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">unescape</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">s</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#204a87">str</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">-&gt;</span> <span style="color:#204a87">str</span><span style="color:#000;font-weight:bold">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">s</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">encode</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">'ascii'</span><span style="color:#000;font-weight:bold">)</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">decode</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">'unicode_escape'</span><span style="color:#000;font-weight:bold">)</span>
+</span></span></code></pre></div><p>Usage example:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#000">s</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#4e9a06">"""
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">value1 \ value2
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">value3 / value4
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">"""</span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87">print</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">escape</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">s</span><span style="color:#000;font-weight:bold">))</span> <span style="color:#8f5902;font-style:italic"># \nvalue1 \\ value2\nvalue3 / value4\n</span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87">print</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">s</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#000">escape</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">s</span><span style="color:#000;font-weight:bold">))</span> <span style="color:#8f5902;font-style:italic"># False</span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87">print</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">s</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#000">unescape</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">escape</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">s</span><span style="color:#000;font-weight:bold">)))</span> <span style="color:#8f5902;font-style:italic"># True</span>
+</span></span></code></pre></div></section><section>
+<h2 id="data-representation-formats-json">Data representation formats: JSON</h2>
+<ul>
+<li>A <code>.json</code> file contains a <em>document</em>, i.e. a characters string</li>
+</ul>
+
+</section>
+</section>
+
+  
+
+
+</div>
+      
+
+    </div>
+<script type="text/javascript" src="/slides-module2/reveal-hugo/object-assign.js"></script>
+
+<a href="/slides-module2/reveal-js/dist/print/" id="print-location" style="display: none;"></a>
+
+<script type="application/json" id="reveal-hugo-site-params">{"custom_theme":"custom-theme.scss","custom_theme_compile":true,"custom_theme_options":{"enablesourcemap":true,"targetpath":"css/custom-theme.css"},"height":"1080","highlight_theme":"solarized-dark","history":true,"mermaid":[{}],"slide_number":true,"theme":"league","transition":"slide","transition_speed":"fast","width":"1920"}</script>
+<script type="application/json" id="reveal-hugo-page-params">null</script>
+
+<script src="/slides-module2/reveal-js/dist/reveal.js"></script>
+
+
+  
+  
+  <script type="text/javascript" src="/slides-module2/reveal-js/plugin/markdown/markdown.js"></script>
+  
+  <script type="text/javascript" src="/slides-module2/reveal-js/plugin/highlight/highlight.js"></script>
+  
+  <script type="text/javascript" src="/slides-module2/reveal-js/plugin/zoom/zoom.js"></script>
+  
+  <script type="text/javascript" src="/slides-module2/reveal-js/plugin/notes/notes.js"></script>
+  
+  
+  <script type="text/javascript" src="/slides-module2/reveal-js/plugin/notes/notes.js"></script>
+
+
+
+
+<script type="text/javascript">
+  
+  
+  function camelize(map) {
+    if (map) {
+      Object.keys(map).forEach(function(k) {
+        newK = k.replace(/(\_\w)/g, function(m) { return m[1].toUpperCase() });
+        if (newK != k) {
+          map[newK] = map[k];
+          delete map[k];
+        }
+      });
+    }
+    return map;
+  }
+
+  var revealHugoDefaults = { center: true, controls: true, history: true, progress: true, transition: "slide" };
+
+  var revealHugoPlugins = { 
+    plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealZoom ]
+   };
+  var revealHugoSiteParams = JSON.parse(document.getElementById('reveal-hugo-site-params').innerHTML);
+  var revealHugoPageParams = JSON.parse(document.getElementById('reveal-hugo-page-params').innerHTML);
+  
+  var options = Object.assign({},
+    camelize(revealHugoDefaults),
+    camelize(revealHugoSiteParams),
+    camelize(revealHugoPageParams),
+    camelize(revealHugoPlugins));
+  Reveal.initialize(options);
+</script>
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@9.1.6/dist/mermaid.min.js"></script>
+  <script>
+    mermaid.initialize({});
+
+    let render = (event) => {
+      let mermaidElems = event.currentSlide.querySelectorAll('.mermaid');
+      if (!mermaidElems.length){
+          return
+      }
+      mermaidElems.forEach(mermaidElem => {
+          let processed = mermaidElem.getAttribute('data-processed');
+          if (!processed){
+              
+              mermaid.init(undefined, mermaidElem);
+          }
+      });
+    };
+    
+    render({currentSlide: Reveal.getCurrentSlide()});
+
+    Reveal.on('slidechanged', render);
+    Reveal.on('ready', render);
+  </script>
+
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+</script>
+
+<script type="text/javascript" id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
+<script>
+  if (/.*?(\?|&)print-pdf/.test(window.location.toString())) {
+      var ytVideos = document.getElementsByTagName("iframe")
+      for (let i = 0; i < ytVideos.length; i++) {
+          var videoFrame = ytVideos[i]
+          var isYouTube = /^https?:\/\/(www.)youtube\.com\/.*/.test(videoFrame.src)
+          if (isYouTube) {
+              console.log(`Removing ${videoFrame.src}`)
+              var parent = videoFrame.parentElement
+              videoFrame.remove()
+              var p = document.createElement('p')
+              p.append(
+                  document.createTextNode(
+                      "There was an embedded video here, but it is disabled in the printed version of the slides."
+                  )
+              )
+              p.append(document.createElement('br'))
+              p.append(
+                  document.createTextNode(
+                      `Visit instead ${
+                          videoFrame.src
+                      } or ${
+                          videoFrame.src.replace(
+                              /(^https?:\/\/(www.)youtube\.com)\/(embed\/)(\w+).*/,
+                              "https://www.youtube.com/watch?v=$4"
+                          )
+                      }`
+                  )
+              )
+              parent.appendChild(p)
+          }
+      }
+  }
+</script>
+
+
+    
+  
+
+</body></html>
