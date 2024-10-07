@@ -38,11 +38,14 @@ aliases = [
 - ... and virtually all programming languages provide a _wrapper_ around this API
     + there including Python, via the [`socket` module](https://docs.python.org/3/library/socket.html)
 
+
+
 - Sockets are:
     * an _ancient_, and _stable_ __API__ for low-level networking in TCP/UDP (and more)
-    * very _didactic_: they require a good understanding of DS fundamentals
-        + e.g. client/server, or local/remote dichotomies
-    + very _elementary_: higher-level communication abstractions can be built on top of them
+    * very _didactic_: they support very common communication mechanism, which you may find in many other technologies too
+        * e.g. __connection-less__ vs. __connection-oriented__ communication
+        * e.g. __message-based__ vs. __stream-based__ communication
+    + very _elementary_: higher-level communication abstractions can be __built on top__ of them
         + e.g. RPC, _HTTP_, and virtually any application-level protocol
 
 ---
