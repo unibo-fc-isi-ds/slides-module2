@@ -53,4 +53,3 @@ aliases = [
 - __Issues__ of distributed systems programming
 - \[Hopefully\] __Testing__ distributed systems
 - \[Hopefully\] Overview on distributed programming __frameworks__ / __libraries__
-
