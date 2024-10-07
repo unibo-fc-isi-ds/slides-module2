@@ -321,10 +321,88 @@ this is why inexperienced programmers <em>often</em> don’t <em>notice</em> the
 </span></span></code></pre></div></section><section>
 <h2 id="data-representation-formats-json">Data representation formats: JSON</h2>
 <ul>
-<li>A <code>.json</code> file contains a <em>document</em>, i.e. a characters string</li>
+<li>A <code>.json</code> file contains a <strong>document</strong>, i.e. a <em>characters</em> string
+<ul>
+<li>encoding: <em>UTF-8</em></li>
 </ul>
-
+</li>
+<li>The file essentially a representation of a <em>tree-like</em> data structure…</li>
+<li>… where each <em>element</em> is one of the following:
+<ul>
+<li><em>value</em> (e.g. <em>string</em>, <em>number</em>, <em>boolean</em>, <em>null</em>)</li>
+<li><em>object</em> (i.e. dictionary) of <em>key-value</em> pairs, where <em>keys</em> are <em>strings</em>, and <em>values</em> are <em>values</em></li>
+<li><em>array</em> (i.e. list) of <em>values</em></li>
+</ul>
+</li>
+</ul>
+<h3 id="example">Example:</h3>
+<div class="container w-100 m-0 p-0">
+    <div class="row "><div class="col " style="text-align: left;"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">"name"</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">"John Doe"</span><span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">"age"</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#0000cf;font-weight:bold">42</span><span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">"password"</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#204a87;font-weight:bold">null</span><span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">"is_student"</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#204a87;font-weight:bold">false</span><span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">"is_teacher"</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#204a87;font-weight:bold">true</span><span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">"stats"</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">{</span> <span style="color:#204a87;font-weight:bold">"height"</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#0000cf;font-weight:bold">1.83</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">"weight"</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#0000cf;font-weight:bold">82.5</span> <span style="color:#000;font-weight:bold">},</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">"working_hours"</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">[{</span><span style="color:#204a87;font-weight:bold">"mon"</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#0000cf;font-weight:bold">8</span><span style="color:#000;font-weight:bold">},</span> <span style="color:#000;font-weight:bold">{</span><span style="color:#204a87;font-weight:bold">"tue"</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#0000cf;font-weight:bold">7</span><span style="color:#000;font-weight:bold">},</span> <span style="color:#000;font-weight:bold">{</span><span style="color:#204a87;font-weight:bold">"wed"</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#0000cf;font-weight:bold">7</span><span style="color:#000;font-weight:bold">},</span> <span style="color:#000;font-weight:bold">{</span><span style="color:#204a87;font-weight:bold">"thu"</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#0000cf;font-weight:bold">8</span><span style="color:#000;font-weight:bold">},</span> <span style="color:#000;font-weight:bold">{</span><span style="color:#204a87;font-weight:bold">"fri"</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#0000cf;font-weight:bold">6</span><span style="color:#000;font-weight:bold">}],</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">"address"</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">"street"</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">"123 Main St"</span><span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">"city"</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">"Springfield"</span><span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">"state"</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">"IL"</span><span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">"zip"</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">"62701"</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
+</span></span></code></pre></div></div>
+<div class="col " style="text-align: left;"><p><img src="http://www.plantuml.com/plantuml/svg/JP51JyCm38Nl_HMHpzL4EzWcJZjm0S5fHuIcQ76RG9TKYQCAglntugxTbfFzFLllMTa7afw-WxF5M8ZymCepmhE0DwUjU748vONBbl5ZFRUz365mNcLcOzVDr8HZeAZGKkQDx0BU149vqkYpG3ukFDjJo6WKeD6qclUgrMvT2XYMVbUldaIQ5xBdZx7jKRleUV5pXBEpF9LACG95JhcTwW7LjIOThpEDDxdUfA_bCgKyXYd51EPW7f7TeQhNuaCQAmu4vMtWPEYNvKFlSvx6OAVkPJuCMNzzlyT_fcUugRSF5Kmu5QdOerNy1_y0" alt=""></p>
+</div>
+</div>
+</div>
+</section><section>
+<h2 id="json-parsing--generation-in-python">JSON parsing / generation in Python</h2>
+<ul>
+<li>
+<p>Python comes with the <em>built-in</em> <a href="https://docs.python.org/3/library/json.html">module <code>json</code></a> to <em>parse</em> and <em>generate</em> JSON documents</p>
+<ul>
+<li><code>json.loads(s)</code>: parses a <em>string</em> <code>s</code> representing a JSON document into a Python <em>object</em></li>
+<li><code>json.dumps(o)</code>: generates a JSON document <em>string</em> from a Python <em>object</em> <code>o</code></li>
+</ul>
+</li>
+<li>
+<p>Object to JSON conversion table</p>
+<ul>
+<li>JSON <em>boolean</em> $\leftrightarrow$ Python <code>bool</code></li>
+<li>JSON <em>number</em> $\leftrightarrow$ Python <code>int</code> or <code>float</code></li>
+<li>JSON <em>string</em> $\leftrightarrow$ Python <code>str</code></li>
+<li>JSON <em>array</em> $\leftrightarrow$ Python <code>list</code></li>
+<li>JSON <em>object</em> $\leftrightarrow$ Python <code>dict</code></li>
+<li>JSON <em>null</em> $\leftrightarrow$ Python <code>None</code></li>
+</ul>
+</li>
+<li>
+<p>Example of JSON parsing:</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#000">doc</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#204a87">str</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#4e9a06">'{"name": "John Doe", "age": 42, "password": null, "is_student": false, "is_teacher": true, "stats": {"height": 1.83, "weight": 82.5}, "working_hours": [{"mon": 8}, {"tue": 7}, {"wed": 7}, {"thu": 8}, {"fri": 6}], "address": {"street": "123 Main St", "city": "Springfield", "state": "IL", "zip": "62701"}}'</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">obj</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#204a87">object</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">json</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">loads</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">doc</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87">print</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87">type</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">obj</span><span style="color:#000;font-weight:bold">))</span> <span style="color:#8f5902;font-style:italic"># &lt;class 'dict'&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87">print</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87">type</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">obj</span><span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">'name'</span><span style="color:#000;font-weight:bold">]),</span> <span style="color:#000">obj</span><span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">'name'</span><span style="color:#000;font-weight:bold">])</span> <span style="color:#8f5902;font-style:italic"># &lt;class 'str'&gt; John Doe</span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87">print</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87">type</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">obj</span><span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">'age'</span><span style="color:#000;font-weight:bold">]),</span> <span style="color:#000">obj</span><span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">'age'</span><span style="color:#000;font-weight:bold">])</span> <span style="color:#8f5902;font-style:italic"># &lt;class 'int'&gt; 42</span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87">print</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87">type</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">obj</span><span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">'password'</span><span style="color:#000;font-weight:bold">]),</span> <span style="color:#000">obj</span><span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">'password'</span><span style="color:#000;font-weight:bold">])</span> <span style="color:#8f5902;font-style:italic"># &lt;class 'NoneType'&gt; None</span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87">print</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87">type</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">obj</span><span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">'is_student'</span><span style="color:#000;font-weight:bold">]),</span> <span style="color:#000">obj</span><span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">'is_student'</span><span style="color:#000;font-weight:bold">])</span> <span style="color:#8f5902;font-style:italic"># &lt;class 'bool'&gt; False</span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87">print</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87">type</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">obj</span><span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">'is_teacher'</span><span style="color:#000;font-weight:bold">]),</span> <span style="color:#000">obj</span><span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">'is_teacher'</span><span style="color:#000;font-weight:bold">])</span> <span style="color:#8f5902;font-style:italic"># &lt;class 'bool'&gt; True</span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87">print</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87">type</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">obj</span><span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">'stats'</span><span style="color:#000;font-weight:bold">]),</span> <span style="color:#000">obj</span><span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">'stats'</span><span style="color:#000;font-weight:bold">])</span> <span style="color:#8f5902;font-style:italic"># &lt;class 'dict'&gt; {'height': 1.83, 'weight': 82.5}</span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87">print</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87">type</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">obj</span><span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">'working_hours'</span><span style="color:#000;font-weight:bold">]),</span> <span style="color:#000">obj</span><span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">'working_hours'</span><span style="color:#000;font-weight:bold">])</span> <span style="color:#8f5902;font-style:italic"># &lt;class 'list'&gt; [{'mon': 8}, {'tue': 7}, {'wed': 7}, {'thu': 8}, {'fri': 6}]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87">print</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">json</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">dumps</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">obj</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#000">doc</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#8f5902;font-style:italic"># True</span>
+</span></span></code></pre></div>
 </section>
+</section><section>
+<h1 id="lecture-is-over">Lecture is Over</h1>
+<br>
+<p>Compiled on: 2024-10-07
+ — <a href="?print-pdf&amp;pdfSeparateFragments=false"><i class="fa fa-print" aria-hidden="true"></i> printable version</a></p>
+<p><a href="../#/toc"><i class="fa fa-undo" aria-hidden="true"></i> back to ToC</a></p>
 </section>
 
   
