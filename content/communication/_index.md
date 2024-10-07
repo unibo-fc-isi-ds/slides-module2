@@ -121,6 +121,13 @@ processes, _distributed_ over the network
 
 ---
 
+## Useful resources
+
+- [Python `socket` module](https://docs.python.org/3/library/socket.html)
+- [Socket Programming in Python (Guide)](https://realpython.com/python-sockets/)
+
+---
+
 {{% section %}}
 
 ## Datagram sockets
@@ -169,7 +176,6 @@ processes, _distributed_ over the network
 ---
 
 ### Datagram sockets in Python (pt. 2)
-
 
 4. Example of datagram __send__:
     ```python
