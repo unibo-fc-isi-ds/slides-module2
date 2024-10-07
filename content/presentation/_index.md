@@ -299,6 +299,108 @@ print(json.dumps(obj) == doc) # True
 
 {{% /section %}}
 
-----
+---
+
+{{% section %}}
+
+# Running Example: Authentication Service
+
+Part 1
+
+---
+
+## Modelling
+
+Class diagram
+
+Sequence diagram
+
+---
+
+## Implementation
+
+Show example 0
+
+{{% /section %}}
+
+---
+
+{{% section %}}
+
+## (De)Serialization
+
+Definition
+
+---
+
+## (De)Serialization in Python
+
+Example
+
+{{% /section %}}
+
+---
+
+{{% section %}}
+
+## RPC
+
+Definition
+
+---
+
+## Marshalling and Unmarshalling
+
+Definition
+
+---
+
+## Request and Response Types in RPC
+
+Class diagram
+
+Sequence diagram
+
+{{% /section %}}
+
+---
+
+{{% section %}}
+
+# Running Example: Authentication Service
+
+Part 2
+
+---
+
+## Modelling the presentation layer
+
+Class diagram
+
+---
+
+## Implementing the presentation layer
+
+Explicit type convention
+
+Show example 1
+
+{{% /section %}}
+
+---
+
+{{% section %}}
+
+## Client and Server Stubs for the Authentication Service
+
+Class diagram
+
+Sequence diagram
+
+Code examples
+
+{{% /section %}}
+
+---
 
 {{% import path="reusable/back.md" %}}
