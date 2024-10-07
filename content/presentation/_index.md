@@ -125,7 +125,7 @@ corollary: data interchange formats are an __essential__ aspect of every interac
     * e.g. _ASCII_, _UTF-8_, _UTF-16_, _ISO-8859-1_, etc.
 
 - _ASCII_ is the _oldest_ encoding scheme, where each character is represented by a _single_ byte (but only 7 bits are used)
-    * e.g. `A` $\equiv$ `0x41`, `B` $\equiv$ `0x42`, ..., `a` $\equiv$ `0x61`, `b` $\equiv$ `0x62`, ... 
+    * e.g. `A` $\equiv$ `0x41`, `B` $\equiv$ `0x42`, ..., `a` $\equiv$ `0x61`, `b` $\equiv$ `0x62`, ...
     (this is what strings are represented in _C_ and _Python 2_)
 
 - _Unicode_: an abstract way to represent information, coming with three different encoding schemes:
@@ -190,7 +190,7 @@ print(b.decode('ascii')) # UnicodeDecodeError: 'ascii' codec can't decode byte 0
         + `\"` $\equiv$ double quote
         + `\'` $\equiv$ single quote
         + `\xHH` (or `\uHHHH`, or `\UHHHHHHHH`) $\equiv$ byte with hexadecimal value `HH` (or`HHHH`, or `HHHHHHHH`)
-    
+
 - Two relevant operations:
     * _escaping_: converting a _character string_ into another character string with _escape sequences_ for non-printable characters
     * _unescaping_: the other way around
@@ -224,12 +224,81 @@ print(escape(s)) # \nvalue1 \\ value2\nvalue3 / value4\n
 print(s == escape(s)) # False
 print(s == unescape(escape(s))) # True
 ```
-
 ---
 
 ## Data representation formats: JSON
 
-- A `.json` file contains a _document_, i.e. a characters string
+- A `.json` file contains a __document__, i.e. a _characters_ string
+    * encoding: _UTF-8_
+- The file essentially a representation of a _tree-like_ data structure...
+- ... where each _element_ is one of the following:
+    * _value_ (e.g. _string_, _number_, _boolean_, _null_)
+    * _object_ (i.e. dictionary) of _key-value_ pairs, where _keys_ are _strings_, and _values_ are _values_
+    * _array_ (i.e. list) of _values_
 
+### Example:
+
+{{% multicol %}}
+{{% col %}}
+```json
+{
+    "name": "John Doe",
+    "age": 42,
+    "password": null,
+    "is_student": false,
+    "is_teacher": true,
+    "stats": { "height": 1.83, "weight": 82.5 },
+    "working_hours": [{"mon": 8}, {"tue": 7}, {"wed": 7}, {"thu": 8}, {"fri": 6}],
+    "address": {
+        "street": "123 Main St",
+        "city": "Springfield",
+        "state": "IL",
+        "zip": "62701"
+    }
+}
+```
+{{% /col %}}
+{{% col %}}
+![](http://www.plantuml.com/plantuml/svg/JP51JyCm38Nl_HMHpzL4EzWcJZjm0S5fHuIcQ76RG9TKYQCAglntugxTbfFzFLllMTa7afw-WxF5M8ZymCepmhE0DwUjU748vONBbl5ZFRUz365mNcLcOzVDr8HZeAZGKkQDx0BU149vqkYpG3ukFDjJo6WKeD6qclUgrMvT2XYMVbUldaIQ5xBdZx7jKRleUV5pXBEpF9LACG95JhcTwW7LjIOThpEDDxdUfA_bCgKyXYd51EPW7f7TeQhNuaCQAmu4vMtWPEYNvKFlSvx6OAVkPJuCMNzzlyT_fcUugRSF5Kmu5QdOerNy1_y0)
+{{% /col %}}
+{{% /multicol %}}
+
+---
+
+## JSON parsing / generation in Python
+
+- Python comes with the _built-in_ [module `json`](https://docs.python.org/3/library/json.html) to _parse_ and _generate_ JSON documents
+    * `json.loads(s)`: parses a _string_ `s` representing a JSON document into a Python _object_
+    * `json.dumps(o)`: generates a JSON document _string_ from a Python _object_ `o`
+
+- Object to JSON conversion table
+    * JSON _boolean_ $\leftrightarrow$ Python `bool`
+    * JSON _number_ $\leftrightarrow$ Python `int` or `float`
+    * JSON _string_ $\leftrightarrow$ Python `str`
+    * JSON _array_ $\leftrightarrow$ Python `list`
+    * JSON _object_ $\leftrightarrow$ Python `dict`
+    * JSON _null_ $\leftrightarrow$ Python `None`
+
+- Example of JSON parsing:
+
+```python
+doc: str = '{"name": "John Doe", "age": 42, "password": null, "is_student": false, "is_teacher": true, "stats": {"height": 1.83, "weight": 82.5}, "working_hours": [{"mon": 8}, {"tue": 7}, {"wed": 7}, {"thu": 8}, {"fri": 6}], "address": {"street": "123 Main St", "city": "Springfield", "state": "IL", "zip": "62701"}}'
+obj: object = json.loads(doc)
+
+print(type(obj)) # <class 'dict'>
+print(type(obj['name']), obj['name']) # <class 'str'> John Doe
+print(type(obj['age']), obj['age']) # <class 'int'> 42
+print(type(obj['password']), obj['password']) # <class 'NoneType'> None
+print(type(obj['is_student']), obj['is_student']) # <class 'bool'> False
+print(type(obj['is_teacher']), obj['is_teacher']) # <class 'bool'> True
+print(type(obj['stats']), obj['stats']) # <class 'dict'> {'height': 1.83, 'weight': 82.5}
+print(type(obj['working_hours']), obj['working_hours']) # <class 'list'> [{'mon': 8}, {'tue': 7}, {'wed': 7}, {'thu': 8}, {'fri': 6}]
+
+print(json.dumps(obj) == doc) # True
+```
 
 {{% /section %}}
+
+----
+
+{{% import path="reusable/back.md" %}}
