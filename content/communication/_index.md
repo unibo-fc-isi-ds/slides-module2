@@ -189,7 +189,7 @@ processes, _distributed_ over the network
     + `sendto` method sends a _datagram_ to a _remote recipient_
     + the $1^{st}$ argument is the _byte sequence_ to be sent
     + the $2^{nd}$ argument is the recipient endpoint (as a _tuple_)
-    + documentation: [socket.sendto](https://docs.python.org/3/library/socket.html#socket.socket.sendto) 
+    + documentation: [socket.sendto](https://docs.python.org/3/library/socket.html#socket.socket.sendto)
 
 5. Example of datagram __receive__
     ```python
@@ -201,7 +201,7 @@ processes, _distributed_ over the network
     + the $1^{st}$ is the _buffer size_, according to doc: _"a relatively small power of 2"_, e.g. 4096
     + the method returns a _tuple_ with the _received data_ and the _sender endpoint_
         * the _received data_ is a _byte sequence_
-    + documentation: [socket.recvfrom](https://docs.python.org/3/library/socket.html#socket.socket.recvfrom) 
+    + documentation: [socket.recvfrom](https://docs.python.org/3/library/socket.html#socket.socket.recvfrom)
 
 ---
 
@@ -246,8 +246,8 @@ processes, _distributed_ over the network
 
 - Each participant is __identified__ by a _nickname_ and/or an _endpoint_
 
-- Each __message__ contains 
-    1. the _nickname_ of the _sender_ 
+- Each __message__ contains
+    1. the _nickname_ of the _sender_
     2. the _text_ of the message
     3. the _timestamp_ of the message
 
@@ -312,7 +312,7 @@ processes, _distributed_ over the network
                         yield addr.address
 
     ## Usage
-    print(f"Local IPs: {list(local_ips())}") 
+    print(f"Local IPs: {list(local_ips())}")
     # Local IPs: ['127.0.0.1', '137.204.71.x', ...]
     ```
 
@@ -347,7 +347,7 @@ class Peer:
     @property # Read-only property to get the local endpoint (ip:port)
     def local_address(self):
         return self.__socket.getsockname()
-    
+
     # Sends a message to all the peers
     def send_all(self, message: str):
         if not isinstance(message, bytes):
@@ -446,7 +446,7 @@ Alice
 > Hello Bob, how are you?
 [2024-10-03T15:01:09.164902] Bob:
         Fine thanks! What about you?
-> 
+>
 ```
 Alice's terminal is waiting for inputs
 {{% /col %}}
@@ -544,7 +544,7 @@ Bob's terminal is waiting for remote messages
             self.__receiver_thread = threading.Thread(target=self.__handle_incoming_messages, daemon=True)
             self.__callback = callback or (lambda *_: None) # callback does nothing by default
             self.__receiver_thread.start()
-        
+
         # This private method is executed in a separate thread, i.e. in background
         def __handle_incoming_messages(self):
             while True:
@@ -560,16 +560,16 @@ Bob's terminal is waiting for remote messages
     ```python
     ## Usage
     AsyncPeer(
-        port = ..., 
-        peers = ... , 
+        port = ...,
+        peers = ... ,
         callback = lambda msg, snd: # handle incoming messages here
     )
     ```
 
 ---
 
-> Important notion of ["callback"](https://en.wikipedia.org/wiki/Callback_(computer_programming)): 
-> a function that is stored as data (a reference) and designed to be called by another function – often back to the original abstraction layer. 
+> Important notion of ["callback"](https://en.wikipedia.org/wiki/Callback_(computer_programming)):
+> a function that is stored as data (a reference) and designed to be called by another function – often back to the original abstraction layer.
 
 ![A callback is often back on the level of the original caller.](https://upload.wikimedia.org/wikipedia/commons/d/d4/Callback-notitle.svg)
 
@@ -744,16 +744,21 @@ Upon receiving this message, a peer should _remove_ the sender from the local li
 
 3. What happens next depends on whether we are on the _client_ or the _server_ side of the connection:
 
-    ![Diagram showing the different API of client and server stream sockets](./socket-connection-overview.png)
+{{% multicol %}}
+{{% col %}}
+- __Server__:
+    1. actively start **listen**ing for incoming _connections_
+    2. actively wait to __accept__ an incoming connection
+    3. __send__ and __receive__ data
 
-    - __Server__:
-        1. actively start **listen**in for incoming _connections_
-        2. actively wait to __accept__ an incoming connection
-        3. __send__ and __receive__ data
-
-    - __Client__:
-        1. actively __connect__ to a server socket (requires knowing the server's _IP address_ and _port_)
-        2. __send__ and __receive__ data
+- __Client__:
+    1. actively __connect__ to a server socket (requires knowing the server's _IP address_ and _port_)
+    2. __send__ and __receive__ data
+{{% /col %}}
+{{% col %}}
+{{< image alt="Diagram showing the different API of client and server stream sockets" src="./stream-sockets.avif" >}}
+{{% /col %}}
+{{% /multicol %}}
 
 ---
 
@@ -879,7 +884,7 @@ Upon receiving this message, a peer should _remove_ the sender from the local li
 
 1. Streams are cool for sending data in _reliable_ and _ordered_ way, but what if one wants to send a sequence of _messages_?
 
-2. Common use case of _stream_ sockets: 
+2. Common use case of _stream_ sockets:
     1. _start_ a connection between any two peers...
     2. ... _keep_ the connection _alive_ for as long as possible...
     3. ... _send messages_ back and forth without the need to _reconnect_ every time
@@ -896,7 +901,7 @@ Upon receiving this message, a peer should _remove_ the sender from the local li
 ### Connection-oriented message exchange (example)
 
 1. Suppose that one node wants to send the following messages (of different sizes) to another node:
-    ```python 
+    ```python
     messages = ["The user pressed UP and RIGHT", "The user released RIGHT, and pressed LEFT", "The user released LEFT"]
     ```
 
@@ -904,7 +909,7 @@ Upon receiving this message, a peer should _remove_ the sender from the local li
     ```python
     for message in messages:
         length = len(message)
-        payload = length.to_bytes(4, 'big') + message.encode() 
+        payload = length.to_bytes(4, 'big') + message.encode()
         sock.sendall(payload)
     sock.shutdown(socket.SHUT_WR) # no more data to send
     ```
@@ -935,7 +940,7 @@ Upon receiving this message, a peer should _remove_ the sender from the local li
 ## Example: TCP Echo
 
 - Let's implement a simple __echo__ application using _stream sockets_
-    + the client will _forward_ it's _standard input stream_ to the server, which will send it back to the client, which will _print it_ 
+    + the client will _forward_ it's _standard input stream_ to the server, which will send it back to the client, which will _print it_
     + essentially, just like the `cat` command in Unix-like systems, when no argument is passed
         * but with the _server_ acting as the intermediary
 
@@ -962,7 +967,7 @@ mode = sys.argv[1].lower().strip() # 'server' for server, 'client' for client
 port = int(sys.argv[2])
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server:
-    server.bind(('0.0.0.0', port)) # bind to any local address, on the specified port 
+    server.bind(('0.0.0.0', port)) # bind to any local address, on the specified port
     server.listen(1) # only one connection at a time
     print(f"# echo server listening on port {port}")
     sock, addr = server.accept()
@@ -1035,7 +1040,7 @@ print("# connection closed")
 2. The client _forwards_ its _standard input stream_ to the server
     + `BUFFER_SIZE` bytes at a time
     + until the _end of the stream_ is reached
-        - e.g. when the user presses `Ctrl+D` on Unix-like systems 
+        - e.g. when the user presses `Ctrl+D` on Unix-like systems
         - or `Ctrl+Z` then `Enter` on Windows
 3. The client _signals_ it has _no more data_ to send
     + by shutting down the _write_ part of the socket
@@ -1070,13 +1075,13 @@ Launch the _client_ via the commnad `poetry run python -m snippets -l 3 -e 1 cli
 
 {{% fragment %}}
 
-### 
+###
 
 4. Yay! It seems working, but let's try to send a _long_ message
     1. let's re-launch the server as before
     2. let's re-lanch the client as follows:
         `poetry run python rand.py | poetry run python -m snippets -l 3 -e 1 client SERVER_IP:SERVER_PORT`
-        + where [the program `rand.py`]({{< github-url repo="lab-snippets" path="rand.py" >}}) aims at generating an _infinite_ sequence of random numbers 
+        + where [the program `rand.py`]({{< github-url repo="lab-snippets" path="rand.py" >}}) aims at generating an _infinite_ sequence of random numbers
         + where `|` is the _pipe_ operator, which _redirects_ the _standard output_ of the _left_ command to the _standard input_ of the _right_ command
 
 {{% /fragment %}}
@@ -1161,7 +1166,7 @@ print("# connection closed")
     1. let's re-launch the server as before
     2. let's re-lanch the client as follows:
         `poetry run python rand.py | poetry run python -m snippets -l 3 -e 2 client SERVER_IP:SERVER_PORT`
-        + where [the program `rand.py`]({{< github-url repo="lab-snippets" path="rand.py" >}}) aims at generating an _infinite_ sequence of random numbers 
+        + where [the program `rand.py`]({{< github-url repo="lab-snippets" path="rand.py" >}}) aims at generating an _infinite_ sequence of random numbers
         + where `|` is the _pipe_ operator, which _redirects_ the _standard output_ of the _left_ command to the _standard input_ of the _right_ command
     3. this time it should work
 
@@ -1223,8 +1228,8 @@ TL;DR: Let's redo the UDP chat, but with TCP, and with _no groups_
 
 - Each participant is __identified__ by a _nickname_ and/or an _endpoint_
 
-- Each __message__ contains 
-    1. the _nickname_ of the _sender_ 
+- Each __message__ contains
+    1. the _nickname_ of the _sender_
     2. the _text_ of the message
     3. the _timestamp_ of the message
 
@@ -1233,6 +1238,8 @@ TL;DR: Let's redo the UDP chat, but with TCP, and with _no groups_
 - See {{< github-url repo="lab-snippets" path="snippets/lab3/example3_tcp_chat.py" >}}
 
 ---
+
+{{< slide id="utilities" >}}
 
 ## Example: TCP Chat
 
@@ -1277,12 +1284,13 @@ TL;DR: Let's redo the UDP chat, but with TCP, and with _no groups_
 
 2. A callback for handling _incoming_ messages:
     ```python
-    def on_message_received(event, payload, sender, error):
+    def on_message_received(event, payload, connection, error):
         match event:
             case 'message':
                 print(payload) # print any message received
             case 'close':
-                print(f"Connection with peer {sender} closed") # inform the user the connection is closed
+                print(f"Connection with peer {connection.remote_address} closed") # inform the user the connection is closed
+                global remote_peer; remote_peer = None # forget about the disconnected peer
             case 'error':
                 print(error) # inform the user about any error which occurs
     ```
@@ -1374,7 +1382,7 @@ TL;DR: Let's redo the UDP chat, but with TCP, and with _no groups_
 
 ## Exercise: TCP Group Chat
 
-- __Prerequisites__: 
+- __Prerequisites__:
     1. understand [stream sockets](#/stream-sockets)
     2. understand the [UDP _group_ chat example](#/example-udp-chat)
     3. understand the [TCP chat example](#/example-tcp-chat)
@@ -1385,20 +1393,21 @@ TL;DR: Let's redo the UDP chat, but with TCP, and with _no groups_
     * similarly to what happens for the UDP _group_ chat example
     * in such a way _each peer **broadcasts** messages to all the other peers it has been contacted with so far_
 
-- __Hints__: 
+- __Hints__:
     * you can and should reuse the provided code, possibly modifying it
     * there's no need anymore to distinguish among _servers_ and _clients_: all peers act simultaneously as both
     * peers may be informed about the _endpoints_ of other peers at _launch time_ (via _command-line_ arguments)
 
-- __Deadline__: two weeks from now
+- __Deadline__: two weeks from today
 
-- __Incentive__: +1 point on the final grade (if solution is satistying)
+- __Incentive__: +1 point on the final grade (if solution is satisfying)
 
-- __Submission__: 
+- __Submission__:
     1. fork the [`lab-snippets` repository]({{< github-url repo="lab-snippets" >}})
     2. create a new branch named `exercise-lab3`
     3. commit your solution in the `snippets/lab3` directory (possibly in a new file named `exercise_tcp_group_chat.py`)
-    4. push the branch to your fork & create a __pull request__ to the original repository
+    4. push the branch to your fork & create a __pull request__ to the original repository, entitled `[{{<academic_year>}} Surname, Name] Exercise: TCP Group Chat`
+        - in the pull request, describe your solution, motivate your choices, and explain how to test it
 
 ---
 
