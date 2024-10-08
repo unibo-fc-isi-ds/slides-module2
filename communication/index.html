@@ -424,7 +424,7 @@ processes, <em>distributed</em> over the network</p>
 </span></span><span style="display:flex;"><span>                    <span style="color:#204a87;font-weight:bold">yield</span> <span style="color:#000">addr</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">address</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">## Usage</span>
-</span></span><span style="display:flex;"><span><span style="color:#204a87">print</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">f</span><span style="color:#4e9a06">"Local IPs: </span><span style="color:#4e9a06">{</span><span style="color:#204a87">list</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">local_ips</span><span style="color:#000;font-weight:bold">())</span><span style="color:#4e9a06">}</span><span style="color:#4e9a06">"</span><span style="color:#000;font-weight:bold">)</span> 
+</span></span><span style="display:flex;"><span><span style="color:#204a87">print</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">f</span><span style="color:#4e9a06">"Local IPs: </span><span style="color:#4e9a06">{</span><span style="color:#204a87">list</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">local_ips</span><span style="color:#000;font-weight:bold">())</span><span style="color:#4e9a06">}</span><span style="color:#4e9a06">"</span><span style="color:#000;font-weight:bold">)</span>
 </span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># Local IPs: ['127.0.0.1', '137.204.71.x', ...]</span>
 </span></span></code></pre></div><ul>
 <li>the <code>psutil</code> module is not Python standard library, but it is available <a href="https://pypi.org/project/psutil/">on PyPI</a></li>
@@ -455,7 +455,7 @@ processes, <em>distributed</em> over the network</p>
 </span></span><span style="display:flex;"><span>    <span style="color:#5c35cc;font-weight:bold">@property</span> <span style="color:#8f5902;font-style:italic"># Read-only property to get the local endpoint (ip:port)</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">local_address</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">):</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">__socket</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">getsockname</span><span style="color:#000;font-weight:bold">()</span>
-</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic"># Sends a message to all the peers</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">send_all</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">message</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#204a87">str</span><span style="color:#000;font-weight:bold">):</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#204a87;font-weight:bold">not</span> <span style="color:#204a87">isinstance</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">message</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87">bytes</span><span style="color:#000;font-weight:bold">):</span>
@@ -473,7 +473,7 @@ processes, <em>distributed</em> over the network</p>
 </span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">close</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">):</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">__socket</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">close</span><span style="color:#000;font-weight:bold">()</span>
 </span></span></code></pre></div></div>
-<div class="col " style="text-align: left;"><figure id="plantuml-figure-1728378405273502397" class="plantuml" alt="" style="width: 100%;height: 30vh;max-width: 95vw;max-height: 80vh;">
+<div class="col " style="text-align: left;"><figure id="plantuml-figure-1728403157165566910" class="plantuml" alt="" style="width: 100%;height: 30vh;max-width: 95vw;max-height: 80vh;">
 <p>class Peer {
 - __socket: socket
 + peers: set
@@ -487,7 +487,7 @@ processes, <em>distributed</em> over the network</p>
 }</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1728378405273502397");
+    handlePlantumlFigureByID("plantuml-figure-1728403157165566910");
 </script>
 </div>
 </div>
@@ -552,7 +552,7 @@ processes, <em>distributed</em> over the network</p>
 </span></span><span style="display:flex;"><span>&gt; Hello Bob, how are you?
 </span></span><span style="display:flex;"><span>[2024-10-03T15:01:09.164902] Bob:
 </span></span><span style="display:flex;"><span>        Fine thanks! What about you?
-</span></span><span style="display:flex;"><span>&gt; 
+</span></span><span style="display:flex;"><span>&gt;
 </span></span></code></pre></div><p>Alice’s terminal is waiting for inputs</p>
 </div>
 <div class="col " style="text-align: left;"><h4 id="peer-2">Peer 2</h4>
@@ -705,8 +705,8 @@ processes, <em>distributed</em> over the network</p>
 <p><code>AsyncPeer</code> is a subclass of <code>Peer</code> exposing a <code>callback</code> for <strong>asynchronously</strong> handling <em>incoming</em> messages</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">## Usage</span>
 </span></span><span style="display:flex;"><span><span style="color:#000">AsyncPeer</span><span style="color:#000;font-weight:bold">(</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#000">port</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#ce5c00;font-weight:bold">...</span><span style="color:#000;font-weight:bold">,</span> 
-</span></span><span style="display:flex;"><span>    <span style="color:#000">peers</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#ce5c00;font-weight:bold">...</span> <span style="color:#000;font-weight:bold">,</span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#000">port</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#ce5c00;font-weight:bold">...</span><span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">peers</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#ce5c00;font-weight:bold">...</span> <span style="color:#000;font-weight:bold">,</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#000">callback</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#204a87;font-weight:bold">lambda</span> <span style="color:#000">msg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">snd</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#8f5902;font-style:italic"># handle incoming messages here</span>
 </span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">)</span>
 </span></span></code></pre></div></li>
@@ -1105,7 +1105,7 @@ to stress-test the chat with <em>many</em> messages, and to observe the <em>reli
 <p>The <em>sender</em> must <em>prefix</em> each message with its <em>length</em>:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">for</span> <span style="color:#000">message</span> <span style="color:#204a87;font-weight:bold">in</span> <span style="color:#000">messages</span><span style="color:#000;font-weight:bold">:</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#000">length</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#204a87">len</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">message</span><span style="color:#000;font-weight:bold">)</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#000">payload</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">length</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">to_bytes</span><span style="color:#000;font-weight:bold">(</span><span style="color:#0000cf;font-weight:bold">4</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">'big'</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#000">message</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">encode</span><span style="color:#000;font-weight:bold">()</span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#000">payload</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">length</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">to_bytes</span><span style="color:#000;font-weight:bold">(</span><span style="color:#0000cf;font-weight:bold">4</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">'big'</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#000">message</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">encode</span><span style="color:#000;font-weight:bold">()</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#000">sock</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">sendall</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">payload</span><span style="color:#000;font-weight:bold">)</span>
 </span></span><span style="display:flex;"><span><span style="color:#000">sock</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">shutdown</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">socket</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">SHUT_WR</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#8f5902;font-style:italic"># no more data to send</span>
 </span></span></code></pre></div><ul>
@@ -1174,7 +1174,7 @@ to stress-test the chat with <em>many</em> messages, and to observe the <em>reli
 </span></span><span style="display:flex;"><span><span style="color:#000">port</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#204a87">int</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">sys</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">argv</span><span style="color:#000;font-weight:bold">[</span><span style="color:#0000cf;font-weight:bold">2</span><span style="color:#000;font-weight:bold">])</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">with</span> <span style="color:#000">socket</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">socket</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">socket</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">AF_INET</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">socket</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">SOCK_STREAM</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#204a87;font-weight:bold">as</span> <span style="color:#000">server</span><span style="color:#000;font-weight:bold">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#000">server</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">bind</span><span style="color:#000;font-weight:bold">((</span><span style="color:#4e9a06">'0.0.0.0'</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">port</span><span style="color:#000;font-weight:bold">))</span> <span style="color:#8f5902;font-style:italic"># bind to any local address, on the specified port </span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">server</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">bind</span><span style="color:#000;font-weight:bold">((</span><span style="color:#4e9a06">'0.0.0.0'</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">port</span><span style="color:#000;font-weight:bold">))</span> <span style="color:#8f5902;font-style:italic"># bind to any local address, on the specified port</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#000">server</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">listen</span><span style="color:#000;font-weight:bold">(</span><span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#8f5902;font-style:italic"># only one connection at a time</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#204a87">print</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">f</span><span style="color:#4e9a06">"# echo server listening on port </span><span style="color:#4e9a06">{</span><span style="color:#000">port</span><span style="color:#4e9a06">}</span><span style="color:#4e9a06">"</span><span style="color:#000;font-weight:bold">)</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#000">sock</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">addr</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">server</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">accept</span><span style="color:#000;font-weight:bold">()</span>
@@ -1481,7 +1481,8 @@ to stress-test the chat with <em>many</em> messages, and to observe the <em>reli
 <p>See <a href="https://github.com/unibo-fc-isi-ds/lab-snippets/blob/master/snippets/lab3/example3_tcp_chat.py">https://github.com/unibo-fc-isi-ds/lab-snippets/blob/master/snippets/lab3/example3_tcp_chat.py</a></p>
 </li>
 </ul>
-</section><section>
+</section>
+<section data-noprocess="" data-shortcode-slide="" id="utilities">
 <h2 id="example-tcp-chat-1">Example: TCP Chat</h2>
 <h3 id="utilitieshttpsgithubcomunibo-fc-isi-dslab-snippetsblobmastersnippetslab3__init__py-pt-1"><a href="https://github.com/unibo-fc-isi-ds/lab-snippets/blob/master/snippets/lab3/__init__.py">Utilities</a> (pt. 1)</h3>
 <p><img src="https://www.plantuml.com/plantuml/svg/bPAnZjim38PtFmMHvH8qpWC8xLGKtRgqkw38J2oSGXgYSjVYUkzUMP9Z1u5nw1B554dz_FbPRqJWAnEXZOu9tXe0W1Qq5hRF61MKyr2EVFi9F5lZjUcwW28AudNmMAy2NZZYmrrjQZqBTWgEp7uE6k-FnZuhE5qfoxXT1RJeNZ3es0SqgR2SZiw7N_bVVLLhHovglIqozp3r_FA32NSrIv2wxGL5p1aLI0pJHNrckylH6Xorfj1DIs-eyvWUidn90dHj9Dkf2vF65wIupR-vrHu6yyUpwSfNLe2Xkh87387JrxVV5eTnxbtptZJ44S7ZAGAV5gjflYDXC145SdzHJGkRpLELyRJPA7ZjaS103O6JQRAkvEQHvipO8zXvzqxAp2KtQrjqfQ8MsDfha1HqVgo-NAxah8d9aGQfWr5zqrIkl4EAyFQm90pZJYiZ3yjwd-f_vhmRa-j4jk2THAIFG6bXXRM5k8730p-h3CpkVO31cAWMszn3dNwTXJiCPpA2E_SPZUBE6XR5aFjT5zz1eWbHgcLfYb9GHvah25-pR8iJ7PWgZwcidtYIoCFA4pmiNe3_G2fRFDRCtYx0cXs4pt_Rq5R65CZrs1Pg-7INTUWErIe5Dk3er3y0" alt=""></p>
@@ -1653,10 +1654,10 @@ to stress-test the chat with <em>many</em> messages, and to observe the <em>reli
 </ul>
 </li>
 <li>
-<p><strong>Deadline</strong>: two weeks from now</p>
+<p><strong>Deadline</strong>: two weeks from today</p>
 </li>
 <li>
-<p><strong>Incentive</strong>: +1 point on the final grade (if solution is satistying)</p>
+<p><strong>Incentive</strong>: +1 point on the final grade (if solution is satisfying)</p>
 </li>
 <li>
 <p><strong>Submission</strong>:</p>
@@ -1664,7 +1665,11 @@ to stress-test the chat with <em>many</em> messages, and to observe the <em>reli
 <li>fork the <a href="https://github.com/unibo-fc-isi-ds/lab-snippets"><code>lab-snippets</code> repository</a></li>
 <li>create a new branch named <code>exercise-lab3</code></li>
 <li>commit your solution in the <code>snippets/lab3</code> directory (possibly in a new file named <code>exercise_tcp_group_chat.py</code>)</li>
-<li>push the branch to your fork &amp; create a <strong>pull request</strong> to the original repository</li>
+<li>push the branch to your fork &amp; create a <strong>pull request</strong> to the original repository, entitled <code>[A.Y. 2024/2025 Surname, Name] Exercise: TCP Group Chat</code>
+<ul>
+<li>in the pull request, describe your solution, motivate your choices, and explain how to test it</li>
+</ul>
+</li>
 </ol>
 </li>
 </ul>

@@ -446,7 +446,7 @@ this is why inexperienced programmers <em>often</em> don’t <em>notice</em> the
 </ol>
 </section><section>
 <h2 id="modelling-classes">Modelling (classes)</h2>
-<figure id="plantuml-figure-1728378405299930021" class="plantuml" alt="" style="width: 100%;height: 60vh;max-width: 95vw;max-height: 80vh;">
+<figure id="plantuml-figure-1728403157190788960" class="plantuml" alt="" style="width: 100%;height: 60vh;max-width: 95vw;max-height: 80vh;">
 <p>package “users” {
 class User {
 +username: str
@@ -509,7 +509,7 @@ AuthenticationService &lt;|.. InMemoryAuthenticationService
 <p>}</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1728378405299930021");
+    handlePlantumlFigureByID("plantuml-figure-1728403157190788960");
 </script>
 <div class="container w-100 m-0 p-0">
     <div class="row "><div class="col " style="text-align: left;"><ul>
@@ -848,7 +848,7 @@ AuthenticationService &lt;|.. InMemoryAuthenticationService
 </span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">_role_to_ast</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">role</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">Role</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">-&gt;</span> <span style="color:#204a87">dict</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#8f5902;font-style:italic"># Role -&gt; AST</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">{</span><span style="color:#4e9a06">'name'</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">role</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">name</span><span style="color:#000;font-weight:bold">}</span>
 </span></span></code></pre></div></div>
-<div class="col " style="text-align: left;"><figure id="plantuml-figure-1728378405316300678" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
+<div class="col " style="text-align: left;"><figure id="plantuml-figure-1728403157204617331" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
 <p>class Serializer {
 +serialize(obj: object) : str
 -_ast_to_string(data) : str
@@ -858,7 +858,7 @@ AuthenticationService &lt;|.. InMemoryAuthenticationService
 }</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1728378405316300678");
+    handlePlantumlFigureByID("plantuml-figure-1728403157204617331");
 </script>
 </div>
 </div>
@@ -925,7 +925,7 @@ AuthenticationService &lt;|.. InMemoryAuthenticationService
 </span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">_role_from_ast</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">data</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">-&gt;</span> <span style="color:#000">Role</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#8f5902;font-style:italic"># AST -&gt; Role</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">Role</span><span style="color:#000;font-weight:bold">[</span><span style="color:#000">data</span><span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">'name'</span><span style="color:#000;font-weight:bold">]]</span>
 </span></span></code></pre></div></div>
-<div class="col " style="text-align: left;"><figure id="plantuml-figure-1728378405321316445" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
+<div class="col " style="text-align: left;"><figure id="plantuml-figure-1728403157208465614" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
 <p>class Deserializer {
 +deserialize(string) : object
 -_ast_to_string(data) : object
@@ -935,7 +935,7 @@ AuthenticationService &lt;|.. InMemoryAuthenticationService
 }</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1728378405321316445");
+    handlePlantumlFigureByID("plantuml-figure-1728403157208465614");
 </script>
 </div>
 </div>
@@ -1053,48 +1053,597 @@ AuthenticationService &lt;|.. InMemoryAuthenticationService
 </ul>
 </li>
 </ul>
+</section><section>
+<h2 id="deserialization-in-python-full-example">De(Serialization) in Python (full example)</h2>
+<ol>
+<li>See the example at <a href="https://github.com/unibo-fc-isi-ds/lab-snippets/blob/master/snippets/lab4/example1_presentation.py">https://github.com/unibo-fc-isi-ds/lab-snippets/blob/master/snippets/lab4/example1_presentation.py</a></li>
+</ol>
+<div class="container w-100 m-0 p-0">
+    <div class="row "><div class="col col-10" style="text-align: left;"><ol start="2">
+<li>
+<p>Notice the two new classes: <code>Request</code> and <code>Response</code></p>
+ <!-- - `Request`: represents an RPC request to the server
+     + `name`: the name of the function to call
+     + `args`: the arguments to pass to the function
+ - `Response`: represents an RPC response from the server
+     + `result`: the result of the function call
+     + `error`: an error message in case of failure -->
+</li>
+<li>
+<p>Notice how complex the <code>Serializer</code> and <code>Deserializer</code> classes may become in a real usecase</p>
+</li>
+<li>
+<p>Try to figure out how the following object…</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">from</span> <span style="color:#000">snippets.lab4.example0_users</span> <span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">gc_credentials_wrong</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000">request</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">Request</span><span style="color:#000;font-weight:bold">(</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">name</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#4e9a06">'my_function'</span><span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">args</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#000;font-weight:bold">(</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">gc_credentials_wrong</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#8f5902;font-style:italic"># an instance of Credentials</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">gc_user</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#8f5902;font-style:italic"># an instance of User</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">"a string"</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#0000cf;font-weight:bold">42</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#0000cf;font-weight:bold">3.14</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">True</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">False</span><span style="color:#000;font-weight:bold">],</span> <span style="color:#8f5902;font-style:italic"># a list, containing various primitive types</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">{</span><span style="color:#4e9a06">'key'</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">'value'</span><span style="color:#000;font-weight:bold">},</span> <span style="color:#8f5902;font-style:italic"># a dictionary</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">Response</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">None</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">'an error'</span><span style="color:#000;font-weight:bold">),</span> <span style="color:#8f5902;font-style:italic"># a Response, which contains a None field</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">)</span>
+</span></span></code></pre></div></li>
+<li>
+<p>… would be serialized as the following JSON</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">"name"</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">"my_function"</span><span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">"args"</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">[</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">{</span> <span style="color:#204a87;font-weight:bold">"id"</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">"giovanni.ciatto@unibo.it"</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">"password"</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">"wrong password"</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">"$type"</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">"Credentials"</span><span style="color:#000;font-weight:bold">},</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#4e9a06">"user"</span><span style="color:#a40000">:</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">"username"</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">"gciatto"</span><span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">"emails"</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">"giovanni.ciatto@gmail.com"</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">"giovanni.ciatto@unibo.it"</span><span style="color:#000;font-weight:bold">],</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">"full_name"</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">"Giovanni Ciatto"</span><span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">"role"</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">{</span> <span style="color:#204a87;font-weight:bold">"name"</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">"ADMIN"</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">"$type"</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">"Role"</span> <span style="color:#000;font-weight:bold">},</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">"password"</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#204a87;font-weight:bold">null</span><span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">"$type"</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">"User"</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">},</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">"a string"</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#0000cf;font-weight:bold">42</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#0000cf;font-weight:bold">3.14</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">true</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">false</span><span style="color:#000;font-weight:bold">],</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">{</span> <span style="color:#204a87;font-weight:bold">"key"</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">"value"</span><span style="color:#000;font-weight:bold">},</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">{</span> <span style="color:#204a87;font-weight:bold">"result"</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#204a87;font-weight:bold">null</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">"error"</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">"an error"</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">"$type"</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">"Response"</span><span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">],</span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">"$type"</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">"Request"</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
+</span></span></code></pre></div></li>
+</ol>
+</div>
+<div class="col col-2" style="text-align: left;"><figure id="plantuml-figure-1728403157213792633" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
+<p>class Request {
++ name: str
++ args: tuple
+}</p>
+<p>Request -d[hidden]- Response</p>
+<p>class Response {
++ result: object
++ error: str
+}</p>
+</figure>
+<script>
+    handlePlantumlFigureByID("plantuml-figure-1728403157213792633");
+</script>
+<ol start="6">
+<li>Run with <code>python -m snippets -l 4 -e 1</code></li>
+</ol>
+</div>
+</div>
+</div>
 
 </section>
 </section><section>
 
 
 <section data-shortcode-section="">
-<h2 id="rpc">RPC</h2>
-<p>Definition</p>
+<h2 id="remote-procedure-call-rpc">Remote Procedure Call (RPC)</h2>
+<blockquote>
+<p><strong>RPC</strong> $\equiv$ a <em>request—response</em> interaction pattern between a <em>client</em> and a <em>server</em> where:
+the client aims at <em>invoking</em> a <em>procedure</em> on the server, and receiving the <em>result</em> of the procedure back
+as if the procedure was <em>locally</em> executed, despite the <em>server</em> being <em>remote</em></p>
+</blockquote>
+<ul>
+<li>
+<p>(Remote) <strong>Procedure</strong> $\equiv$ a <em>function</em> with a clear <em>signature</em>, <em>offered</em> by a <em>server</em>, to be <em>invoked</em> by a <em>client</em></p>
+<ul>
+<li><em>name</em> (or <em>identifier</em>)</li>
+<li><em>input</em> parameters</li>
+<li><em>returns</em> value(s), there including <em>errors</em> that may or may not be <em>raised</em> during the <em>execution</em></li>
+<li><em>side effects</em> (if any) which may change the <em>state</em> of the <em>server</em>, hence affecting the result of <em>future</em> calls</li>
+</ul>
+</li>
+<li>
+<p>Differences w.r.t. <em>local</em> procedure calls:</p>
+<ol>
+<li>caller and callee are <em>not</em> in the <em>same</em> <em>address space</em> $\Rightarrow$ can<em>not</em> pass arguments <em>by reference</em>
+<ul>
+<li>passage <em>by value</em> is the only option: <em>copies</em> of arguments must be transferred over the network</li>
+</ul>
+</li>
+<li>input parameters and return values must be <em>serialized</em> and <em>deserialized</em> to pass through the <em>network</em></li>
+<li><em>exceptions</em> do not really exist, ad-hoc <em>return values</em> are used instead</li>
+</ol>
+</li>
+</ul>
+</section><section>
+<h2 id="rpc-client-and-server">RPC Client and Server</h2>
+<br>
+<img src="./rpc-time.png" alt="" style="max-width: 95vw; max-height: 80vh; object-fit: contain;">
+<ul>
+<li>The <em>client</em> and the <em>server</em> are <strong>temporally coupled</strong>
+<ul>
+<li>the <em>client</em> must <strong>wait</strong> for the <em>server</em> to <em>respond</em></li>
+<li>the <em>server</em> must <strong>wait</strong> for the <em>client</em> to <em>send</em> the <em>request</em></li>
+<li>they must be <em>online</em> at the <strong>same time</strong></li>
+<li>the <em>server</em> must be <em>online</em> <strong>before</strong> the <em>client</em></li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2 id="common-rpc-infrastructure">Common RPC Infrastructure</h2>
+<img src="./rpc-dataflow1.png" alt="" style="height: 50vh; max-width: 95vw; max-height: 80vh; object-fit: contain;">
+<ul>
+<li><strong>protocol</strong>: the low level <em>transfer</em> protocol (e.g. <em>HTTP</em>, <em>TCP</em>, <em>UDP</em>, etc.) + <em>data representation format</em> (e.g. <em>JSON</em>, <em>XML</em>, <em>binary</em>, etc.)</li>
+<li><strong>client stub</strong>: a <em>proxy</em> object that <strong>mimics</strong> the <em>server</em> <em>interface</em> on the <em>client</em> side</li>
+<li><strong>client</strong>: the piece of code which is using the <em>client stub</em>
+<ul>
+<li>it may not even be aware of the fact that the <em>server</em> is <em>remote</em></li>
+</ul>
+</li>
+<li><strong>server stub</strong>: a <em>server</em> which listens for requests, handles them (possibly concurrently) and sends back responses
+<ul>
+<li>it commonly acts as a <em>proxy</em> towards some actual <em>server</em> code</li>
+</ul>
+</li>
+<li><strong>server</strong>: the piece of code which is <em>executing</em> the <em>actual procedure</em> on the <em>server</em> side
+<ul>
+<li>it may not even be aware of the fact that the <em>client</em> is <em>remote</em></li>
+<li><em>beware</em>! In this case “server” means <em>“provider of a functionality”</em>: the infrastructural component is actually the “server stub”!</li>
+</ul>
+</li>
+</ul>
 </section><section>
 <h2 id="marshalling-and-unmarshalling">Marshalling and Unmarshalling</h2>
-<p>Definition</p>
+<p>The client and server <em>stubs</em> are essentially aimed at performing these operations:</p>
+<img src="./rpc-dataflow2.svg" alt="" style="height: 50vh; max-width: 95vw; max-height: 80vh; object-fit: contain;">
+<ul>
+<li><strong>Marshalling</strong>: the process of <em>serializing</em> the arguments/results of a RPC to send them over the network</li>
+<li><strong>Unmarshalling</strong>: the process of <em>deserializing</em> the arguments/results of a RPC received from the network</li>
+</ul>
 </section><section>
 <h2 id="request-and-response-types-in-rpc">Request and Response Types in RPC</h2>
-<p>Class diagram</p>
-<p>Sequence diagram</p>
+<p>To support RPC, implementation will most commonly define two data structures:</p>
+<ul>
+<li><code>Request</code>: a data structure representing the <em>invokation request</em> to be sent to the <em>server</em>
+<ul>
+<li>it will contain the <em>name</em> of the <em>procedure</em> to be <em>invoked</em>, and the <em>arguments</em> to be passed to it, etc.</li>
+</ul>
+</li>
+<li><code>Response</code>: a data structure representing the <em>response</em> to be sent back to the <em>client</em>
+<ul>
+<li>it will contain the <em>result</em> of the <em>procedure</em> (if any), and the <em>error</em> message (if any), etc.</li>
+</ul>
+</li>
+</ul>
+<div class="container w-100 m-0 p-0">
+    <div class="row "><div class="col col-3" style="text-align: left;"><figure id="plantuml-figure-1728403157225220316" class="plantuml" alt="" style="width: 100%;height: 60vh;max-width: 95vw;max-height: 80vh;">
+<p>class Request {
++ name: str
++ args: tuple
+}</p>
+<p>Request -d[hidden]- Response</p>
+<p>class Response {
++ result: object
++ error: str
+}</p>
+</figure>
+<script>
+    handlePlantumlFigureByID("plantuml-figure-1728403157225220316");
+</script>
+</div>
+<div class="col " style="text-align: left;"><figure id="plantuml-figure-1728403157225342373" class="plantuml" alt="" style="width: 100%;height: 60vh;max-width: 95vw;max-height: 80vh;">
+<p>@startuml
+hide footbox</p>
+<p>actor Client
+participant “Client Stub” as CS
+control “Server Stub” as SS
+participant Server</p>
+<p>Client -&gt; CS: f(a, b, c)
+activate Client
+activate CS
+CS -&gt; CS: req = Request(name=‘f’, args=(a, b, c)) \n req = serialize(req)
+CS -&gt; SS: {“name”=“function”, “args”=[a, b, c]}
+activate SS
+SS -&gt; SS : req = deserialize(req)
+SS -&gt; SS : lookup function req.name
+SS -&gt; Server: f(a, b, c)
+activate Server</p>
+<p>alt success
+Server –&gt; SS: return R
+else exception
+Server –&gt; SS: raise E
+deactivate Server
+end
+SS -&gt; SS: res = Response(result=R, error=E) \n res = serialize(res)
+SS -&gt; CS: {“result”: R, “error”: E}
+deactivate SS
+CS -&gt; CS: res = deserialize(res)</p>
+<p>alt res.error is None
+CS –&gt; Client: return res.result
+else
+CS –&gt; Client: raise res.error
+deactivate CS
+end
+@enduml</p>
+</figure>
+<script>
+    handlePlantumlFigureByID("plantuml-figure-1728403157225342373");
+</script>
+</div>
+</div>
+</div>
 
 </section>
 </section><section>
 
 
 <section data-shortcode-section="">
-<h1 id="running-example-authentication-service">Running Example: Authentication Service</h1>
-<p>Part 2</p>
+<h1 id="running-example-authentication">Running Example: Authentication</h1>
+<p>(Part 2)</p>
 </section><section>
-<h2 id="modelling-the-presentation-layer">Modelling the presentation layer</h2>
-<p>Class diagram</p>
+<h2 id="server-stubs-for-the-user-database">Server Stubs for the User Database</h2>
+<ul>
+<li>The “actual” server (provider of functionality) here is some instance of the <code>InMemoryUserDatabase</code> class</li>
+<li>We will exemplify how to build a <em>server stub</em> for that server
+<ul>
+<li>it will leverage on <em>TCP sockets</em> to listen for incoming requests, hence reusing <a href="../communication/#/utilities">the <code>Server</code> interface from the previous lecture</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="design-considerations">Design considerations</h3>
+<ol>
+<li>assume each TCP connection is devoted to a <em>single</em> RPC, i.e. just one <em>request</em> and one <em>response</em></li>
+<li>serve RPCs <em>concurrently</em>, by starting a new <em>thread</em> for each incoming connection</li>
+<li>use the <code>Serializer</code> and <code>Deserializer</code> classes to (de)serialize <em>requests</em> and <em>responses</em></li>
+<li>the server stub holds a reference to the <em>actual</em> server, and <em>delegates</em> the <em>actual</em> work to it
+<ul>
+<li>upon receiving a <em>request</em>, it <em>deserializes</em> it, <em>invokes</em> the <em>actual</em> server, <em>serializes</em> the <em>response</em>, and <em>sends</em> it back to the <em>client</em></li>
+<li>if any <em>error</em> occurs, it <em>serializes</em> the <em>error</em> message and <em>sends</em> it back to the <em>client</em></li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">from</span> <span style="color:#000">snippets.lab3</span> <span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">Server</span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">from</span> <span style="color:#000">snippets.lab4.users.impl</span> <span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">InMemoryUserDatabase</span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">from</span> <span style="color:#000">snippets.lab4.example1_presentation</span> <span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">serialize</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">deserialize</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">Request</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">Response</span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">traceback</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">class</span> <span style="color:#000">ServerStub</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">Server</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">__init__</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">port</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87">super</span><span style="color:#000;font-weight:bold">()</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">__init__</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">port</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">__on_connection_event</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#8f5902;font-style:italic"># start listening on port upon creation, call callback upon incoming connections</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">__user_db</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">InMemoryUserDatabase</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#8f5902;font-style:italic"># hold a reference to the actual server</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">__on_connection_event</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">event</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">connection</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">address</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">error</span><span style="color:#000;font-weight:bold">):</span> <span style="color:#8f5902;font-style:italic"># whenever a connection event occurs...</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">match</span> <span style="color:#000">event</span><span style="color:#000;font-weight:bold">:</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#204a87;font-weight:bold">case</span> <span style="color:#4e9a06">'listen'</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#8f5902;font-style:italic"># ... if it's the server starting to listen:</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#204a87">print</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">'Server listening on </span><span style="color:#4e9a06">%s</span><span style="color:#4e9a06">:</span><span style="color:#4e9a06">%d</span><span style="color:#4e9a06">'</span> <span style="color:#ce5c00;font-weight:bold">%</span> <span style="color:#000">address</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#8f5902;font-style:italic"># then log the address it's listening on</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#204a87;font-weight:bold">case</span> <span style="color:#4e9a06">'connect'</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#8f5902;font-style:italic"># ... if it's a new connection:</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#000">connection</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">callback</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">__on_message_event</span> <span style="color:#8f5902;font-style:italic"># then set the callback for incoming messages (this will start a thread under the hood)</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#204a87;font-weight:bold">case</span> <span style="color:#4e9a06">'error'</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#8f5902;font-style:italic"># ... if an error occurs while handling the connection:</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#000">traceback</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">print_exception</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">error</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#8f5902;font-style:italic"># then log it</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#204a87;font-weight:bold">case</span> <span style="color:#4e9a06">'stop'</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#8f5902;font-style:italic"># ... if the server stops listening:</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#204a87">print</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">'Server stopped'</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#8f5902;font-style:italic"># log this information before quitting</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">__on_message_event</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">event</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">payload</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">connection</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">error</span><span style="color:#000;font-weight:bold">):</span> <span style="color:#8f5902;font-style:italic"># whenever a message event occurs...</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">match</span> <span style="color:#000">event</span><span style="color:#000;font-weight:bold">:</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#204a87;font-weight:bold">case</span> <span style="color:#4e9a06">'message'</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#8f5902;font-style:italic"># ... if it's a new message:</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#204a87">print</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">'[</span><span style="color:#4e9a06">%s</span><span style="color:#4e9a06">:</span><span style="color:#4e9a06">%d</span><span style="color:#4e9a06">] Open connection'</span> <span style="color:#ce5c00;font-weight:bold">%</span> <span style="color:#000">connection</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">remote_address</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#8f5902;font-style:italic"># log the connection</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#000">request</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">deserialize</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">payload</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#8f5902;font-style:italic"># deserialize the ingoing message</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#204a87;font-weight:bold">assert</span> <span style="color:#204a87">isinstance</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">request</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">Request</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#8f5902;font-style:italic"># make sure it's a Request object (raise an error if not)</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#204a87">print</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">'[</span><span style="color:#4e9a06">%s</span><span style="color:#4e9a06">:</span><span style="color:#4e9a06">%d</span><span style="color:#4e9a06">] Unmarshall request:'</span> <span style="color:#ce5c00;font-weight:bold">%</span> <span style="color:#000">connection</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">remote_address</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">request</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#8f5902;font-style:italic"># log the request</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#000">response</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">__handle_request</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">request</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#8f5902;font-style:italic"># handle the request, compute the response</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#000">connection</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">send</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">serialize</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">response</span><span style="color:#000;font-weight:bold">))</span> <span style="color:#8f5902;font-style:italic"># serialize the response and send it back</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#204a87">print</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">'[</span><span style="color:#4e9a06">%s</span><span style="color:#4e9a06">:</span><span style="color:#4e9a06">%d</span><span style="color:#4e9a06">] Marshall response:'</span> <span style="color:#ce5c00;font-weight:bold">%</span> <span style="color:#000">connection</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">remote_address</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">response</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#8f5902;font-style:italic"># log the response</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#000">connection</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">close</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#8f5902;font-style:italic"># close the connection (this RPC is over!)</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#204a87;font-weight:bold">case</span> <span style="color:#4e9a06">'error'</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#8f5902;font-style:italic"># ... if an error occurs while handling the message:</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#000">traceback</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">print_exception</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">error</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#8f5902;font-style:italic"># log it</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#204a87;font-weight:bold">case</span> <span style="color:#4e9a06">'close'</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#8f5902;font-style:italic"># ... if the connection closes:</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#204a87">print</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">'[</span><span style="color:#4e9a06">%s</span><span style="color:#4e9a06">:</span><span style="color:#4e9a06">%d</span><span style="color:#4e9a06">] Close connection'</span> <span style="color:#ce5c00;font-weight:bold">%</span> <span style="color:#000">connection</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">remote_address</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#8f5902;font-style:italic"># log this information</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">__handle_request</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">request</span><span style="color:#000;font-weight:bold">):</span> <span style="color:#8f5902;font-style:italic"># this is where the actual function to execute is selecte and executed</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">try</span><span style="color:#000;font-weight:bold">:</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#000">method</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#204a87">getattr</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">__user_db</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">request</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">name</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#8f5902;font-style:italic"># get the method from the user database</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#000">result</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">method</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">request</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">args</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#8f5902;font-style:italic"># call the method with the arguments, store the result</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#000">error</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#204a87;font-weight:bold">None</span> <span style="color:#8f5902;font-style:italic"># no error occurred in this case</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">except</span> <span style="color:#c00;font-weight:bold">Exception</span> <span style="color:#204a87;font-weight:bold">as</span> <span style="color:#000">e</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#8f5902;font-style:italic"># if an error occurs:</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#000">result</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#204a87;font-weight:bold">None</span> <span style="color:#8f5902;font-style:italic"># no result in case of an error</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#000">error</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#4e9a06">" "</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">join</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">e</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">args</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#8f5902;font-style:italic"># store the error message</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">Response</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">result</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">error</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#8f5902;font-style:italic"># return a Response object with the result and the error message</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">__name__</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#4e9a06">'__main__'</span><span style="color:#000;font-weight:bold">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">sys</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">server</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">ServerStub</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87">int</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">sys</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">argv</span><span style="color:#000;font-weight:bold">[</span><span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">]))</span> <span style="color:#8f5902;font-style:italic"># server stub will listen on the port provided as argument</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">while</span> <span style="color:#204a87;font-weight:bold">True</span><span style="color:#000;font-weight:bold">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">try</span><span style="color:#000;font-weight:bold">:</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#204a87">input</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">'Close server with Ctrl+D (Unix) or Ctrl+Z (Win)</span><span style="color:#4e9a06">\n</span><span style="color:#4e9a06">'</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">except</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#c00;font-weight:bold">EOFError</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#c00;font-weight:bold">KeyboardInterrupt</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#204a87;font-weight:bold">break</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">server</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">close</span><span style="color:#000;font-weight:bold">()</span>
+</span></span></code></pre></div><p>(see code in <a href="https://github.com/unibo-fc-isi-ds/lab-snippets/blob/master/snippets/lab4/example2_rpc_server.py"><code>snippets.lab4.example2_rpc_server</code></a>, run with <code>python -m snippets -l 4 -e 2</code>)</p>
 </section><section>
-<h2 id="implementing-the-presentation-layer">Implementing the presentation layer</h2>
-<p>Explicit type convention</p>
-<p>Show example 1</p>
+<h2 id="client-stubs-for-the-authentication-service">Client Stubs for the Authentication Service</h2>
+<ul>
+<li>We will exemplify how to build a <em>client stub</em> for the <em>user database</em>
+<ul>
+<li>it will leverage on <em>TCP sockets</em> to send requests to the server, hence reusing <a href="../communication/#/utilities">the <code>Client</code> interface from the previous lecture</a></li>
+</ul>
+</li>
+<li>We create a general-purpose <em>abstract</em> class <code>ClientStub</code> to be <em>extended</em> by <em>specific</em> client stubs
+<ul>
+<li>for the user database, we create the <code>RemoteUserDatabase</code> class which inherits from <code>ClientStub</code> and implements the <code>UserDatabase</code> interface</li>
+<li>this is to make the <em>RPC-based</em> implementation of the user database have the <strong>same interface</strong> of the in-memory implementation</li>
+</ul>
+</li>
+</ul>
+<h3 id="design-considerations-1">Design considerations</h3>
+<ol>
+<li>the <code>ClientStub</code> class comes with method <code>rpc(name, *args)</code> to issue an RPC to the server
+<ul>
+<li>the server address and port are passed to the <em>constructor</em>, as they are not supposed to change during the lifetime of the client stub</li>
+</ul>
+</li>
+<li>the <code>RemoteUserDatabase</code> class implements the <code>UserDatabase</code> interface by <em>delegating</em> the <em>actual</em> work to the <code>rpc</code> method</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">from</span> <span style="color:#000">snippets.lab3</span> <span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">Client</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">address</span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">from</span> <span style="color:#000">snippets.lab4.users</span> <span style="color:#204a87;font-weight:bold">import</span> <span style="color:#ce5c00;font-weight:bold">*</span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">from</span> <span style="color:#000">snippets.lab4.example1_presentation</span> <span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">serialize</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">deserialize</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">Request</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">Response</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">class</span> <span style="color:#000">ClientStub</span><span style="color:#000;font-weight:bold">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">__init__</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">server_address</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#204a87">tuple</span><span style="color:#000;font-weight:bold">[</span><span style="color:#204a87">str</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87">int</span><span style="color:#000;font-weight:bold">]):</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">__server_address</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">address</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">server_address</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#8f5902;font-style:italic"># memorize the server address</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">rpc</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">name</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">args</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">client</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">Client</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">__server_address</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#8f5902;font-style:italic"># create a new TCP client instance</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">try</span><span style="color:#000;font-weight:bold">:</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#204a87">print</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">'# Connected to </span><span style="color:#4e9a06">%s</span><span style="color:#4e9a06">:</span><span style="color:#4e9a06">%d</span><span style="color:#4e9a06">'</span> <span style="color:#ce5c00;font-weight:bold">%</span> <span style="color:#000">client</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">remote_address</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#000">request</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">Request</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">name</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">args</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#8f5902;font-style:italic"># create a new request</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#204a87">print</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">'# Marshalling'</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">request</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">'towards'</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">"</span><span style="color:#4e9a06">%s</span><span style="color:#4e9a06">:</span><span style="color:#4e9a06">%d</span><span style="color:#4e9a06">"</span> <span style="color:#ce5c00;font-weight:bold">%</span> <span style="color:#000">client</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">remote_address</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#000">request</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">serialize</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">request</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#8f5902;font-style:italic"># serialize the request</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#204a87">print</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">'# Sending message:'</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">request</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">replace</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">'</span><span style="color:#4e9a06">\n</span><span style="color:#4e9a06">'</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">'</span><span style="color:#4e9a06">\n</span><span style="color:#4e9a06"># '</span><span style="color:#000;font-weight:bold">))</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#000">client</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">send</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">request</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#8f5902;font-style:italic"># send the request</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#000">response</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">client</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">receive</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#8f5902;font-style:italic"># receive the response</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#204a87">print</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">'# Received message:'</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">response</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">replace</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">'</span><span style="color:#4e9a06">\n</span><span style="color:#4e9a06">'</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">'</span><span style="color:#4e9a06">\n</span><span style="color:#4e9a06"># '</span><span style="color:#000;font-weight:bold">))</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#000">response</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">deserialize</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">response</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#8f5902;font-style:italic"># deserialize the response</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#204a87;font-weight:bold">assert</span> <span style="color:#204a87">isinstance</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">response</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">Response</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#204a87">print</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">'# Unmarshalled'</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">response</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">'from'</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">"</span><span style="color:#4e9a06">%s</span><span style="color:#4e9a06">:</span><span style="color:#4e9a06">%d</span><span style="color:#4e9a06">"</span> <span style="color:#ce5c00;font-weight:bold">%</span> <span style="color:#000">client</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">remote_address</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">response</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">error</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#8f5902;font-style:italic"># if an error occurred:</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#204a87;font-weight:bold">raise</span> <span style="color:#c00;font-weight:bold">RuntimeError</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">response</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">error</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#8f5902;font-style:italic"># raise the error</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">response</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">result</span> <span style="color:#8f5902;font-style:italic"># otherwise, return the result</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">finally</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#8f5902;font-style:italic"># in any case, before exiting:</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#000">client</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">close</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#8f5902;font-style:italic"># close the connection</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#204a87">print</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">'# Disconnected from </span><span style="color:#4e9a06">%s</span><span style="color:#4e9a06">:</span><span style="color:#4e9a06">%d</span><span style="color:#4e9a06">'</span> <span style="color:#ce5c00;font-weight:bold">%</span> <span style="color:#000">client</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">remote_address</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">class</span> <span style="color:#000">RemoteUserDatabase</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ClientStub</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">UserDatabase</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">__init__</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">server_address</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87">super</span><span style="color:#000;font-weight:bold">()</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">__init__</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">server_address</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic"># notice how the following methods are implemented by RPC</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">add_user</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">user</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">User</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">rpc</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">'add_user'</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">user</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">get_user</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87">id</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#204a87">str</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">-&gt;</span> <span style="color:#000">User</span><span style="color:#000;font-weight:bold">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">rpc</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">'get_user'</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87">id</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">check_password</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">credentials</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">Credentials</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">-&gt;</span> <span style="color:#204a87">bool</span><span style="color:#000;font-weight:bold">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">rpc</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">'check_password'</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">credentials</span><span style="color:#000;font-weight:bold">)</span>
+</span></span></code></pre></div></section><section>
+<h2 id="exemplify-programming-with-rpc-client-and-server">Exemplify Programming with RPC Client and Server</h2>
+<ol>
+<li>
+<p>Start the server with <code>python -m snippets -l 4 -e 2 PORT</code></p>
+<ul>
+<li>where <code>PORT</code> is the port number the server will listen to, e.g. <code>8080</code></li>
+<li>recall to <em>restart</em> the server too if you want to <em>restart</em> the client</li>
+</ul>
+</li>
+<li>
+<p>Run the following Python script (cf. <a href="https://github.com/unibo-fc-isi-ds/lab-snippets/blob/master/snippets/lab4/example3_rpc_client.py"><code>snippets.lab4.example3_rpc_client</code> module</a>)</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">from</span> <span style="color:#000">snippets.lab4.example0_users</span> <span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">gc_user</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">gc_credentials_ok</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">gc_credentials_wrong</span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">sys</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000">user_db</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">RemoteUserDatabase</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">address</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">sys</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">argv</span><span style="color:#000;font-weight:bold">[</span><span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">]))</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># Trying to get a user that does not exist should raise a KeyError</span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">try</span><span style="color:#000;font-weight:bold">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">user_db</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">get_user</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">'gciatto'</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">except</span> <span style="color:#c00;font-weight:bold">RuntimeError</span> <span style="color:#204a87;font-weight:bold">as</span> <span style="color:#000">e</span><span style="color:#000;font-weight:bold">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">assert</span> <span style="color:#4e9a06">'User with ID gciatto not found'</span> <span style="color:#204a87;font-weight:bold">in</span> <span style="color:#204a87">str</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">e</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># Adding a novel user should work</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">user_db</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">add_user</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">gc_user</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># Trying to add a user that already exist should raise a ValueError</span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">try</span><span style="color:#000;font-weight:bold">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">user_db</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">add_user</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">gc_user</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">except</span> <span style="color:#c00;font-weight:bold">RuntimeError</span> <span style="color:#204a87;font-weight:bold">as</span> <span style="color:#000">e</span><span style="color:#000;font-weight:bold">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">assert</span> <span style="color:#204a87">str</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">e</span><span style="color:#000;font-weight:bold">)</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">startswith</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">'User with ID'</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">assert</span> <span style="color:#204a87">str</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">e</span><span style="color:#000;font-weight:bold">)</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">endswith</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">'already exists'</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># Getting a user that exists should work</span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">assert</span> <span style="color:#000">user_db</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">get_user</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">'gciatto'</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#000">gc_user</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">copy</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">password</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#204a87;font-weight:bold">None</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># Checking credentials should work if there exists a user with the same ID and password (no matter which ID is used)</span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">for</span> <span style="color:#000">gc_cred</span> <span style="color:#204a87;font-weight:bold">in</span> <span style="color:#000">gc_credentials_ok</span><span style="color:#000;font-weight:bold">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">assert</span> <span style="color:#000">user_db</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">check_password</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">gc_cred</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#204a87;font-weight:bold">True</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># Checking credentials should fail if the password is wrong</span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">assert</span> <span style="color:#000">user_db</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">check_password</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">gc_credentials_wrong</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#204a87;font-weight:bold">False</span>
+</span></span></code></pre></div><ul>
+<li>launch it with <code>python -m snippets -l 4 -e 3 SERVER_IP:PORT</code>
+<ul>
+<li>where <code>SERVER_IP</code> (e.g. <code>localhost</code>) is the IP address of the server…</li>
+<li>… and <code>PORT</code> is the port number the server is listening to (e.g. <code>8080</code>)</li>
+</ul>
+</li>
+<li>this should succeed with no errors <em>the first time</em>
+<ul>
+<li>it will <em>fail</em> if you run it <em>one more time</em> without restarting the server! <strong>why</strong>?</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Look at the logs of the client and the server to understand what’s going on</p>
+</li>
+</ol>
+</section><section>
+<h2 id="exemplify-command-line-user-database-client">Exemplify Command-Line User Database Client</h2>
+<ol>
+<li>
+<p>(Re)Start the server with <code>python -m snippets -l 4 -e 2 PORT</code></p>
+<ul>
+<li>where <code>PORT</code> is the port number the server will listen to, e.g. <code>8080</code></li>
+<li>recall to <em>restart</em> the server too if you want to <em>restart</em> the client</li>
+</ul>
+</li>
+<li>
+<p>Play with the Python module <a href="https://github.com/unibo-fc-isi-ds/lab-snippets/blob/master/snippets/lab4/example4_rpc_client_cli.py"><code>snippets.lab4.example4_rpc_client_cli</code></a></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span>usage: python -m snippets -l 4 -e 4 [-h] [--user USER] [--email EMAIL [EMAIL ...]] [--name NAME] [--role {admin,user}] [--password PASSWORD]
+</span></span><span style="display:flex;"><span>                                    address {add,get,check}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>RPC client for user database
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>positional arguments:
+</span></span><span style="display:flex;"><span>address               Server address in the form ip:port
+</span></span><span style="display:flex;"><span>{add,get,check}       Method to call
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>options:
+</span></span><span style="display:flex;"><span>-h, --help            show this help message and exit
+</span></span><span style="display:flex;"><span>--user USER, -u USER  Username
+</span></span><span style="display:flex;"><span>--email EMAIL [EMAIL ...], --address EMAIL [EMAIL ...], -a EMAIL [EMAIL ...]
+</span></span><span style="display:flex;"><span>                        Email address
+</span></span><span style="display:flex;"><span>--name NAME, -n NAME  Full name
+</span></span><span style="display:flex;"><span>--role {admin,user}, -r {admin,user}
+</span></span><span style="display:flex;"><span>                        Role (defaults to "user")
+</span></span><span style="display:flex;"><span>--password PASSWORD, -p PASSWORD
+</span></span><span style="display:flex;"><span>                        Password
+</span></span></code></pre></div></li>
+<li>
+<p>Consider the following sequence of commands:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span>python -m snippets -l <span style="color:#0000cf;font-weight:bold">4</span> -e <span style="color:#0000cf;font-weight:bold">4</span> SERVER_IP:PORT get -u gciatto
+</span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic"># [RuntimeError] User with ID gciatto not found</span>
+</span></span><span style="display:flex;"><span>python -m snippets -l <span style="color:#0000cf;font-weight:bold">4</span> -e <span style="color:#0000cf;font-weight:bold">4</span> SERVER_IP:PORT add -u gciatto -a giovanni.ciatto@unibo.it giovanni.ciatto@gmail.com -n <span style="color:#4e9a06">"Giovanni Ciatto"</span> -r admin -p <span style="color:#4e9a06">"my secret password"</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic"># None</span>
+</span></span><span style="display:flex;"><span>python -m snippets -l <span style="color:#0000cf;font-weight:bold">4</span> -e <span style="color:#0000cf;font-weight:bold">4</span> SERVER_IP:PORT get -u gciatto
+</span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic"># User(username='gciatto', emails={'giovanni.ciatto@unibo.it', 'giovanni.ciatto@gmail.com'}, full_name='Giovanni Ciatto', role=&lt;Role.ADMIN: 1&gt;, password=None)</span>
+</span></span><span style="display:flex;"><span>python -m snippets -l <span style="color:#0000cf;font-weight:bold">4</span> -e <span style="color:#0000cf;font-weight:bold">4</span> SERVER_IP:PORT check -u gciatto -p <span style="color:#4e9a06">"my secret password"</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic"># True</span>
+</span></span><span style="display:flex;"><span>python -m snippets -l <span style="color:#0000cf;font-weight:bold">4</span> -e <span style="color:#0000cf;font-weight:bold">4</span> SERVER_IP:PORT check -u gciatto -p <span style="color:#4e9a06">"wrong password"</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic"># False</span>
+</span></span></code></pre></div></li>
+</ol>
 
 </section>
-</section><section>
-
-
-<section data-shortcode-section="">
-<h2 id="client-and-server-stubs-for-the-authentication-service">Client and Server Stubs for the Authentication Service</h2>
-<p>Class diagram</p>
-<p>Sequence diagram</p>
-<p>Code examples</p>
-
 </section>
+
+<section data-noprocess="" data-shortcode-slide="" id="exercise-rpc-auth-service">
+  
+<h2 id="exercise-rpc-based-authentication-service">Exercise: RPC-based Authentication Service</h2>
+<ul>
+<li>
+<p><strong>Prerequisites</strong>:</p>
+<ol>
+<li>understand the <em>(de)serialization</em> we have just exemplified</li>
+<li>understand the <em>RPC</em> infrastructure we have just exemplified</li>
+</ol>
+</li>
+<li>
+<p><strong>Goal</strong>: extend the exemplified <em>RPC</em> infrastructure to support an <em>authentication service</em></p>
+<ul>
+<li>the server stub should <em>delegate</em> the <em>actual</em> work to an <em>actual</em> <code>InMemoryAuthenticationService</code> instance</li>
+<li>one more client stub should be created to for the <code>AuthenticationService</code> interface</li>
+<li>the command-line interface of the client should be extended accordingly</li>
+</ul>
+</li>
+<li>
+<p><strong>Hints</strong>: you must reuse the provided code, modifying it: no need to create further Python files</p>
+</li>
+<li>
+<p><strong>Deadline</strong>: two weeks from today</p>
+</li>
+<li>
+<p><strong>Incentive</strong>: +1 point on the final grade (if solution is satisfying)</p>
+</li>
+<li>
+<p><strong>Submission</strong>:</p>
+<ol>
+<li>fork the <a href="https://github.com/unibo-fc-isi-ds/lab-snippets"><code>lab-snippets</code> repository</a></li>
+<li>create a new branch named <code>exercise-lab4</code></li>
+<li>commit your solution in the <code>snippets/lab4</code> directory</li>
+<li>push the branch to your fork &amp; create a <strong>pull request</strong> to the original repository, entitled <code>[A.Y. 2024/2025 Surname, Name] Exercise: RPC Auth Service</code>
+<ul>
+<li>in the pull request, describe your solution, motivate your choices, and explain how to test it</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+</section>
+
+<section data-noprocess="" data-shortcode-slide="" id="exercise-rpc-auth-service-secure">
+  
+<h2 id="exercise-secure-rpc-based-authentication-service">Exercise: Secure RPC-based Authentication Service</h2>
+<ul>
+<li>
+<p><strong>Prerequisites</strong>: complete previous exercise</p>
+</li>
+<li>
+<p><strong>Goal</strong>: extend the exemplified <em>RPC</em> infrastructure to support <strong>authorization</strong></p>
+<ul>
+<li><em>reading</em> registered user data should <em>only</em> be possible for <em>authenticated</em> users whose <em>role</em> is <strong>admin</strong></li>
+<li>any attempt do so by <em>unauthorized</em> or <em>unauthenticated</em> users should result in an <em>error</em> being returned</li>
+<li>the command-line interface of the client should be extended accordingly</li>
+</ul>
+</li>
+<li>
+<p><strong>Hints</strong>:</p>
+<ul>
+<li>the <code>Request</code> class should be extended to include an optional <em>metadata</em> field
+<ul>
+<li>when the <em>client</em> performs an operation which <strong>requires</strong> <em>authentication</em>…</li>
+<li>… the <em>metadata</em> field should be <em>filled</em> with the <em>token</em> of the <em>user</em></li>
+</ul>
+</li>
+<li>the <code>ServerStub</code> should be extended to check for the presence and validity of the <em>token</em> in the <em>metadata</em> field</li>
+<li>the client should be extended to memorize the <em>token</em> upon successful <em>authentication</em> and <em>pass</em> it in the <em>metadata</em> field of any <em>subsequent</em> request</li>
+</ul>
+</li>
+<li>
+<p><strong>Deadline</strong>: two weeks from today</p>
+</li>
+<li>
+<p><strong>Incentive</strong>: +1 point on the final grade (if solution is satisfying)</p>
+</li>
+<li>
+<p><strong>Submission</strong>:</p>
+<ol>
+<li>fork the <a href="https://github.com/unibo-fc-isi-ds/lab-snippets"><code>lab-snippets</code> repository</a></li>
+<li>create a new branch named <code>exercise-lab4</code></li>
+<li>commit your solution in the <code>snippets/lab4</code> directory</li>
+<li>push the branch to your fork &amp; create a <strong>pull request</strong> to the original repository, entitled <code>[A.Y. 2024/2025 Surname, Name] Exercise: RPC Auth Service 2</code>
+<ul>
+<li>or just reuse the pull request and branch of the previous exercise, if you already submitted it</li>
+<li>in the pull request, describe your solution, motivate your choices, and explain how to test it</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
 </section><section>
 <h1 id="lecture-is-over">Lecture is Over</h1>
 <br>
