@@ -25,6 +25,7 @@ aliases = [
         - Exercise: [TCP Group Chat](./communication/#/exercise-tcp-group-chat)
     1. [Presentation](./presentation/)
         - Exercise: [RPC-based Authentication Service](./presentation/#/exercise-rpc-auth-service)
+        - Exercise: [Secure RPC-based Authentication Service](./presentation/#/exercise-rpc-auth-service-secure)
     1. \[Tentative\] Testing <!-- [Testing](./testing/) -->
 
     <!-- [Miscellanea](./misc/) -->
