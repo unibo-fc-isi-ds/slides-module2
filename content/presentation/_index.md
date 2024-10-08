@@ -337,7 +337,7 @@ print(json.dumps(obj) == doc) # True
 
 ## Modelling (classes)
 
-{{< plantuml >}}
+{{< plantuml height="60vh" >}}
 package "users" {
     class User {
         +username: str
@@ -393,7 +393,7 @@ package "users" {
         }
 
         InMemoryAuthenticationService *-l- InMemoryUserDatabase
-    } 
+    }
 
     UserDatabase <|.. InMemoryUserDatabase
     AuthenticationService <|.. InMemoryAuthenticationService
@@ -468,7 +468,7 @@ from snippets.lab4.users import User, Role
 User(
     username='gciatto',
     emails={
-        'giovanni.ciatto@unibo.it', 
+        'giovanni.ciatto@unibo.it',
         'giovanni.ciatto@gmail.com'
     },
     full_name='Giovanni Ciatto',
@@ -487,7 +487,7 @@ $\xleftarrow{\text{deserialization}}$
 {
     "username": "gciatto",
     "emails": [
-        "giovanni.ciatto@unibo.it", 
+        "giovanni.ciatto@unibo.it",
         "giovanni.ciatto@gmail.com"
     ],
     "full_name": "Giovanni Ciatto",
@@ -530,7 +530,7 @@ $\xleftarrow{\text{deserialization}}$
 User(
   username='gciatto',
   emails={
-    'giovanni.ciatto@unibo.it', 
+    'giovanni.ciatto@unibo.it',
     'giovanni.ciatto@gmail.com'
   },
   full_name='Giovanni Ciatto',
@@ -546,7 +546,7 @@ User(
 dict(
   username='gciatto',
   emails=[
-    'giovanni.ciatto@unibo.it', 
+    'giovanni.ciatto@unibo.it',
     'giovanni.ciatto@gmail.com',
   ],
   full_name='Giovanni Ciatto',
@@ -562,7 +562,7 @@ dict(
 {
   "username": "gciatto",
   "emails": [
-    "giovanni.ciatto@unibo.it", 
+    "giovanni.ciatto@unibo.it",
     "giovanni.ciatto@gmail.com"
   ],
   "full_name": "Giovanni Ciatto",
@@ -583,7 +583,211 @@ dict(
 
 ---
 
-## Serialization in Python
+## Serialization in Python (attempt 1)
+
+{{% multicol %}}
+{{% col class="col-5" %}}
+```python
+from snippets.lab4.users import User, Role
+
+to_serialize = User(
+  username='gciatto',
+  emails={
+    'giovanni.ciatto@unibo.it',
+    'giovanni.ciatto@gmail.com'
+  },
+  full_name='Giovanni Ciatto',
+  role=Role.ADMIN,
+  password='my secret password',
+)
+```
+{{% /col %}}
+{{% col class="col-2" %}}
+$\xrightarrow{\text{serialization}}$
+{{% /col %}}
+{{% col class="col-5" %}}
+```json
+{
+  "username": "gciatto",
+  "emails": [
+    "giovanni.ciatto@unibo.it",
+    "giovanni.ciatto@gmail.com"
+  ],
+  "full_name": "Giovanni Ciatto",
+  "role": {"name": "ADMIN"},
+  "password": "my secret password",
+}
+```
+{{% /col %}}
+{{% /multicol %}}
+
+Let's implement a serializer:
+
+{{% multicol %}}
+{{% col class="col-8" %}}
+```python
+class Serializer:
+    def serialize(self, obj: object) -> str:
+        return self._ast_to_string(self._to_ast(obj)) # objct -> AST -> JSON string
+
+    def _ast_to_string(self, data):
+        return json.dumps(data, indent=2) # AST -> JSON string
+
+    # here we select which conversion to apply based on the type of obj
+    def _to_ast(self, obj: object) -> object:
+        if isinstance(obj, User):
+            return self._user_to_ast(obj)
+        elif isinstance(obj, Role):
+            return self._role_to_ast(obj)
+        else:
+            raise ValueError(f'unsupported type: {type(obj)}')
+
+    def _user_to_ast(self, user: User) -> dict: # User -> AST
+        return {
+            'username': user.username,
+            'emails': list(user.emails),
+            'full_name': user.full_name,
+            'role': self._role_to_ast(user.role),
+            'password': user.password,
+        }
+
+    def _role_to_ast(self, role: Role) -> dict: # Role -> AST
+        return {'name': role.name}
+```
+{{% /col %}}
+{{% col %}}
+{{< plantuml >}}
+class Serializer {
+    +serialize(obj: object) : str
+    -_ast_to_string(data) : str
+    -_to_ast(obj: object) : object
+    -_user_to_ast(user: User) : dict
+    -_role_to_ast(role: Role) : dict
+}
+{{< /plantuml >}}
+{{% /col %}}
+{{% /multicol %}}
+
+```python
+serializer = Serializer()
+print(serializer.serialize(to_serialize)) # prints the JSON document
+```
+
+---
+
+## Deserialization in Python (attempt 1)
+
+{{% multicol %}}
+{{% col class="col-5" %}}
+```python
+to_deserialize = """{
+  "username": "gciatto",
+  "emails": [
+    "giovanni.ciatto@unibo.it",
+    "giovanni.ciatto@gmail.com"
+  ],
+  "full_name": "Giovanni Ciatto",
+  "role": {"name": "ADMIN"},
+  "password": "my secret password",
+}"""
+```
+{{% /col %}}
+{{% col class="col-2" %}}
+$\xrightarrow{\text{deserialization}}$
+{{% /col %}}
+{{% col class="col-5" %}}
+```python
+from snippets.lab4.users import User, Role
+
+result = User(
+  username='gciatto',
+  emails={
+    'giovanni.ciatto@unibo.it',
+    'giovanni.ciatto@gmail.com'
+  },
+  full_name='Giovanni Ciatto',
+  role=Role.ADMIN,
+  password='my secret password',
+)
+```
+{{% /col %}}
+{{% /multicol %}}
+
+{{% multicol %}}
+{{% col class="col-8" %}}
+```python
+class Deserializer:
+    def deserialize(self, string):
+        return self._ast_to_obj(self._ast_to_string(string)) # JSON string -> AST -> object
+
+    def _ast_to_string(self, data):
+        return json.loads(data)  # JSON string -> AST
+
+    # here we select which conversion to apply based which keys are present in the AST
+    def _ast_to_obj(self, data) -> object:
+        if all(k in data for k in ['username', 'emails', 'full_name', 'role', 'password']):
+            return self._user_from_ast(data)
+        elif 'name' in data:
+            return self._role_from_ast(data)
+        else:
+            raise ValueError(f'unsupported data: {data}')
+
+    def _user_from_ast(self, data) -> User: # AST -> User
+        return User(
+            username=data['username'],
+            emails=set(data['emails']),
+            full_name=data['full_name'],
+            role=self._ast_to_obj(data['role']), # recursive call!
+            password=data['password'],
+        )
+
+    def _role_from_ast(self, data) -> Role: # AST -> Role
+        return Role[data['name']]
+```
+{{% /col %}}
+{{% col %}}
+{{< plantuml >}}
+class Deserializer {
+    +deserialize(string) : object
+    -_ast_to_string(data) : object
+    -_ast_to_obj(data) : object
+    -_user_from_ast(data) : User
+    -_role_from_ast(data) : Role
+}
+{{< /plantuml >}}
+{{% /col %}}
+{{% /multicol %}}
+
+```python
+deserializer = Deserializer()
+print(deserializer.deserialize(to_deserialize) == result) # prints True
+```
+
+---
+
+## Analysis of the current approach
+
+- __Pros__:
+    * one method per _data type_ to (de)serialize
+    * _automatically_ understands _how_ to (de)serilize the provided object/string
+    * raises error on attempt to (de)serialize an _unsupported_ data type
+    * raises error on attempt to (de)serialize _invalid_ data (e.g. missing fields)
+    * _easy_ to _extend_ to support _new_ data types
+        1. requires adding _one more_ method to the `Serializer` and `Deserializer` for the _new_ data type
+        2. requires _modifying_ the `_to_ast` and `_ast_to_obj` methods to _select_ the _new_ method
+
+- __Cons__:
+    * quite _verbose_ and _repetitive_
+    * the _type_ of the _object_ to *de*serialize is __inferred__ from the _keys_ present in the _AST_
+        + this may lead to _ambiguities_ if _different_ data types _share_ the _same_ _keys_
+            * e.g. what if _another_ data type has a `name` key (other than `Role`)?
+        + this may lead to _errors_ if _some_ _keys_ are _missing_ in the _AST_
+
+---
+
+## (De)Serialization in Python (attempt 2)
+
+__Improvement__: _explicitly_ _tag_ the _type_ of the object to _serialize_ in the _AST_, and use this tag to _select_ the right method to _**de**serialize_
 
 {{% multicol %}}
 {{% col class="col-5" %}}
@@ -593,7 +797,7 @@ from snippets.lab4.users import User, Role
 User(
     username='gciatto',
     emails={
-        'giovanni.ciatto@unibo.it', 
+        'giovanni.ciatto@unibo.it',
         'giovanni.ciatto@gmail.com'
     },
     full_name='Giovanni Ciatto',
@@ -604,22 +808,67 @@ User(
 {{% /col %}}
 {{% col class="col-2" %}}
 $\xrightarrow{\text{serialization}}$
+
+$\xleftarrow{\text{deserialization}}$
 {{% /col %}}
 {{% col class="col-5" %}}
 ```json
 {
     "username": "gciatto",
     "emails": [
-        "giovanni.ciatto@unibo.it", 
+        "giovanni.ciatto@unibo.it",
         "giovanni.ciatto@gmail.com"
     ],
     "full_name": "Giovanni Ciatto",
-    "role": {"name": "ADMIN"},
+    "role": {
+        "name": "ADMIN",
+        "$type": "Role" // explicit type field
+    },
     "password": "my secret password",
+    "$type": "User" // explicit type field
 }
 ```
 {{% /col %}}
 {{% /multicol %}}
+
+Apply these updates to the `Serializer` and `Deserializer` classes:
+
+{{% multicol %}}
+{{% col %}}
+```python
+class Serializer:
+    # rest of the class unchanged
+
+    def _to_ast(self, obj: object) -> object:
+        if isinstance(obj, User):
+            result = self._user_to_ast(obj)
+        elif isinstance(obj, Role):
+            result = self._role_to_ast(obj)
+        else:
+            raise ValueError(f'unsupported type: {type(obj)}')
+        result['$type'] = type(obj).__name__
+        return result
+```
+{{% /col %}}
+{{% col %}}
+```python
+class Deserializer:
+    # rest of the class unchanged
+
+    def _ast_to_obj(self, data) -> object:
+        if data['$type'] == type(User).__name__:
+            return self._user_from_ast(data)
+        elif data['$type'] == type(Role).__name__:
+            return self._role_from_ast(data)
+        else:
+            raise ValueError(f'unsupported data: {data}')
+```
+{{% /col %}}
+{{% /multicol %}}
+
+- Let's use `$type` as the type tag _key_:
+    + the _dollar_ is just a character that is _unlikely_ to be used in _real_ data to minimize the risk of _collisions_
+        * (but any other unlikely character would work as well)
 
 {{% /section %}}
 
