@@ -432,7 +432,7 @@ package "users" {
 
 (cf. <{{< github-url repo="lab-snippets" path="snippets/lab4/example0_users.py"  >}}>)
 
-{{% code path="content/presentation/example0_users.py" %}}
+{{< code path="content/presentation/example0_users.py" >}}
 - run with `python -m snippets -l 4 -e 0`
     * analyse the logs to understand what's going on
 
@@ -870,29 +870,217 @@ class Deserializer:
     + the _dollar_ is just a character that is _unlikely_ to be used in _real_ data to minimize the risk of _collisions_
         * (but any other unlikely character would work as well)
 
+---
+
+## De(Serialization) in Python (full example)
+
+1. See the example at <{{< github-url repo="lab-snippets" path="snippets/lab4/example1_presentation.py"  >}}>
+
+{{% multicol %}}
+{{% col class="col-10" %}}
+2. Notice the two new classes: `Request` and `Response`
+    <!-- - `Request`: represents an RPC request to the server
+        + `name`: the name of the function to call
+        + `args`: the arguments to pass to the function
+    - `Response`: represents an RPC response from the server
+        + `result`: the result of the function call
+        + `error`: an error message in case of failure -->
+
+3. Notice how complex the `Serializer` and `Deserializer` classes may become in a real usecase
+
+4. Try to figure out how the following object...
+    ```python
+    from snippets.lab4.example0_users import gc_credentials_wrong
+
+    request = Request(
+        name='my_function',
+        args=(
+            gc_credentials_wrong, # an instance of Credentials
+            gc_user, # an instance of User
+            ["a string", 42, 3.14, True, False], # a list, containing various primitive types
+            {'key': 'value'}, # a dictionary
+            Response(None, 'an error'), # a Response, which contains a None field
+        )
+    )
+    ```
+
+5. ... would be serialized as the following JSON
+    ```json
+    {
+    "name": "my_function",
+    "args": [
+        { "id": "giovanni.ciatto@unibo.it", "password": "wrong password", "$type": "Credentials"},
+        "user": {
+            "username": "gciatto",
+            "emails": ["giovanni.ciatto@gmail.com", "giovanni.ciatto@unibo.it"],
+            "full_name": "Giovanni Ciatto",
+            "role": { "name": "ADMIN", "$type": "Role" },
+            "password": null,
+            "$type": "User"
+        },
+        ["a string", 42, 3.14, true, false],
+        { "key": "value"},
+        { "result": null, "error": "an error", "$type": "Response"}
+    ],
+    "$type": "Request"
+    }
+    ```
+
+{{% /col %}}
+{{% col class="col-2" %}}
+{{< plantuml >}}
+
+class Request {
+    + name: str
+    + args: tuple
+}
+
+Request -d[hidden]- Response
+
+class Response {
+    + result: object
+    + error: str
+}
+{{< /plantuml >}}
+
+6. Run with `python -m snippets -l 4 -e 1`
+
+{{% /col %}}
+{{% /multicol %}}
+
 {{% /section %}}
 
 ---
 
 {{% section %}}
 
-## RPC
+## Remote Procedure Call (RPC)
 
-Definition
+> __RPC__ $\equiv$ a _request—response_ interaction pattern between a _client_ and a _server_ where:
+> the client aims at _invoking_ a _procedure_ on the server, and receiving the _result_ of the procedure back
+> as if the procedure was _locally_ executed, despite the _server_ being _remote_
+
+- (Remote) __Procedure__ $\equiv$ a _function_ with a clear _signature_, _offered_ by a _server_, to be _invoked_ by a _client_
+    * _name_ (or _identifier_)
+    * _input_ parameters
+    * _returns_ value(s), there including _errors_ that may or may not be _raised_ during the _execution_
+    * _side effects_ (if any) which may change the _state_ of the _server_, hence affecting the result of _future_ calls
+
+- Differences w.r.t. _local_ procedure calls:
+    1. caller and callee are _not_ in the _same_ _address space_ $\Rightarrow$ can*not* pass arguments _by reference_
+        * passage _by value_ is the only option: _copies_ of arguments must be transferred over the network
+    2. input parameters and return values must be _serialized_ and _deserialized_ to pass through the _network_
+    3. _exceptions_ do not really exist, ad-hoc _return values_ are used instead
+
+---
+
+## RPC Client and Server
+
+<br>
+
+{{< image src="./rpc-time.png" >}}
+
+- The _client_ and the _server_ are __temporally coupled__
+    * the _client_ must __wait__ for the _server_ to _respond_
+    * the _server_ must __wait__ for the _client_ to _send_ the _request_
+    * they must be _online_ at the __same time__
+    * the _server_ must be _online_ __before__ the _client_
+
+---
+
+## Common RPC Infrastructure
+
+{{< image src="./rpc-dataflow1.png" height="50vh" >}}
+
+- __protocol__: the low level _transfer_ protocol (e.g. _HTTP_, _TCP_, _UDP_, etc.) + _data representation format_ (e.g. _JSON_, _XML_, _binary_, etc.)
+- __client stub__: a _proxy_ object that __mimics__ the _server_ _interface_ on the _client_ side
+- __client__: the piece of code which is using the _client stub_
+    + it may not even be aware of the fact that the _server_ is _remote_
+- __server stub__: a _server_ which listens for requests, handles them (possibly concurrently) and sends back responses
+    + it commonly acts as a _proxy_ towards some actual _server_ code
+- __server__: the piece of code which is _executing_ the _actual procedure_ on the _server_ side
+    + it may not even be aware of the fact that the _client_ is _remote_
+    + _beware_! In this case "server" means _"provider of a functionality"_: the infrastructural component is actually the "server stub"!
 
 ---
 
 ## Marshalling and Unmarshalling
 
-Definition
+The client and server _stubs_ are essentially aimed at performing these operations:
+
+{{< image src="./rpc-dataflow2.svg" height="50vh" >}}
+
+- __Marshalling__: the process of _serializing_ the arguments/results of a RPC to send them over the network
+- __Unmarshalling__: the process of _deserializing_ the arguments/results of a RPC received from the network
 
 ---
 
 ## Request and Response Types in RPC
 
-Class diagram
+To support RPC, implementation will most commonly define two data structures:
+- `Request`: a data structure representing the _invokation request_ to be sent to the _server_
+    * it will contain the _name_ of the _procedure_ to be _invoked_, and the _arguments_ to be passed to it, etc.
+- `Response`: a data structure representing the _response_ to be sent back to the _client_
+    * it will contain the _result_ of the _procedure_ (if any), and the _error_ message (if any), etc.
 
-Sequence diagram
+{{% multicol %}}
+{{% col class="col-3" %}}
+{{< plantuml height="60vh" >}}
+class Request {
+    + name: str
+    + args: tuple
+}
+
+Request -d[hidden]- Response
+
+class Response {
+    + result: object
+    + error: str
+}
+{{< /plantuml >}}
+{{% /col %}}
+{{% col %}}
+{{< plantuml height="60vh" >}}
+@startuml
+hide footbox
+
+actor Client
+participant "Client Stub" as CS
+control "Server Stub" as SS
+participant Server
+
+Client -> CS: f(a, b, c)
+activate Client
+activate CS
+CS -> CS: req = Request(name='f', args=(a, b, c)) \n req = serialize(req)
+CS -> SS: {"name"="function", "args"=[a, b, c]}
+activate SS
+SS -> SS : req = deserialize(req)
+SS -> SS : lookup function req.name
+SS -> Server: f(a, b, c)
+activate Server
+
+alt success
+Server --> SS: return R
+else exception
+Server --> SS: raise E
+deactivate Server
+end
+SS -> SS: res = Response(result=R, error=E) \n res = serialize(res)
+SS -> CS: {"result": R, "error": E}
+deactivate SS
+CS -> CS: res = deserialize(res)
+
+alt res.error is None
+CS --> Client: return res.result
+else
+CS --> Client: raise res.error
+deactivate CS
+end
+@enduml
+{{< /plantuml >}}
+{{% /col %}}
+{{% /multicol %}}
 
 {{% /section %}}
 
@@ -900,39 +1088,171 @@ Sequence diagram
 
 {{% section %}}
 
-# Running Example: Authentication Service
+# Running Example: Authentication
 
-Part 2
-
----
-
-## Modelling the presentation layer
-
-Class diagram
+(Part 2)
 
 ---
 
-## Implementing the presentation layer
+## Server Stubs for the User Database
 
-Explicit type convention
+- The "actual" server (provider of functionality) here is some instance of the `InMemoryUserDatabase` class
+- We will exemplify how to build a _server stub_ for that server
+    * it will leverage on _TCP sockets_ to listen for incoming requests, hence reusing [the `Server` interface from the previous lecture](../communication/#/utilities)
 
-Show example 1
+### Design considerations
+1. assume each TCP connection is devoted to a _single_ RPC, i.e. just one _request_ and one _response_
+2. serve RPCs _concurrently_, by starting a new _thread_ for each incoming connection
+3. use the `Serializer` and `Deserializer` classes to (de)serialize _requests_ and _responses_
+4. the server stub holds a reference to the _actual_ server, and _delegates_ the _actual_ work to it
+    - upon receiving a _request_, it _deserializes_ it, _invokes_ the _actual_ server, _serializes_ the _response_, and _sends_ it back to the _client_
+    - if any _error_ occurs, it _serializes_ the _error_ message and _sends_ it back to the _client_
+
+{{< code path="content/presentation/example2_rpc_server.py" >}}
+
+(see code in [`snippets.lab4.example2_rpc_server`]({{< github-url repo="lab-snippets" path="snippets/lab4/example2_rpc_server.py" >}}), run with `python -m snippets -l 4 -e 2`)
+
+---
+
+## Client Stubs for the Authentication Service
+
+- We will exemplify how to build a _client stub_ for the _user database_
+    * it will leverage on _TCP sockets_ to send requests to the server, hence reusing [the `Client` interface from the previous lecture](../communication/#/utilities)
+- We create a general-purpose _abstract_ class `ClientStub` to be _extended_ by _specific_ client stubs
+    * for the user database, we create the `RemoteUserDatabase` class which inherits from `ClientStub` and implements the `UserDatabase` interface
+    * this is to make the _RPC-based_ implementation of the user database have the __same interface__ of the in-memory implementation
+
+### Design considerations
+1. the `ClientStub` class comes with method `rpc(name, *args)` to issue an RPC to the server
+    + the server address and port are passed to the _constructor_, as they are not supposed to change during the lifetime of the client stub
+2. the `RemoteUserDatabase` class implements the `UserDatabase` interface by _delegating_ the _actual_ work to the `rpc` method
+
+{{< code path="content/presentation/example3_rpc_client.py" >}}
+
+---
+
+## Exemplify Programming with RPC Client and Server
+
+1. Start the server with `python -m snippets -l 4 -e 2 PORT`
+    - where `PORT` is the port number the server will listen to, e.g. `8080`
+    - recall to _restart_ the server too if you want to _restart_ the client
+
+2. Run the following Python script (cf. [`snippets.lab4.example3_rpc_client` module]({{< github-url repo="lab-snippets" path="snippets/lab4/example3_rpc_client.py" >}}))
+    {{< code path="content/presentation/example3_rpc_client-main.py" >}}
+    - launch it with `python -m snippets -l 4 -e 3 SERVER_IP:PORT`
+        + where `SERVER_IP` (e.g. `localhost`) is the IP address of the server...
+        + ... and `PORT` is the port number the server is listening to (e.g. `8080`)
+    - this should succeed with no errors _the first time_
+        + it will _fail_ if you run it _one more time_ without restarting the server! __why__?
+
+3. Look at the logs of the client and the server to understand what's going on
+
+---
+
+## Exemplify Command-Line User Database Client
+
+1. (Re)Start the server with `python -m snippets -l 4 -e 2 PORT`
+    - where `PORT` is the port number the server will listen to, e.g. `8080`
+    - recall to _restart_ the server too if you want to _restart_ the client
+
+2. Play with the Python module [`snippets.lab4.example4_rpc_client_cli`]({{< github-url repo="lab-snippets" path="snippets/lab4/example4_rpc_client_cli.py" >}})
+    ```text
+    usage: python -m snippets -l 4 -e 4 [-h] [--user USER] [--email EMAIL [EMAIL ...]] [--name NAME] [--role {admin,user}] [--password PASSWORD]
+                                        address {add,get,check}
+
+    RPC client for user database
+
+    positional arguments:
+    address               Server address in the form ip:port
+    {add,get,check}       Method to call
+
+    options:
+    -h, --help            show this help message and exit
+    --user USER, -u USER  Username
+    --email EMAIL [EMAIL ...], --address EMAIL [EMAIL ...], -a EMAIL [EMAIL ...]
+                            Email address
+    --name NAME, -n NAME  Full name
+    --role {admin,user}, -r {admin,user}
+                            Role (defaults to "user")
+    --password PASSWORD, -p PASSWORD
+                            Password
+    ```
+
+3. Consider the following sequence of commands:
+    ```bash
+    python -m snippets -l 4 -e 4 SERVER_IP:PORT get -u gciatto
+        # [RuntimeError] User with ID gciatto not found
+    python -m snippets -l 4 -e 4 SERVER_IP:PORT add -u gciatto -a giovanni.ciatto@unibo.it giovanni.ciatto@gmail.com -n "Giovanni Ciatto" -r admin -p "my secret password"
+        # None
+    python -m snippets -l 4 -e 4 SERVER_IP:PORT get -u gciatto
+        # User(username='gciatto', emails={'giovanni.ciatto@unibo.it', 'giovanni.ciatto@gmail.com'}, full_name='Giovanni Ciatto', role=<Role.ADMIN: 1>, password=None)
+    python -m snippets -l 4 -e 4 SERVER_IP:PORT check -u gciatto -p "my secret password"
+        # True
+    python -m snippets -l 4 -e 4 SERVER_IP:PORT check -u gciatto -p "wrong password"
+        # False
+    ```
 
 {{% /section %}}
 
 ---
 
-{{% section %}}
+{{< slide id="exercise-rpc-auth-service" >}}
 
-## Client and Server Stubs for the Authentication Service
+## Exercise: RPC-based Authentication Service
 
-Class diagram
+- __Prerequisites__:
+    1. understand the _(de)serialization_ we have just exemplified
+    1. understand the _RPC_ infrastructure we have just exemplified
 
-Sequence diagram
+- __Goal__: extend the exemplified _RPC_ infrastructure to support an _authentication service_
+    * the server stub should _delegate_ the _actual_ work to an _actual_ `InMemoryAuthenticationService` instance
+    * one more client stub should be created to for the `AuthenticationService` interface
+    * the command-line interface of the client should be extended accordingly
 
-Code examples
+- __Hints__: you must reuse the provided code, modifying it: no need to create further Python files
 
-{{% /section %}}
+- __Deadline__: two weeks from today
+
+- __Incentive__: +1 point on the final grade (if solution is satisfying)
+
+- __Submission__:
+    1. fork the [`lab-snippets` repository]({{< github-url repo="lab-snippets" >}})
+    2. create a new branch named `exercise-lab4`
+    3. commit your solution in the `snippets/lab4` directory
+    4. push the branch to your fork & create a __pull request__ to the original repository, entitled `[{{<academic_year>}} Surname, Name] Exercise: RPC Auth Service`
+        - in the pull request, describe your solution, motivate your choices, and explain how to test it
+
+---
+
+{{< slide id="exercise-rpc-auth-service-secure" >}}
+
+## Exercise: Secure RPC-based Authentication Service
+
+- __Prerequisites__: complete previous exercise
+
+- __Goal__: extend the exemplified _RPC_ infrastructure to support __authorization__
+    + _reading_ registered user data should _only_ be possible for _authenticated_ users whose _role_ is __admin__
+    + any attempt do so by _unauthorized_ or _unauthenticated_ users should result in an _error_ being returned
+    + the command-line interface of the client should be extended accordingly
+
+- __Hints__:
+    * the `Request` class should be extended to include an optional _metadata_ field
+        + when the _client_ performs an operation which __requires__ _authentication_...
+        + ... the _metadata_ field should be _filled_ with the _token_ of the _user_
+    * the `ServerStub` should be extended to check for the presence and validity of the _token_ in the _metadata_ field
+    * the client should be extended to memorize the _token_ upon successful _authentication_ and _pass_ it in the _metadata_ field of any _subsequent_ request
+
+- __Deadline__: two weeks from today
+
+- __Incentive__: +1 point on the final grade (if solution is satisfying)
+
+- __Submission__:
+    1. fork the [`lab-snippets` repository]({{< github-url repo="lab-snippets" >}})
+    2. create a new branch named `exercise-lab4`
+    3. commit your solution in the `snippets/lab4` directory
+    4. push the branch to your fork & create a __pull request__ to the original repository, entitled `[{{<academic_year>}} Surname, Name] Exercise: RPC Auth Service 2`
+        - or just reuse the pull request and branch of the previous exercise, if you already submitted it
+        - in the pull request, describe your solution, motivate your choices, and explain how to test it
 
 ---
 
