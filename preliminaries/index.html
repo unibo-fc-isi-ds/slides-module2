@@ -31,7 +31,7 @@
 <h3 id="hahahugoshortcode1s2hbhb"><a href="mailto:giovanni.ciatto@unibo.it">Giovanni Ciatto</a></h3>
 <br>
 <br>
-<p>Compiled on: 2024-10-08
+<p>Compiled on: 2024-10-16
  — <a href="?print-pdf&amp;pdfSeparateFragments=false"><i class="fa fa-print" aria-hidden="true"></i> printable version</a></p>
 <p><a href="../#/toc"><i class="fa fa-undo" aria-hidden="true"></i> back to ToC</a></p>
 </section><section>
@@ -752,7 +752,7 @@ These patterns define the <em>flow of messages</em>, <em>responsibilities</em> o
 <h3 id="requestresponse">Request—Response</h3>
 <p>The most common and basic pattern for communication between two components</p>
 <div class="container w-100 m-0 p-0">
-    <div class="row "><div class="col " style="text-align: left;"><figure id="plantuml-figure-1728404284227791491" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
+    <div class="row "><div class="col " style="text-align: left;"><figure id="plantuml-figure-1729087287938190904" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
     <p>hide footbox
 participant Client
 participant Server</p>
@@ -760,7 +760,7 @@ participant Server</p>
 Server -&gt; Client: Response</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1728404284227791491");
+    handlePlantumlFigureByID("plantuml-figure-1729087287938190904");
 </script>
 </div>
 <div class="col " style="text-align: left;"><ul>
@@ -786,7 +786,7 @@ Server -&gt; Client: Response</p>
 <h3 id="publishsubscribe">Publish—Subscribe</h3>
 <p>A simple pattern to spread information among multiple recipients</p>
 <div class="container w-100 m-0 p-0">
-    <div class="row "><div class="col " style="text-align: left;"><figure id="plantuml-figure-1728404284228166861" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
+    <div class="row "><div class="col " style="text-align: left;"><figure id="plantuml-figure-1729087287938653659" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
     <p>hide footbox
 actor User
 participant Publisher
@@ -809,7 +809,7 @@ Publisher -&gt; Subscriber2: notify Message
 deactivate Publisher</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1728404284228166861");
+    handlePlantumlFigureByID("plantuml-figure-1729087287938653659");
 </script>
 </div>
 <div class="col " style="text-align: left;"><ul>
@@ -845,7 +845,7 @@ deactivate Publisher</p>
 <li>this is commonly useful to <em>decouple</em> the <em>publisher</em> from the <em>subscribers</em></li>
 <li>most commonly, brokers <em>store</em> messages until they are <em>consumed</em></li>
 </ul>
-<figure id="plantuml-figure-1728404284228514890" class="plantuml" alt="" style="width: 100%;height: 50vh;max-width: 95vw;max-height: 80vh;">
+<figure id="plantuml-figure-1729087287939174440" class="plantuml" alt="" style="width: 100%;height: 50vh;max-width: 95vw;max-height: 80vh;">
     <p>hide footbox
 actor User
 participant Publisher
@@ -877,7 +877,7 @@ Broker -&gt; Subscriber2: notify Message
 deactivate Broker</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1728404284228514890");
+    handlePlantumlFigureByID("plantuml-figure-1729087287939174440");
 </script>
 </section><section>
 <h2 id="common-interaction-protocols-pt-2-2">Common Interaction Protocols (pt. 2)</h2>
@@ -898,7 +898,7 @@ deactivate Broker</p>
 <h3 id="contractnet-protocol">ContractNet Protocol</h3>
 <p>A simple protocol for <em>auctions</em> and <em>negotiations</em></p>
 <div class="container w-100 m-0 p-0">
-    <div class="row "><div class="col " style="text-align: left;"><figure id="plantuml-figure-1728404284228872797" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
+    <div class="row "><div class="col " style="text-align: left;"><figure id="plantuml-figure-1729087287939545265" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
     <p>hide footbox
 participant Initiator
 participant Contractor1
@@ -922,7 +922,7 @@ deactivate Contractor1
 deactivate Initiator</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1728404284228872797");
+    handlePlantumlFigureByID("plantuml-figure-1729087287939545265");
 </script>
 </div>
 <div class="col " style="text-align: left;"><ul>
@@ -1736,7 +1736,7 @@ e.g. <a href="https://en.wikipedia.org/wiki/Access-control_list">ACLs</a>, <a hr
 </section><section>
 <h1 id="lecture-is-over">Lecture is Over</h1>
 <br>
-<p>Compiled on: 2024-10-08
+<p>Compiled on: 2024-10-16
  — <a href="?print-pdf&amp;pdfSeparateFragments=false"><i class="fa fa-print" aria-hidden="true"></i> printable version</a></p>
 <p><a href="../#/toc"><i class="fa fa-undo" aria-hidden="true"></i> back to ToC</a></p>
 </section>
@@ -1825,37 +1825,7 @@ e.g. <a href="https://en.wikipedia.org/wiki/Access-control_list">ACLs</a>, <a hr
 
   
 
-  
-    
-  
 
-  
-
-
-
-  <script src="https://cdn.jsdelivr.net/npm/mermaid@9.1.6/dist/mermaid.min.js"></script>
-  <script>
-    mermaid.initialize({});
-
-    let render = (event) => {
-      let mermaidElems = event.currentSlide.querySelectorAll('.mermaid');
-      if (!mermaidElems.length){
-          return
-      }
-      mermaidElems.forEach(mermaidElem => {
-          let processed = mermaidElem.getAttribute('data-processed');
-          if (!processed){
-              
-              mermaid.init(undefined, mermaidElem);
-          }
-      });
-    };
-    
-    render({currentSlide: Reveal.getCurrentSlide()});
-
-    Reveal.on('slidechanged', render);
-    Reveal.on('ready', render);
-  </script>
 
     <script>
     MathJax = {
