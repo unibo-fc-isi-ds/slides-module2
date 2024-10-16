@@ -40,47 +40,63 @@
 <section data-shortcode-section="">
 <h1 id="what-is-a-distributed-system">What is a Distributed System?</h1>
 </section><section>
-<h3 id="leslie-lamport-1987">Leslie Lamport (1987)</h3>
+<h3 id="leslie-lamport-1987httpsenwikiquoteorgwikileslie_lamport"><a href="https://en.wikiquote.org/wiki/Leslie_Lamport">Leslie Lamport (1987)</a></h3>
 <blockquote>
 <p>A distributed system is one in which the failure of a computer you didn’t even know existed can render your own computer unusable</p>
 </blockquote>
 <h3 id="__interpretation__"><strong>Interpretation</strong></h3>
-<p>This humorous yet insightful definition highlights one of the main challenges in distributed systems—hidden interdependencies between machines and how a failure in one part of the system can have unforeseen consequences elsewhere.</p>
+<ul>
+<li>hidden interdependencies between machines</li>
+<li>how a failure in one part of the system can have unforeseen consequences elsewhere</li>
+</ul>
 </section><section>
-<h3 id="andrew-s-tanenbaum-2002">Andrew S. Tanenbaum (2002)</h3>
+<h3 id="distributed-systems-tannenbaum-and-van-steenhttpcsispaceedumarchesecs865lectureschap1chapter1ahtm-the-book-herehttpskomputasiwordpresscomwp-contentuploads201803mvsteen-distributed-systems-3rd-preliminary-version-3-01pre-2017-170215pdf"><a href="http://csis.pace.edu/~marchese/CS865/Lectures/Chap1/Chapter1a.htm">“Distributed Systems”, Tannenbaum and Van Steen</a> (the <a href="https://komputasi.wordpress.com/wp-content/uploads/2018/03/mvsteen-distributed-systems-3rd-preliminary-version-3-01pre-2017-170215.pdf">book here</a>)</h3>
 <blockquote>
 <p>A distributed system is a collection of independent computers that appears to its users as a single coherent system</p>
 </blockquote>
 <h3 id="__interpretation__-1"><strong>Interpretation</strong></h3>
-<p>This definition emphasizes the illusion of a unified system despite the fact that it is made up of multiple independent machines.</p>
-<p>The key idea is that users should not be aware that the system is distributed.</p>
+<ul>
+<li>illusion of a unified system…</li>
+<li>… despite the fact that it is made up of multiple independent machines</li>
+<li>the key idea is that users should not be aware that the system is distributed.</li>
+</ul>
 </section><section>
-<h3 id="coulouris-dollimore-and-kindberg-2005">Coulouris, Dollimore, and Kindberg (2005)</h3>
+<h3 id="distributed-systems--concepts-and-design-coulouris-et-alhttpsapipageplacedepreviewdt04009781447930174_a24570107preview-9781447930174_a24570107pdf"><a href="https://api.pageplace.de/preview/DT0400.9781447930174_A24570107/preview-9781447930174_A24570107.pdf">“Distributed Systems — Concepts and Design”, Coulouris et. al.</a></h3>
 <blockquote>
-<p>A distributed system is one in which components located at networked computers communicate and coordinate their actions only by passing messages.</p>
+<p>We define a distributed system as one in which hardware or software components
+located at networked computers communicate and coordinate their actions only by
+passing messages.</p>
 </blockquote>
 <h3 id="__interpretation__-2"><strong>Interpretation</strong></h3>
-<p>This definition focuses on the communication and coordination aspect of distributed systems, particularly the reliance on message passing across a network to achieve collaboration among independent components.</p>
+<ul>
+<li>reliance on message passing across a network for communication</li>
+</ul>
 </section><section>
-<h3 id="george-coulouris-2001">George Coulouris (2001)</h3>
+<h3 id="distributed-systems--concepts-and-design-coulouris-et-alhttpsapipageplacedepreviewdt04009781447930174_a24570107preview-9781447930174_a24570107pdf-1"><a href="https://api.pageplace.de/preview/DT0400.9781447930174_A24570107/preview-9781447930174_A24570107.pdf">“Distributed Systems — Concepts and Design”, Coulouris et. al.</a></h3>
 <blockquote>
-<p>A distributed system is a system in which hardware or software components located at networked computers communicate and coordinate their actions by passing messages.</p>
+<p>We define a distributed system as one in which hardware or software components
+located at networked computers communicate and coordinate their actions only by
+passing messages.</p>
 </blockquote>
 <h3 id="__interpretation__-3"><strong>Interpretation</strong></h3>
-<p>This expands the idea of distributed systems to both hardware and software components, emphasizing the key role of communication over a network.</p>
+<ul>
+<li>reliance on message passing across a network for communication</li>
+</ul>
 </section><section>
-<h3 id="peter-van-roy-2009">Peter Van Roy (2009)</h3>
+<h3 id="concepts-techniques-and-models-of-computer-programming-van-roy-and-haridihttpswebpersoinfouclacbepvrvanroyharidi2003-bookpdf">[]“Concepts, Techniques, and Models of Computer Programming”, Van Roy and Haridi](<a href="https://webperso.info.ucl.ac.be/~pvr/VanRoyHaridi2003-book.pdf">https://webperso.info.ucl.ac.be/~pvr/VanRoyHaridi2003-book.pdf</a>)</h3>
 <blockquote>
-<p>A distributed system is a system that consists of a collection of independent computers that appear to the users of the system as a single coherent system.</p>
+<p>A distributed system is a set of computers that are linked together by a network</p>
 </blockquote>
 <h3 id="__interpretation__-4"><strong>Interpretation</strong></h3>
-<p>This builds on Tanenbaum’s definition, stressing the coherence and illusion of a single system, despite its distributed nature across many independent computers.</p>
+<ul>
+<li>very abstract definition focusing on how distribution should be interpreted</li>
+</ul>
 
 </section>
 </section><section>
 <h2 id="what-is-a-distributed-system">What is a Distributed System?</h2>
 <h3 id="wrap-up">Wrap up</h3>
-<p>These definitions cover the essential characteristics of distributed systems:</p>
+<p>These definitions cover the <em>essential characteristics</em> of distributed systems:</p>
 <ul>
 <li>independent components,</li>
 <li>communication via messages, and the</li>
@@ -92,6 +108,7 @@
 
 <section data-shortcode-section="">
 <h2 id="why-would-you-make-your-system-distributed">Why would you make your system distributed?</h2>
+<p>Any or some of the following reasons:</p>
 <ul>
 <li><strong>Scalability</strong>: Handling large-scale systems efficiently</li>
 <li><strong>Fault Tolerance</strong> and <strong>Availability</strong>: Ensuring reliability despite failures</li>
@@ -435,24 +452,32 @@
 <h1 id="nomenclature">Nomenclature</h1>
 </section><section>
 <h2 id="infrastructure">Infrastructure</h2>
-<ul>
-<li>Andrew S. Tanenbaum and Maarten Van Steen - “Distributed Systems: Principles and Paradigms” (2007):</li>
-</ul>
 <blockquote>
-<p>The infrastructure of a distributed system comprises the communication mechanisms, middleware, and platforms that allow components, located on different networked computers, to communicate and coordinate their actions.</p>
+<p>The set of hardware, software, and networking facilities that allow the many pieces of a distributed system to communicate and inter-operate over a network</p>
 </blockquote>
+<p>$\approx$ the set of <em>infrastructural components</em> composing the <em>backbone</em> of the distributed system</p>
 <ul>
-<li>Coulouris, Dollimore, Kindberg - “Distributed Systems: Concepts and Design” (2011):</li>
+<li>Distributed systems may rely on similar infrastructures, regardless of the different functionalities they provide</li>
+<li>The infrastructure is <strong>transparent</strong> to the <em>end-users</em>, yet essential for the <em>system</em> to work</li>
 </ul>
-<blockquote>
-<p>Infrastructure in a distributed system refers to the underlying hardware, software services, and networks that facilitate the integration, execution, and management of distributed components.</p>
-</blockquote>
+
+
+<span class="fragment ">
+  <h4 id="br-example"><br> Example</h4>
+<p>Consider your fancy social network of choice (e.g., Instagram, TikTok, Twitter, etc.)</p>
 <ul>
-<li>Peter Van Roy - “Concepts, Techniques, and Models of Computer Programming” (2004):</li>
+<li>it looks like a dashboard on you phone / computer, but…
+<ul>
+<li>… where are the <em>data</em> stored?</li>
+<li>… where are the <em>messages</em> after they have been sent but before they reach your phone?</li>
+<li>… where does information <em>processing</em> happen?</li>
 </ul>
-<blockquote>
-<p>In distributed systems, infrastructure is the ensemble of hardware and software that provides the necessary support for computation and communication across a network of independent, interacting components.</p>
-</blockquote>
+</li>
+<li>different sorts of computations are performed on different <em>infrastructural components</em>, depending on their <em>role</em> in the system</li>
+</ul>
+
+</span>
+
 </section><section>
 
 
@@ -752,7 +777,7 @@ These patterns define the <em>flow of messages</em>, <em>responsibilities</em> o
 <h3 id="requestresponse">Request—Response</h3>
 <p>The most common and basic pattern for communication between two components</p>
 <div class="container w-100 m-0 p-0">
-    <div class="row "><div class="col " style="text-align: left;"><figure id="plantuml-figure-1729087287938190904" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
+    <div class="row "><div class="col " style="text-align: left;"><figure id="plantuml-figure-1729091193100840691" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
     <p>hide footbox
 participant Client
 participant Server</p>
@@ -760,7 +785,7 @@ participant Server</p>
 Server -&gt; Client: Response</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1729087287938190904");
+    handlePlantumlFigureByID("plantuml-figure-1729091193100840691");
 </script>
 </div>
 <div class="col " style="text-align: left;"><ul>
@@ -786,7 +811,7 @@ Server -&gt; Client: Response</p>
 <h3 id="publishsubscribe">Publish—Subscribe</h3>
 <p>A simple pattern to spread information among multiple recipients</p>
 <div class="container w-100 m-0 p-0">
-    <div class="row "><div class="col " style="text-align: left;"><figure id="plantuml-figure-1729087287938653659" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
+    <div class="row "><div class="col " style="text-align: left;"><figure id="plantuml-figure-1729091193101461198" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
     <p>hide footbox
 actor User
 participant Publisher
@@ -809,7 +834,7 @@ Publisher -&gt; Subscriber2: notify Message
 deactivate Publisher</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1729087287938653659");
+    handlePlantumlFigureByID("plantuml-figure-1729091193101461198");
 </script>
 </div>
 <div class="col " style="text-align: left;"><ul>
@@ -845,7 +870,7 @@ deactivate Publisher</p>
 <li>this is commonly useful to <em>decouple</em> the <em>publisher</em> from the <em>subscribers</em></li>
 <li>most commonly, brokers <em>store</em> messages until they are <em>consumed</em></li>
 </ul>
-<figure id="plantuml-figure-1729087287939174440" class="plantuml" alt="" style="width: 100%;height: 50vh;max-width: 95vw;max-height: 80vh;">
+<figure id="plantuml-figure-1729091193102008829" class="plantuml" alt="" style="width: 100%;height: 50vh;max-width: 95vw;max-height: 80vh;">
     <p>hide footbox
 actor User
 participant Publisher
@@ -877,7 +902,7 @@ Broker -&gt; Subscriber2: notify Message
 deactivate Broker</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1729087287939174440");
+    handlePlantumlFigureByID("plantuml-figure-1729091193102008829");
 </script>
 </section><section>
 <h2 id="common-interaction-protocols-pt-2-2">Common Interaction Protocols (pt. 2)</h2>
@@ -898,7 +923,7 @@ deactivate Broker</p>
 <h3 id="contractnet-protocol">ContractNet Protocol</h3>
 <p>A simple protocol for <em>auctions</em> and <em>negotiations</em></p>
 <div class="container w-100 m-0 p-0">
-    <div class="row "><div class="col " style="text-align: left;"><figure id="plantuml-figure-1729087287939545265" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
+    <div class="row "><div class="col " style="text-align: left;"><figure id="plantuml-figure-1729091193102214633" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
     <p>hide footbox
 participant Initiator
 participant Contractor1
@@ -922,7 +947,7 @@ deactivate Contractor1
 deactivate Initiator</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1729087287939545265");
+    handlePlantumlFigureByID("plantuml-figure-1729091193102214633");
 </script>
 </div>
 <div class="col " style="text-align: left;"><ul>
