@@ -20,6 +20,8 @@ aliases = [
 
 * General aspects
     1. [About the course](./) (this page)
+        - [Useful links](./#/links)
+        - [Project work rules](./#/rules)
     1. [Preliminaries](./preliminaries/)
     1. [Communication mechanisms](./communication/)
         - Exercise: [TCP Group Chat](./communication/#/exercise-tcp-group-chat)
@@ -41,59 +43,109 @@ aliases = [
 
 ---
 
-# Professors
+## Teachers
 
-### Giovanni Ciatto
-  * email: [`giovanni.ciatto@unibo.it`](mailto:giovanni.ciatto@unibo.it)
-  * homepage: [`https://www.unibo.it/sitoweb/giovanni.ciatto/en`](https://www.unibo.it/sitoweb/giovanni.ciatto/en)
-  * office hours: by appointment (send me an email)
+### Prof. Giovanni Ciatto
+* email: [`giovanni.ciatto@unibo.it`](mailto:giovanni.ciatto@unibo.it)
+* homepage: <https://www.unibo.it/sitoweb/giovanni.ciatto/en>
+* office hours: by appointment (send me an email)
 
-### \[Tutor\] Matteo Magnini
-    * email: [`matteo.magnini@unibo.it`](mailto:matteo.magnini@unibo.it)
-    * homepage: [`https://www.unibo.it/sitoweb/matteo.magnini/en`](https://www.unibo.it/sitoweb/matteo.magnini/en)
-    * office hours: by appointment (send me an email)
+### Tutor Matteo Magnini
+* email: [`matteo.magnini@unibo.it`](mailto:matteo.magnini@unibo.it)
+* homepage: <https://www.unibo.it/sitoweb/matteo.magnini/en>
+* office hours: by appointment (send me an email)
 
 ---
 
-#### Prioritize the {{< forum_general >}}
+## Prioritize the {{< forum_general >}}
 
-#### [`https://virtuale.unibo.it/mod/forum/view.php?id=1678931`](https://virtuale.unibo.it/mod/forum/view.php?id=1678931)
-  * All technical question
-  * Any other non-personal question
+* All technical question
+* Any other non-personal question
 
 <p>
 
-#### When using the email
-  * Include *all* teachers, **always**, there including prof. [Omicini](mailto:andrea.omicini@unibo.it)
-  * Clarify the _academic year_ and the _name of the course_ in the subject
+## When using the email
+* Include *all* teachers in CC, **always**, there including prof. [Omicini](mailto:andrea.omicini@unibo.it)
+* Clarify the _academic year_ and the _name of the course_ in the subject
 
 ---
 
+{{< slide id="links" >}}
+
 ## Pages of the course
 
-- [Institutional Page of the Course](https://www.unibo.it/it/studiare/dottorati-master-specializzazioni-e-altra-formazione/insegnamenti/insegnamento/2024/493397)
+- [Institutional Page of the Course]({{< institutional_page_url >}})
 - [Virtuale Page of the Course]({{< vle_url >}})
-      + please enroll if you didn't already
-- [APICe Page of the Course](https://apice.unibo.it/xwiki/bin/view/Course/Ds2425/)
-- [These slides](https://unibo-fc-isi-ds.github.io/slides-module2/)
-- [Examples and Exercises Repository](https://github.com/unibo-fc-isi-ds/lab-snippets)
+    + please enroll if you didn't already
+- [APICe Page of the Course]({{< apice_url >}})
+- [These slides](./)
+- [Examples and Exercises Repository]({{< github-url repo="lab-snippets" >}})
 - [Python Programming 101](https://matteomagnini.github.io/distributed-systems-python-101/#/)
 
 ---
 
-# Organization of Module 2
+## Organization of Module 2
 
-- Lectures in lab with immediate hands-on
+- Lectures in lab with immediate _hands-on_
 - Exercises and examples in Python
-    * submission of exercises [via GitHub](https://github.com/) via grant you extra points
+    * submission of _exercises_ [via GitHub](https://github.com/) may grant you _extra points_
 - Final project work in any language of your choice
 
-## Time table
+---
+
+## Time—table
 
 * **Wednesday 15:00--17:00** (2h) --- Lab 3.1
-    - cf. [official timetable](https://www.unibo.it/en/study/phd-professional-masters-specialisation-schools-and-other-programmes/course-unit-catalogue/course-unit/2024/493397/orariolezioni) for any change
+    - cf. [official timetable]({{< institutional_page_url >}}/orariolezioni) for any change
 
 Changes will be published on the {{< forum_news >}}
+
+---
+
+{{< slide id="rules" >}}
+
+## Workflow for the project work (pt. 1)
+
+> Detailed rules here: <{{% apice_url %}}Projects/Rules>
+
+1. **Propose** your project idea on the {{< forum_projects >}}
+    + 1-3 students per _group_
+    + open a discussion thread named `[Surname1, Surname2, ...] Project Proposal: <your project name>`
+
+2. Any _subsequent communication_ on the project should be done on the __same thread__
+    + use the thread as a _backlog_ of any official communication concerning the administration of your project work
+    + if you want to talk _privately_ about your project work, _mention the URL_ of your project's thread in your email
+
+2. __Wait__ for the teachers to _approve_ your proposal
+    + most likely, we'll try to estimate the effort and ask for changes if too much or too little
+    + we'll also check for overlaps with other groups
+
+3. Create a __GitHub repository__ where to develop your project and post the URL onto your project's thread
+    + make all the _members_ of the group collaborators on the repository
+    + give _full admin_ rights to the teachers:
+        - Usernames: [`gciatto`](https://github.com/gciatto), [`matteomagnini`](https://github.com/MatteoMagnini)
+
+---
+
+{{< slide id="rules" >}}
+
+## Workflow for the project work (pt. 2)
+
+> Detailed rules here: <{{% apice_url %}}Projects/Rules>
+
+4. __Work__ on your project:
+    + _commit_ and _push_ your changes often
+        - only the `master` or `main` branch will be considered for the evaluation
+    + in parallel, or later, write a _report_ about your report following [this template]({{% final_report_template %}})
+
+5. Once done, post a _message_ on your _project's thread_ to signal the end of the work
+    + we'll _clone_ your repository and evaluate the code
+
+6. __Edits__ may be requested by the teachers, to either the code or the report (or both)
+
+7. Once the teachers are satisfied, you'll be requested to __present__ your work to prof. Omicini
+    + after setting up a meeting with him, in private
+    + 12-15 minutes _presentation_ + 5-10 minutes _Q&A_
 
 ---
 
@@ -128,6 +180,7 @@ Changes will be published on the {{< forum_news >}}
 ## Software Requirements
 
 ### Required
+
 * A working internet connection
 * A working Python 3.10+ installation
 
@@ -136,3 +189,13 @@ Changes will be published on the {{< forum_news >}}
 * PyCharm
 * Visual Studio Code
 * A decent Unix terminal
+
+---
+
+# Lecture is Over
+
+<br>
+
+Compiled on: {{< today >}} --- [<i class="fa fa-print" aria-hidden="true"></i> printable version](?print-pdf&pdfSeparateFragments=false)
+
+[<i class="fa fa-undo" aria-hidden="true"></i> back to ToC](./#/toc)
