@@ -21,55 +21,60 @@ aliases = [
 
 ---
 
-### Leslie Lamport (1987)
+### [Leslie Lamport (1987)](https://en.wikiquote.org/wiki/Leslie_Lamport)
 
 > A distributed system is one in which the failure of a computer you didn’t even know existed can render your own computer unusable
 
 ### __Interpretation__
 
-This humorous yet insightful definition highlights one of the main challenges in distributed systems—hidden interdependencies between machines and how a failure in one part of the system can have unforeseen consequences elsewhere.
+- hidden interdependencies between machines
+- how a failure in one part of the system can have unforeseen consequences elsewhere
 
 ---
 
-### Andrew S. Tanenbaum (2002)
+### ["Distributed Systems", Tannenbaum and Van Steen](http://csis.pace.edu/~marchese/CS865/Lectures/Chap1/Chapter1a.htm) (the [book here](https://komputasi.wordpress.com/wp-content/uploads/2018/03/mvsteen-distributed-systems-3rd-preliminary-version-3-01pre-2017-170215.pdf))
 
 > A distributed system is a collection of independent computers that appears to its users as a single coherent system
 
 ### __Interpretation__
 
-This definition emphasizes the illusion of a unified system despite the fact that it is made up of multiple independent machines.
-
-The key idea is that users should not be aware that the system is distributed.
-
----
-
-### Coulouris, Dollimore, and Kindberg (2005)
-
-> A distributed system is one in which components located at networked computers communicate and coordinate their actions only by passing messages.
-
-### __Interpretation__
-
-This definition focuses on the communication and coordination aspect of distributed systems, particularly the reliance on message passing across a network to achieve collaboration among independent components.
+- illusion of a unified system...
+- ... despite the fact that it is made up of multiple independent machines
+- the key idea is that users should not be aware that the system is distributed.
 
 ---
 
-### George Coulouris (2001)
+### ["Distributed Systems — Concepts and Design", Coulouris et. al.](https://api.pageplace.de/preview/DT0400.9781447930174_A24570107/preview-9781447930174_A24570107.pdf)
 
-> A distributed system is a system in which hardware or software components located at networked computers communicate and coordinate their actions by passing messages.
+> We define a distributed system as one in which hardware or software components
+> located at networked computers communicate and coordinate their actions only by
+> passing messages.
 
 ### __Interpretation__
 
-This expands the idea of distributed systems to both hardware and software components, emphasizing the key role of communication over a network.
+- reliance on message passing across a network for communication
 
 ---
 
-### Peter Van Roy (2009)
+### ["Distributed Systems — Concepts and Design", Coulouris et. al.](https://api.pageplace.de/preview/DT0400.9781447930174_A24570107/preview-9781447930174_A24570107.pdf)
 
-> A distributed system is a system that consists of a collection of independent computers that appear to the users of the system as a single coherent system.
+> We define a distributed system as one in which hardware or software components
+> located at networked computers communicate and coordinate their actions only by
+> passing messages.
 
 ### __Interpretation__
 
-This builds on Tanenbaum’s definition, stressing the coherence and illusion of a single system, despite its distributed nature across many independent computers.
+- reliance on message passing across a network for communication
+
+---
+
+### []"Concepts, Techniques, and Models of Computer Programming", Van Roy and Haridi](https://webperso.info.ucl.ac.be/~pvr/VanRoyHaridi2003-book.pdf)
+
+> A distributed system is a set of computers that are linked together by a network
+
+### __Interpretation__
+
+- very abstract definition focusing on how distribution should be interpreted
 
 {{%/section%}}
 
@@ -79,7 +84,7 @@ This builds on Tanenbaum’s definition, stressing the coherence and illusion of
 
 ### Wrap up
 
-These definitions cover the essential characteristics of distributed systems:
+These definitions cover the _essential characteristics_ of distributed systems:
 - independent components,
 - communication via messages, and the
 - challenge of presenting a unified system to the user,
@@ -90,6 +95,8 @@ These definitions cover the essential characteristics of distributed systems:
 {{%section%}}
 
 ## Why would you make your system distributed?
+
+Any or some of the following reasons:
 
 - __Scalability__: Handling large-scale systems efficiently
 - __Fault Tolerance__ and __Availability__: Ensuring reliability despite failures
@@ -334,14 +341,25 @@ These definitions cover the essential characteristics of distributed systems:
 
 ## Infrastructure
 
-- Andrew S. Tanenbaum and Maarten Van Steen - “Distributed Systems: Principles and Paradigms” (2007):
-> The infrastructure of a distributed system comprises the communication mechanisms, middleware, and platforms that allow components, located on different networked computers, to communicate and coordinate their actions.
+> The set of hardware, software, and networking facilities that allow the many pieces of a distributed system to communicate and inter-operate over a network
 
-- Coulouris, Dollimore, Kindberg - “Distributed Systems: Concepts and Design” (2011):
-> Infrastructure in a distributed system refers to the underlying hardware, software services, and networks that facilitate the integration, execution, and management of distributed components.
+$\approx$ the set of _infrastructural components_ composing the _backbone_ of the distributed system
 
-- Peter Van Roy - “Concepts, Techniques, and Models of Computer Programming” (2004):
-> In distributed systems, infrastructure is the ensemble of hardware and software that provides the necessary support for computation and communication across a network of independent, interacting components.
+- Distributed systems may rely on similar infrastructures, regardless of the different functionalities they provide
+- The infrastructure is __transparent__ to the _end-users_, yet essential for the _system_ to work
+
+{{% fragment %}}
+
+#### <br> Example
+
+Consider your fancy social network of choice (e.g., Instagram, TikTok, Twitter, etc.)
++ it looks like a dashboard on you phone / computer, but...
+    + ... where are the _data_ stored?
+    + ... where are the _messages_ after they have been sent but before they reach your phone?
+    + ... where does information _processing_ happen?
++ different sorts of computations are performed on different _infrastructural components_, depending on their _role_ in the system
+
+{{% /fragment %}}
 
 ---
 
@@ -1338,7 +1356,7 @@ so this is a way to _recover_ from it when it does
 
 - __Heart-beats__ are _periodic_ signals sent between nodes to ensure they are _alive_ and _responsive_
     * if a node stops sending heart-beats within _the period_, it's considered _dead_
-    * signal $\approx$ (almost) empty message: only its reception matter 
+    * signal $\approx$ (almost) empty message: only its reception matter
 - __Timeout__: amount of _time_ necessary to _locally_ mark a _remote operation_ as _failed_ (e.g. node as unreachable)
 - __Retry__: commonly a single failure not enough (e.g. short timeout, bad luck) so better to _retry a few times_
     <!-- * commonly implies to parameters:  -->
@@ -1347,13 +1365,13 @@ so this is a way to _recover_ from it when it does
 
 ### Why
 
-- __Fault Tolerance__: basic mechanism to _detect_ failures, to be able to _react_ to them ASAP  
+- __Fault Tolerance__: basic mechanism to _detect_ failures, to be able to _react_ to them ASAP
 
 ### How
 
 1. Nodes keep a connection open between them, and send data periodically
     + alternatively, they send each other messages with no connection
-    + some application may have this feature _built-in_, others may need ad-hoc design 
+    + some application may have this feature _built-in_, others may need ad-hoc design
 2. _Timeout_ + _retrial threshold_ + _retrial delay_ to mark nodes as unreachable
 3. Decide what to do when depending on which and how many nodes are unreachable
     + e.g. prioritize consistency? prioritize availability?
@@ -1386,13 +1404,13 @@ so this is a way to _recover_ from it when it does
 1. One or more server is in charge of generating _session tokens_ upon client _request_
 1. Authenticated nodes _include_ session tokens in _any subsequent interaction_
 1. Nodes know how to _verify_ session _tokens_ are __valid__ and _genuine_
-1. Nodes _enforce_ access control depending on the _content of the token_ 
+1. Nodes _enforce_ access control depending on the _content of the token_
 
 ### Implications
 
 - Requires one _authentication server_, possibly backed by a _database_
 - Requires _cryptography_ to handle session tokens
-- Requires _designing_ and _implementing_ some access control mechanism, 
+- Requires _designing_ and _implementing_ some access control mechanism,
 e.g. [ACLs](https://en.wikipedia.org/wiki/Access-control_list), [RBAC](https://en.wikipedia.org/wiki/Role-based_access_control), etc.
 
 ---
