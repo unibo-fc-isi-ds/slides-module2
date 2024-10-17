@@ -229,7 +229,7 @@ Any or some of the following reasons:
     - most likely, answers to the questions above imply __technical constrains__ on the system
         * e.g. where to store data?
             + in case of multiple data centers, how to keep them consistent?
-    - will the system need to _scale_? how to handle _faults_? _how_ will it _recover_?
+    - will the system need to _scale_? how to handle _faults_? _how_ to _recover_ from failures?
     - _acceptance criteria_ will for all such additional requirements/constraints
 
 ---

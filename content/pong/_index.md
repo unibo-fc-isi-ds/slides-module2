@@ -100,7 +100,7 @@ Default key bindings:
     3. **Rendering the game** (e.g., drawing the game world on the screen)
     4. **Simulating the passage of time** in the game (e.g., moving objects even in absence of inputs)
 
-- Most commonly, some _wait_ is introduced at the end of each cycle 
+- Most commonly, some _wait_ is introduced at the end of each cycle
     + to control the game's frame rate
 
 ---
@@ -115,7 +115,7 @@ full example [on GitHub]({{<github-url repo="lab-snippets" path="snippets/lab1/e
 
 #### Aspects to notice (cf. [PyGame documentation](https://www.pygame.org/docs/ref/event.html)):
 
-- PyGame comes with a notion of _events_ and __event queue__ 
+- PyGame comes with a notion of _events_ and __event queue__
     * this is good for handling user _inputs_
 
 - each event had a _type_ (e.g., `pygame.KEYDOWN` and `pygame.KEYUP`) and _attributes_ (e.g., `event.key`)
@@ -368,7 +368,7 @@ full example [on GitHub]({{<github-url repo="lab-snippets" path="snippets/lab1/e
 
 left to right direction
 
-package "dpongpy.model" { 
+package "dpongpy.model" {
 
     enum Direction {
         + {static} NONE
@@ -510,7 +510,7 @@ code [on GitHub]({{<github-url repo="dpongpy" path="dpongpy/model.py">}})
 ## Let's infer a model from the view (pt. 4)
 
 Facilities of the `Pong` class, to __configure__ the game:
-- `reset_ball(speed=None)`: _re-locates_ the `Ball` at the _center_ of the `Board`, setting its `speed` _vector_ to the given value 
+- `reset_ball(speed=None)`: _re-locates_ the `Ball` at the _center_ of the `Board`, setting its `speed` _vector_ to the given value
     + _random_ speed _direction_ is provided if `speed` is `None`
 - `add_paddle(side, paddle=None)`: _assigns_ a `Paddle` to the `Pong`, at the given `side` (if not already present)
     + the `Paddle` is created from scratch if `paddle` is `None`
@@ -529,7 +529,7 @@ Facilities of the `Pong` class, to __animate__ the game:
     + _up_ and _down_ paddles can only move _left_ and _right_, respectively
 - `stop_paddle(side)`: _stops_ the selected `Paddle` from moving
 
---- 
+---
 
 ## About collisions
 
@@ -639,8 +639,8 @@ In a simple video game like Pong, we distinguish between:
 2. What other __control events__ are _relevant_ for the software, during its execution?
     - __player__ _joining_ or _leaving_ the game (mostly useful in _distributed_ setting)
     - __game__ _starting_ or _ending_ (mostly useful in _distributed_ setting)
-    - __time__ _passing_ in the game 
-    - __paddle__ _moving_ or _stopping_ 
+    - __time__ _passing_ in the game
+    - __paddle__ _moving_ or _stopping_
 
 {{% fragment %}}
 
@@ -693,7 +693,7 @@ In a simple video game like Pong, we distinguish between:
 
 ### More design choices
 
-* Useful additional _abstractions_: 
+* Useful additional _abstractions_:
     - `PlayerAction` _enumerates_ all possible _actions_ a player can perform (on a paddle)
         + e.g. __move__ _paddle_ in a given `Direction`, __stop__ _paddle_, __quit__ the game
     - `ActionMap`, associating _key codes_ to `PlayerAction`s
@@ -832,7 +832,7 @@ we call `Controller` any entity which acts as both an `EventHandler` and an `Inp
 
 ## About outputs
 
-> __Insight__: outputs are representations of the _system state_ 
+> __Insight__: outputs are representations of the _system state_
 > <br> that are _perceived_ by the _external world_
 > <br> (most _commonly_ corresponding to _visual_ or _auditory_ _feedback_ for the user)
 
@@ -950,8 +950,9 @@ notice the implementation of `run()`
 
 ## Lancing the game
 
+See the command line options via `poetry run python -m dpongpy -h`:
+
 ```bash
-poetry run python -m dpongpy -h                                                                                                                                                                            ✔ 
 pygame 2.6.0 (SDL 2.28.4, Python 3.12.5)
 Hello from the pygame community. https://www.pygame.org/contribute.html
 usage: python -m dpongpy [-h] [--mode {local}] [--side {none,left,up,right,down}] [--keys {wasd,arrows,ijkl,numpad}] [--debug] [--size SIZE SIZE] [--fps FPS]
@@ -976,6 +977,132 @@ game:
 
 [GitHub repository]({{<github-url repo="dpongpy">}})
 + minimal launch with `poetry run python -m dpongpy --mode local`
+
+---
+
+{{%section%}}
+
+## Towards _Distributed_ Pong (pt. 1)
+
+(only DS related aspects are discussed here)
+
+1. __Use case collection__:
+    - _where_ are the users?
+        + sitting in front of they _own_ computer, connected to the _internet_ or _LAN_
+        + we __want users to be able to play togther from _different_ locations__
+    - _when_ and _how frequently_ do they interact with the system?
+        + _sporadically_ they may start a game, but when that happens, _interactions_ among users are _very frequent_
+    - _how_ do they _interact_ with the system? which _devices_ are they using?
+        + pressing _keyboard_ keys on one _computer_ may impact what is _displayed_ on another
+    - does the system need to _store_ user's __data__? _which_? _where_?
+        + _no_ data needs to be stored, but a lot of information needs to be _exchanged_ among users during the game
+            * this may change if _leaderboards_ are introduced
+    - most likely, there will be _multiple_ __roles__
+        + just _players_
+        + possibly _spectators_, i.e. players providing _no input_ but getting the whole _visual feedback_
+
+---
+
+## Towards _Distributed_ Pong (pt. 1)
+
+<br>
+
+2. __Requirements analysis__:
+    - how to synchronize and coordinate inputs coming from different players?
+        + possibly, some _infrastructural component_ is needed, behind the scenes, to do this
+    - will the system need to _scale_?
+        + not really scale, but it must be able to support players _joining_ and _leaving_ the game at any time
+    - how to handle _faults_? _how_ will it _recover_?
+        + what if a player _goes offline_ during the game?
+            1. e.g. the game _pauses_ until the player _reconnects_
+            2. e.g. the ball position _resets_ to centre and the corresponding paddle is _removed_
+            3. e.g. the corresponding _paddle_ is _frozen_ in place
+        + what if the aforementioned infrastructural component becomes _unreachable_?
+            1. e.g. the game _pauses_ until the component is _reachable_ again
+    - _acceptance criteria_ will for all such additional requirements/constraints
+        + _latency_ must be _low_ enough to allow for a _smooth_ game experience
+            * e.g. avoid _lag_ in the ball/paddle movements
+
+---
+
+## Towards _Distributed_ Pong (pt. 1)
+
+<br>
+
+3. __Design__:
+    - are there _infrastructural components_ that need to be introduced? _how many_?
+    - how do components	_distribute_ over the network? _where_?
+
+> In other words, _how is the infrastructure of the system organized?_
+
+<!-- * e.g., one _server_ to coordinate _$N$ clients_ (one for each player) -->
+
+<!-- * e.g. _centralised_ server on the cloud, _clients_ on all users' computers
+* e.g. _centralised_ server on __one__ user's computer, _clients_ on __all__ other users' computers -->
+
+---
+
+## About the Distributed Pong _Infrastructure_ (pt. 1)
+
+### No infrastructure (local)
+
+Let's focus on information flow:
+
+{{< image alt="No infrastructure for Pong" src="./local.svg" >}}
+
+---
+
+## About the Distributed Pong _Infrastructure_ (pt. 2)
+
+### Centralized infrastructure
+
+Let's suppose a central server is coordinating the game:
+
+{{< image alt="Centralized infrastructure for Pong" src="./centralised.svg" >}}
+
+---
+
+## About the Distributed Pong _Infrastructure_ (pt. 3)
+
+### Brokered infrastructure
+
+Let's suppose a central server is coordinating the game, but a broker is used to _relay_ messages:
+
+{{< image alt="Brokered infrastructure for Pong" src="./brokered.svg" >}}
+
+---
+
+## About the Distributed Pong _Infrastructure_ (pt. 4)
+
+### Replicated infrastructure
+
+Like the centralised one, but the server is replicated and a consensus protocol is used to keep replicas in sync:
+
+{{< image alt="Replicated infrastructure for Pong" src="./replicated.svg" >}}
+
+---
+
+## About the Distributed Pong _Infrastructure_ (pt. 5)
+
+### What to choose?
+
+1. Local infrastructure implies no _distribution_ for players
+2. Centralized infrastructure implies a _single point of failure_ (the server)
+    + plus it _complicates deploy_:
+        1. who's in charge of starting the server?
+            * e.g., one player (makes the start-up procedure more complex)
+            * e.g., hosted online (makes access control more critical, adds deploy and maintenance costs)
+        2. where should the server be located?
+3. Brokered infrastructure implies __two__ _single points of failure_ (the broker, the server)
+    + essentially it has all the _drawbacks_ of the centralized infrastructure, plus the _complexity_ of the broker
+        1. where to deploy the broker?
+        2. potentially _higher_ latency, due to the _additional_ hop for message propagation
+    + may temporally _decouple_ the server from the clients, which is a __non-goal__ in our case
+4. Replicated infrastructure is _overkill_ for a simple online game
+    + for video games, it's better to _prioritize availability_ over consistency
+    + no data storage $\implies$ no strong need for _consistency_
+
+{{%/section%}}
 
 ---
 
