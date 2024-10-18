@@ -1094,13 +1094,43 @@ Like the centralised one, but the server is replicated and a consensus protocol 
             * e.g., hosted online (makes access control more critical, adds deploy and maintenance costs)
         2. where should the server be located?
 3. Brokered infrastructure implies __two__ _single points of failure_ (the broker, the server)
-    + essentially it has all the _drawbacks_ of the centralized infrastructure, plus the _complexity_ of the broker
+    + essentially, it has all the _drawbacks_ of the centralized infrastructure, plus the _complexity_ of the broker
         1. where to deploy the broker?
         2. potentially _higher_ latency, due to the _additional_ hop for message propagation
     + may temporally _decouple_ the server from the clients, which is a __non-goal__ in our case
 4. Replicated infrastructure is _overkill_ for a simple online game
     + for video games, it's better to _prioritize availability_ over consistency
     + no data storage $\implies$ no strong need for _consistency_
+
+---
+
+## Towards _Distributed_ Pong (pt. 2)
+
+<br>
+
+3. __Design__:
+    - are there _infrastructural components_ that need to be introduced? _how many_?
+        * e.g., one _server_ to coordinate _$N$ clients_ (one for each player)
+    - how do components	_distribute_ over the network? _where_?
+        * e.g., _centralised_ server on the cloud, _clients_ on all users' computers
+        * e.g., _centralised_ server on __one__ user's computer, _clients_ on __all__ other users' computers
+    - how do _domain entities_ __map to__ _infrastructural components_?
+        * e.g., `PongGame` entity updated by _the server_ and replicated on _all clients_, in a _master-slave_ fashion
+        * e.g., one `PongView` entity _per client_, to render the game state on the local screen
+        * e.g., one `InputHandler` entity _per client_, to grasp local inputs and send them to the server
+        * e.g., one `EventHandler` entity on the server, to receive remote inputs and update the `PongGame` entity accordingly
+    - how do components _communicate_? _what_? _which_ __interaction patterns__ do they enact?
+        * e.g., _request-response_? _publish-subscribe_?
+    - do components need to store data? _what data_? _where_? _when_? _how many **copies**_?
+        * e.g., no real need for data storage, but the overall state of the game must be _replicated_ on all clients ($N+1$ copies)
+            + replication must be as _quick/frequent_ as possible to avoid _inconsistencies_
+            + prioritize _availability_ over _consistency_
+    - how do components _find_ each other?
+        * TBD
+    - _how_ do components _recognize_ each other?
+        * TBD
+
+
 
 {{%/section%}}
 
