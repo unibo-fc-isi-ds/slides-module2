@@ -2,12 +2,12 @@
     <meta charset="utf-8">
 <title>[DS] Presentation Mechanisms</title>
 <meta name="description" content="Presentation Mechanisms for Distributed Systems">
-<meta name="author" content="Giovanni Ciatto">
+
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><link rel="stylesheet" href="/slides-module2/reveal-js/dist/reset.css">
 <link rel="stylesheet" href="/slides-module2/reveal-js/dist/reveal.css">
-  <link rel="stylesheet" href="/slides-module2/css/custom-theme.min.1b20742b97214d830a9aee59899723c921c39aabc30127443e315315207a1497.css" id="theme"><link rel="stylesheet" href="/slides-module2/highlight-js/solarized-dark.min.css">
+  <link rel="stylesheet" href="/slides-module2/css/custom-theme.min.e415e19db372f1135499fc2ea3a836cea3f048a00982e05f2d60d127261af094.css" id="theme"><link rel="stylesheet" href="/slides-module2/highlight-js/solarized-dark.min.css">
 <link href="https://fonts.googleapis.com/css?family=Roboto Mono" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Oxygen Mono" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Ubuntu Mono" rel="stylesheet">
@@ -446,7 +446,7 @@ this is why inexperienced programmers <em>often</em> don’t <em>notice</em> the
 </ol>
 </section><section>
 <h2 id="modelling-classes">Modelling (classes)</h2>
-<figure id="plantuml-figure-1729333858001352840" class="plantuml" alt="" style="width: 100%;height: 60vh;max-width: 95vw;max-height: 80vh;">
+<figure id="plantuml-figure-1729377939555702723" class="plantuml" alt="" style="width: 100%;height: 60vh;max-width: 95vw;max-height: 80vh;">
 <p>package “users” {
 class User {
 +username: str
@@ -509,7 +509,7 @@ AuthenticationService &lt;|.. InMemoryAuthenticationService
 <p>}</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1729333858001352840");
+    handlePlantumlFigureByID("plantuml-figure-1729377939555702723");
 </script>
 <div class="container w-100 m-0 p-0">
     <div class="row "><div class="col " style="text-align: left;"><ul>
@@ -848,7 +848,7 @@ AuthenticationService &lt;|.. InMemoryAuthenticationService
 </span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">_role_to_ast</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">role</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">Role</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">-&gt;</span> <span style="color:#204a87">dict</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#8f5902;font-style:italic"># Role -&gt; AST</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">{</span><span style="color:#4e9a06">'name'</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">role</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">name</span><span style="color:#000;font-weight:bold">}</span>
 </span></span></code></pre></div></div>
-<div class="col " style="text-align: left;"><figure id="plantuml-figure-1729333858024258974" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
+<div class="col " style="text-align: left;"><figure id="plantuml-figure-1729377939576675135" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
 <p>class Serializer {
 +serialize(obj: object) : str
 -_ast_to_string(data) : str
@@ -858,7 +858,7 @@ AuthenticationService &lt;|.. InMemoryAuthenticationService
 }</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1729333858024258974");
+    handlePlantumlFigureByID("plantuml-figure-1729377939576675135");
 </script>
 </div>
 </div>
@@ -925,7 +925,7 @@ AuthenticationService &lt;|.. InMemoryAuthenticationService
 </span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">_role_from_ast</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">data</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">-&gt;</span> <span style="color:#000">Role</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#8f5902;font-style:italic"># AST -&gt; Role</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">Role</span><span style="color:#000;font-weight:bold">[</span><span style="color:#000">data</span><span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">'name'</span><span style="color:#000;font-weight:bold">]]</span>
 </span></span></code></pre></div></div>
-<div class="col " style="text-align: left;"><figure id="plantuml-figure-1729333858030132228" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
+<div class="col " style="text-align: left;"><figure id="plantuml-figure-1729377939582934790" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
 <p>class Deserializer {
 +deserialize(string) : object
 -_ast_to_string(data) : object
@@ -935,7 +935,7 @@ AuthenticationService &lt;|.. InMemoryAuthenticationService
 }</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1729333858030132228");
+    handlePlantumlFigureByID("plantuml-figure-1729377939582934790");
 </script>
 </div>
 </div>
@@ -1110,7 +1110,7 @@ AuthenticationService &lt;|.. InMemoryAuthenticationService
 </span></span></code></pre></div></li>
 </ol>
 </div>
-<div class="col col-2" style="text-align: left;"><figure id="plantuml-figure-1729333858035028500" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
+<div class="col col-2" style="text-align: left;"><figure id="plantuml-figure-1729377939592462450" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
 <p>class Request {
 + name: str
 + args: tuple
@@ -1122,7 +1122,7 @@ AuthenticationService &lt;|.. InMemoryAuthenticationService
 }</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1729333858035028500");
+    handlePlantumlFigureByID("plantuml-figure-1729377939592462450");
 </script>
 <ol start="6">
 <li>Run with <code>python -m snippets -l 4 -e 1</code></li>
@@ -1226,7 +1226,7 @@ as if the procedure was <em>locally</em> executed, despite the <em>server</em> b
 </li>
 </ul>
 <div class="container w-100 m-0 p-0">
-    <div class="row "><div class="col col-3" style="text-align: left;"><figure id="plantuml-figure-1729333858036627098" class="plantuml" alt="" style="width: 100%;height: 60vh;max-width: 95vw;max-height: 80vh;">
+    <div class="row "><div class="col col-3" style="text-align: left;"><figure id="plantuml-figure-1729377939598000432" class="plantuml" alt="" style="width: 100%;height: 60vh;max-width: 95vw;max-height: 80vh;">
 <p>class Request {
 + name: str
 + args: tuple
@@ -1238,10 +1238,10 @@ as if the procedure was <em>locally</em> executed, despite the <em>server</em> b
 }</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1729333858036627098");
+    handlePlantumlFigureByID("plantuml-figure-1729377939598000432");
 </script>
 </div>
-<div class="col " style="text-align: left;"><figure id="plantuml-figure-1729333858036710563" class="plantuml" alt="" style="width: 100%;height: 60vh;max-width: 95vw;max-height: 80vh;">
+<div class="col " style="text-align: left;"><figure id="plantuml-figure-1729377939598101931" class="plantuml" alt="" style="width: 100%;height: 60vh;max-width: 95vw;max-height: 80vh;">
 <p>@startuml
 hide footbox</p>
 <p>actor Client
@@ -1277,7 +1277,7 @@ end
 @enduml</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1729333858036710563");
+    handlePlantumlFigureByID("plantuml-figure-1729377939598101931");
 </script>
 </div>
 </div>
@@ -1722,19 +1722,29 @@ end
 
 
 
+
+  
   
 
   
-
   
 
   
-
   
 
   
+  
 
   
+  
+
+  
+  
+
+  
+  
+
+
 
 
 

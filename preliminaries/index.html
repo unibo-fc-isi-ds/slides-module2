@@ -2,12 +2,12 @@
     <meta charset="utf-8">
 <title>[DS] Preliminaries</title>
 <meta name="description" content="Preliminaries about Distributed Systems Engineering">
-<meta name="author" content="Giovanni Ciatto">
+
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><link rel="stylesheet" href="/slides-module2/reveal-js/dist/reset.css">
 <link rel="stylesheet" href="/slides-module2/reveal-js/dist/reveal.css">
-  <link rel="stylesheet" href="/slides-module2/css/custom-theme.min.1b20742b97214d830a9aee59899723c921c39aabc30127443e315315207a1497.css" id="theme"><link rel="stylesheet" href="/slides-module2/highlight-js/solarized-dark.min.css">
+  <link rel="stylesheet" href="/slides-module2/css/custom-theme.min.e415e19db372f1135499fc2ea3a836cea3f048a00982e05f2d60d127261af094.css" id="theme"><link rel="stylesheet" href="/slides-module2/highlight-js/solarized-dark.min.css">
 <link href="https://fonts.googleapis.com/css?family=Roboto Mono" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Oxygen Mono" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Ubuntu Mono" rel="stylesheet">
@@ -777,7 +777,7 @@ These patterns define the <em>flow of messages</em>, <em>responsibilities</em> o
 <h3 id="requestresponse">Request—Response</h3>
 <p>The most common and basic pattern for communication between two components</p>
 <div class="container w-100 m-0 p-0">
-    <div class="row "><div class="col " style="text-align: left;"><figure id="plantuml-figure-1729333857976926030" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
+    <div class="row "><div class="col " style="text-align: left;"><figure id="plantuml-figure-1729377939538559676" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
     <p>hide footbox
 participant Client
 participant Server</p>
@@ -785,7 +785,7 @@ participant Server</p>
 Server -&gt; Client: Response</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1729333857976926030");
+    handlePlantumlFigureByID("plantuml-figure-1729377939538559676");
 </script>
 </div>
 <div class="col " style="text-align: left;"><ul>
@@ -811,7 +811,7 @@ Server -&gt; Client: Response</p>
 <h3 id="publishsubscribe">Publish—Subscribe</h3>
 <p>A simple pattern to spread information among multiple recipients</p>
 <div class="container w-100 m-0 p-0">
-    <div class="row "><div class="col " style="text-align: left;"><figure id="plantuml-figure-1729333857978147613" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
+    <div class="row "><div class="col " style="text-align: left;"><figure id="plantuml-figure-1729377939538892285" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
     <p>hide footbox
 actor User
 participant Publisher
@@ -834,7 +834,7 @@ Publisher -&gt; Subscriber2: notify Message
 deactivate Publisher</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1729333857978147613");
+    handlePlantumlFigureByID("plantuml-figure-1729377939538892285");
 </script>
 </div>
 <div class="col " style="text-align: left;"><ul>
@@ -870,7 +870,7 @@ deactivate Publisher</p>
 <li>this is commonly useful to <em>decouple</em> the <em>publisher</em> from the <em>subscribers</em></li>
 <li>most commonly, brokers <em>store</em> messages until they are <em>consumed</em></li>
 </ul>
-<figure id="plantuml-figure-1729333857979038760" class="plantuml" alt="" style="width: 100%;height: 50vh;max-width: 95vw;max-height: 80vh;">
+<figure id="plantuml-figure-1729377939539390833" class="plantuml" alt="" style="width: 100%;height: 50vh;max-width: 95vw;max-height: 80vh;">
     <p>hide footbox
 actor User
 participant Publisher
@@ -902,7 +902,7 @@ Broker -&gt; Subscriber2: notify Message
 deactivate Broker</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1729333857979038760");
+    handlePlantumlFigureByID("plantuml-figure-1729377939539390833");
 </script>
 </section><section>
 <h2 id="common-interaction-protocols-pt-2-2">Common Interaction Protocols (pt. 2)</h2>
@@ -923,7 +923,7 @@ deactivate Broker</p>
 <h3 id="contractnet-protocol">ContractNet Protocol</h3>
 <p>A simple protocol for <em>auctions</em> and <em>negotiations</em></p>
 <div class="container w-100 m-0 p-0">
-    <div class="row "><div class="col " style="text-align: left;"><figure id="plantuml-figure-1729333857979170086" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
+    <div class="row "><div class="col " style="text-align: left;"><figure id="plantuml-figure-1729377939539518942" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
     <p>hide footbox
 participant Initiator
 participant Contractor1
@@ -947,7 +947,7 @@ deactivate Contractor1
 deactivate Initiator</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1729333857979170086");
+    handlePlantumlFigureByID("plantuml-figure-1729377939539518942");
 </script>
 </div>
 <div class="col " style="text-align: left;"><ul>
@@ -1836,19 +1836,29 @@ e.g. <a href="https://en.wikipedia.org/wiki/Access-control_list">ACLs</a>, <a hr
 
 
 
+
+  
   
 
   
-
   
 
   
-
   
 
   
+  
 
   
+  
+
+  
+  
+
+  
+  
+
+
 
 
 
