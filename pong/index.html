@@ -31,7 +31,7 @@
 <h3 id="hahahugoshortcode1s2hbhb"><a href="mailto:giovanni.ciatto@unibo.it">Giovanni Ciatto</a></h3>
 <br>
 <br>
-<p>Compiled on: 2024-10-20
+<p>Compiled on: 2024-10-21
  — <a href="?print-pdf&amp;pdfSeparateFragments=false"><i class="fa fa-print" aria-hidden="true"></i> printable version</a></p>
 <p><a href="../#/toc"><i class="fa fa-undo" aria-hidden="true"></i> back to ToC</a></p>
 </section><section>
@@ -286,7 +286,7 @@
 </span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">assert</span> <span style="color:#000">x</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">position</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#000">Vector2</span><span style="color:#000;font-weight:bold">(</span><span style="color:#0000cf;font-weight:bold">102</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#0000cf;font-weight:bold">204</span><span style="color:#000;font-weight:bold">)</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">assert</span> <span style="color:#000">x</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#000">y</span>
 </span></span></code></pre></div></div>
-<div class="col " style="text-align: left;"><figure id="plantuml-figure-1729383884623773588" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
+<div class="col " style="text-align: left;"><figure id="plantuml-figure-1729522226888648285" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
 <p>class GameObject {
 + name: str
 + position: Vector2
@@ -311,7 +311,7 @@ class Rect {
 GameObject *– Rect</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1729383884623773588");
+    handlePlantumlFigureByID("plantuml-figure-1729522226888648285");
 </script>
 </div>
 </div>
@@ -410,7 +410,7 @@ GameObject *– Rect</p>
 </span></span><span style="display:flex;"><span>                <span style="color:#000">pygame</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">quit</span><span style="color:#000;font-weight:bold">()</span>
 </span></span><span style="display:flex;"><span>                <span style="color:#000">exit</span><span style="color:#000;font-weight:bold">()</span>
 </span></span></code></pre></div></div>
-<div class="col " style="text-align: left;"><figure id="plantuml-figure-1729383884635317254" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
+<div class="col " style="text-align: left;"><figure id="plantuml-figure-1729522226900254963" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
 <p>top to bottom direction</p>
 <p>enum GameEvent {
 + MOVE_UP
@@ -446,7 +446,7 @@ class Event {
 InputHandler .u.&gt; Event: uses</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1729383884635317254");
+    handlePlantumlFigureByID("plantuml-figure-1729522226900254963");
 </script>
 </div>
 </div>
@@ -493,7 +493,7 @@ InputHandler .u.&gt; Event: uses</p>
 </span></span><span style="display:flex;"><span>        <span style="color:#000">pygame</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">draw</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">ellipse</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">_screen</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">color</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">game_object</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">bounding_box</span><span style="color:#000;font-weight:bold">)</span>    
 </span></span><span style="display:flex;"><span>        
 </span></span></code></pre></div></div>
-<div class="col " style="text-align: left;"><figure id="plantuml-figure-1729383884642458292" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
+<div class="col " style="text-align: left;"><figure id="plantuml-figure-1729522226905460038" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
 <p>top to bottom direction</p>
 <p>class View {
 - _size: tuple[int, int]
@@ -521,7 +521,7 @@ class Color {
 View ..&gt; Color: uses</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1729383884642458292");
+    handlePlantumlFigureByID("plantuml-figure-1729522226905460038");
 </script>
 </div>
 </div>
@@ -642,7 +642,7 @@ View ..&gt; Color: uses</p>
 </div>
 </section><section>
 <h2 id="lets-infer-a-model-from-the-view-pt-3">Let’s infer a model from the view (pt. 3)</h2>
-<figure id="plantuml-figure-1729383884657073883" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
+<figure id="plantuml-figure-1729522226922542996" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
 <p>left to right direction</p>
 <p>package “dpongpy.model” {</p>
 <pre><code>enum Direction {
@@ -774,7 +774,7 @@ class Vector2 {
 Pong “1” *– “1” Random</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1729383884657073883");
+    handlePlantumlFigureByID("plantuml-figure-1729522226922542996");
 </script>
 <p>code <a href="https://github.com/unibo-fc-isi-ds/dpongpy/blob/master/dpongpy/model.py">on GitHub</a></p>
 </section><section>
@@ -1006,7 +1006,7 @@ Pong “1” *– “1” Random</p>
 </span>
 </section><section>
 <h2 id="design-proposal-pt-1">Design Proposal (pt. 1)</h2>
-<figure id="plantuml-figure-1729383884658275384" class="plantuml" alt="" style="width: 85%;max-width: 95vw;max-height: 80vh;">
+<figure id="plantuml-figure-1729522226923528597" class="plantuml" alt="" style="width: 85%;max-width: 95vw;max-height: 80vh;">
 <p>left to right direction</p>
 <p>package “pygame.event” {
 class Event {
@@ -1078,7 +1078,7 @@ ControlEvent &lt;.. EventHandler: processes
 EventHandler ..&gt; Pong: updates\nbased on\nControlEvent</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1729383884658275384");
+    handlePlantumlFigureByID("plantuml-figure-1729522226923528597");
 </script>
 <ul>
 <li>each <strong>player</strong> is associated to a <code>Paddle</code> and to an <code>ActionMap</code> to <em>govern</em> that <code>Paddle</code></li>
@@ -1113,7 +1113,7 @@ EventHandler ..&gt; Pong: updates\nbased on\nControlEvent</p>
 <p><img src="http://www.plantuml.com/plantuml/svg/PLBBRjGy5DwVf_Wq_wAjrOp-THPLKMSGI4NC0bX5gZpnQHhgiODzCZ0QzIruBfu9so4Yg9jSlildS_5j51raF5Yo_2WGZz1tJmBJ1swbzuwezKw2jxYpldqcohXsdMNyTs9h_NUiXbEd3xoMFZsAQWKTuRmmYCgh2jLh_-hNJsdSPRQ1hHuYcyR5thKCgwFWCQJKgv9bXAZuKLKtwGyrMdyOHk58bB-yOoTuxnBqJZjZEH0PAUebM6Fknde_D6xGCN94AWJYYGRTFkkESJU9jiSSUYO0cAcvMSxSMgcYKUgoSLcbb9m6LgfUHcJPxircSxzz-F3norQfzL7RaQzdYz6Yi-Ky0HDuCMXZB3_qpl2FYqnlvfMakFljsqzANVzZC3F_IlrvfzGaVMdSDD1LgN-5CwZWz4BqRUIHKIgEHCkneR9faCkMQdJiEEYyW2MEzRY--PDHWrt9DDYV6hSCN2ujY__YanNLc0vSCZKCbx08pZ1H7jjUHyREkmv4ItNo_tzL5QR6mH-JIobjhLB8suFVV-LMOkDqs_fW-XGW7lB4VK0xXi2Iz75WDdbo-OQMIqAtxCnuiBy1" alt=""></p>
 </section><section>
 <h2 id="design-proposal-pt-4">Design proposal (pt. 4)</h2>
-<figure id="plantuml-figure-1729383884658304709" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
+<figure id="plantuml-figure-1729522226923559284" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
 <p>package “dpongpy.controller” {
 interface EventHandler
 interface InputHandler
@@ -1125,7 +1125,7 @@ InputHandler &lt;|-d- Controller
 }</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1729383884658304709");
+    handlePlantumlFigureByID("plantuml-figure-1729522226923559284");
 </script>
 <p>we call <code>Controller</code> any entity which acts as both an <code>EventHandler</code> and an <code>InputHandler</code></p>
 </section><section>
@@ -1153,7 +1153,7 @@ InputHandler &lt;|-d- Controller
 </section><section>
 <h2 id="design-proposal">Design Proposal</h2>
 <div class="container w-100 m-0 p-0">
-    <div class="row "><div class="col col-5" style="text-align: left;"><figure id="plantuml-figure-1729383884658329846" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
+    <div class="row "><div class="col col-5" style="text-align: left;"><figure id="plantuml-figure-1729522226923582177" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
 <p>@startuml
 package “dpongpy” {
 class Pong</p>
@@ -1180,7 +1180,7 @@ PongView &lt;|-d- ShowNothingPongView
 @enduml</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1729383884658329846");
+    handlePlantumlFigureByID("plantuml-figure-1729522226923582177");
 </script>
 </div>
 <div class="col " style="text-align: left;"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">pygame</span>
@@ -1241,7 +1241,7 @@ PongView &lt;|-d- ShowNothingPongView
 <h2 id="wiring-it-all-together">Wiring it all together</h2>
 
 <div class="container w-100 m-0 p-0">
-    <div class="row "><div class="col col-3" style="text-align: left;"><figure id="plantuml-figure-1729383884667809118" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
+    <div class="row "><div class="col col-3" style="text-align: left;"><figure id="plantuml-figure-1729522226930803526" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
 <p>top to bottom direction
 package “dpongpy” {
 class Settings {
@@ -1273,7 +1273,7 @@ Settings -d[hidden]- PongGame
 }</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1729383884667809118");
+    handlePlantumlFigureByID("plantuml-figure-1729522226930803526");
 </script>
 </div>
 <div class="col " style="text-align: center;"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">class</span> <span style="color:#000">PongGame</span><span style="color:#000;font-weight:bold">:</span>
@@ -1575,12 +1575,51 @@ Settings -d[hidden]- PongGame
 </li>
 <li>how do components <em>find</em> each other?
 <ul>
-<li>TBD</li>
+<li>e.g. clients are assumed to know the IP of the central server</li>
 </ul>
 </li>
 <li><em>how</em> do components <em>recognize</em> each other?
 <ul>
-<li>TBD</li>
+<li>e.g. mutual trust is assumed, no need for authentication</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</section><section>
+<h2 id="towards-_distributed_-pong-pt-3">Towards <em>Distributed</em> Pong (pt. 3)</h2>
+<br>
+<ol start="4">
+<li><strong>Implementation</strong>:
+<ul>
+<li>which <strong>network protocols</strong> to use?
+<ul>
+<li>e.g. <em>UDP</em>: good for low-latency, real-time applications (let’s go with this one!)
+<ul>
+<li>no big deal for <em>package loss</em> in a video game, yet <em>duplication</em>, <em>unordered dispatch</em>, and <em>delays</em> may give us headaches</li>
+</ul>
+</li>
+<li>e.g. <em>TCP</em>: good for <em>reliability</em> but may introduce <em>latencies</em>
+<ul>
+<li>may complicate the design of the central server, which will have to manage several <em>simultaneous connections</em></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>how should <em>in-transit data</em> be <strong>represented</strong>?
+<ul>
+<li>e.g. any binary one would be better, to avoid latency bandwidth waste
+<ul>
+<li>we’ll go with <em>JSON</em>, for didactic purposes, then switch to <a href="https://bsonspec.org/">BSON</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>no need</strong> for <em>storage</em> capabilities, so no need for a <em>database</em></li>
+<li>trust-based <em>communication</em> $\implies$ no need for <em>authentication</em></li>
+<li>trust-based <em>authorization</em> each client should only be able to command <em>one and only one paddle</em>
+<ul>
+<li><em>first-come-first-served</em> policy for paddle assignment</li>
 </ul>
 </li>
 </ul>
@@ -1588,12 +1627,42 @@ Settings -d[hidden]- PongGame
 </ol>
 
 </section>
-</section>
+</section><section>
 
 
 <section data-shortcode-section="">
-<section data-noprocess="" data-shortcode-slide="" id="architecture">
 <h2 id="distributed-pong-architecture">Distributed Pong Architecture</h2>
+<h3 id="components-view">Components view</h3>
+<p><img src="https://www.plantuml.com/plantuml/svg/TP2n2iCW48Ptd-9mZs3cKW9TijSyWCI35jGhfw53wRltMhD8wF8FVfyVw5Igvxgbg385X2ibVDwG4LuAOANqe8ovmeM8mptxIgpUghbwfbB1Ql05Plkxu5SHG2y5UGUBxJhQ8IVfn1qxmJ9WeX5LqbrxREtnq6vW6V-q6tQ2PS2m4VNRTXPEmpQSk-U8SJoSC0Vvb0y0" alt="">
+or
+<img src="https://www.plantuml.com/plantuml/svg/TP112iCW44NtdkBZFaAoBYNGJGuG3o3HHK6TCffLwDqx8IugfPiHvZt_5-TI7TSzHPN91-Y5IiMeuGgM4OS2DaeloY5NF8ZOFxEhnB9tcvpGjWHk5-pOwNeDd4IF3Q-2PS14SwflfRuxfwjpmj5dDs2dFzaNNWNBW65pgf8jHRTX7-xTgyNuNSuXU_c03m00" alt=""></p>
+<ul>
+<li>
+<p><strong>Coordinator</strong> is the central server, coordinating the game</p>
+<ul>
+<li>it runs the <em>game loop</em> and <em>updates</em> the game state, <em>without</em> listening to the keyboard, <em>nor</em> rendering the game</li>
+<li>it <em>receives</em> inputs from the clients</li>
+<li>it <em>periodically sends</em> the updated game state to the clients</li>
+</ul>
+</li>
+<li>
+<p><strong>Terminal</strong> is the client’s end point, visualising the game</p>
+<ul>
+<li>it <em>listens</em> to the keyboard and <em>sends</em> inputs to the coordinator</li>
+<li>it <em>receives</em> the game state from the coordinator and <em>renders</em> it on the screen</li>
+</ul>
+</li>
+<li>
+<p><strong>Event-Based Architecture</strong>:</p>
+<ul>
+<li>the coordinator <em>publishes</em> the “game state update” events and <em>consumes</em> “input” events</li>
+<li>terminals <em>consume</em> the “game state update” events and <em>publish</em> “input” events</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2 id="distributed-pong-architecture-1">Distributed Pong Architecture</h2>
+<h3 id="behavioural-view">Behavioural view</h3>
 
 </section>
 </section>
