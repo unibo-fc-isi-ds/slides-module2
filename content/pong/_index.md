@@ -1146,7 +1146,7 @@ Like the centralised one, but the server is replicated and a consensus protocol 
         * e.g. any binary one would be better, to avoid latency bandwidth waste
             + we'll go with _JSON_, for didactic purposes, then switch to [BSON](https://bsonspec.org/)
     - __no need__ for _storage_ capabilities, so no need for a _database_
-    - trust-based _communication_ $\implies$ no need for _authentication_ 
+    - trust-based _communication_ $\implies$ no need for _authentication_
     - trust-based _authorization_ each client should only be able to command _one and only one paddle_
         * _first-come-first-served_ policy for paddle assignment
 
@@ -1160,9 +1160,9 @@ Like the centralised one, but the server is replicated and a consensus protocol 
 
 ### Components view
 
-![](https://www.plantuml.com/plantuml/svg/TP2n2iCW48Ptd-9mZs3cKW9TijSyWCI35jGhfw53wRltMhD8wF8FVfyVw5Igvxgbg385X2ibVDwG4LuAOANqe8ovmeM8mptxIgpUghbwfbB1Ql05Plkxu5SHG2y5UGUBxJhQ8IVfn1qxmJ9WeX5LqbrxREtnq6vW6V-q6tQ2PS2m4VNRTXPEmpQSk-U8SJoSC0Vvb0y0)
+![Components diagram of the Distributed Pong architecture](https://www.plantuml.com/plantuml/svg/TP2n2iCW48Ptd-9mZs3cKW9TijSyWCI35jGhfw53wRltMhD8wF8FVfyVw5Igvxgbg385X2ibVDwG4LuAOANqe8ovmeM8mptxIgpUghbwfbB1Ql05Plkxu5SHG2y5UGUBxJhQ8IVfn1qxmJ9WeX5LqbrxREtnq6vW6V-q6tQ2PS2m4VNRTXPEmpQSk-U8SJoSC0Vvb0y0)
 or
-![](https://www.plantuml.com/plantuml/svg/TP112iCW44NtdkBZFaAoBYNGJGuG3o3HHK6TCffLwDqx8IugfPiHvZt_5-TI7TSzHPN91-Y5IiMeuGgM4OS2DaeloY5NF8ZOFxEhnB9tcvpGjWHk5-pOwNeDd4IF3Q-2PS14SwflfRuxfwjpmj5dDs2dFzaNNWNBW65pgf8jHRTX7-xTgyNuNSuXU_c03m00)
+![Components diagram of the Distributed Pong architecture (coordinator hosted by some user)](https://www.plantuml.com/plantuml/svg/TP112iCW44NtdkBZFaAoBYNGJGuG3o3HHK6TCffLwDqx8IugfPiHvZt_5-TI7TSzHPN91-Y5IiMeuGgM4OS2DaeloY5NF8ZOFxEhnB9tcvpGjWHk5-pOwNeDd4IF3Q-2PS14SwflfRuxfwjpmj5dDs2dFzaNNWNBW65pgf8jHRTX7-xTgyNuNSuXU_c03m00)
 
 - __Coordinator__ is the central server, coordinating the game
     * it runs the _game loop_ and _updates_ the game state, _without_ listening to the keyboard, _nor_ rendering the game
@@ -1183,10 +1183,9 @@ or
 
 ### Behavioural view
 
-
 {{% multicol %}}
 {{% col %}}
-![](https://www.plantuml.com/plantuml/svg/XLHDQnj13BtFhn0v5apfrGGJ2FG30WsrSx9p63oACx2hMJIpRal8V-_EhBhQPOVsO90qxpt9qcFlOhAS-hOnGv0GxaDWvyccmF1c0CRgZQUkJ_46R8JxCORRM_pLMOe-qBTSsUr0yNtdR48XI39dVEzJeHYOaHvyJ4YUBeKsPKKz6iLziIt2GmXTmUKi9sNS2ODNfBy3Zt5zO6KybIaBOmopi2c8uuTds6nsitekJyARexFn5Ttp0hA5Sw3O2rRhHMdV87RbeKIgBbJxaf1FzEdZvyVzYI8EKYwkXBJljEGjH2HteXI67tBhoJQP-6uC69YEDwSk5pqeC9xHN_54BnpQfOnYrpgoZYrSa91jGYERutMJcbG5zMx4bWUP0UgUF9Iuwh2w9m-IL4nX_cl8fv6hm1z83XbvQS6BRN6C9v_kSvPxKkBVZy6JzDD5YTRG9PSrKzV8aoJoCk7-OHsTGC-sf39QLxoYAoXBWQ-MN8DS_aUfI07U5iCBBjSaX4szgltbTWlZdlKZ9EFemMRKrKLMrbqAANojfSlPGhWY_sHVCx2Igtert33-_AEwuUEhTmvfQ3hPsjmXkRvj_W00")
+![State diagrams of the Coordinator and Terminal nodes](https://www.plantuml.com/plantuml/svg/XLHDQnj13BtFhn0v5apfrGGJ2FG30WsrSx9p63oACx2hMJIpRal8V-_EhBhQPOVsO90qxpt9qcFlOhAS-hOnGv0GxaDWvyccmF1c0CRgZQUkJ_46R8JxCORRM_pLMOe-qBTSsUr0yNtdR48XI39dVEzJeHYOaHvyJ4YUBeKsPKKz6iLziIt2GmXTmUKi9sNS2ODNfBy3Zt5zO6KybIaBOmopi2c8uuTds6nsitekJyARexFn5Ttp0hA5Sw3O2rRhHMdV87RbeKIgBbJxaf1FzEdZvyVzYI8EKYwkXBJljEGjH2HteXI67tBhoJQP-6uC69YEDwSk5pqeC9xHN_54BnpQfOnYrpgoZYrSa91jGYERutMJcbG5zMx4bWUP0UgUF9Iuwh2w9m-IL4nX_cl8fv6hm1z83XbvQS6BRN6C9v_kSvPxKkBVZy6JzDD5YTRG9PSrKzV8aoJoCk7-OHsTGC-sf39QLxoYAoXBWQ-MN8DS_aUfI07U5iCBBjSaX4szgltbTWlZdlKZ9EFemMRKrKLMrbqAANojfSlPGhWY_sHVCx2Igtert33-_AEwuUEhTmvfQ3hPsjmXkRvj_W00")
 {{% /col %}}
 {{% col %}}
 <br>
@@ -1195,7 +1194,7 @@ or
     + one for the _coordinator_
     + one for the _terminals_
 - 2 sorts of __communication channels__ for 2 sorts of __events__:
-    + one for the _game state updates_, 
+    + one for the _game state updates_
     + one for the _inputs_
 - each process is carrying on __several *concurrent* activities__:
     + the _coordinator_:
@@ -1205,14 +1204,28 @@ or
         1. sends _inputs_ to the coordinator
         2. listen for incoming _game state updates_ from the coordinator
         3. render the _game state_ on the screen
-- 
 {{% /col %}}
 {{% /multicol %}}
 
+---
+
+## Distributed Pong Architecture
+
+### Interaction view
 
 
+{{% multicol %}}
+{{% col class="col-5" %}}
+![Sequence diagram showing the interaction among the Coordinator and Terminal nodes](https://www.plantuml.com/plantuml/svg/VPBHIyCm4CRVxwyuzZA5YgoFXSYSu8i-2DKNdPIut6PXpPNa2eBiVpUDMzSmjfTmlNpVxxiccNlHJhfc2z-r8LmponV_0EYLiCF9coU7imbgZtqvWpQewrNTQYiuUINNr5Plzuh3PwfwO7Ocj0FlZ3jFt7cIdG_PES36STVYCtDxgD_9SOPiAImE6tQ4KZVa8KwBDtV7eGfi7NcFJzKz3CsW60zOu2_Mjksaw6KPhXqtnO2ePhY3ICx7vFn8Ni3Gl4HUd90NEo1h09H2lPR-p6yVNqhqj69hF2e5C1tHJk1TQxGGRdH3w2MKnT8k9GPwzH7_9SH-zaqZAiBX4k_VYGh7NYEX4RrBMqvHxLEhFhMAgLTbjhTcQEGwYKZlefoUsypZPdf58wCZQyZrai6GkCUAUARpi8Jt_GS0)
+{{% /col %}}
+{{% col %}}
+<br>
 
-
+- this is stressing _when_ messages are _exchanged_, and by _whom_
+- the _coordinator_ shall send __state-update__ messages to all _terminals_ once every $1/FPS$ seconds
+- the _terminals_ shall send __input__ messages to the _coordinator_ whenever a __key__ is pressed or released
+{{% /col %}}
+{{% /multicol %}}
 
 {{%/section%}}
 
