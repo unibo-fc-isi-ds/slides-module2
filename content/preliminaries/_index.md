@@ -1053,7 +1053,7 @@ cf. <https://en.wikipedia.org/wiki/Hexagonal_architecture_(software)>
 
 ## Architectural Styles in Practice (pt. 3)
 
-### Event Based Architecture (concept)
+### Event-Based Architecture (concept)
 
 {{% multicol %}}
 {{% col %}}

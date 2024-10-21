@@ -1126,11 +1126,29 @@ Like the centralised one, but the server is replicated and a consensus protocol 
             + replication must be as _quick/frequent_ as possible to avoid _inconsistencies_
             + prioritize _availability_ over _consistency_
     - how do components _find_ each other?
-        * TBD
+        * e.g. clients are assumed to know the IP of the central server
     - _how_ do components _recognize_ each other?
-        * TBD
+        * e.g. mutual trust is assumed, no need for authentication
 
+---
 
+## Towards _Distributed_ Pong (pt. 3)
+
+<br>
+
+4. __Implementation__:
+    - which __network protocols__ to use?
+        * e.g. _UDP_: good for low-latency, real-time applications (let's go with this one!)
+            + no big deal for _package loss_ in a video game, yet _duplication_, _unordered dispatch_, and _delays_ may give us headaches
+        * e.g. _TCP_: good for _reliability_ but may introduce _latencies_
+            + may complicate the design of the central server, which will have to manage several _simultaneous connections_
+    - how should _in-transit data_ be __represented__?
+        * e.g. any binary one would be better, to avoid latency bandwidth waste
+            + we'll go with _JSON_, for didactic purposes, then switch to [BSON](https://bsonspec.org/)
+    - __no need__ for _storage_ capabilities, so no need for a _database_
+    - trust-based _communication_ $\implies$ no need for _authentication_ 
+    - trust-based _authorization_ each client should only be able to command _one and only one paddle_
+        * _first-come-first-served_ policy for paddle assignment
 
 {{%/section%}}
 
@@ -1138,9 +1156,62 @@ Like the centralised one, but the server is replicated and a consensus protocol 
 
 {{%section%}}
 
-{{< slide id="architecture" >}}
+## Distributed Pong Architecture
+
+### Components view
+
+![](https://www.plantuml.com/plantuml/svg/TP2n2iCW48Ptd-9mZs3cKW9TijSyWCI35jGhfw53wRltMhD8wF8FVfyVw5Igvxgbg385X2ibVDwG4LuAOANqe8ovmeM8mptxIgpUghbwfbB1Ql05Plkxu5SHG2y5UGUBxJhQ8IVfn1qxmJ9WeX5LqbrxREtnq6vW6V-q6tQ2PS2m4VNRTXPEmpQSk-U8SJoSC0Vvb0y0)
+or
+![](https://www.plantuml.com/plantuml/svg/TP112iCW44NtdkBZFaAoBYNGJGuG3o3HHK6TCffLwDqx8IugfPiHvZt_5-TI7TSzHPN91-Y5IiMeuGgM4OS2DaeloY5NF8ZOFxEhnB9tcvpGjWHk5-pOwNeDd4IF3Q-2PS14SwflfRuxfwjpmj5dDs2dFzaNNWNBW65pgf8jHRTX7-xTgyNuNSuXU_c03m00)
+
+- __Coordinator__ is the central server, coordinating the game
+    * it runs the _game loop_ and _updates_ the game state, _without_ listening to the keyboard, _nor_ rendering the game
+    * it _receives_ inputs from the clients
+    * it _periodically sends_ the updated game state to the clients
+
+- __Terminal__ is the client's end point, visualising the game
+    * it _listens_ to the keyboard and _sends_ inputs to the coordinator
+    * it _receives_ the game state from the coordinator and _renders_ it on the screen
+
+- __Event-Based Architecture__:
+    * the coordinator _publishes_ the "game state update" events and _consumes_ "input" events
+    * terminals _consume_ the "game state update" events and _publish_ "input" events
+
+---
 
 ## Distributed Pong Architecture
+
+### Behavioural view
+
+
+{{% multicol %}}
+{{% col %}}
+![](https://www.plantuml.com/plantuml/svg/XLHDQnj13BtFhn0v5apfrGGJ2FG30WsrSx9p63oACx2hMJIpRal8V-_EhBhQPOVsO90qxpt9qcFlOhAS-hOnGv0GxaDWvyccmF1c0CRgZQUkJ_46R8JxCORRM_pLMOe-qBTSsUr0yNtdR48XI39dVEzJeHYOaHvyJ4YUBeKsPKKz6iLziIt2GmXTmUKi9sNS2ODNfBy3Zt5zO6KybIaBOmopi2c8uuTds6nsitekJyARexFn5Ttp0hA5Sw3O2rRhHMdV87RbeKIgBbJxaf1FzEdZvyVzYI8EKYwkXBJljEGjH2HteXI67tBhoJQP-6uC69YEDwSk5pqeC9xHN_54BnpQfOnYrpgoZYrSa91jGYERutMJcbG5zMx4bWUP0UgUF9Iuwh2w9m-IL4nX_cl8fv6hm1z83XbvQS6BRN6C9v_kSvPxKkBVZy6JzDD5YTRG9PSrKzV8aoJoCk7-OHsTGC-sf39QLxoYAoXBWQ-MN8DS_aUfI07U5iCBBjSaX4szgltbTWlZdlKZ9EFemMRKrKLMrbqAANojfSlPGhWY_sHVCx2Igtert33-_AEwuUEhTmvfQ3hPsjmXkRvj_W00")
+{{% /col %}}
+{{% col %}}
+<br>
+
+- 2 sorts of __processes__
+    + one for the _coordinator_
+    + one for the _terminals_
+- 2 sorts of __communication channels__ for 2 sorts of __events__:
+    + one for the _game state updates_, 
+    + one for the _inputs_
+- each process is carrying on __several *concurrent* activities__:
+    + the _coordinator_:
+        1. listen for incoming _inputs_ from terminals
+        2. execute the _game loop_ and send back _game state updates_
+    + the _terminals_:
+        1. sends _inputs_ to the coordinator
+        2. listen for incoming _game state updates_ from the coordinator
+        3. render the _game state_ on the screen
+- 
+{{% /col %}}
+{{% /multicol %}}
+
+
+
+
 
 
 {{%/section%}}
