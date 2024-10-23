@@ -46,8 +46,8 @@
 </blockquote>
 <h3 id="__interpretation__"><strong>Interpretation</strong></h3>
 <ul>
-<li>hidden interdependencies between machines</li>
-<li>how a failure in one part of the system can have unforeseen consequences elsewhere</li>
+<li>hidden <em>interdependencies</em> between machines</li>
+<li>how a <em>failure</em> in one part of the system can have <em>unforeseen consequences</em> elsewhere</li>
 </ul>
 </section><section>
 <h3 id="distributed-systems-tannenbaum-and-van-steenhttpcsispaceedumarchesecs865lectureschap1chapter1ahtm-the-book-herehttpskomputasiwordpresscomwp-contentuploads201803mvsteen-distributed-systems-3rd-preliminary-version-3-01pre-2017-170215pdf"><a href="http://csis.pace.edu/~marchese/CS865/Lectures/Chap1/Chapter1a.htm">“Distributed Systems”, Tannenbaum and Van Steen</a> (the <a href="https://komputasi.wordpress.com/wp-content/uploads/2018/03/mvsteen-distributed-systems-3rd-preliminary-version-3-01pre-2017-170215.pdf">book here</a>)</h3>
@@ -56,9 +56,9 @@
 </blockquote>
 <h3 id="__interpretation__-1"><strong>Interpretation</strong></h3>
 <ul>
-<li>illusion of a unified system…</li>
-<li>… despite the fact that it is made up of multiple independent machines</li>
-<li>the key idea is that users should not be aware that the system is distributed.</li>
+<li><em>illusion</em> of a <em>unified</em> system…</li>
+<li>… despite the fact that it is made up of <em>multiple</em> independent machines</li>
+<li>the key idea is that users <em>may NOT be aware</em> that the system is <em>distributed</em></li>
 </ul>
 </section><section>
 <h3 id="distributed-systems--concepts-and-design-coulouris-et-alhttpsapipageplacedepreviewdt04009781447930174_a24570107preview-9781447930174_a24570107pdf"><a href="https://api.pageplace.de/preview/DT0400.9781447930174_A24570107/preview-9781447930174_A24570107.pdf">“Distributed Systems — Concepts and Design”, Coulouris et. al.</a></h3>
@@ -69,25 +69,14 @@ passing messages.</p>
 </blockquote>
 <h3 id="__interpretation__-2"><strong>Interpretation</strong></h3>
 <ul>
-<li>reliance on message passing across a network for communication</li>
-</ul>
-</section><section>
-<h3 id="distributed-systems--concepts-and-design-coulouris-et-alhttpsapipageplacedepreviewdt04009781447930174_a24570107preview-9781447930174_a24570107pdf-1"><a href="https://api.pageplace.de/preview/DT0400.9781447930174_A24570107/preview-9781447930174_A24570107.pdf">“Distributed Systems — Concepts and Design”, Coulouris et. al.</a></h3>
-<blockquote>
-<p>We define a distributed system as one in which hardware or software components
-located at networked computers communicate and coordinate their actions only by
-passing messages.</p>
-</blockquote>
-<h3 id="__interpretation__-3"><strong>Interpretation</strong></h3>
-<ul>
-<li>reliance on message passing across a network for communication</li>
+<li>reliance on <em>message passing</em> across a network for communication</li>
 </ul>
 </section><section>
 <h3 id="concepts-techniques-and-models-of-computer-programming-van-roy-and-haridihttpswebpersoinfouclacbepvrvanroyharidi2003-bookpdf">[]“Concepts, Techniques, and Models of Computer Programming”, Van Roy and Haridi](<a href="https://webperso.info.ucl.ac.be/~pvr/VanRoyHaridi2003-book.pdf">https://webperso.info.ucl.ac.be/~pvr/VanRoyHaridi2003-book.pdf</a>)</h3>
 <blockquote>
 <p>A distributed system is a set of computers that are linked together by a network</p>
 </blockquote>
-<h3 id="__interpretation__-4"><strong>Interpretation</strong></h3>
+<h3 id="__interpretation__-3"><strong>Interpretation</strong></h3>
 <ul>
 <li>very abstract definition focusing on how distribution should be interpreted</li>
 </ul>
@@ -98,10 +87,10 @@ passing messages.</p>
 <h3 id="wrap-up">Wrap up</h3>
 <p>These definitions cover the <em>essential characteristics</em> of distributed systems:</p>
 <ul>
-<li>independent components,</li>
-<li>communication via messages, and the</li>
-<li>challenge of presenting a unified system to the user,</li>
-<li>despite failures or complexities within the system.</li>
+<li>independent components</li>
+<li>communication via messages</li>
+<li>challenge of presenting a unified system to the user…</li>
+<li>… despite failures or complexities within the system</li>
 </ul>
 </section><section>
 
@@ -484,9 +473,11 @@ passing messages.</p>
 <section data-shortcode-section="">
 <h2 id="infrastructural-components">Infrastructural Components</h2>
 <blockquote>
-<p>An infrastructural component consists of a software unit — most commonly a process —&nbsp;playing a precise role in the distributed system.
+<p>An infrastructural component consists of a <em>software unit</em>&nbsp;playing a precise role in the distributed system.
 The role depends on the purpose of the component in the system, and/or how it interacts.</p>
 </blockquote>
+<p>software unit $\approx$ <strong>process</strong> (in the OS sense)</p>
+<h3 id="heading"></h3>
 <h3 id="examples">Examples</h3>
 <p>clients, servers, brokers, load balancers, caches, databases, queues, masters, workers, proxies, etc.</p>
 </section><section>
@@ -541,6 +532,7 @@ The role depends on the purpose of the component in the system, and/or how it in
 </section><section>
 <h2 id="load-balancer">Load Balancer</h2>
 <img src="./load-balancer.png" alt="Load Balancer concept" style="height: 60vh; max-width: 95vw; max-height: 80vh; object-fit: contain;">
+<br>
 <ul>
 <li><strong>Load Balancer</strong> $\equiv$ a proxy <em>distributing</em> incoming requests among multiple servers
 <ul>
@@ -582,7 +574,7 @@ The role depends on the purpose of the component in the system, and/or how it in
 <ul>
 <li><strong>Queue</strong> $\approx$ a data structure where messages are <em>stored</em> in a <em>FIFO</em> manner
 <ul>
-<li>FIFO storage $\rightarrow$ messages are consumed in the order they were produced</li>
+<li>FIFO $\rightarrow$ messages are consumed in the order they were produced</li>
 <li>storage $\rightarrow$ messages are <em>not</em> lost if consumers are <em>unavailable</em></li>
 </ul>
 </li>
@@ -777,7 +769,7 @@ These patterns define the <em>flow of messages</em>, <em>responsibilities</em> o
 <h3 id="requestresponse">Request—Response</h3>
 <p>The most common and basic pattern for communication between two components</p>
 <div class="container w-100 m-0 p-0">
-    <div class="row "><div class="col " style="text-align: left;"><figure id="plantuml-figure-1729674553455486454" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
+    <div class="row "><div class="col " style="text-align: left;"><figure id="plantuml-figure-1729675606215468411" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
     <p>hide footbox
 participant Client
 participant Server</p>
@@ -785,7 +777,7 @@ participant Server</p>
 Server -&gt; Client: Response</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1729674553455486454");
+    handlePlantumlFigureByID("plantuml-figure-1729675606215468411");
 </script>
 </div>
 <div class="col " style="text-align: left;"><ul>
@@ -811,7 +803,7 @@ Server -&gt; Client: Response</p>
 <h3 id="publishsubscribe">Publish—Subscribe</h3>
 <p>A simple pattern to spread information among multiple recipients</p>
 <div class="container w-100 m-0 p-0">
-    <div class="row "><div class="col " style="text-align: left;"><figure id="plantuml-figure-1729674553455808073" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
+    <div class="row "><div class="col " style="text-align: left;"><figure id="plantuml-figure-1729675606215765527" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
     <p>hide footbox
 actor User
 participant Publisher
@@ -834,7 +826,7 @@ Publisher -&gt; Subscriber2: notify Message
 deactivate Publisher</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1729674553455808073");
+    handlePlantumlFigureByID("plantuml-figure-1729675606215765527");
 </script>
 </div>
 <div class="col " style="text-align: left;"><ul>
@@ -870,7 +862,7 @@ deactivate Publisher</p>
 <li>this is commonly useful to <em>decouple</em> the <em>publisher</em> from the <em>subscribers</em></li>
 <li>most commonly, brokers <em>store</em> messages until they are <em>consumed</em></li>
 </ul>
-<figure id="plantuml-figure-1729674553456128731" class="plantuml" alt="" style="width: 100%;height: 50vh;max-width: 95vw;max-height: 80vh;">
+<figure id="plantuml-figure-1729675606216266594" class="plantuml" alt="" style="width: 100%;height: 50vh;max-width: 95vw;max-height: 80vh;">
     <p>hide footbox
 actor User
 participant Publisher
@@ -902,7 +894,7 @@ Broker -&gt; Subscriber2: notify Message
 deactivate Broker</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1729674553456128731");
+    handlePlantumlFigureByID("plantuml-figure-1729675606216266594");
 </script>
 </section><section>
 <h2 id="common-interaction-protocols-pt-2-2">Common Interaction Protocols (pt. 2)</h2>
@@ -923,7 +915,7 @@ deactivate Broker</p>
 <h3 id="contractnet-protocol">ContractNet Protocol</h3>
 <p>A simple protocol for <em>auctions</em> and <em>negotiations</em></p>
 <div class="container w-100 m-0 p-0">
-    <div class="row "><div class="col " style="text-align: left;"><figure id="plantuml-figure-1729674553456261419" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
+    <div class="row "><div class="col " style="text-align: left;"><figure id="plantuml-figure-1729675606216384034" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
     <p>hide footbox
 participant Initiator
 participant Contractor1
@@ -947,7 +939,7 @@ deactivate Contractor1
 deactivate Initiator</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1729674553456261419");
+    handlePlantumlFigureByID("plantuml-figure-1729675606216384034");
 </script>
 </div>
 <div class="col " style="text-align: left;"><ul>
