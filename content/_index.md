@@ -33,13 +33,13 @@ aliases = [
     <!-- [Miscellanea](./misc/) -->
 
 * Case Studies
-    - [PONG](./pong/)
+    - \[WIP\] [PONG](./pong/)
         1. [Game Loop](./pong/#/game-loop)
         1. [Game Model](./pong/#/model)
         1. [I/O](./pong/#/io)
-        1. [Architecture](./pong/#/architecture)
-        1. [Protocols](./pong/#/protocols)
-        1. [Analysis](./pong/#/analysis)
+        1. \[WIP\] [Architecture](./pong/#/architecture)
+        1. \[WIP\] [Protocols](./pong/#/protocols)
+        1. \[WIP\] [Analysis](./pong/#/analysis)
 
 ---
 
