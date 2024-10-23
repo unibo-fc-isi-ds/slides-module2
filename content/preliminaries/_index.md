@@ -27,8 +27,8 @@ aliases = [
 
 ### __Interpretation__
 
-- hidden interdependencies between machines
-- how a failure in one part of the system can have unforeseen consequences elsewhere
+- hidden _interdependencies_ between machines
+- how a _failure_ in one part of the system can have _unforeseen consequences_ elsewhere
 
 ---
 
@@ -38,9 +38,9 @@ aliases = [
 
 ### __Interpretation__
 
-- illusion of a unified system...
-- ... despite the fact that it is made up of multiple independent machines
-- the key idea is that users should not be aware that the system is distributed.
+- _illusion_ of a _unified_ system...
+- ... despite the fact that it is made up of _multiple_ independent machines
+- the key idea is that users _may NOT be aware_ that the system is _distributed_
 
 ---
 
@@ -52,19 +52,7 @@ aliases = [
 
 ### __Interpretation__
 
-- reliance on message passing across a network for communication
-
----
-
-### ["Distributed Systems — Concepts and Design", Coulouris et. al.](https://api.pageplace.de/preview/DT0400.9781447930174_A24570107/preview-9781447930174_A24570107.pdf)
-
-> We define a distributed system as one in which hardware or software components
-> located at networked computers communicate and coordinate their actions only by
-> passing messages.
-
-### __Interpretation__
-
-- reliance on message passing across a network for communication
+- reliance on _message passing_ across a network for communication
 
 ---
 
@@ -85,10 +73,10 @@ aliases = [
 ### Wrap up
 
 These definitions cover the _essential characteristics_ of distributed systems:
-- independent components,
-- communication via messages, and the
-- challenge of presenting a unified system to the user,
-- despite failures or complexities within the system.
+- independent components
+- communication via messages
+- challenge of presenting a unified system to the user...
+- ... despite failures or complexities within the system
 
 ---
 
@@ -367,9 +355,12 @@ Consider your fancy social network of choice (e.g., Instagram, TikTok, Twitter, 
 
 ## Infrastructural Components
 
-> An infrastructural component consists of a software unit — most commonly a process — playing a precise role in the distributed system.
+> An infrastructural component consists of a _software unit_ playing a precise role in the distributed system.
 > The role depends on the purpose of the component in the system, and/or how it interacts.
 
+software unit $\approx$ __process__ (in the OS sense)
+
+###
 ### Examples
 
 clients, servers, brokers, load balancers, caches, databases, queues, masters, workers, proxies, etc.
@@ -418,6 +409,8 @@ clients, servers, brokers, load balancers, caches, databases, queues, masters, w
 
 {{< image src="./load-balancer.png" height="60vh" alt="Load Balancer concept" >}}
 
+<br>
+
 - __Load Balancer__ $\equiv$ a proxy _distributing_ incoming requests among multiple servers
     * according to some _distribution policy_:
         + _round-robin_,
@@ -448,7 +441,7 @@ clients, servers, brokers, load balancers, caches, databases, queues, masters, w
 ![Queue concept](./queue.jpg)
 
 - __Queue__ $\approx$ a data structure where messages are _stored_ in a _FIFO_ manner
-    * FIFO storage $\rightarrow$ messages are consumed in the order they were produced
+    * FIFO $\rightarrow$ messages are consumed in the order they were produced
     * storage $\rightarrow$ messages are _not_ lost if consumers are _unavailable_
 
 ---

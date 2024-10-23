@@ -186,9 +186,9 @@ Changes will be published on the {{< forum_news >}}
 
 ### Recommended
 
-* PyCharm
-* Visual Studio Code
+* PyCharm OR _Visual Studio Code_
 * A decent Unix terminal
+    * prefer _Git Bash_ on Windows
 
 ---
 
