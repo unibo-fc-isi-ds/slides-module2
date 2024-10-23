@@ -9,15 +9,15 @@ state Coordinator {
     state "Update" as UpdateGame
 
     [*] --> UpdateGame
-    Cevents -[dashed]-> UpdateGame
+    Cevents -[dashed]-> UpdateGame: consume
     UpdateGame --> Sleep
     Sleep --> UpdateGame: after\n1/FPS\nseconds
-    UpdateGame -[dashed]-> Cupdates
+    UpdateGame -[dashed]-> Cupdates: send\nto\nterminals
   }
 
  
-  Cinputs -[dashed]-> ListeningInputs
-  ListeningInputs -[dashed]-> Cevents
+  Cinputs -[dashed]-> ListeningInputs: receive\nfrom\nterminals
+  ListeningInputs -[dashed]-> Cevents: generate
   [*] -r-> ListeningInputs
   ListeningInputs --> ListeningInputs
 }
@@ -29,27 +29,24 @@ state Terminal {
   state "Listening" as ListeningUpdates
 
   state Renderer {
-    state "Game State" as GameState <<entryPoint>>
+    state "game state" as GameState <<entryPoint>>
 
     [*] -r-> Rendering
     Rendering --> Sleeping
     Sleeping --> Rendering: after\n1/FPS\nseconds
-    GameState -[dashed]-> Rendering
+    GameState -[dashed]-> Rendering: read
   }
 
   state "Input Handler" as InputHandler {
     [*] -r-> Handle
     Handle --> Handle
-    Handle -[dashed]-> Tinputs
+    Handle -[dashed]-> Tinputs: send\nto\ncoordinator
   }
 
-  Tupdates -[dashed]-> ListeningUpdates
-  ListeningUpdates -[dashed]-> GameState
+  Tupdates -[dashed]-> ListeningUpdates: receive\nfrom\ncoordinator
+  ListeningUpdates -[dashed]-> GameState: overwrite
   [*] -r-> ListeningUpdates
   ListeningUpdates --> ListeningUpdates
 }
 
-Tinputs --> Cinputs
-Cupdates --> Tupdates
-
-'Coordinator -r[hidden]-> Terminal
+Coordinator -r[hidden]-> Terminal
