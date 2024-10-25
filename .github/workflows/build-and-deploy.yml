@@ -15,11 +15,17 @@ on:
   pull_request:
   workflow_dispatch:
 
+env:
+  REPOSITORY_NAME: ${{ github.event.repository.name }}
+
 permissions: {}
 
 jobs:
   success:
     runs-on: ubuntu-latest
+    concurrency:
+      group: slides-${{ github.ref }}
+      cancel-in-progress: false
     permissions:
       contents: write
     steps:
@@ -69,13 +75,15 @@ jobs:
         uses: cric96/inline-mermaid@v1.8.1
         with:
           css-file-regex: '^css\\/.*custom.*theme.*\\.css$'
-      - name: Get branch name
-        id: branch-name
-        uses: tj-actions/branch-names@v8
+#      - name: Get branch name
+#        id: branch-name
+#        uses: tj-actions/branch-names@v8
       - name: Deploy website
-        if: ${{ github.event_name != 'pull_request' && steps.branch-name.outputs.is_default == 'true' }}
+        if: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/master' }}
         uses: JamesIves/github-pages-deploy-action@v4.6.8
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: gh-pages
           folder: build
+          repository_name: ${{ env.REPOSITORY_NAME }}
+
