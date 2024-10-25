@@ -72,6 +72,8 @@ jobs:
         uses: cric96/inline-mermaid@v1.8.1
         with:
           css-file-regex: '^css\\/.*custom.*theme.*\\.css$'
+          root-folder: build
+          config-file: config.toml
 #      - name: Get branch name
 #        id: branch-name
 #        uses: tj-actions/branch-names@v8
@@ -80,7 +82,7 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4.6.8
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          branch: gh-pages
+          branch: master
           folder: build
-          repository_name: unibo-fc-isi-ds/slides-module2.github.io
+          repository-name: unibo-fc-isi-ds/slides-module2.github.io
 
