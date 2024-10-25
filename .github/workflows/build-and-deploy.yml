@@ -15,9 +15,6 @@ on:
   pull_request:
   workflow_dispatch:
 
-env:
-  REPOSITORY_NAME: ${{ github.event.repository.name }}
-
 permissions: {}
 
 jobs:
@@ -85,5 +82,5 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: gh-pages
           folder: build
-          repository_name: ${{ env.REPOSITORY_NAME }}
+          repository_name: unibo-fc-isi-ds/slides-module2.github.io
 
