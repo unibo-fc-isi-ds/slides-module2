@@ -19,7 +19,7 @@ jobs:
       - name: Checkout the pdf creation script
         uses: actions/checkout@v4.2.2
         with:
-          repository: ${{ github.event.repository.name }}
+          repository: unibo-fc-isi-ds/slides-module2
           submodules: recursive
       - name: Checkout the current website
         uses: actions/checkout@v4.2.2
@@ -27,7 +27,7 @@ jobs:
           fetch-depth: 0
           path: pages
           ref: master
-          repository: ${{ github.event.repository.name }}
+          repository: unibo-fc-isi-ds/slides-module2
       - name: Count the commits so far
         id: commit-counter
         run: echo "commits=$(git -C pages rev-list --count HEAD)" >> "$GITHUB_OUTPUT"
