@@ -1154,6 +1154,8 @@ Like the centralised one, but the server is replicated and a consensus protocol 
 
 ---
 
+{{< slide id="architecture" >}}
+
 {{%section%}}
 
 ## Distributed Pong Architecture
@@ -1213,7 +1215,6 @@ or
 
 ### Interaction view
 
-
 {{% multicol %}}
 {{% col class="col-5" %}}
 ![Sequence diagram showing the interaction among the Coordinator and Terminal nodes](https://www.plantuml.com/plantuml/svg/VPBHIyCm4CRVxwyuzZA5YgoFXSYSu8i-2DKNdPIut6PXpPNa2eBiVpUDMzSmjfTmlNpVxxiccNlHJhfc2z-r8LmponV_0EYLiCF9coU7imbgZtqvWpQewrNTQYiuUINNr5Plzuh3PwfwO7Ocj0FlZ3jFt7cIdG_PES36STVYCtDxgD_9SOPiAImE6tQ4KZVa8KwBDtV7eGfi7NcFJzKz3CsW60zOu2_Mjksaw6KPhXqtnO2ePhY3ICx7vFn8Ni3Gl4HUd90NEo1h09H2lPR-p6yVNqhqj69hF2e5C1tHJk1TQxGGRdH3w2MKnT8k9GPwzH7_9SH-zaqZAiBX4k_VYGh7NYEX4RrBMqvHxLEhFhMAgLTbjhTcQEGwYKZlefoUsypZPdf58wCZQyZrai6GkCUAUARpi8Jt_GS0)
@@ -1231,12 +1232,68 @@ or
 
 ---
 
+## Open Design Issues
+
+Aren't we missing something?
+
+{{% fragment %}}
+
+1. How should players _join_ the game?
+
+2. How should players _leave_ the game?
+
+{{% /fragment %}}
+
+---
+
 {{%section%}}
 
 {{< slide id="protocols" >}}
 
-## Distributed Pong Protocols
+## Joining/Leaving Protocols (a proposal)
 
+
+{{% multicol %}}
+{{% col %}}
+{{< image src="https://www.plantuml.com/plantuml/svg/dP51R_em3CNl-HIcb_z_1zGxKYSan4xSnivJQBsHoOcZs6NRjryA1LeL3McNg7Nytiz-MOhQfAqditSDmXkpxlZB65ih9tWHJ2Rc1bUxQ8F25fDtmTAek69EJQvcnL7e3bPnN7rFt4ROC4TZweJv_chLGM0-VxnK5b2Mnx44FftkeIWswwTjKK2qJKDObkRS2Laru2mWalt6zFh1BlplH0_zF4EU6IWc1cMP6LFY7Kr2GOMT9OB8ujHno1fJLT1D0Z6nSiq4DVj8g0XLDTXXwkT2R5N6s4b4RMoielGWGdl0Aya5fovVDnsgZtWeZmb5OFsykflbqRWFSzHy-PxDkd7qzAjTMdVZydp06oaRImgwnuJ_14GT4GXxx1l-z0X8WX0OFAUpZ_nYT6iP3CtfMEQZzVG3" >}}
+{{% /col %}}
+{{% col %}}
+0. Assumptions
+    - the coordinator is _started before_ any terminal
+    - the coordinator is _reachable_ by all terminals
+
+1. __Joining__:
+    1. players _start_ terminals by _choosing_ their paddle (by side)
+        + first-come-first-served policy
+    2. terminals send a `PLAYER_JOIN` message to the coordinator upon _starting_
+    3. the coordinator simply _registers_ the new paddle, and _resets_ the ball position
+    4. the coordinator starts _accepting inputs_ from the new paddle/terminal
+        + and _updates_ the game state accordingly
+
+2. __Leaving__ (gracefully):
+    1. players may press a _key_ (e.g. `ESC`) to _quit_ the game
+    2. terminals send a `PLAYER_LEAVE` message to the coordinator upon _quitting_
+        + only _after sending_ the message, the terminal node can _terminate_
+    3. upon receiving the message, the coordinator _unregisters_ the paddle and _resets_ the ball position
+    4. the coordinator _terminates_ if there are no more paddles
+        + otherwise, it keeps operating as usual
+{{% /col %}}
+{{% /multicol %}}
+
+---
+
+## Joining/Leaving Protocol (issues)
+
+1. what if the _coordinator_ is _not available_ when the terminal starts?
+
+2. what if a _terminal_ crashes _before_ sending the `PLAYER_LEAVE` message?
+    - how could the coordinator _distinguish_ between a _crashed_ terminal and one sending _no inputs_?
+
+3. what if the _coordinator_ _crashes_ while some terminals are still running?
+
+4. what if a _terminal_ selects a _side_ that is _already taken_?
+
+5. what if a _terminal_ send inputs concerning the _wrong paddle_?
 
 {{%/section%}}
 
