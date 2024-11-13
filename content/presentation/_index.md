@@ -90,10 +90,10 @@ A lot of concepts to unpack here:
     * they define how _data_ is _encoded_ into _bytes_
     * they define how _bytes_ should be _decoded_ into _data_
 
-> __The problem__: most programming languages/platforms/OS use _different_ conventions for representing data
-> <br> __The solution__: _agree_ on the data format to use for _communication_
+> __Problem__: most programming languages/platforms/OS use _different_ conventions for representing data
+> <br> __Solution__: _agree_ on the data format to use for _communication_
 
-corollary: data interchange formats are an __essential__ aspect of every interaction pattern / protocol
+__Corollary__: data interchange formats are an _essential_ aspect of every interaction pattern / protocol
 
 ---
 
@@ -718,10 +718,10 @@ result = User(
 ```python
 class Deserializer:
     def deserialize(self, string):
-        return self._ast_to_obj(self._ast_to_string(string)) # JSON string -> AST -> object
+        return self._ast_to_obj(self._string_to_ast(string)) # JSON string -> AST -> object
 
-    def _ast_to_string(self, data):
-        return json.loads(data)  # JSON string -> AST
+    def _string_to_ast(self, string):
+        return json.loads(string)  # JSON string -> AST
 
     # here we select which conversion to apply based which keys are present in the AST
     def _ast_to_obj(self, data) -> object:
@@ -748,11 +748,11 @@ class Deserializer:
 {{% col %}}
 {{< plantuml >}}
 class Deserializer {
-    +deserialize(string) : object
-    -_ast_to_string(data) : object
-    -_ast_to_obj(data) : object
-    -_user_from_ast(data) : User
-    -_role_from_ast(data) : Role
+    + deserialize(string) : object
+    - _string_to_ast(string) : object
+    - _ast_to_obj(data) : object
+    - _user_from_ast(data) : User
+    - _role_from_ast(data) : Role
 }
 {{< /plantuml >}}
 {{% /col %}}
