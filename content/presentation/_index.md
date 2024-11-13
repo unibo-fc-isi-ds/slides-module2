@@ -49,7 +49,7 @@ A lot of concepts to unpack here:
     * _serialization_ is the process of converting an object into a stream of characters/bytes
     * _deserialization_ is the reverse process
     * both operations imply a _common_ target/source __data interchange format__ (e.g. JSON)
-    * both operations are ___unavoidable__ in distributed systems programming
+    * both operations are __unavoidable__ in distributed systems programming
 
 2. __Remote Procedure Call__ (RPC): this is a very common _interaction pattern_ in distributed systems
     * it allows a client program to _invoke_ a procedure from a remote server
@@ -90,7 +90,7 @@ A lot of concepts to unpack here:
     * they define how _data_ is _encoded_ into _bytes_
     * they define how _bytes_ should be _decoded_ into _data_
 
-> __The problem__: most programming languages / platforms / OS use _different_ conventions for representing data
+> __The problem__: most programming languages/platforms/OS use _different_ conventions for representing data
 > <br> __The solution__: _agree_ on the data format to use for _communication_
 
 corollary: data interchange formats are an __essential__ aspect of every interaction pattern / protocol
@@ -177,7 +177,7 @@ print(b.decode('ascii')) # UnicodeDecodeError: 'ascii' codec can't decode byte 0
     * e.g. _control characters_ (e.g. `\n`, `\t`, `\r`, etc.)
     * e.g. _non-printable characters_ (e.g. `0x00`, `0x01`, etc.)
 
-- Other than supporting encodings, most _programming_ or _data representation languages_ also support_
+- Other than supporting encodings, most _programming_ or _data representation languages_ also support
     * __escape sequences__ $\approx$ sub-sequences of characters that represent a _single_ character
 
 - Most commonly:
@@ -337,7 +337,7 @@ print(json.dumps(obj) == doc) # True
 
 ## Modelling (classes)
 
-{{< plantuml height="60vh" >}}
+{{< plantuml height="50vh" >}}
 package "users" {
     class User {
         +username: str
@@ -498,7 +498,7 @@ $\xleftarrow{\text{deserialization}}$
 {{% /col %}}
 {{% /multicol %}}
 
-- One key part in any distributed system _design_ / implementation is how to about _supporting_ (de)serialization:
+- One key part in any distributed system _design_ / implementation is how to about _supporting_ __(de)serialization__:
     * _what_ data should be (de)serialized?
     * how exactly should it be (de)serialized?
         - which _data interchange format_ should be used?
@@ -990,7 +990,7 @@ class Response {
 
 ## Common RPC Infrastructure
 
-{{< image src="./rpc-dataflow1.png" height="50vh" >}}
+{{< image src="./rpc-dataflow1.png" height="40vh" >}}
 
 - __protocol__: the low level _transfer_ protocol (e.g. _HTTP_, _TCP_, _UDP_, etc.) + _data representation format_ (e.g. _JSON_, _XML_, _binary_, etc.)
 - __client stub__: a _proxy_ object that __mimics__ the _server_ _interface_ on the _client_ side
