@@ -79,7 +79,7 @@ jobs:
 #        uses: tj-actions/branch-names@v8
       - name: Deploy website
         if: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/master' }}
-        uses: JamesIves/github-pages-deploy-action@v4.6.8
+        uses: JamesIves/github-pages-deploy-action@v4.6.9
         with:
           token: ${{ secrets.DEPLOYMENT_TOKEN }}
           branch: master
