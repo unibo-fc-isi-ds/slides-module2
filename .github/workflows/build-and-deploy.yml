@@ -74,15 +74,21 @@ jobs:
           css-file-regex: '^css\\/.*custom.*theme.*\\.css$'
           root-folder: build
           config-file: config.toml
-#      - name: Get branch name
-#        id: branch-name
-#        uses: tj-actions/branch-names@v8
+      - name: Get branch name
+        id: branch-name
+        uses: tj-actions/branch-names@v8
       - name: Deploy website
-        if: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/master' }}
+        if: ${{ github.event_name != 'pull_request' && steps.branch-name.outputs.is_default == 'true' }}
         uses: JamesIves/github-pages-deploy-action@v4.6.9
         with:
           token: ${{ secrets.DEPLOYMENT_TOKEN }}
           branch: master
           folder: build
           repository-name: unibo-fc-isi-ds/slides-module2.github.io
-
+      - name: Deploy website
+        if: ${{ github.event_name != 'pull_request' && steps.branch-name.outputs.is_default == 'true' }}
+        uses: JamesIves/github-pages-deploy-action@v4.6.9
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: gh-pages
+          folder: build
