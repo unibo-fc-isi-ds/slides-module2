@@ -81,14 +81,54 @@ jobs:
         if: ${{ github.event_name != 'pull_request' && steps.branch-name.outputs.is_default == 'true' }}
         uses: JamesIves/github-pages-deploy-action@v4.6.9
         with:
-          token: ${{ secrets.DEPLOYMENT_TOKEN }}
-          branch: master
-          folder: build
-          repository-name: unibo-fc-isi-ds/slides-module2.github.io
-      - name: Deploy website
-        if: ${{ github.event_name != 'pull_request' && steps.branch-name.outputs.is_default == 'true' }}
-        uses: JamesIves/github-pages-deploy-action@v4.6.9
-        with:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: gh-pages
           folder: build
+
+  create-and-deploy-pdfs:
+    runs-on: ubuntu-latest
+    concurrency:
+      group: pdf-slides-${{ github.event_name }}-${{ github.ref }}
+      cancel-in-progress: false
+    needs: 
+      - success
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout the PDF creation script
+        uses: actions/checkout@v4.2.2
+        with:
+          submodules: recursive
+      - name: Checkout the current website
+        uses: actions/checkout@v4.2.2
+        with:
+          fetch-depth: 0
+          path: pages
+          ref: gh-pages
+      - name: Create version
+        id: version-compute
+        run: echo "version=$(date +"%Y.%m.%d")" >> "$GITHUB_OUTPUT"
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1.197.0
+        with:
+          working-directory: shared-slides
+      - name: Setup Chrome
+        uses: browser-actions/setup-chrome@latest
+        with:
+          chrome-version: stable
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils
+          sudo apt-get install -y libnss3 libxss1 libasound2 libatk-bridge2.0-0 libgtk-3-0
+      - name: Make the pdfs
+        run: shared-slides/makepdfs.rb pages
+      - name: Deliver the pdfs
+        # if: github.event_name == 'workflow_run'
+        uses: ncipollo/release-action@v1.14.0
+        with:
+          allowUpdates: true
+          artifacts: "*.pdf"
+          replacesArtifacts: true
+          tag: ${{ steps.version-compute.outputs.version }}
+          token: ${{ secrets.GITHUB_TOKEN }}
