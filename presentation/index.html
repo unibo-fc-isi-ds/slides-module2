@@ -5,9 +5,9 @@
 
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><link rel="stylesheet" href="/slides-module2/reveal-js/dist/reset.css">
-<link rel="stylesheet" href="/slides-module2/reveal-js/dist/reveal.css">
-  <link rel="stylesheet" href="/slides-module2/css/custom-theme.min.e415e19db372f1135499fc2ea3a836cea3f048a00982e05f2d60d127261af094.css" id="theme"><link rel="stylesheet" href="/slides-module2/highlight-js/solarized-dark.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><link rel="stylesheet" href="/slides-module2.github.io/reveal-js/dist/reset.css">
+<link rel="stylesheet" href="/slides-module2.github.io/reveal-js/dist/reveal.css">
+  <link rel="stylesheet" href="/slides-module2.github.io/css/custom-theme.min.e415e19db372f1135499fc2ea3a836cea3f048a00982e05f2d60d127261af094.css" id="theme"><link rel="stylesheet" href="/slides-module2.github.io/highlight-js/solarized-dark.min.css">
 <link href="https://fonts.googleapis.com/css?family=Roboto Mono" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Oxygen Mono" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Ubuntu Mono" rel="stylesheet">
@@ -15,7 +15,7 @@
 <link href="https://cdn.jsdelivr.net/gh/DanySK/css-blur-animation/blur.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://kit.fontawesome.com/81ac037be0.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://unpkg.com/qr-code-styling@1.5.0/lib/qr-code-styling.js"></script>
-<script src="https://unibo-fc-isi-ds.github.io/slides-module2//plantuml.js"></script>
+<script src="https://unibo-fc-isi-ds/slides-module2.github.io//plantuml.js"></script>
 
   </head>
   <body>
@@ -31,7 +31,7 @@
 <h3 id="hahahugoshortcode1s2hbhb"><a href="mailto:giovanni.ciatto@unibo.it">Giovanni Ciatto</a></h3>
 <br>
 <br>
-<p>Compiled on: 2024-10-25
+<p>Compiled on: 2024-11-20
  — <a href="?print-pdf&amp;pdfSeparateFragments=false"><i class="fa fa-print" aria-hidden="true"></i> printable version</a></p>
 <p><a href="../#/toc"><i class="fa fa-undo" aria-hidden="true"></i> back to ToC</a></p>
 </section><section>
@@ -86,7 +86,7 @@
 <li><em>serialization</em> is the process of converting an object into a stream of characters/bytes</li>
 <li><em>deserialization</em> is the reverse process</li>
 <li>both operations imply a <em>common</em> target/source <strong>data interchange format</strong> (e.g. JSON)</li>
-<li>both operations are _<strong>unavoidable</strong> in distributed systems programming</li>
+<li>both operations are <strong>unavoidable</strong> in distributed systems programming</li>
 </ul>
 </li>
 <li>
@@ -147,10 +147,10 @@
 </li>
 </ul>
 <blockquote>
-<p><strong>The problem</strong>: most programming languages / platforms / OS use <em>different</em> conventions for representing data
-<br> <strong>The solution</strong>: <em>agree</em> on the data format to use for <em>communication</em></p>
+<p><strong>Problem</strong>: most programming languages/platforms/OS use <em>different</em> conventions for representing data
+<br> <strong>Solution</strong>: <em>agree</em> on the data format to use for <em>communication</em></p>
 </blockquote>
-<p>corollary: data interchange formats are an <strong>essential</strong> aspect of every interaction pattern / protocol</p>
+<p><strong>Corollary</strong>: data interchange formats are an <em>essential</em> aspect of every interaction pattern / protocol</p>
 </section><section>
 <h2 id="two-broad-categories-of-data-interchange-formats">Two broad categories of data interchange formats</h2>
 <ol>
@@ -272,7 +272,7 @@ this is why inexperienced programmers <em>often</em> don’t <em>notice</em> the
 </ul>
 </li>
 <li>
-<p>Other than supporting encodings, most <em>programming</em> or <em>data representation languages</em> also support_</p>
+<p>Other than supporting encodings, most <em>programming</em> or <em>data representation languages</em> also support</p>
 <ul>
 <li><strong>escape sequences</strong> $\approx$ sub-sequences of characters that represent a <em>single</em> character</li>
 </ul>
@@ -446,7 +446,7 @@ this is why inexperienced programmers <em>often</em> don’t <em>notice</em> the
 </ol>
 </section><section>
 <h2 id="modelling-classes">Modelling (classes)</h2>
-<figure id="plantuml-figure-1729863590339346009" class="plantuml" alt="" style="width: 100%;height: 60vh;max-width: 95vw;max-height: 80vh;">
+<figure id="plantuml-figure-1732110419067851378" class="plantuml" alt="" style="width: 100%;height: 50vh;max-width: 95vw;max-height: 80vh;">
 <p>package “users” {
 class User {
 +username: str
@@ -509,7 +509,7 @@ AuthenticationService &lt;|.. InMemoryAuthenticationService
 <p>}</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1729863590339346009");
+    handlePlantumlFigureByID("plantuml-figure-1732110419067851378");
 </script>
 <div class="container w-100 m-0 p-0">
     <div class="row "><div class="col " style="text-align: left;"><ul>
@@ -688,7 +688,7 @@ AuthenticationService &lt;|.. InMemoryAuthenticationService
 </div>
 <ul>
 <li>
-<p>One key part in any distributed system <em>design</em> / implementation is how to about <em>supporting</em> (de)serialization:</p>
+<p>One key part in any distributed system <em>design</em> / implementation is how to about <em>supporting</em> <strong>(de)serialization</strong>:</p>
 <ul>
 <li><em>what</em> data should be (de)serialized?</li>
 <li>how exactly should it be (de)serialized?
@@ -848,7 +848,7 @@ AuthenticationService &lt;|.. InMemoryAuthenticationService
 </span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">_role_to_ast</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">role</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">Role</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">-&gt;</span> <span style="color:#204a87">dict</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#8f5902;font-style:italic"># Role -&gt; AST</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">{</span><span style="color:#4e9a06">'name'</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">role</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">name</span><span style="color:#000;font-weight:bold">}</span>
 </span></span></code></pre></div></div>
-<div class="col " style="text-align: left;"><figure id="plantuml-figure-1729863590357899457" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
+<div class="col " style="text-align: left;"><figure id="plantuml-figure-1732110419085440263" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
 <p>class Serializer {
 +serialize(obj: object) : str
 -_ast_to_string(data) : str
@@ -858,7 +858,7 @@ AuthenticationService &lt;|.. InMemoryAuthenticationService
 }</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1729863590357899457");
+    handlePlantumlFigureByID("plantuml-figure-1732110419085440263");
 </script>
 </div>
 </div>
@@ -899,10 +899,10 @@ AuthenticationService &lt;|.. InMemoryAuthenticationService
 <div class="container w-100 m-0 p-0">
     <div class="row "><div class="col col-8" style="text-align: left;"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">class</span> <span style="color:#000">Deserializer</span><span style="color:#000;font-weight:bold">:</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">deserialize</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">string</span><span style="color:#000;font-weight:bold">):</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">_ast_to_obj</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">_ast_to_string</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">string</span><span style="color:#000;font-weight:bold">))</span> <span style="color:#8f5902;font-style:italic"># JSON string -&gt; AST -&gt; object</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">_ast_to_obj</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">_string_to_ast</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">string</span><span style="color:#000;font-weight:bold">))</span> <span style="color:#8f5902;font-style:italic"># JSON string -&gt; AST -&gt; object</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">_ast_to_string</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">data</span><span style="color:#000;font-weight:bold">):</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">json</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">loads</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">data</span><span style="color:#000;font-weight:bold">)</span>  <span style="color:#8f5902;font-style:italic"># JSON string -&gt; AST</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">_string_to_ast</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">string</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">json</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">loads</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">string</span><span style="color:#000;font-weight:bold">)</span>  <span style="color:#8f5902;font-style:italic"># JSON string -&gt; AST</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic"># here we select which conversion to apply based which keys are present in the AST</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">_ast_to_obj</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">data</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">-&gt;</span> <span style="color:#204a87">object</span><span style="color:#000;font-weight:bold">:</span>
@@ -925,17 +925,17 @@ AuthenticationService &lt;|.. InMemoryAuthenticationService
 </span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">_role_from_ast</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">data</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">-&gt;</span> <span style="color:#000">Role</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#8f5902;font-style:italic"># AST -&gt; Role</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">Role</span><span style="color:#000;font-weight:bold">[</span><span style="color:#000">data</span><span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">'name'</span><span style="color:#000;font-weight:bold">]]</span>
 </span></span></code></pre></div></div>
-<div class="col " style="text-align: left;"><figure id="plantuml-figure-1729863590361670855" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
+<div class="col " style="text-align: left;"><figure id="plantuml-figure-1732110419089445581" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
 <p>class Deserializer {
-+deserialize(string) : object
--_ast_to_string(data) : object
--_ast_to_obj(data) : object
--_user_from_ast(data) : User
--_role_from_ast(data) : Role
++ deserialize(string) : object
+- _string_to_ast(string) : object
+- _ast_to_obj(data) : object
+- _user_from_ast(data) : User
+- _role_from_ast(data) : Role
 }</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1729863590361670855");
+    handlePlantumlFigureByID("plantuml-figure-1732110419089445581");
 </script>
 </div>
 </div>
@@ -1110,7 +1110,7 @@ AuthenticationService &lt;|.. InMemoryAuthenticationService
 </span></span></code></pre></div></li>
 </ol>
 </div>
-<div class="col col-2" style="text-align: left;"><figure id="plantuml-figure-1729863590366934888" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
+<div class="col col-2" style="text-align: left;"><figure id="plantuml-figure-1732110419099904046" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
 <p>class Request {
 + name: str
 + args: tuple
@@ -1122,7 +1122,7 @@ AuthenticationService &lt;|.. InMemoryAuthenticationService
 }</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1729863590366934888");
+    handlePlantumlFigureByID("plantuml-figure-1732110419099904046");
 </script>
 <ol start="6">
 <li>Run with <code>python -m snippets -l 4 -e 1</code></li>
@@ -1181,7 +1181,7 @@ as if the procedure was <em>locally</em> executed, despite the <em>server</em> b
 </ul>
 </section><section>
 <h2 id="common-rpc-infrastructure">Common RPC Infrastructure</h2>
-<img src="./rpc-dataflow1.png" alt="" style="height: 50vh; max-width: 95vw; max-height: 80vh; object-fit: contain;">
+<img src="./rpc-dataflow1.png" alt="" style="height: 40vh; max-width: 95vw; max-height: 80vh; object-fit: contain;">
 <ul>
 <li><strong>protocol</strong>: the low level <em>transfer</em> protocol (e.g. <em>HTTP</em>, <em>TCP</em>, <em>UDP</em>, etc.) + <em>data representation format</em> (e.g. <em>JSON</em>, <em>XML</em>, <em>binary</em>, etc.)</li>
 <li><strong>client stub</strong>: a <em>proxy</em> object that <strong>mimics</strong> the <em>server</em> <em>interface</em> on the <em>client</em> side</li>
@@ -1226,7 +1226,7 @@ as if the procedure was <em>locally</em> executed, despite the <em>server</em> b
 </li>
 </ul>
 <div class="container w-100 m-0 p-0">
-    <div class="row "><div class="col col-3" style="text-align: left;"><figure id="plantuml-figure-1729863590372736247" class="plantuml" alt="" style="width: 100%;height: 60vh;max-width: 95vw;max-height: 80vh;">
+    <div class="row "><div class="col col-3" style="text-align: left;"><figure id="plantuml-figure-1732110419102502136" class="plantuml" alt="" style="width: 100%;height: 60vh;max-width: 95vw;max-height: 80vh;">
 <p>class Request {
 + name: str
 + args: tuple
@@ -1238,10 +1238,10 @@ as if the procedure was <em>locally</em> executed, despite the <em>server</em> b
 }</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1729863590372736247");
+    handlePlantumlFigureByID("plantuml-figure-1732110419102502136");
 </script>
 </div>
-<div class="col " style="text-align: left;"><figure id="plantuml-figure-1729863590372870138" class="plantuml" alt="" style="width: 100%;height: 60vh;max-width: 95vw;max-height: 80vh;">
+<div class="col " style="text-align: left;"><figure id="plantuml-figure-1732110419102598345" class="plantuml" alt="" style="width: 100%;height: 60vh;max-width: 95vw;max-height: 80vh;">
 <p>@startuml
 hide footbox</p>
 <p>actor Client
@@ -1277,7 +1277,7 @@ end
 @enduml</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1729863590372870138");
+    handlePlantumlFigureByID("plantuml-figure-1732110419102598345");
 </script>
 </div>
 </div>
@@ -1647,7 +1647,7 @@ end
 </section><section>
 <h1 id="lecture-is-over">Lecture is Over</h1>
 <br>
-<p>Compiled on: 2024-10-25
+<p>Compiled on: 2024-11-20
  — <a href="?print-pdf&amp;pdfSeparateFragments=false"><i class="fa fa-print" aria-hidden="true"></i> printable version</a></p>
 <p><a href="../#/toc"><i class="fa fa-undo" aria-hidden="true"></i> back to ToC</a></p>
 </section>
@@ -1659,28 +1659,28 @@ end
       
 
     </div>
-<script type="text/javascript" src="/slides-module2/reveal-hugo/object-assign.js"></script>
+<script type="text/javascript" src="/slides-module2.github.io/reveal-hugo/object-assign.js"></script>
 
-<a href="/slides-module2/reveal-js/dist/print/" id="print-location" style="display: none;"></a>
+<a href="/slides-module2.github.io/reveal-js/dist/print/" id="print-location" style="display: none;"></a>
 
 <script type="application/json" id="reveal-hugo-site-params">{"custom_theme":"custom-theme.scss","custom_theme_compile":true,"custom_theme_options":{"enablesourcemap":true,"targetpath":"css/custom-theme.css"},"height":"1080","highlight_theme":"solarized-dark","history":true,"mermaid":[{}],"slide_number":true,"theme":"league","transition":"slide","transition_speed":"fast","width":"1920"}</script>
 <script type="application/json" id="reveal-hugo-page-params">null</script>
 
-<script src="/slides-module2/reveal-js/dist/reveal.js"></script>
+<script src="/slides-module2.github.io/reveal-js/dist/reveal.js"></script>
 
 
   
   
-  <script type="text/javascript" src="/slides-module2/reveal-js/plugin/markdown/markdown.js"></script>
+  <script type="text/javascript" src="/slides-module2.github.io/reveal-js/plugin/markdown/markdown.js"></script>
   
-  <script type="text/javascript" src="/slides-module2/reveal-js/plugin/highlight/highlight.js"></script>
+  <script type="text/javascript" src="/slides-module2.github.io/reveal-js/plugin/highlight/highlight.js"></script>
   
-  <script type="text/javascript" src="/slides-module2/reveal-js/plugin/zoom/zoom.js"></script>
+  <script type="text/javascript" src="/slides-module2.github.io/reveal-js/plugin/zoom/zoom.js"></script>
   
-  <script type="text/javascript" src="/slides-module2/reveal-js/plugin/notes/notes.js"></script>
+  <script type="text/javascript" src="/slides-module2.github.io/reveal-js/plugin/notes/notes.js"></script>
   
   
-  <script type="text/javascript" src="/slides-module2/reveal-js/plugin/notes/notes.js"></script>
+  <script type="text/javascript" src="/slides-module2.github.io/reveal-js/plugin/notes/notes.js"></script>
 
 
 
@@ -1703,7 +1703,7 @@ end
 
   var revealHugoDefaults = { center: true, controls: true, history: true, progress: true, transition: "slide" };
 
-  var revealHugoPlugins = { 
+  var revealHugoPlugins = {
     plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealZoom ]
    };
   var revealHugoSiteParams = JSON.parse(document.getElementById('reveal-hugo-site-params').innerHTML);
