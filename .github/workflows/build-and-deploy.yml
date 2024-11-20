@@ -109,7 +109,7 @@ jobs:
         id: version-compute
         run: echo "version=$(date +"%Y.%m.%d")" >> "$GITHUB_OUTPUT"
       - name: Setup Ruby
-        uses: ruby/setup-ruby@v1.197.0
+        uses: ruby/setup-ruby@v1.198.0
         with:
           working-directory: shared-slides
       - name: Setup Chrome
