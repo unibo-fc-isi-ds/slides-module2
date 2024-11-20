@@ -1252,7 +1252,6 @@ Aren't we missing something?
 
 ## Joining/Leaving Protocols (a proposal)
 
-
 {{% multicol %}}
 {{% col %}}
 {{< image src="https://www.plantuml.com/plantuml/svg/dP51R_em3CNl-HIcb_z_1zGxKYSan4xSnivJQBsHoOcZs6NRjryA1LeL3McNg7Nytiz-MOhQfAqditSDmXkpxlZB65ih9tWHJ2Rc1bUxQ8F25fDtmTAek69EJQvcnL7e3bPnN7rFt4ROC4TZweJv_chLGM0-VxnK5b2Mnx44FftkeIWswwTjKK2qJKDObkRS2Laru2mWalt6zFh1BlplH0_zF4EU6IWc1cMP6LFY7Kr2GOMT9OB8ujHno1fJLT1D0Z6nSiq4DVj8g0XLDTXXwkT2R5N6s4b4RMoielGWGdl0Aya5fovVDnsgZtWeZmb5OFsykflbqRWFSzHy-PxDkd7qzAjTMdVZydp06oaRImgwnuJ_14GT4GXxx1l-z0X8WX0OFAUpZ_nYT6iP3CtfMEQZzVG3" >}}
@@ -1286,14 +1285,46 @@ Aren't we missing something?
 
 1. what if the _coordinator_ is _not available_ when the terminal starts?
 
-2. what if a _terminal_ crashes _before_ sending the `PLAYER_LEAVE` message?
-    - how could the coordinator _distinguish_ between a _crashed_ terminal and one sending _no inputs_?
+1. what if a _terminal_ crashes _before_ sending the `PLAYER_LEAVE` message?
 
-3. what if the _coordinator_ _crashes_ while some terminals are still running?
+1. how could the coordinator _distinguish_ between a _crashed_ terminal and one sending _no inputs_?
 
-4. what if a _terminal_ selects a _side_ that is _already taken_?
+1. what if the _coordinator_ _crashes_ while some terminals are still running?
 
-5. what if a _terminal_ send inputs concerning the _wrong paddle_?
+1. what if a _terminal_ selects a _side_ that is _already taken_?
+
+1. what if a _terminal_ send inputs concerning the _wrong paddle_?
+
+---
+
+## Joining/Leaving Protocol (solutions)
+
+1. what if the _coordinator_ is _not available_ when the terminal starts?
+    - e.g., the _terminal_ simply terminates
+    - e.g., the terminal _waits_ (up to a _timeout_, and no more than a _maximum_ amount of _retries_) for the coordinator to become available
+
+1. what if a _terminal_ crashes _before_ sending the `PLAYER_LEAVE` message?
+    - e.g., if UDP is used, some _custom_ __heart-beating__ mechanism may be needed
+    - e.g., if TCP is used, the connection dies and the coordinator can notice the terminal's crash
+
+1. how could the coordinator _distinguish_ between a _crashed_ terminal and one sending _no inputs_?
+    - e.g. via _timeouts_ on the coordinator side
+
+1. what if the _coordinator_ _crashes_ while some terminals are still running?
+    - e.g. via _timeouts_ on the terminal side
+
+1. what if a _terminal_ selects a _side_ that is _already taken_?
+    - e.g. the coordinator _silently ignores_ the `PLAYER_JOIN` message
+    - e.g. the coordinator _rejects_ the `PLAYER_JOIN` message and the terminal _terminates_
+        + implies changing the __joining__ protocol to a _request-response_ one
+
+1. what if a _terminal_ send inputs concerning the _wrong paddle_?
+    - e.g. the coordinator _silently ignores_ the inputs
+        + implies the coordinator is keeping track of _which paddle_ is associated with _which terminal_
+    - e.g. the coordinator _kicks out_ the misbehaving terminal
+        + same implication as above
+        + implies changing the __leaving__ protocol in such a way it can be _initiated_ by the _coordinator_  
+
 
 {{%/section%}}
 
