@@ -50,11 +50,14 @@ Source code at: <{{<github-url repo="dpongpy">}}>
 Go on, play with it!
 
 ```bash
-git clone {{<github-url repo="dpongpy">}}
-cd dpongpy
-# may require pip install -r requirements.txt if poetry is missing
-poetry install
-poetry run python -m dpongpy --mode local
+pip install dpongpy
+python -m dpongpy --help # to see all options
+python -m dpongpy --mode local # to play offline
+
+# to start a centralised server
+python -m dpongpy --mode centralised --role coordinator 
+python -m dpongpy --mode centralised --role terminal --side left --keys wasd --host IP_COORDINATOR
+python -m dpongpy --mode centralised --role terminal --side right --keys arrows --host IP_COORDINATOR
 ```
 
 <br>
@@ -64,6 +67,10 @@ Default key bindings:
 - _Right_ paddle: __Arrow keys__
 {{% /col %}}
 {{% /multicol %}}
+
+{{% fragment %}}
+> Recall to `pip uninstall dpongpy` _before_ proceeding with this lecture, to avoid __conflicts__ with your working copy
+{{% /fragment %}}
 
 ---
 
@@ -101,7 +108,7 @@ Default key bindings:
     4. **Simulating the passage of time** in the game (e.g., moving objects even in absence of inputs)
 
 - Most commonly, some _wait_ is introduced at the end of each cycle
-    + to control the game's frame rate
+    + to control the game's __frame rate__
 
 ---
 
@@ -118,7 +125,7 @@ full example [on GitHub]({{<github-url repo="lab-snippets" path="snippets/lab1/e
 - PyGame comes with a notion of _events_ and __event queue__
     * this is good for handling user _inputs_
 
-- each event had a _type_ (e.g., `pygame.KEYDOWN` and `pygame.KEYUP`) and _attributes_ (e.g., `event.key`)
+- each event has a _type_ (e.g., `pygame.KEYDOWN` and `pygame.KEYUP`) and _attributes_ (e.g., `event.key`)
     * there is a _class_ for events, namely `pygame.event.Event`
     * event _types_ are indeed `int`egers
 
@@ -772,7 +779,7 @@ package "dpongpy.model" {
     }
 }
 
-ActionMap <.. InputHandler: processes
+ActionMap <.. InputHandler: knows
 Event <.. InputHandler: processes
 InputHandler ..> PlayerAction: selects\nbased on\nActionMap\nand\nEvent
 InputHandler ..> ControlEvent: generates
@@ -799,7 +806,7 @@ EventHandler ..> Pong: updates\nbased on\nControlEvent
 
 ### Example of Keyboard Input Processing
 
-![](http://www.plantuml.com/plantuml/svg/bPHFRvj04CNlyob6xY79Ag3QlN684jNqZveq79fMbP3GnaoePPYbx68NMVdkNNPhR6nVUh8qy_Otx9ktljL6DgQjIYZfnQ1Hs2oBNmRpPKCBirGC81T6DJX9IjbHWzC9Iet95A0NI2vAmZSTbQNQu6IXs3Igr2X4ZnC2Qvdd9Raph0mXWFi9ci0nQhbOoO9mKdU5h2YaDR49XOZxNo4kKqP4IpDTJK94w6LMy2N-EN_yyLM8wvraHTrOaJqbGgHyvOPF7Db-_1RX5U1tIosXcwBxTZmzBStWugJs3Y2POX3SeEUX7TYGrgJnAKaPdrjZ58DlzZfBZZ3fFigAaDZnTCh_-kkbJFdevhNIvZ8CmoiX01QggXNR1dxckZMV95ip6u3OiKV527FoUFJqb2qUZ-W53V2zztTkqG-o7kokr9gojZxZv_L8agiD7ub6Mx6ZXWL8DoMhP9sfbyodAHiMSdWL3Ce0pyiZNB7QwFt7l_U9Sol2BI0Y_c-c1eIN9NVp-NsSFJn-ZuK8rx9iQRXqBetiZsnzmHSlVCQp9UVqvw9lptUFn-Bkum_Vh1-Z0yFZEb7t5dlfwpYvCsUKQvopwsPqYmWBOcga8GqZWy8sj8cSHRievlZSfNm8EyoSExFFt0o3rWxorVEXcm7q5ZrBJPWeBX3WK6u1Rwy2rucm3z3-Zo9bxw9zHd1BdBTL-HS0)
+![](https://www.plantuml.com/plantuml/svg/bLHDRvj04BtFhtXo3qbM0HNtXgeeKKq_rAJXqBIgX8GsPaAjm2vb5wSeodylxCecEBdqjDAyDsyyRvuvDrQsjgihglZEmcgqc_AtHR5fUMqtMX79jTKj5cabUsuHBI0DqeXe94XLLemtFLULVi1YhPLjTMKWn2Wd11fP51Mx7gKjWyWzGHiuZKQkxsN9M3HzAMiEUSlAXa8auol4SQO0G0ZRDon434yR25-JNwlhdz-4EDrHxhcVC_ARL8XCdRZX2wSSBV08UYBwqt77S5FC22VHozAIZbxKtX6b4OBW35uFmy2MZM63cpHJkEsirOeSw7b952FjFycQmShfcKnv7DkDpDJ1veqszZWCmnCXYDQwRhGQ07nHJMS_IrLKt18b4Tu7mQmOes0l3w-UgK4U1-ebJ-9xxo_SeQzaixUxrblEk-OLFqzdb48_g0FIx2h3gFq1f9kIrxB9zLtkqvJl3_9y5GHLWDVfCUwLVZ3JZ__W4-TEX4S2WF_Cr2JXQUd5QdMPv5VNFn8XmgsiEjulNKWhnvP7N_358v_nVACA_diqmglTdsUGkqm-VlT-J0t53d_1Tf5rrATvSfVEA0UyPjVPR8iO9IjkfML3CuF2BXmIkOntKInmssTgdgqfSwvdojnoo5mNpAg7eLiIZHRTIiD8jIf1z9oEe7jx4ZWanXYWwKEHAUyYRb8wPrLqTVKF)
 
 ---
 
@@ -807,13 +814,13 @@ EventHandler ..> Pong: updates\nbased on\nControlEvent
 
 ### Example of Time Elapsed Processing
 
-![](http://www.plantuml.com/plantuml/svg/PLBBRjGy5DwVf_Wq_wAjrOp-THPLKMSGI4NC0bX5gZpnQHhgiODzCZ0QzIruBfu9so4Yg9jSlildS_5j51raF5Yo_2WGZz1tJmBJ1swbzuwezKw2jxYpldqcohXsdMNyTs9h_NUiXbEd3xoMFZsAQWKTuRmmYCgh2jLh_-hNJsdSPRQ1hHuYcyR5thKCgwFWCQJKgv9bXAZuKLKtwGyrMdyOHk58bB-yOoTuxnBqJZjZEH0PAUebM6Fknde_D6xGCN94AWJYYGRTFkkESJU9jiSSUYO0cAcvMSxSMgcYKUgoSLcbb9m6LgfUHcJPxircSxzz-F3norQfzL7RaQzdYz6Yi-Ky0HDuCMXZB3_qpl2FYqnlvfMakFljsqzANVzZC3F_IlrvfzGaVMdSDD1LgN-5CwZWz4BqRUIHKIgEHCkneR9faCkMQdJiEEYyW2MEzRY--PDHWrt9DDYV6hSCN2ujY__YanNLc0vSCZKCbx08pZ1H7jjUHyREkmv4ItNo_tzL5QR6mH-JIobjhLB8suFVV-LMOkDqs_fW-XGW7lB4VK0xXi2Iz75WDdbo-OQMIqAtxCnuiBy1)
+![](https://www.plantuml.com/plantuml/svg/PLBBRjGm5DtVhpWQ5csjPiGwGbLHPn18HSm2M4MgFF5j6khOmRuP68tw5tmNtqJi43LLDtcSnz7rkRwEeeCCdINBzmBn26tp831ju5fQxuXgxoHuYnlhwqUYX6lNMCQR8rlhVs7L7nlTyLhQyP5LA-W8vuL1b5z5A5xxLt__IENEamriTH_PL2wshcPO7GNtOKozo5b6YB8VHN4r_g54xRj-48v4wSixTe9FReG-QcSi1o8ZMRq4IyodiTxtbUjrZ1mn3WBnHBsk7tN3k9b4sqCAFH40pDHyM4xSMgciKUgySacbb1nxLgfSHYJPxlrcSxkz-_pb-rQfzK7RWIzdYz6Ya-Kq0HDurcjZBD-rpl3liqHlvfMCSRVR3r-LkdnXC3F_IlrjfzGaVQhSLEWgpx_22PHnUYBwEV30o1D7ecLjAEnOvF989Hfs77HQm1B7UbXV_SyemIvd6koFbLi6BfUMnC_uPCMxOYXUC2KCvx28F3fHgcsl8sFdNOF9-JpmyFQYo4o9pXz6brBQMgMGjWU__y6rnChfklR1j6E0UCW3jm7r408Bb8eziqdDfHkQBmbTipD3P_y1)
 
 ---
 
 ## Design proposal (pt. 4)
 
-{{< plantuml >}}
+{{< plantuml max-h="50vh" >}}
 package "dpongpy.controller" {
 interface EventHandler
 interface InputHandler
@@ -1048,7 +1055,7 @@ game:
 
 Let's focus on information flow:
 
-{{< image alt="No infrastructure for Pong" src="./local.svg" >}}
+{{< image alt="No infrastructure for Pong" src="./local.svg" max-h="60vh" >}}
 
 ---
 
@@ -1058,7 +1065,7 @@ Let's focus on information flow:
 
 Let's suppose a central server is coordinating the game:
 
-{{< image alt="Centralized infrastructure for Pong" src="./centralised.svg" >}}
+{{< image alt="Centralized infrastructure for Pong" src="./centralised.svg" max-h="60vh" >}}
 
 ---
 
@@ -1068,7 +1075,7 @@ Let's suppose a central server is coordinating the game:
 
 Let's suppose a central server is coordinating the game, but a broker is used to _relay_ messages:
 
-{{< image alt="Brokered infrastructure for Pong" src="./brokered.svg" >}}
+{{< image alt="Brokered infrastructure for Pong" src="./brokered.svg" max-h="60vh" >}}
 
 ---
 
@@ -1078,7 +1085,7 @@ Let's suppose a central server is coordinating the game, but a broker is used to
 
 Like the centralised one, but the server is replicated and a consensus protocol is used to keep replicas in sync:
 
-{{< image alt="Replicated infrastructure for Pong" src="./replicated.svg" >}}
+{{< image alt="Replicated infrastructure for Pong" src="./replicated.svg" max-h="60vh" >}}
 
 ---
 

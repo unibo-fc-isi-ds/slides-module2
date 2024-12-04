@@ -28,7 +28,7 @@ aliases = [
     1. [Presentation](./presentation/)
         - Exercise: [RPC-based Authentication Service](./presentation/#/exercise-rpc-auth-service)
         - Exercise: [Secure RPC-based Authentication Service](./presentation/#/exercise-rpc-auth-service-secure)
-    1. \[Tentative\] Testing <!-- [Testing](./testing/) -->
+    1. \[No time for this in A.Y. 24-25\] Testing <!-- [Testing](./testing/) -->
 
     <!-- [Miscellanea](./misc/) -->
 
@@ -37,8 +37,8 @@ aliases = [
         1. [Game Loop](./pong/#/game-loop)
         1. [Game Model](./pong/#/model)
         1. [I/O](./pong/#/io)
-        1. \[WIP\] [Architecture](./pong/#/architecture)
-        1. \[WIP\] [Protocols](./pong/#/protocols)
+        1. [Architecture](./pong/#/architecture)
+        1. [Protocols](./pong/#/protocols)
         1. \[WIP\] [Analysis](./pong/#/analysis)
 
 ---
