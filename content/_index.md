@@ -18,7 +18,7 @@ aliases = [
 
 ## Table of Contents
 
-* General aspects
+1. General aspects
     1. [About the course](./) (this page)
         - [Useful links](./#/links)
         - [Project work rules](./#/rules)
@@ -32,14 +32,14 @@ aliases = [
 
     <!-- [Miscellanea](./misc/) -->
 
-* Case Studies
-    - \[WIP\] [PONG](./pong/)
-        1. [Game Loop](./pong/#/game-loop)
-        1. [Game Model](./pong/#/model)
-        1. [I/O](./pong/#/io)
-        1. [Architecture](./pong/#/architecture)
-        1. [Protocols](./pong/#/protocols)
-        1. \[WIP\] [Analysis](./pong/#/analysis)
+1. [PONG](./pong/) case study
+    1. [Game Loop](./pong/#/game-loop)
+    1. [Game Model](./pong/#/model)
+    1. [I/O](./pong/#/io)
+    1. [Architecture](./pong/#/architecture)
+    1. [Protocols](./pong/#/protocols)
+    1. [Analysis](./pong/#/analysis)
+        + Exercise: [Secure RPC-based Authentication Service](./pong/#/exercise-available-dpongpy)
 
 ---
 

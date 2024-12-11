@@ -1188,6 +1188,8 @@ or
 
 ---
 
+{{< slide id="behavioural-view">}}
+
 ## Distributed Pong Architecture
 
 ### Behavioural view
@@ -1217,6 +1219,8 @@ or
 {{% /multicol %}}
 
 ---
+
+{{< slide id="interaction-view">}}
 
 ## Distributed Pong Architecture
 
@@ -1332,7 +1336,6 @@ Aren't we missing something?
         + same implication as above
         + implies changing the __leaving__ protocol in such a way it can be _initiated_ by the _coordinator_  
 
-
 {{%/section%}}
 
 ---
@@ -1341,8 +1344,140 @@ Aren't we missing something?
 
 {{< slide id="analysis" >}}
 
-## Distributed Pong Analysis
+## Distributed Pong Analysis (pt. 1)
+
+Let's focus on the currently available implementation: <br> <{{<github-url repo="dpongpy">}}>
+
+### Project structure
+
+```kotlin
+package dpongpy
+├── class PongGame    // entry point for local game
+├── package dpongpy.model
+│   └── class Pong
+├── package dpongpy.controller
+│   ├── interface EventHandler
+│   ├── interface InputHandler
+│   ├── package dpongpy.local
+│   │   ├── class PongInputHandler : InputHandler
+│   │   ├── class PongEventHandler : EventHandler
+│   │   └── class PongLocalController : PongInputHandler,PongEventHandler
+│   └── package dpongpy.view
+│       ├── interface PongView
+│       ├── class ScreenPongView : PongView
+│       └── class ShowNothingPongView : PongView
+├── package dpongpy.remote
+│   ├── class Address
+│   ├── interface Session
+│   ├── interface Server
+│   ├── interface Client
+│   ├── package dpongpy.remote.centralised
+│   │   ├── class PongCoordinator : PongGame  // entry point for remote game, coordinator side
+│   │   └── class PongTerminal : PongGame     // entry point for remote game, terminal side
+│   ├── package dpongpy.remote.udp
+│   │   ├── class UdpSession : Session
+│   │   ├── class UdpServer : Server
+│   │   └── class UdpClient : Client
+│   └── package dpongpy.remote.presentation
+│       ├── Serializer
+│       └── Deserializer
+```
+(only the _organization_ of __classes__ and __interfaces__ into packages is reported, as well as _sub-typing_ relationships)
+
+{{% fragment %}}
+### TODO
+
+- Give a look to the code, especially the [`PongCoordinator`]({{<github-url repo="dpongpy" path="dpongpy/remote/centralised/__init__.py#L16">}}>) and [`PongTerminal`]({{<github-url repo="dpongpy" path="dpongpy/remote/centralised/__init__.py#L102">}}>) classes
+
+- compare the code to the _design_ we discussed, especially the [interaction](#interaction-view) and [behavioural views](#behavioural-view)
+{{% /fragment %}}
 
 
+---
+
+## Distributed Pong Analysis (pt. 2)
+
+> W.r.t. the previous corner cases, in which situations are we?
+
+{{% fragment %}}
+### How to know?
+
+1. what if the _coordinator_ is _not available_ when the terminal starts?
+    - Start the _terminal_ when no _coordinator_ is running, what happens?
+
+1. what if a _terminal_ crashes _before_ sending the `PLAYER_LEAVE` message?
+    - Start the coordinator and then 2 terminals for 2 different paddles. Kill one terminal. What happens?
+
+1. what if the _coordinator_ _crashes_ while some terminals are still running?
+    - Start the coordinator and then 1 terminal. Kill the terminal. What happens?
+
+1. what if a _terminal_ selects a _side_ that is _already taken_?
+    - Start the coordinator and then 2 terminals for the same paddle. What happens?
+
+1. what if a _terminal_ send inputs concerning the _wrong paddle_?
+    - Inject a bug into the terminal to force sending events for the same paddle. Start the coordinator and then 2 terminals. What happens?
+        ```python
+        class Controller(PongInputHandler, EventHandler):           # dpongpy/remote/centralised/__init__.py, line 114
+            def post_event(self, event: Event | ControlEvent, **kwargs):
+                event = super().post_event(event, **kwargs)
+                if ControlEvent.PADDLE_MOVE.matches(event):         # this is how you can inject the bug
+                    event.dict["paddle_index"] = Direction.LEFT
+                ...
+        ```
+    
+
+{{% /fragment %}}
+
+---
+
+## Distributed Pong Analysis (pt. 2)
+
+> Are we prioritizing _availability_ or _consistency_ with the current design/implementation?
+
+{{% fragment %}}
+
+### How to know?
+
+1. Let's try to simulate a _network partition_:
+    - we're using UDP, so message drops are _possible_ already, when the coordinator and the host are on _different_ machines
+    - to make it _network partitioning_ more evident, let's force a higher __package drop rate__
+        + set the `UDP_DROP_RATE` _environment variable_ to a number __$p \in [0, 1]$__ (say, `0.2`) to affect the _probability_ of a package being dropped to _$p$_...
+            * meaning that roughly the __$100p$%__ of the packages will be __dropped__ (`20%` in our case)
+        + ... then _launch_ the coordinator and the terminal
+
+2. is the gameplay __fluid__ or __laggy__?
+    - fluid $\approx$ we're prioritizing _availability_
+    - laggy $\approx$ we're prioritizing _consistency_
+
+{{% /fragment %}}
 
 {{%/section%}}
+
+---
+
+{{< slide id="exercise-available-dpongpy" >}}
+
+## Exercise: Available Distributed Pong
+
+- __Goal__: modify the current `dpongpy` implementation to prioritize _availability_ over consistency, in order to make the game __fluid__, even in presence of _network issues_
+
+- __Hints__: implement __speculative execution__ on the _terminal_-side, to make the game _appear available_ even when the coordinator non-responsive
+    1. the terminal's game-loop should *never* __block__
+        + in particular, it should _not block_ while waiting for the coodinator's __updates__
+    2. rather, the terminal should continue updating the _local game state_ according to the _local inputs_, and render it as usual
+    3. upon receiving a new update from the coordinator, the terminal should overwrite the _local game state_ with the _remote one_
+
+- __Deadline__: two weeks from today
+
+- __Incentive__: +1 point on the final grade (if solution is satisfying)
+
+- __Submission__:
+    1. fork the [`dpongpy` repository]({{< github-url repo="dpongpy" >}})
+    2. create a new branch named `exercise-lab1`
+    3. commit your changes to the new branch
+    4. push the branch to your fork & create a __pull request__ to the original repository, entitled `[{{<academic_year>}} Surname, Name] Exercise: Available Distributed Pong`
+        - in the pull request, describe your solution, motivate your choices, and explain how to test it
+
+---
+
+{{% import path="reusable/back.md" %}}
