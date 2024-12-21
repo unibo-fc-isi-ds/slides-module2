@@ -39,7 +39,7 @@ aliases = [
     1. [Architecture](./pong/#/architecture)
     1. [Protocols](./pong/#/protocols)
     1. [Analysis](./pong/#/analysis)
-        + Exercise: [Secure RPC-based Authentication Service](./pong/#/exercise-available-dpongpy)
+        + Exercise: [Available Distributed Pong](./pong/#/exercise-available-dpongpy)
 
 ---
 
