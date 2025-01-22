@@ -120,7 +120,6 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y poppler-utils
-          sudo apt-get install -y libnss3 libxss1 libasound2 libatk-bridge2.0-0 libgtk-3-0
       - name: Make the pdfs
         run: shared-slides/makepdfs.rb pages
       - name: Deliver the pdfs
