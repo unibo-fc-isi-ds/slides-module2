@@ -120,11 +120,10 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y poppler-utils
-          sudo apt-get install -y libnss3 libxss1 libasound2 libatk-bridge2.0-0 libgtk-3-0
       - name: Make the pdfs
         run: shared-slides/makepdfs.rb pages
       - name: Deliver the pdfs
-        # if: github.event_name == 'workflow_run'
+        if: ${{ github.event_name != 'pull_request' && (github.ref_name == 'main' || github.ref_name == 'master') }}
         uses: ncipollo/release-action@v1.14.0
         with:
           allowUpdates: true
