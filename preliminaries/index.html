@@ -31,7 +31,7 @@
 <h3 id="hahahugoshortcode1s2hbhb"><a href="mailto:giovanni.ciatto@unibo.it">Giovanni Ciatto</a></h3>
 <br>
 <br>
-<p>Compiled on: 2025-02-01
+<p>Compiled on: 2025-02-02
  — <a href="?print-pdf&amp;pdfSeparateFragments=false"><i class="fa fa-print" aria-hidden="true"></i> printable version</a></p>
 <p><a href="../#/toc"><i class="fa fa-undo" aria-hidden="true"></i> back to ToC</a></p>
 </section><section>
@@ -42,8 +42,7 @@
 </section><section>
 <h3 id="leslie-lamport-1987httpsenwikiquoteorgwikileslie_lamport"><a href="https://en.wikiquote.org/wiki/Leslie_Lamport">Leslie Lamport (1987)</a></h3>
 <blockquote>
-<p>A distributed system is one in which the failure of a computer you didn’t even know existed can render your own computer unusable</p>
-</blockquote>
+<p>A distributed system is one in which the failure of a computer you didn’t even know existed can render your own computer unusable</p></blockquote>
 <h3 id="__interpretation__"><strong>Interpretation</strong></h3>
 <ul>
 <li>hidden <em>interdependencies</em> between machines</li>
@@ -52,8 +51,7 @@
 </section><section>
 <h3 id="distributed-systems-tannenbaum-and-van-steenhttpcsispaceedumarchesecs865lectureschap1chapter1ahtm-the-book-herehttpskomputasiwordpresscomwp-contentuploads201803mvsteen-distributed-systems-3rd-preliminary-version-3-01pre-2017-170215pdf"><a href="http://csis.pace.edu/~marchese/CS865/Lectures/Chap1/Chapter1a.htm">“Distributed Systems”, Tannenbaum and Van Steen</a> (the <a href="https://komputasi.wordpress.com/wp-content/uploads/2018/03/mvsteen-distributed-systems-3rd-preliminary-version-3-01pre-2017-170215.pdf">book here</a>)</h3>
 <blockquote>
-<p>A distributed system is a collection of independent computers that appears to its users as a single coherent system</p>
-</blockquote>
+<p>A distributed system is a collection of independent computers that appears to its users as a single coherent system</p></blockquote>
 <h3 id="__interpretation__-1"><strong>Interpretation</strong></h3>
 <ul>
 <li><em>illusion</em> of a <em>unified</em> system…</li>
@@ -65,8 +63,7 @@
 <blockquote>
 <p>We define a distributed system as one in which hardware or software components
 located at networked computers communicate and coordinate their actions only by
-passing messages.</p>
-</blockquote>
+passing messages.</p></blockquote>
 <h3 id="__interpretation__-2"><strong>Interpretation</strong></h3>
 <ul>
 <li>reliance on <em>message passing</em> across a network for communication</li>
@@ -74,8 +71,7 @@ passing messages.</p>
 </section><section>
 <h3 id="concepts-techniques-and-models-of-computer-programming-van-roy-and-haridihttpswebpersoinfouclacbepvrvanroyharidi2003-bookpdf">[]“Concepts, Techniques, and Models of Computer Programming”, Van Roy and Haridi](<a href="https://webperso.info.ucl.ac.be/~pvr/VanRoyHaridi2003-book.pdf">https://webperso.info.ucl.ac.be/~pvr/VanRoyHaridi2003-book.pdf</a>)</h3>
 <blockquote>
-<p>A distributed system is a set of computers that are linked together by a network</p>
-</blockquote>
+<p>A distributed system is a set of computers that are linked together by a network</p></blockquote>
 <h3 id="__interpretation__-3"><strong>Interpretation</strong></h3>
 <ul>
 <li>very abstract definition focusing on how distribution should be interpreted</li>
@@ -442,8 +438,7 @@ passing messages.</p>
 </section><section>
 <h2 id="infrastructure">Infrastructure</h2>
 <blockquote>
-<p>The set of hardware, software, and networking facilities that allow the many pieces of a distributed system to communicate and inter-operate over a network</p>
-</blockquote>
+<p>The set of hardware, software, and networking facilities that allow the many pieces of a distributed system to communicate and inter-operate over a network</p></blockquote>
 <p>$\approx$ the set of <em>infrastructural components</em> composing the <em>backbone</em> of the distributed system</p>
 <ul>
 <li>Distributed systems may rely on similar infrastructures, regardless of the different functionalities they provide</li>
@@ -474,8 +469,7 @@ passing messages.</p>
 <h2 id="infrastructural-components">Infrastructural Components</h2>
 <blockquote>
 <p>An infrastructural component consists of a <em>software unit</em>&nbsp;playing a precise role in the distributed system.
-The role depends on the purpose of the component in the system, and/or how it interacts.</p>
-</blockquote>
+The role depends on the purpose of the component in the system, and/or how it interacts.</p></blockquote>
 <p>software unit $\approx$ <strong>process</strong> (in the OS sense)</p>
 <h3 id="heading"></h3>
 <h3 id="examples">Examples</h3>
@@ -647,8 +641,7 @@ The role depends on the purpose of the component in the system, and/or how it in
 <h2 id="interaction-patterns">Interaction Patterns</h2>
 <blockquote>
 <p>An <strong>interaction pattern</strong> describes how different <em>components</em> (nodes, processes, etc.) <em>communicate</em> and <em>coordinate</em> their actions to achieve a common goal.
-These patterns define the <em>flow of messages</em>, <em>responsibilities</em> of <strong>participants</strong>, and the <em>timing</em> and <em>sequencing</em> of <strong>communications</strong>.</p>
-</blockquote>
+These patterns define the <em>flow of messages</em>, <em>responsibilities</em> of <strong>participants</strong>, and the <em>timing</em> and <em>sequencing</em> of <strong>communications</strong>.</p></blockquote>
 <p>e.g. <em>request-response</em>, <em>publish-subscribe</em>, <em>auction</em>, _etc.</p>
 <h3 id="key-points">Key points</h3>
 <ul>
@@ -769,7 +762,7 @@ These patterns define the <em>flow of messages</em>, <em>responsibilities</em> o
 <h3 id="requestresponse">Request—Response</h3>
 <p>The most common and basic pattern for communication between two components</p>
 <div class="container w-100 m-0 p-0">
-    <div class="row "><div class="col " style="text-align: left;"><figure id="plantuml-figure-1738387292560245260" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
+    <div class="row "><div class="col " style="text-align: left;"><figure id="plantuml-figure-1738459465561041516" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
     <p>hide footbox
 participant Client
 participant Server</p>
@@ -777,7 +770,7 @@ participant Server</p>
 Server -&gt; Client: Response</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1738387292560245260");
+    handlePlantumlFigureByID("plantuml-figure-1738459465561041516");
 </script>
 </div>
 <div class="col " style="text-align: left;"><ul>
@@ -803,7 +796,7 @@ Server -&gt; Client: Response</p>
 <h3 id="publishsubscribe">Publish—Subscribe</h3>
 <p>A simple pattern to spread information among multiple recipients</p>
 <div class="container w-100 m-0 p-0">
-    <div class="row "><div class="col " style="text-align: left;"><figure id="plantuml-figure-1738387292560755300" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
+    <div class="row "><div class="col " style="text-align: left;"><figure id="plantuml-figure-1738459465561655335" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
     <p>hide footbox
 actor User
 participant Publisher
@@ -826,7 +819,7 @@ Publisher -&gt; Subscriber2: notify Message
 deactivate Publisher</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1738387292560755300");
+    handlePlantumlFigureByID("plantuml-figure-1738459465561655335");
 </script>
 </div>
 <div class="col " style="text-align: left;"><ul>
@@ -862,7 +855,7 @@ deactivate Publisher</p>
 <li>this is commonly useful to <em>decouple</em> the <em>publisher</em> from the <em>subscribers</em></li>
 <li>most commonly, brokers <em>store</em> messages until they are <em>consumed</em></li>
 </ul>
-<figure id="plantuml-figure-1738387292561867904" class="plantuml" alt="" style="width: 100%;height: 50vh;max-width: 95vw;max-height: 80vh;">
+<figure id="plantuml-figure-1738459465562082155" class="plantuml" alt="" style="width: 100%;height: 50vh;max-width: 95vw;max-height: 80vh;">
     <p>hide footbox
 actor User
 participant Publisher
@@ -894,7 +887,7 @@ Broker -&gt; Subscriber2: notify Message
 deactivate Broker</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1738387292561867904");
+    handlePlantumlFigureByID("plantuml-figure-1738459465562082155");
 </script>
 </section><section>
 <h2 id="common-interaction-protocols-pt-2-2">Common Interaction Protocols (pt. 2)</h2>
@@ -915,7 +908,7 @@ deactivate Broker</p>
 <h3 id="contractnet-protocol">ContractNet Protocol</h3>
 <p>A simple protocol for <em>auctions</em> and <em>negotiations</em></p>
 <div class="container w-100 m-0 p-0">
-    <div class="row "><div class="col " style="text-align: left;"><figure id="plantuml-figure-1738387292562312272" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
+    <div class="row "><div class="col " style="text-align: left;"><figure id="plantuml-figure-1738459465562234730" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
     <p>hide footbox
 participant Initiator
 participant Contractor1
@@ -939,7 +932,7 @@ deactivate Contractor1
 deactivate Initiator</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1738387292562312272");
+    handlePlantumlFigureByID("plantuml-figure-1738459465562234730");
 </script>
 </div>
 <div class="col " style="text-align: left;"><ul>
@@ -1012,14 +1005,12 @@ deactivate Initiator</p>
 <blockquote>
 <p>A <strong>software architecture</strong> is an abstraction of the run-time elements of a software system during some phase of its operation.
 […]
-It is defined by a <em>configuration</em> of <strong>architectural elements</strong> constrained in their relationships in order to achieve a desired set of <em>architectural properties</em>.</p>
-</blockquote>
+It is defined by a <em>configuration</em> of <strong>architectural elements</strong> constrained in their relationships in order to achieve a desired set of <em>architectural properties</em>.</p></blockquote>
 <ul>
 <li>Very roughly:</li>
 </ul>
 <blockquote>
-<p><strong>Architectural style</strong> $\approx$ <em>patterns</em> of architectures which are known to work in practice</p>
-</blockquote>
+<p><strong>Architectural style</strong> $\approx$ <em>patterns</em> of architectures which are known to work in practice</p></blockquote>
 <h3 id="main-architectural-styles-for-distributed-systems">Main architectural styles for distributed systems</h3>
 <ul>
 <li><em>layered</em> architectures</li>
@@ -1753,7 +1744,7 @@ e.g. <a href="https://en.wikipedia.org/wiki/Access-control_list">ACLs</a>, <a hr
 </section><section>
 <h1 id="lecture-is-over">Lecture is Over</h1>
 <br>
-<p>Compiled on: 2025-02-01
+<p>Compiled on: 2025-02-02
  — <a href="?print-pdf&amp;pdfSeparateFragments=false"><i class="fa fa-print" aria-hidden="true"></i> printable version</a></p>
 <p><a href="../#/toc"><i class="fa fa-undo" aria-hidden="true"></i> back to ToC</a></p>
 </section>

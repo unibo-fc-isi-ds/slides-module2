@@ -31,7 +31,7 @@
 <h3 id="hahahugoshortcode1s2hbhb"><a href="mailto:giovanni.ciatto@unibo.it">Giovanni Ciatto</a></h3>
 <br>
 <br>
-<p>Compiled on: 2025-02-01
+<p>Compiled on: 2025-02-02
  — <a href="?print-pdf&amp;pdfSeparateFragments=false"><i class="fa fa-print" aria-hidden="true"></i> printable version</a></p>
 <p><a href="../#/toc"><i class="fa fa-undo" aria-hidden="true"></i> back to ToC</a></p>
 </section><section>
@@ -91,8 +91,7 @@
 </section><section>
 <h2 id="definition">Definition</h2>
 <blockquote>
-<p>A <strong>socket</strong> is an abstract representation for the <em>local</em> endpoint of a network communication path.</p>
-</blockquote>
+<p>A <strong>socket</strong> is an abstract representation for the <em>local</em> endpoint of a network communication path.</p></blockquote>
 
 
 
@@ -473,7 +472,7 @@ processes, <em>distributed</em> over the network</p>
 </span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">close</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">):</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">__socket</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">close</span><span style="color:#000;font-weight:bold">()</span>
 </span></span></code></pre></div></div>
-<div class="col " style="text-align: left;"><figure id="plantuml-figure-1738387292573132057" class="plantuml" alt="" style="width: 100%;height: 30vh;max-width: 95vw;max-height: 80vh;">
+<div class="col " style="text-align: left;"><figure id="plantuml-figure-1738459465572318472" class="plantuml" alt="" style="width: 100%;height: 30vh;max-width: 95vw;max-height: 80vh;">
 <p>class Peer {
 - __socket: socket
 + peers: set
@@ -487,7 +486,7 @@ processes, <em>distributed</em> over the network</p>
 }</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1738387292573132057");
+    handlePlantumlFigureByID("plantuml-figure-1738459465572318472");
 </script>
 </div>
 </div>
@@ -714,8 +713,7 @@ processes, <em>distributed</em> over the network</p>
 </section><section>
 <blockquote>
 <p>Important notion of <a href="https://en.wikipedia.org/wiki/Callback_(computer_programming)">“callback”</a>:
-a function that is stored as data (a reference) and designed to be called by another function – often back to the original abstraction layer.</p>
-</blockquote>
+a function that is stored as data (a reference) and designed to be called by another function – often back to the original abstraction layer.</p></blockquote>
 <p><img src="https://upload.wikimedia.org/wikipedia/commons/d/d4/Callback-notitle.svg" alt="A callback is often back on the level of the original caller."></p>
 </section><section>
 <h2 id="example-udp-group-chat-9">Example: UDP Group Chat</h2>
@@ -980,8 +978,7 @@ to stress-test the chat with <em>many</em> messages, and to observe the <em>reli
 </ol>
 <blockquote>
 <p><strong>Golden rule</strong>: always be aware of <em>how many bytes</em> are being sent/received at a time
-<be> (i.e. <em>avoid</em> <strong>unilimited</strong> reads/writes: these may saturate the network, or the local memory)</be></p>
-</blockquote>
+<be> (i.e. <em>avoid</em> <strong>unilimited</strong> reads/writes: these may saturate the network, or the local memory)</be></p></blockquote>
 <span class="fragment ">
   <ol start="6">
 <li>How to <strong>send</strong> data to remove via <em>buffered</em> <strong>write</strong>:
@@ -1680,7 +1677,7 @@ to stress-test the chat with <em>many</em> messages, and to observe the <em>reli
 </section><section>
 <h1 id="lecture-is-over">Lecture is Over</h1>
 <br>
-<p>Compiled on: 2025-02-01
+<p>Compiled on: 2025-02-02
  — <a href="?print-pdf&amp;pdfSeparateFragments=false"><i class="fa fa-print" aria-hidden="true"></i> printable version</a></p>
 <p><a href="../#/toc"><i class="fa fa-undo" aria-hidden="true"></i> back to ToC</a></p>
 </section>
