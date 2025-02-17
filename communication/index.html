@@ -372,7 +372,7 @@ processes, <em>distributed</em> over the network</p>
 </ul>
 </section><section>
 <h2 id="example-udp-group-chat-1">Example: UDP Group Chat</h2>
-<h3 id="utilitieshttpsgithubcomunibo-fc-isi-dslab-snippetsblobmastersnippetslab2__init__py-pt-1"><a href="https://github.com/unibo-fc-isi-ds/lab-snippets/blob/master/snippets/lab2/__init__.py">Utilities</a> (pt. 1)</h3>
+<h3 id="utilities-pt-1"><a href="https://github.com/unibo-fc-isi-ds/lab-snippets/blob/master/snippets/lab2/__init__.py">Utilities</a> (pt. 1)</h3>
 <ol>
 <li>
 <p>A function to <em>parse</em> the <em>address</em> and <em>port</em> from a string, or validate an <em>address</em> and <em>port</em> pair:</p>
@@ -410,7 +410,7 @@ processes, <em>distributed</em> over the network</p>
 </ol>
 </section><section>
 <h2 id="example-udp-group-chat-2">Example: UDP Group Chat</h2>
-<h3 id="utilitieshttpsgithubcomunibo-fc-isi-dslab-snippetsblobmastersnippetslab2__init__py-pt-2"><a href="https://github.com/unibo-fc-isi-ds/lab-snippets/blob/master/snippets/lab2/__init__.py">Utilities</a> (pt. 2)</h3>
+<h3 id="utilities-pt-2"><a href="https://github.com/unibo-fc-isi-ds/lab-snippets/blob/master/snippets/lab2/__init__.py">Utilities</a> (pt. 2)</h3>
 <ol start="3">
 <li>
 <p>A function to get <em>all</em> the <em>IP addresses</em> of the current machine:</p>
@@ -472,7 +472,7 @@ processes, <em>distributed</em> over the network</p>
 </span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">close</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">):</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">__socket</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">close</span><span style="color:#000;font-weight:bold">()</span>
 </span></span></code></pre></div></div>
-<div class="col " style="text-align: left;"><figure id="plantuml-figure-1739761488237822322" class="plantuml" alt="" style="width: 100%;height: 30vh;max-width: 95vw;max-height: 80vh;">
+<div class="col " style="text-align: left;"><figure id="plantuml-figure-1739831370828536161" class="plantuml" alt="" style="width: 100%;height: 30vh;max-width: 95vw;max-height: 80vh;">
 <p>class Peer {
 - __socket: socket
 + peers: set
@@ -486,7 +486,7 @@ processes, <em>distributed</em> over the network</p>
 }</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1739761488237822322");
+    handlePlantumlFigureByID("plantuml-figure-1739831370828536161");
 </script>
 </div>
 </div>
@@ -498,7 +498,7 @@ processes, <em>distributed</em> over the network</p>
 </ul>
 </section><section>
 <h2 id="example-udp-group-chat-4">Example: UDP Group Chat</h2>
-<h3 id="attempt-1----example1_udp_chat_wronghttpsgithubcomunibo-fc-isi-dslab-snippetsblobmastersnippetslab2example1_udp_chat_wrongpy">Attempt 1 – <a href="https://github.com/unibo-fc-isi-ds/lab-snippets/blob/master/snippets/lab2/example1_udp_chat_wrong.py"><code>example1_udp_chat_wrong</code></a></h3>
+<h3 id="attempt-1--example1_udp_chat_wrong">Attempt 1 – <a href="https://github.com/unibo-fc-isi-ds/lab-snippets/blob/master/snippets/lab2/example1_udp_chat_wrong.py"><code>example1_udp_chat_wrong</code></a></h3>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">sys</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#000">peer</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">Peer</span><span style="color:#000;font-weight:bold">(</span>
@@ -538,7 +538,7 @@ processes, <em>distributed</em> over the network</p>
 </ol>
 </section><section>
 <h2 id="example-udp-group-chat-5">Example: UDP Group Chat</h2>
-<h3 id="attempt-1----example-logs">Attempt 1 – Example logs</h3>
+<h3 id="attempt-1--example-logs">Attempt 1 – Example logs</h3>
 <div class="container w-100 m-0 p-0">
     <div class="row "><div class="col " style="text-align: left;"><h4 id="peer-1">Peer 1</h4>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span>Bound to: ('0.0.0.0', 8080)
@@ -569,7 +569,7 @@ processes, <em>distributed</em> over the network</p>
 </div>
 </section><section>
 <h2 id="example-udp-group-chat-6">Example: UDP Group Chat</h2>
-<h3 id="attempt-1----issues">Attempt 1 – Issues</h3>
+<h3 id="attempt-1--issues">Attempt 1 – Issues</h3>
 <ol>
 <li>
 <p>Input operations tend to <em>block</em> the current (and only) <strong>thread of execution</strong></p>
@@ -631,7 +631,7 @@ processes, <em>distributed</em> over the network</p>
 </ol>
 </section><section>
 <h2 id="example-udp-group-chat-7">Example: UDP Group Chat</h2>
-<h3 id="attempt-1----possible-improvements">Attempt 1 – Possible Improvements</h3>
+<h3 id="attempt-1--possible-improvements">Attempt 1 – Possible Improvements</h3>
 <ol>
 <li>
 <p>Input operations tend to <em>block</em> the current (and only) <strong>thread of execution</strong></p>
@@ -676,7 +676,7 @@ processes, <em>distributed</em> over the network</p>
 </ol>
 </section><section>
 <h2 id="example-udp-group-chat-8">Example: UDP Group Chat</h2>
-<h3 id="attempt-2----example2_udp_chathttpsgithubcomunibo-fc-isi-dslab-snippetsblobmastersnippetslab2example2_udp_chatpy-pt-1">Attempt 2 – <a href="https://github.com/unibo-fc-isi-ds/lab-snippets/blob/master/snippets/lab2/example2_udp_chat.py"><code>example2_udp_chat</code></a> (pt. 1)</h3>
+<h3 id="attempt-2--example2_udp_chat-pt-1">Attempt 2 – <a href="https://github.com/unibo-fc-isi-ds/lab-snippets/blob/master/snippets/lab2/example2_udp_chat.py"><code>example2_udp_chat</code></a> (pt. 1)</h3>
 <ol>
 <li>
 <p>Let’s address the <em>blocking</em> issue by using <em>threads</em> to handle <em>input</em> and <em>reception</em>:</p>
@@ -717,7 +717,7 @@ a function that is stored as data (a reference) and designed to be called by ano
 <p><img src="https://upload.wikimedia.org/wikipedia/commons/d/d4/Callback-notitle.svg" alt="A callback is often back on the level of the original caller."></p>
 </section><section>
 <h2 id="example-udp-group-chat-9">Example: UDP Group Chat</h2>
-<h3 id="attempt-2----example2_udp_chathttpsgithubcomunibo-fc-isi-dslab-snippetsblobmastersnippetslab2example2_udp_chatpy-pt-1-1">Attempt 2 – <a href="https://github.com/unibo-fc-isi-ds/lab-snippets/blob/master/snippets/lab2/example2_udp_chat.py"><code>example2_udp_chat</code></a> (pt. 1)</h3>
+<h3 id="attempt-2--example2_udp_chat-pt-1-1">Attempt 2 – <a href="https://github.com/unibo-fc-isi-ds/lab-snippets/blob/master/snippets/lab2/example2_udp_chat.py"><code>example2_udp_chat</code></a> (pt. 1)</h3>
 <ol start="3">
 <li>
 <p>Creating a minimal group chat is now straightforward:</p>
@@ -748,7 +748,7 @@ a function that is stored as data (a reference) and designed to be called by ano
 </ol>
 </section><section>
 <h2 id="example-udp-group-chat-10">Example: UDP Group Chat</h2>
-<h3 id="attempt-2----remaining-issues">Attempt 2 – Remaining issues</h3>
+<h3 id="attempt-2--remaining-issues">Attempt 2 – Remaining issues</h3>
 <ol>
 <li>Participants are <strong>peers</strong> at runtime, but initially one acts as a <strong>client</strong> and the other as a <strong>server</strong></li>
 <li>Lack of <strong>graceful</strong> termination
@@ -761,7 +761,7 @@ a function that is stored as data (a reference) and designed to be called by ano
 </ol>
 </section><section>
 <h2 id="example-udp-group-chat-11">Example: UDP Group Chat</h2>
-<h3 id="attempt-3----example4_udp_chat_gracefulhttpsgithubcomunibo-fc-isi-dslab-snippetsblobmastersnippetslab2example4_udp_chat_gracefulpy-pt-1">Attempt 3 – <a href="https://github.com/unibo-fc-isi-ds/lab-snippets/blob/master/snippets/lab2/example4_udp_chat_graceful.py"><code>example4_udp_chat_graceful</code></a> (pt. 1)</h3>
+<h3 id="attempt-3--example4_udp_chat_graceful-pt-1">Attempt 3 – <a href="https://github.com/unibo-fc-isi-ds/lab-snippets/blob/master/snippets/lab2/example4_udp_chat_graceful.py"><code>example4_udp_chat_graceful</code></a> (pt. 1)</h3>
 <ol>
 <li>
 <p>Let’s address the <strong>graceful termination</strong> issue by <em>catching exceptions</em> and <em>communicating</em> them accordingly</p>
@@ -802,7 +802,7 @@ Upon receiving this message, a peer should <em>remove</em> the sender from the l
 </ol>
 </section><section>
 <h2 id="example-udp-group-chat-12">Example: UDP Group Chat</h2>
-<h3 id="attempt-3----example4_udp_chat_gracefulhttpsgithubcomunibo-fc-isi-dslab-snippetsblobmastersnippetslab2example4_udp_chat_gracefulpy-pt-2">Attempt 3 – <a href="https://github.com/unibo-fc-isi-ds/lab-snippets/blob/master/snippets/lab2/example4_udp_chat_graceful.py"><code>example4_udp_chat_graceful</code></a> (pt. 2)</h3>
+<h3 id="attempt-3--example4_udp_chat_graceful-pt-2">Attempt 3 – <a href="https://github.com/unibo-fc-isi-ds/lab-snippets/blob/master/snippets/lab2/example4_udp_chat_graceful.py"><code>example4_udp_chat_graceful</code></a> (pt. 2)</h3>
 <ol start="4">
 <li>
 <p><strong>Rationale</strong>: no need to terminate the application when one peer leaves the chat</p>
@@ -835,7 +835,7 @@ to stress-test the chat with <em>many</em> messages, and to observe the <em>reli
 </ol>
 </section><section>
 <h2 id="example-udp-group-chat-13">Example: UDP Group Chat</h2>
-<h3 id="attempt-2----remaining-issues-1">Attempt 2 – Remaining issues</h3>
+<h3 id="attempt-2--remaining-issues-1">Attempt 2 – Remaining issues</h3>
 <ol>
 <li>Participants are <strong>peers</strong> at runtime, but initially one acts as a <strong>client</strong> and the other as a <strong>server</strong></li>
 <li>Lack of <strong>authentication</strong></li>
@@ -1275,7 +1275,7 @@ to stress-test the chat with <em>many</em> messages, and to observe the <em>reli
 (cf. <a href="https://github.com/unibo-fc-isi-ds/lab-snippets/blob/master/snippets/lab3/example1_tcp_echo_wrong.py">source code</a>)</p>
 </section><section>
 <h2 id="example-tcp-echo-3">Example: TCP Echo</h2>
-<h3 id="attempt-1----manual-testing">Attempt 1 – Manual Testing</h3>
+<h3 id="attempt-1--manual-testing">Attempt 1 – Manual Testing</h3>
 <ol>
 <li>
 <p>Run the <em>server</em> with <code>poetry run python -m snippets -l 3 -e 1 server PORT</code></p>
@@ -1299,7 +1299,7 @@ to stress-test the chat with <em>many</em> messages, and to observe the <em>reli
 </li>
 </ol>
 <span class="fragment ">
-  <h3 id="heading"></h3>
+  <h3></h3>
 <ol start="4">
 <li>Yay! It seems working, but let’s try to send a <em>long</em> message
 <ol>
@@ -1317,7 +1317,7 @@ to stress-test the chat with <em>many</em> messages, and to observe the <em>reli
 </span>
 </section><section>
 <h2 id="example-tcp-echo-4">Example: TCP Echo</h2>
-<h3 id="attempt-1----issues">Attempt 1 – Issues</h3>
+<h3 id="attempt-1--issues">Attempt 1 – Issues</h3>
 <ol>
 <li>
 <p>If the <em>client</em>’s input stream is too long…</p>
@@ -1343,7 +1343,7 @@ to stress-test the chat with <em>many</em> messages, and to observe the <em>reli
 </ol>
 </section><section>
 <h2 id="example-tcp-echo-5">Example: TCP Echo</h2>
-<h3 id="attempt-2----client-side">Attempt 2 – Client Side</h3>
+<h3 id="attempt-2--client-side">Attempt 2 – Client Side</h3>
 <div class="container w-100 m-0 p-0">
     <div class="row "><div class="col " style="text-align: left;"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># prologue of the script is unchanged w.r.t. attempt 1</span>
 </span></span><span style="display:flex;"><span>
@@ -1388,7 +1388,7 @@ to stress-test the chat with <em>many</em> messages, and to observe the <em>reli
 </div>
 </section><section>
 <h2 id="example-tcp-echo-6">Example: TCP Echo</h2>
-<h3 id="attempt-2----manual-testing">Attempt 2 – Manual Testing</h3>
+<h3 id="attempt-2--manual-testing">Attempt 2 – Manual Testing</h3>
 <ol>
 <li>
 <p>Run the <em>server</em> with <code>poetry run python -m snippets -l 3 -e 2 server PORT</code></p>
@@ -1422,7 +1422,7 @@ to stress-test the chat with <em>many</em> messages, and to observe the <em>reli
 </ol>
 </section><section>
 <h2 id="example-tcp-echo-7">Example: TCP Echo</h2>
-<h3 id="attempt-2----example-output">Attempt 2 – Example output</h3>
+<h3 id="attempt-2--example-output">Attempt 2 – Example output</h3>
 <h4 id="client">Client</h4>
 <p><code>poetry run python rand.py | poetry run python -m snippets -l 3 -e 2 client localhost:8080</code></p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span>502573549
@@ -1484,11 +1484,11 @@ to stress-test the chat with <em>many</em> messages, and to observe the <em>reli
 </section>
 <section data-noprocess="" data-shortcode-slide="" id="utilities">
 <h2 id="example-tcp-chat-1">Example: TCP Chat</h2>
-<h3 id="utilitieshttpsgithubcomunibo-fc-isi-dslab-snippetsblobmastersnippetslab3__init__py-pt-1"><a href="https://github.com/unibo-fc-isi-ds/lab-snippets/blob/master/snippets/lab3/__init__.py">Utilities</a> (pt. 1)</h3>
+<h3 id="utilities-pt-1"><a href="https://github.com/unibo-fc-isi-ds/lab-snippets/blob/master/snippets/lab3/__init__.py">Utilities</a> (pt. 1)</h3>
 <p><img src="https://www.plantuml.com/plantuml/svg/bPAnZjim38PtFmMHvH8qpWC8xLGKtRgqkw38J2oSGXgYSjVYUkzUMP9Z1u5nw1B554dz_FbPRqJWAnEXZOu9tXe0W1Qq5hRF61MKyr2EVFi9F5lZjUcwW28AudNmMAy2NZZYmrrjQZqBTWgEp7uE6k-FnZuhE5qfoxXT1RJeNZ3es0SqgR2SZiw7N_bVVLLhHovglIqozp3r_FA32NSrIv2wxGL5p1aLI0pJHNrckylH6Xorfj1DIs-eyvWUidn90dHj9Dkf2vF65wIupR-vrHu6yyUpwSfNLe2Xkh87387JrxVV5eTnxbtptZJ44S7ZAGAV5gjflYDXC145SdzHJGkRpLELyRJPA7ZjaS103O6JQRAkvEQHvipO8zXvzqxAp2KtQrjqfQ8MsDfha1HqVgo-NAxah8d9aGQfWr5zqrIkl4EAyFQm90pZJYiZ3yjwd-f_vhmRa-j4jk2THAIFG6bXXRM5k8730p-h3CpkVO31cAWMszn3dNwTXJiCPpA2E_SPZUBE6XR5aFjT5zz1eWbHgcLfYb9GHvah25-pR8iJ7PWgZwcidtYIoCFA4pmiNe3_G2fRFDRCtYx0cXs4pt_Rq5R65CZrs1Pg-7INTUWErIe5Dk3er3y0" alt=""></p>
 </section><section>
 <h2 id="example-tcp-chat-2">Example: TCP Chat</h2>
-<h3 id="utilitieshttpsgithubcomunibo-fc-isi-dslab-snippetsblobmastersnippetslab3__init__py-pt-2"><a href="https://github.com/unibo-fc-isi-ds/lab-snippets/blob/master/snippets/lab3/__init__.py">Utilities</a> (pt. 2)</h3>
+<h3 id="utilities-pt-2"><a href="https://github.com/unibo-fc-isi-ds/lab-snippets/blob/master/snippets/lab3/__init__.py">Utilities</a> (pt. 2)</h3>
 <ul>
 <li>
 <p><code>Connection</code>: a <em>communication channel</em> among 2 endponts, for sending and <em>asynchrnously</em> receiving messages <em>via TCP</em></p>
