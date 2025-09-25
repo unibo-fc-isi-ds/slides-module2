@@ -28,7 +28,7 @@ aliases = [
     1. [Presentation](./presentation/)
         - Exercise: [RPC-based Authentication Service](./presentation/#/exercise-rpc-auth-service)
         - Exercise: [Secure RPC-based Authentication Service](./presentation/#/exercise-rpc-auth-service-secure)
-    1. \[No time for this in A.Y. 24-25\] Testing <!-- [Testing](./testing/) -->
+    <!-- 1. \[No time for this in A.Y. 24-25\] Testing [Testing](./testing/) -->
 
     <!-- [Miscellanea](./misc/) -->
 
@@ -95,7 +95,7 @@ aliases = [
 
 ## Time—table
 
-* **Wednesday 15:00--17:00** (2h) --- Lab 3.1
+* **Friday 9:00--11:00** (2h) --- Lab 3.1
     - cf. [official timetable]({{< institutional_page_url >}}/orariolezioni) for any change
 
 Changes will be published on the {{< forum_news >}}

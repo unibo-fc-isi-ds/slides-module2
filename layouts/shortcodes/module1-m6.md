@@ -1,1 +1,0 @@
-[M6 – Modelling Distributed Systems: Software & System Architectures](https://virtuale.unibo.it/mod/resource/view.php?id=1716487)
