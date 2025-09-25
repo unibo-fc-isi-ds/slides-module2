@@ -27,11 +27,11 @@
     <section><h1 id="presentation-mechanisms-for-distributed-systems">Presentation Mechanisms for Distributed Systems</h1>
 <br>
 <h2 id="hahahugoshortcode1s0hbhb">Distributes Systems — Module 2</h2>
-<h3 id="hahahugoshortcode1s1hbhb">A.Y. 2024/2025</h3>
+<h3 id="hahahugoshortcode1s1hbhb">A.Y. 2025/2026</h3>
 <h3 id="hahahugoshortcode1s2hbhb"><a href="mailto:giovanni.ciatto@unibo.it">Giovanni Ciatto</a></h3>
 <br>
 <br>
-<p>Compiled on: 2025-09-23
+<p>Compiled on: 2025-09-25
  — <a href="?print-pdf&amp;pdfSeparateFragments=false"><i class="fa fa-print" aria-hidden="true"></i> printable version</a></p>
 <p><a href="../#/toc"><i class="fa fa-undo" aria-hidden="true"></i> back to ToC</a></p>
 </section><section>
@@ -443,7 +443,7 @@ this is why inexperienced programmers <em>often</em> don’t <em>notice</em> the
 </ol>
 </section><section>
 <h2 id="modelling-classes">Modelling (classes)</h2>
-<figure id="plantuml-figure-1758605274242267718" class="plantuml" alt="" style="width: 100%;height: 50vh;max-width: 95vw;max-height: 80vh;">
+<figure id="plantuml-figure-1758808935255528585" class="plantuml" alt="" style="width: 100%;height: 50vh;max-width: 95vw;max-height: 80vh;">
 <p>package “users” {
 class User {
 +username: str
@@ -506,7 +506,7 @@ AuthenticationService &lt;|.. InMemoryAuthenticationService
 <p>}</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1758605274242267718");
+    handlePlantumlFigureByID("plantuml-figure-1758808935255528585");
 </script>
 <div class="container w-100 m-0 p-0">
     <div class="row "><div class="col " style="text-align: left;"><ul>
@@ -845,7 +845,7 @@ AuthenticationService &lt;|.. InMemoryAuthenticationService
 </span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">_role_to_ast</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">role</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">Role</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">-&gt;</span> <span style="color:#204a87">dict</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#8f5902;font-style:italic"># Role -&gt; AST</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">{</span><span style="color:#4e9a06">'name'</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">role</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">name</span><span style="color:#000;font-weight:bold">}</span>
 </span></span></code></pre></div></div>
-<div class="col " style="text-align: left;"><figure id="plantuml-figure-1758605274260093068" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
+<div class="col " style="text-align: left;"><figure id="plantuml-figure-1758808935275833688" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
 <p>class Serializer {
 +serialize(obj: object) : str
 -_ast_to_string(data) : str
@@ -855,7 +855,7 @@ AuthenticationService &lt;|.. InMemoryAuthenticationService
 }</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1758605274260093068");
+    handlePlantumlFigureByID("plantuml-figure-1758808935275833688");
 </script>
 </div>
 </div>
@@ -922,7 +922,7 @@ AuthenticationService &lt;|.. InMemoryAuthenticationService
 </span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">_role_from_ast</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">data</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">-&gt;</span> <span style="color:#000">Role</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#8f5902;font-style:italic"># AST -&gt; Role</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">Role</span><span style="color:#000;font-weight:bold">[</span><span style="color:#000">data</span><span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">'name'</span><span style="color:#000;font-weight:bold">]]</span>
 </span></span></code></pre></div></div>
-<div class="col " style="text-align: left;"><figure id="plantuml-figure-1758605274266585836" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
+<div class="col " style="text-align: left;"><figure id="plantuml-figure-1758808935284393584" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
 <p>class Deserializer {
 + deserialize(string) : object
 - _string_to_ast(string) : object
@@ -932,7 +932,7 @@ AuthenticationService &lt;|.. InMemoryAuthenticationService
 }</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1758605274266585836");
+    handlePlantumlFigureByID("plantuml-figure-1758808935284393584");
 </script>
 </div>
 </div>
@@ -1107,7 +1107,7 @@ AuthenticationService &lt;|.. InMemoryAuthenticationService
 </span></span></code></pre></div></li>
 </ol>
 </div>
-<div class="col col-2" style="text-align: left;"><figure id="plantuml-figure-1758605274276372550" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
+<div class="col col-2" style="text-align: left;"><figure id="plantuml-figure-1758808935289512572" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
 <p>class Request {
 + name: str
 + args: tuple
@@ -1119,7 +1119,7 @@ AuthenticationService &lt;|.. InMemoryAuthenticationService
 }</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1758605274276372550");
+    handlePlantumlFigureByID("plantuml-figure-1758808935289512572");
 </script>
 <ol start="6">
 <li>Run with <code>python -m snippets -l 4 -e 1</code></li>
@@ -1222,7 +1222,7 @@ as if the procedure was <em>locally</em> executed, despite the <em>server</em> b
 </li>
 </ul>
 <div class="container w-100 m-0 p-0">
-    <div class="row "><div class="col col-3" style="text-align: left;"><figure id="plantuml-figure-1758605274278817620" class="plantuml" alt="" style="width: 100%;height: 60vh;max-width: 95vw;max-height: 80vh;">
+    <div class="row "><div class="col col-3" style="text-align: left;"><figure id="plantuml-figure-1758808935291047731" class="plantuml" alt="" style="width: 100%;height: 60vh;max-width: 95vw;max-height: 80vh;">
 <p>class Request {
 + name: str
 + args: tuple
@@ -1234,10 +1234,10 @@ as if the procedure was <em>locally</em> executed, despite the <em>server</em> b
 }</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1758605274278817620");
+    handlePlantumlFigureByID("plantuml-figure-1758808935291047731");
 </script>
 </div>
-<div class="col " style="text-align: left;"><figure id="plantuml-figure-1758605274278949548" class="plantuml" alt="" style="width: 100%;height: 60vh;max-width: 95vw;max-height: 80vh;">
+<div class="col " style="text-align: left;"><figure id="plantuml-figure-1758808935291111250" class="plantuml" alt="" style="width: 100%;height: 60vh;max-width: 95vw;max-height: 80vh;">
 <p>@startuml
 hide footbox</p>
 <p>actor Client
@@ -1273,7 +1273,7 @@ end
 @enduml</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1758605274278949548");
+    handlePlantumlFigureByID("plantuml-figure-1758808935291111250");
 </script>
 </div>
 </div>
@@ -1581,7 +1581,7 @@ end
 <li>fork the <a href="https://github.com/unibo-fc-isi-ds/lab-snippets"><code>lab-snippets</code> repository</a></li>
 <li>create a new branch named <code>exercise-lab4</code></li>
 <li>commit your solution in the <code>snippets/lab4</code> directory</li>
-<li>push the branch to your fork &amp; create a <strong>pull request</strong> to the original repository, entitled <code>[A.Y. 2024/2025 Surname, Name] Exercise: RPC Auth Service</code>
+<li>push the branch to your fork &amp; create a <strong>pull request</strong> to the original repository, entitled <code>[A.Y. 2025/2026 Surname, Name] Exercise: RPC Auth Service</code>
 <ul>
 <li>in the pull request, describe your solution, motivate your choices, and explain how to test it</li>
 </ul>
@@ -1631,7 +1631,7 @@ end
 <li>fork the <a href="https://github.com/unibo-fc-isi-ds/lab-snippets"><code>lab-snippets</code> repository</a></li>
 <li>create a new branch named <code>exercise-lab4</code></li>
 <li>commit your solution in the <code>snippets/lab4</code> directory</li>
-<li>push the branch to your fork &amp; create a <strong>pull request</strong> to the original repository, entitled <code>[A.Y. 2024/2025 Surname, Name] Exercise: RPC Auth Service 2</code>
+<li>push the branch to your fork &amp; create a <strong>pull request</strong> to the original repository, entitled <code>[A.Y. 2025/2026 Surname, Name] Exercise: RPC Auth Service 2</code>
 <ul>
 <li>or just reuse the pull request and branch of the previous exercise, if you already submitted it</li>
 <li>in the pull request, describe your solution, motivate your choices, and explain how to test it</li>
@@ -1643,7 +1643,7 @@ end
 </section><section>
 <h1 id="lecture-is-over">Lecture is Over</h1>
 <br>
-<p>Compiled on: 2025-09-23
+<p>Compiled on: 2025-09-25
  — <a href="?print-pdf&amp;pdfSeparateFragments=false"><i class="fa fa-print" aria-hidden="true"></i> printable version</a></p>
 <p><a href="../#/toc"><i class="fa fa-undo" aria-hidden="true"></i> back to ToC</a></p>
 </section>
