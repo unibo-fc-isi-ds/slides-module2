@@ -56,7 +56,7 @@ aliases = [
 
 ---
 
-### []"Concepts, Techniques, and Models of Computer Programming", Van Roy and Haridi](https://webperso.info.ucl.ac.be/~pvr/VanRoyHaridi2003-book.pdf)
+### ["Concepts, Techniques, and Models of Computer Programming", Van Roy and Haridi](https://webperso.info.ucl.ac.be/~pvr/VanRoyHaridi2003-book.pdf)
 
 > A distributed system is a set of computers that are linked together by a network
 
@@ -407,7 +407,7 @@ clients, servers, brokers, load balancers, caches, databases, queues, masters, w
 
 ## Load Balancer
 
-{{< image src="./load-balancer.png" height="60vh" alt="Load Balancer concept" >}}
+{{< image src="./load-balancer.png" height="50vh" alt="Load Balancer concept" >}}
 
 <br>
 
@@ -519,7 +519,7 @@ e.g. _request-response_, _publish-subscribe_, _auction_, _etc.
     * _arrows_ represent _messages_ sent from one participant to another
     * _lifelines_ represent the _lifetime_ of a participant
 
-![Example of a Sequence Diagram](./diagram-sequence.png)
+{{< image src="./diagram-sequence.png" alt="Example of a Sequence Diagram" max-h="50vh" >}}
 
 ### Hints
 
@@ -537,7 +537,7 @@ e.g. _request-response_, _publish-subscribe_, _auction_, _etc.
     * the graph may contain _cycles_, if the pattern allows for _repeated_ interactions, or _resets_
     * nodes may be represented in different colours/shapes depending on which _role_ sends/receives the message
 
-{{< image src="./user-agent-protocol.svg" width="65vw" link="https://link.springer.com/chapter/10.1007/978-3-031-40878-6_3" >}}
+{{< image src="./user-agent-protocol.svg" width="65vw" max-h="40vh" link="https://link.springer.com/chapter/10.1007/978-3-031-40878-6_3" >}}
 
 ### Hints
 
@@ -558,10 +558,10 @@ e.g. _request-response_, _publish-subscribe_, _auction_, _etc.
 
 {{% multicol %}}
 {{% col %}}
-{{< image src="./user-state-diagram.svg" width="40vw" link="https://link.springer.com/chapter/10.1007/978-3-031-40878-6_3" >}}
+{{< image src="./user-state-diagram.svg" width="100%" link="https://link.springer.com/chapter/10.1007/978-3-031-40878-6_3" >}}
 {{% /col %}}
 {{% col %}}
-{{< image src="./agent-state-diagram.svg" width="40vw" link="https://link.springer.com/chapter/10.1007/978-3-031-40878-6_3" >}}
+{{< image src="./agent-state-diagram.svg" width="100%" link="https://link.springer.com/chapter/10.1007/978-3-031-40878-6_3" >}}
 {{% /col %}}
 {{% /multicol %}}
 
@@ -597,7 +597,7 @@ The most common and basic pattern for communication between two components
 
 {{% multicol %}}
 {{% col %}}
-{{% plantuml %}}
+{{% plantuml max-h="60vh" %}}
 hide footbox
 participant Client
 participant Server
@@ -632,7 +632,7 @@ A simple pattern to spread information among multiple recipients
 
 {{% multicol %}}
 {{% col %}}
-{{% plantuml %}}
+{{% plantuml max-h="60vh" %}}
 hide footbox
 actor User
 participant Publisher
@@ -744,7 +744,7 @@ A simple protocol for _auctions_ and _negotiations_
 
 {{% multicol %}}
 {{% col %}}
-{{% plantuml %}}
+{{% plantuml max-h="60vh" %}}
 hide footbox
 participant Initiator
 participant Contractor1
@@ -1413,7 +1413,7 @@ e.g. [ACLs](https://en.wikipedia.org/wiki/Access-control_list), [RBAC](https://e
 ### What
 
 - _Clones_ of the same _functionality_ are deployed, each one covering a _partition_ of the _geographic region_ where the system operates
-    + e.g. amazon**.uk** vs. amazon**.it**, google**.fr** vs. google*.com**, etc.
+    + e.g. amazon<b>.uk</b> vs. amazon<b>.it</b>, google<b>.fr</b> vs. google<b>.com</b>, etc.
 - Clones are _not consistent_ among each other, because data is _partitioned_ on a geographical basis
     + mechanisms are in place to _direct_ users towards _closest_ partition
 
