@@ -69,7 +69,7 @@ passing messages.</p></blockquote>
 <li>reliance on <em>message passing</em> across a network for communication</li>
 </ul>
 </section><section>
-<h3 id="concepts-techniques-and-models-of-computer-programming-van-roy-and-haridi">[]“Concepts, Techniques, and Models of Computer Programming”, Van Roy and Haridi](<a href="https://webperso.info.ucl.ac.be/~pvr/VanRoyHaridi2003-book.pdf">https://webperso.info.ucl.ac.be/~pvr/VanRoyHaridi2003-book.pdf</a>)</h3>
+<h3 id="heading-1"><a href="https://webperso.info.ucl.ac.be/~pvr/VanRoyHaridi2003-book.pdf">“Concepts, Techniques, and Models of Computer Programming”, Van Roy and Haridi</a></h3>
 <blockquote>
 <p>A distributed system is a set of computers that are linked together by a network</p></blockquote>
 <h3 id="interpretation-3"><strong>Interpretation</strong></h3>
@@ -525,7 +525,7 @@ The role depends on the purpose of the component in the system, and/or how it in
 </ul>
 </section><section>
 <h2 id="load-balancer">Load Balancer</h2>
-<img src="./load-balancer.png" alt="Load Balancer concept" style="height: 60vh; max-width: 95vw; max-height: 80vh; object-fit: contain;">
+<img src="./load-balancer.png" alt="Load Balancer concept" style="height: 50vh; max-width: 95vw; max-height: 80vh; object-fit: contain;">
 <br>
 <ul>
 <li><strong>Load Balancer</strong> $\equiv$ a proxy <em>distributing</em> incoming requests among multiple servers
@@ -670,7 +670,7 @@ These patterns define the <em>flow of messages</em>, <em>responsibilities</em> o
 </ul>
 </li>
 </ol>
-<p><img src="./diagram-sequence.png" alt="Example of a Sequence Diagram"></p>
+<img src="./diagram-sequence.png" alt="Example of a Sequence Diagram" style="max-width: 95vw; max-height: 50vh; object-fit: contain;">
 <h3 id="hints">Hints</h3>
 <ul>
 <li>see explanation at <a href="https://www.uml-diagrams.org/sequence-diagrams.html">https://www.uml-diagrams.org/sequence-diagrams.html</a></li>
@@ -693,7 +693,7 @@ These patterns define the <em>flow of messages</em>, <em>responsibilities</em> o
 </li>
 </ol>
 <a href="https://link.springer.com/chapter/10.1007/978-3-031-40878-6_3">
-<img src="./user-agent-protocol.svg" alt="" style="width: 65vw; max-width: 95vw; max-height: 80vh; object-fit: contain;">
+<img src="./user-agent-protocol.svg" alt="" style="width: 65vw; max-width: 95vw; max-height: 40vh; object-fit: contain;">
 </a>
 <h3 id="hints-1">Hints</h3>
 <ul>
@@ -719,11 +719,11 @@ These patterns define the <em>flow of messages</em>, <em>responsibilities</em> o
 </ol>
 <div class="container w-100 m-0 p-0">
     <div class="row "><div class="col " style="text-align: left;"><a href="https://link.springer.com/chapter/10.1007/978-3-031-40878-6_3">
-<img src="./user-state-diagram.svg" alt="" style="width: 40vw; max-width: 95vw; max-height: 80vh; object-fit: contain;">
+<img src="./user-state-diagram.svg" alt="" style="width: 100%; max-width: 95vw; max-height: 80vh; object-fit: contain;">
 </a>
 </div>
 <div class="col " style="text-align: left;"><a href="https://link.springer.com/chapter/10.1007/978-3-031-40878-6_3">
-<img src="./agent-state-diagram.svg" alt="" style="width: 40vw; max-width: 95vw; max-height: 80vh; object-fit: contain;">
+<img src="./agent-state-diagram.svg" alt="" style="width: 100%; max-width: 95vw; max-height: 80vh; object-fit: contain;">
 </a>
 </div>
 </div>
@@ -762,7 +762,7 @@ These patterns define the <em>flow of messages</em>, <em>responsibilities</em> o
 <h3 id="requestresponse">Request—Response</h3>
 <p>The most common and basic pattern for communication between two components</p>
 <div class="container w-100 m-0 p-0">
-    <div class="row "><div class="col " style="text-align: left;"><figure id="plantuml-figure-1758808935234929120" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
+    <div class="row "><div class="col " style="text-align: left;"><figure id="plantuml-figure-1758809442761386225" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 60vh;">
     <p>hide footbox
 participant Client
 participant Server</p>
@@ -770,7 +770,7 @@ participant Server</p>
 Server -&gt; Client: Response</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1758808935234929120");
+    handlePlantumlFigureByID("plantuml-figure-1758809442761386225");
 </script>
 </div>
 <div class="col " style="text-align: left;"><ul>
@@ -796,7 +796,7 @@ Server -&gt; Client: Response</p>
 <h3 id="publishsubscribe">Publish—Subscribe</h3>
 <p>A simple pattern to spread information among multiple recipients</p>
 <div class="container w-100 m-0 p-0">
-    <div class="row "><div class="col " style="text-align: left;"><figure id="plantuml-figure-1758808935235324550" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
+    <div class="row "><div class="col " style="text-align: left;"><figure id="plantuml-figure-1758809442761754112" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 60vh;">
     <p>hide footbox
 actor User
 participant Publisher
@@ -819,7 +819,7 @@ Publisher -&gt; Subscriber2: notify Message
 deactivate Publisher</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1758808935235324550");
+    handlePlantumlFigureByID("plantuml-figure-1758809442761754112");
 </script>
 </div>
 <div class="col " style="text-align: left;"><ul>
@@ -855,7 +855,7 @@ deactivate Publisher</p>
 <li>this is commonly useful to <em>decouple</em> the <em>publisher</em> from the <em>subscribers</em></li>
 <li>most commonly, brokers <em>store</em> messages until they are <em>consumed</em></li>
 </ul>
-<figure id="plantuml-figure-1758808935235680956" class="plantuml" alt="" style="width: 100%;height: 50vh;max-width: 95vw;max-height: 80vh;">
+<figure id="plantuml-figure-1758809442762080811" class="plantuml" alt="" style="width: 100%;height: 50vh;max-width: 95vw;max-height: 80vh;">
     <p>hide footbox
 actor User
 participant Publisher
@@ -887,7 +887,7 @@ Broker -&gt; Subscriber2: notify Message
 deactivate Broker</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1758808935235680956");
+    handlePlantumlFigureByID("plantuml-figure-1758809442762080811");
 </script>
 </section><section>
 <h2 id="common-interaction-protocols-pt-2-2">Common Interaction Protocols (pt. 2)</h2>
@@ -908,7 +908,7 @@ deactivate Broker</p>
 <h3 id="contractnet-protocol">ContractNet Protocol</h3>
 <p>A simple protocol for <em>auctions</em> and <em>negotiations</em></p>
 <div class="container w-100 m-0 p-0">
-    <div class="row "><div class="col " style="text-align: left;"><figure id="plantuml-figure-1758808935235824805" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
+    <div class="row "><div class="col " style="text-align: left;"><figure id="plantuml-figure-1758809442762296183" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 60vh;">
     <p>hide footbox
 participant Initiator
 participant Contractor1
@@ -932,7 +932,7 @@ deactivate Contractor1
 deactivate Initiator</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1758808935235824805");
+    handlePlantumlFigureByID("plantuml-figure-1758809442762296183");
 </script>
 </div>
 <div class="col " style="text-align: left;"><ul>
@@ -1714,7 +1714,7 @@ e.g. <a href="https://en.wikipedia.org/wiki/Access-control_list">ACLs</a>, <a hr
 <ul>
 <li><em>Clones</em> of the same <em>functionality</em> are deployed, each one covering a <em>partition</em> of the <em>geographic region</em> where the system operates
 <ul>
-<li>e.g. amazon**.uk** vs. amazon**.it**, google**.fr** vs. google*.com**, etc.</li>
+<li>e.g. amazon<b>.uk</b> vs. amazon<b>.it</b>, google<b>.fr</b> vs. google<b>.com</b>, etc.</li>
 </ul>
 </li>
 <li>Clones are <em>not consistent</em> among each other, because data is <em>partitioned</em> on a geographical basis
