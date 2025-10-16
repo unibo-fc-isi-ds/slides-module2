@@ -89,7 +89,8 @@ aliases = [
 - Lectures in lab with immediate _hands-on_
 - Exercises and examples in Python
     * submission of _exercises_ [via GitHub](https://github.com/) may grant you _extra points_
-- Final project work in any language of your choice
+- Final project work in any programming language of your choice
+    * report must be in English and follow [this LaTeX template]({{% final_report_template %}})
 
 ---
 
@@ -111,39 +112,42 @@ Changes will be published on the {{< forum_news >}}
 1. **Propose** your project idea on the {{< forum_projects >}}
     + 1-3 students per _group_
     + open a discussion thread named `[Surname1, Surname2, ...] Project Proposal: <your project name>`
+    + please indicate:
+        1. names and __email-addresses__ of the members of the group;
+        2. the project _vision_, i.e. what you want to realise, eliciting the _functionalities_ of the envisioned system;
+        3. a _motivation_ of why/how the project is letting you _explore_ the __topics of the course__ (e.g. consistency, fault-tolerance, etc);
+        4. _which technologies_ (programming langues, libraries, technologies) you intend to use and _why_;
+        5. which _deliverable(s)_ you intend to produce (application, library, presentation, etc), __aside from the final report__;
+        6. some strict _temporal constraint_, if any (e.g., someone in the group is going to graduate soon)
 
 2. Any _subsequent communication_ on the project should be done on the __same thread__
     + use the thread as a _backlog_ of any official communication concerning the administration of your project work
     + if you want to talk _privately_ about your project work, _mention the URL_ of your project's thread in your email
 
-2. __Wait__ for the teachers to _approve_ your proposal
+3. __Wait__ for the teachers to _approve_ your proposal
     + most likely, we'll try to estimate the effort and ask for changes if too much or too little
     + we'll also check for overlaps with other groups
 
-3. Create a __GitHub repository__ where to develop your project and post the URL onto your project's thread
+--- 
+
+## Workflow for the project work (pt. 2)
+
+4. Create a __GitHub repository__ where to develop your project and post the URL onto your project's thread
     + make all the _members_ of the group collaborators on the repository
     + give _full admin_ rights to the teachers:
         - Usernames: [`gciatto`](https://github.com/gciatto), [`matteomagnini`](https://github.com/MatteoMagnini)
 
----
-
-{{< slide id="rules" >}}
-
-## Workflow for the project work (pt. 2)
-
-> Detailed rules here: <{{% apice_url %}}Projects/Rules>
-
-4. __Work__ on your project:
+5. __Work__ on your project:
     + _commit_ and _push_ your changes often
         - only the `master` or `main` branch will be considered for the evaluation
-    + in parallel, or later, write a _report_ about your report following [this template]({{% final_report_template %}})
+    + in parallel, or later, write a _report_ about your report following [this LaTeX template]({{% final_report_template %}})
 
-5. Once done, post a _message_ on your _project's thread_ to signal the end of the work
+6. Once done, post a _message_ on your _project's thread_ to signal the end of the work
     + we'll _clone_ your repository and evaluate the code
 
-6. __Edits__ may be requested by the teachers, to either the code or the report (or both)
+7. __Edits__ may be requested by the teachers, to either the code or the report (or both)
 
-7. Once the teachers are satisfied, you'll be requested to __present__ your work to prof. Omicini
+8. Once the teachers are satisfied, you'll be requested to __present__ your work to prof. Omicini
     + after setting up a meeting with him, in private
     + 12-15 minutes _presentation_ + 5-10 minutes _Q&A_
 

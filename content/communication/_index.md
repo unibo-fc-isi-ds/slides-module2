@@ -54,7 +54,7 @@ aliases = [
 
 > A __socket__ is an abstract representation for the _local_ endpoint of a network communication path.
 
-{{< image src="./sockets.svg" height="50vh" alt="Concept of a socket" >}}
+{{< image src="./sockets.svg" width="70%" max-h="50vh" alt="Concept of a socket" >}}
 
 ### Interpretation
 
@@ -135,7 +135,7 @@ processes, _distributed_ over the network
 
 ## Datagram sockets
 
-{{< image src="./udp-sockets.svg" alt="Datagram sockets representation" height="50vh" >}}
+{{< image src="./udp-sockets.svg" alt="Datagram sockets representation" width="80%" max-h="40vh" >}}
 
 - Datagram sockets aim at exchanging _packets_ of bytes, called _datagrams_, among _endpoints_
     + __datagram__ $\approx$ self-contained packet of a given size
@@ -700,7 +700,7 @@ Upon receiving this message, a peer should _remove_ the sender from the local li
 
 ## Stream sockets
 
-{{< image src="./tcp-sockets.svg" alt="Stream sockets representation" height="50vh" >}}
+{{< image src="./tcp-sockets.svg" alt="Stream sockets representation" width="80%" max-h="50vh" >}}
 
 - Stream sockets aim at exchanging _streams_ of bytes among _endpoints_
     + __stream__ $\approx$ sequence of bytes with __no__ _length limitation_
@@ -756,7 +756,7 @@ Upon receiving this message, a peer should _remove_ the sender from the local li
     2. __send__ and __receive__ data
 {{% /col %}}
 {{% col %}}
-{{< image alt="Diagram showing the different API of client and server stream sockets" src="./stream-sockets.avif" >}}
+{{< image max-h="80vh" alt="Diagram showing the different API of client and server stream sockets" src="./stream-sockets.avif" >}}
 {{% /col %}}
 {{% /multicol %}}
 
@@ -1398,7 +1398,7 @@ TL;DR: Let's redo the UDP chat, but with TCP, and with _no groups_
     * there's no need anymore to distinguish among _servers_ and _clients_: all peers act simultaneously as both
     * peers may be informed about the _endpoints_ of other peers at _launch time_ (via _command-line_ arguments)
 
-- __Deadline__: two weeks from today
+- __Deadline__: December 31st, 2025
 
 - __Incentive__: +1 point on the final grade (if solution is satisfying)
 

@@ -1467,7 +1467,7 @@ package dpongpy
     2. rather, the terminal should continue updating the _local game state_ according to the _local inputs_, and render it as usual
     3. upon receiving a new update from the coordinator, the terminal should overwrite the _local game state_ with the _remote one_
 
-- __Deadline__: two weeks from today
+- __Deadline__: December 31st, 2025
 
 - __Incentive__: +1 point on the final grade (if solution is satisfying)
 

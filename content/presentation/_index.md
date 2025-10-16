@@ -1211,7 +1211,7 @@ end
 
 - __Hints__: you must reuse the provided code, modifying it: no need to create further Python files
 
-- __Deadline__: two weeks from today
+- __Deadline__: December 31st, 2025
 
 - __Incentive__: +1 point on the final grade (if solution is satisfying)
 
@@ -1242,7 +1242,7 @@ end
     * the `ServerStub` should be extended to check for the presence and validity of the _token_ in the _metadata_ field
     * the client should be extended to memorize the _token_ upon successful _authentication_ and _pass_ it in the _metadata_ field of any _subsequent_ request
 
-- __Deadline__: two weeks from today
+- __Deadline__: December 31st, 2025
 
 - __Incentive__: +1 point on the final grade (if solution is satisfying)
 
