@@ -322,7 +322,7 @@ processes, _distributed_ over the network
 
 Recall that:
 - each OS may have _multiple_ __network interfaces__
-- each network interface may have _multiple_ __IP addresses__
+- each network interface may be assigned with _one_ __IP addresse__
 - `127.0.0.1` a.k.a. `localhost` is the _loopback_ address, i.e. the address of the _local_ machine
 - if the machine is connected to UniBO network, the _local_ IP address may start with `137.204.x.y`
 
@@ -551,7 +551,7 @@ Bob's terminal is waiting for remote messages
                 message, address = self.receive()
                 self.on_message_received(message, address)
 
-        # Callback being invoked when a message is received
+        # Method being invoked when a message is received
         def on_message_received(self, message, sender):
             self.__callback(message, sender)
     ```
@@ -585,9 +585,9 @@ Bob's terminal is waiting for remote messages
     import sys
 
     peer = AsyncPeer(
-    port = int(sys.argv[1]), # port number from first command-line argument
-    peers = [address(peer) for peer in sys.argv[2:]], # any other command-line argument is "ip:port"
-        callback = lambda message, _: print(message) # print incoming messages on the console
+        port=int(sys.argv[1]), # port number from first command-line argument
+        peers=[address(peer) for peer in sys.argv[2:]], # any other command-line argument is "ip:port"
+        callback=lambda message, _: print(message) # print incoming messages on the console
     )
 
     print(f'Bound to: {peer.local_address}')
