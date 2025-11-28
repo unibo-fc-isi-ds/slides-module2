@@ -1025,7 +1025,7 @@ To support RPC, implementation will most commonly define two data structures:
 
 {{% multicol %}}
 {{% col class="col-3" %}}
-{{< plantuml height="60vh" >}}
+{{< plantuml height="50vh" >}}
 class Request {
     + name: str
     + args: tuple
@@ -1040,7 +1040,7 @@ class Response {
 {{< /plantuml >}}
 {{% /col %}}
 {{% col %}}
-{{< plantuml height="60vh" >}}
+{{< plantuml height="50vh" >}}
 @startuml
 hide footbox
 
