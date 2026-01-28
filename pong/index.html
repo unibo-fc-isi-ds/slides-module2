@@ -31,7 +31,7 @@
 <h3 id="hahahugoshortcode1s2hbhb"><a href="mailto:giovanni.ciatto@unibo.it">Giovanni Ciatto</a></h3>
 <br>
 <br>
-<p>Compiled on: 2026-01-23
+<p>Compiled on: 2026-01-28
  — <a href="?print-pdf&amp;pdfSeparateFragments=false"><i class="fa fa-print" aria-hidden="true"></i> printable version</a></p>
 <p><a href="../#/toc"><i class="fa fa-undo" aria-hidden="true"></i> back to ToC</a></p>
 </section><section>
@@ -56,7 +56,7 @@
 </div>
 <div class="col " style="text-align: left;"><p>Source code at: <a href="https://github.com/unibo-fc-isi-ds/dpongpy">https://github.com/unibo-fc-isi-ds/dpongpy</a></p>
 <p>Go on, play with it!</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span>pip install dpongpy
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span>pip install dpongpy
 </span></span><span style="display:flex;"><span>python -m dpongpy --help <span style="color:#8f5902;font-style:italic"># to see all options</span>
 </span></span><span style="display:flex;"><span>python -m dpongpy --mode <span style="color:#204a87">local</span> <span style="color:#8f5902;font-style:italic"># to play offline</span>
 </span></span><span style="display:flex;"><span>
@@ -132,7 +132,7 @@
 </ul>
 </section><section>
 <h2 id="the-game-loop-in-pygame">The Game Loop in PyGame</h2>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">pygame</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">pygame</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># Initialize Pygame</span>
 </span></span><span style="display:flex;"><span><span style="color:#000">pygame</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">init</span><span style="color:#000;font-weight:bold">()</span>
@@ -242,7 +242,7 @@
 </li>
 </ol>
 <div class="container w-100 m-0 p-0">
-    <div class="row "><div class="col col-9" style="text-align: left;"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">from</span> <span style="color:#000">pygame.math</span> <span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">Vector2</span>
+    <div class="row "><div class="col col-9" style="text-align: left;"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">from</span> <span style="color:#000">pygame.math</span> <span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">Vector2</span>
 </span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">from</span> <span style="color:#000">pygame.rect</span> <span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">Rect</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>
@@ -298,7 +298,7 @@
 </span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">assert</span> <span style="color:#000">x</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">position</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#000">Vector2</span><span style="color:#000;font-weight:bold">(</span><span style="color:#0000cf;font-weight:bold">102</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#0000cf;font-weight:bold">204</span><span style="color:#000;font-weight:bold">)</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">assert</span> <span style="color:#000">x</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#000">y</span>
 </span></span></code></pre></div></div>
-<div class="col " style="text-align: left;"><figure id="plantuml-figure-1769133905292898647" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
+<div class="col " style="text-align: left;"><figure id="plantuml-figure-1769638366915163987" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
 <p>class GameObject {
 + name: str
 + position: Vector2
@@ -323,7 +323,7 @@ class Rect {
 GameObject *– Rect</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1769133905292898647");
+    handlePlantumlFigureByID("plantuml-figure-1769638366915163987");
 </script>
 </div>
 </div>
@@ -350,7 +350,7 @@ GameObject *– Rect</p>
 </li>
 </ol>
 <div class="container w-100 m-0 p-0">
-    <div class="row "><div class="col col-9" style="text-align: left;"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">pygame</span>
+    <div class="row "><div class="col col-9" style="text-align: left;"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">pygame</span>
 </span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">from</span> <span style="color:#000">pygame.event</span> <span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">Event</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">custom_type</span>
 </span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">from</span> <span style="color:#000">enum</span> <span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">Enum</span>
 </span></span><span style="display:flex;"><span>
@@ -422,7 +422,7 @@ GameObject *– Rect</p>
 </span></span><span style="display:flex;"><span>                <span style="color:#000">pygame</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">quit</span><span style="color:#000;font-weight:bold">()</span>
 </span></span><span style="display:flex;"><span>                <span style="color:#000">exit</span><span style="color:#000;font-weight:bold">()</span>
 </span></span></code></pre></div></div>
-<div class="col " style="text-align: left;"><figure id="plantuml-figure-1769133905306392725" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
+<div class="col " style="text-align: left;"><figure id="plantuml-figure-1769638366926163962" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
 <p>top to bottom direction</p>
 <p>enum GameEvent {
 + MOVE_UP
@@ -458,7 +458,7 @@ class Event {
 InputHandler .u.&gt; Event: uses</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1769133905306392725");
+    handlePlantumlFigureByID("plantuml-figure-1769638366926163962");
 </script>
 </div>
 </div>
@@ -479,7 +479,7 @@ InputHandler .u.&gt; Event: uses</p>
 </li>
 </ol>
 <div class="container w-100 m-0 p-0">
-    <div class="row "><div class="col col-9" style="text-align: left;"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">pygame</span>
+    <div class="row "><div class="col col-9" style="text-align: left;"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">pygame</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">class</span> <span style="color:#000">View</span><span style="color:#000;font-weight:bold">:</span>
@@ -505,7 +505,7 @@ InputHandler .u.&gt; Event: uses</p>
 </span></span><span style="display:flex;"><span>        <span style="color:#000">pygame</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">draw</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">ellipse</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">_screen</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">color</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">game_object</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">bounding_box</span><span style="color:#000;font-weight:bold">)</span>    
 </span></span><span style="display:flex;"><span>        
 </span></span></code></pre></div></div>
-<div class="col " style="text-align: left;"><figure id="plantuml-figure-1769133905311600708" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
+<div class="col " style="text-align: left;"><figure id="plantuml-figure-1769638366932448280" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
 <p>top to bottom direction</p>
 <p>class View {
 - _size: tuple[int, int]
@@ -533,7 +533,7 @@ class Color {
 View ..&gt; Color: uses</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1769133905311600708");
+    handlePlantumlFigureByID("plantuml-figure-1769638366932448280");
 </script>
 </div>
 </div>
@@ -551,7 +551,7 @@ View ..&gt; Color: uses</p>
 </ul>
 </li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">pygame</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">pygame</span>
 </span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">from</span> <span style="color:#000">.example2_game_object</span> <span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">GameObject</span>
 </span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">from</span> <span style="color:#000">.example3_controller</span> <span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">Controller</span>
 </span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">from</span> <span style="color:#000">.example4_view</span> <span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">View</span>
@@ -654,7 +654,7 @@ View ..&gt; Color: uses</p>
 </div>
 </section><section>
 <h2 id="lets-infer-a-model-from-the-view-pt-3">Let’s infer a model from the view (pt. 3)</h2>
-<figure id="plantuml-figure-1769133905327853997" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
+<figure id="plantuml-figure-1769638366947685677" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
 <p>left to right direction</p>
 <p>package “dpongpy.model” {</p>
 <pre><code>enum Direction {
@@ -786,7 +786,7 @@ class Vector2 {
 Pong “1” *– “1” Random</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1769133905327853997");
+    handlePlantumlFigureByID("plantuml-figure-1769638366947685677");
 </script>
 <p>code <a href="https://github.com/unibo-fc-isi-ds/dpongpy/blob/master/dpongpy/model.py">on GitHub</a></p>
 </section><section>
@@ -1018,7 +1018,7 @@ Pong “1” *– “1” Random</p>
 </span>
 </section><section>
 <h2 id="design-proposal-pt-1">Design Proposal (pt. 1)</h2>
-<figure id="plantuml-figure-1769133905329411077" class="plantuml" alt="" style="width: 85%;max-width: 95vw;max-height: 80vh;">
+<figure id="plantuml-figure-1769638366948834637" class="plantuml" alt="" style="width: 85%;max-width: 95vw;max-height: 80vh;">
 <p>left to right direction</p>
 <p>package “pygame.event” {
 class Event {
@@ -1090,7 +1090,7 @@ ControlEvent &lt;.. EventHandler: processes
 EventHandler ..&gt; Pong: updates\nbased on\nControlEvent</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1769133905329411077");
+    handlePlantumlFigureByID("plantuml-figure-1769638366948834637");
 </script>
 <ul>
 <li>each <strong>player</strong> is associated to a <code>Paddle</code> and to an <code>ActionMap</code> to <em>govern</em> that <code>Paddle</code></li>
@@ -1125,7 +1125,7 @@ EventHandler ..&gt; Pong: updates\nbased on\nControlEvent</p>
 <p><img src="https://www.plantuml.com/plantuml/svg/PLBBRjGm5DtVhpWQ5csjPiGwGbLHPn18HSm2M4MgFF5j6khOmRuP68tw5tmNtqJi43LLDtcSnz7rkRwEeeCCdINBzmBn26tp831ju5fQxuXgxoHuYnlhwqUYX6lNMCQR8rlhVs7L7nlTyLhQyP5LA-W8vuL1b5z5A5xxLt__IENEamriTH_PL2wshcPO7GNtOKozo5b6YB8VHN4r_g54xRj-48v4wSixTe9FReG-QcSi1o8ZMRq4IyodiTxtbUjrZ1mn3WBnHBsk7tN3k9b4sqCAFH40pDHyM4xSMgciKUgySacbb1nxLgfSHYJPxlrcSxkz-_pb-rQfzK7RWIzdYz6Ya-Kq0HDurcjZBD-rpl3liqHlvfMCSRVR3r-LkdnXC3F_IlrjfzGaVQhSLEWgpx_22PHnUYBwEV30o1D7ecLjAEnOvF989Hfs77HQm1B7UbXV_SyemIvd6koFbLi6BfUMnC_uPCMxOYXUC2KCvx28F3fHgcsl8sFdNOF9-JpmyFQYo4o9pXz6brBQMgMGjWU__y6rnChfklR1j6E0UCW3jm7r408Bb8eziqdDfHkQBmbTipD3P_y1" alt=""></p>
 </section><section>
 <h2 id="design-proposal-pt-4">Design proposal (pt. 4)</h2>
-<figure id="plantuml-figure-1769133905329450901" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 50vh;">
+<figure id="plantuml-figure-1769638366948865485" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 50vh;">
 <p>package “dpongpy.controller” {
 interface EventHandler
 interface InputHandler
@@ -1137,7 +1137,7 @@ InputHandler &lt;|-d- Controller
 }</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1769133905329450901");
+    handlePlantumlFigureByID("plantuml-figure-1769638366948865485");
 </script>
 <p>we call <code>Controller</code> any entity which acts as both an <code>EventHandler</code> and an <code>InputHandler</code></p>
 </section><section>
@@ -1165,7 +1165,7 @@ InputHandler &lt;|-d- Controller
 </section><section>
 <h2 id="design-proposal">Design Proposal</h2>
 <div class="container w-100 m-0 p-0">
-    <div class="row "><div class="col col-5" style="text-align: left;"><figure id="plantuml-figure-1769133905329491987" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
+    <div class="row "><div class="col col-5" style="text-align: left;"><figure id="plantuml-figure-1769638366948896403" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
 <p>@startuml
 package “dpongpy” {
 class Pong</p>
@@ -1192,10 +1192,10 @@ PongView &lt;|-d- ShowNothingPongView
 @enduml</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1769133905329491987");
+    handlePlantumlFigureByID("plantuml-figure-1769638366948896403");
 </script>
 </div>
-<div class="col " style="text-align: left;"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">pygame</span>
+<div class="col " style="text-align: left;"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">pygame</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">from</span> <span style="color:#000">dpongpy.model</span> <span style="color:#204a87;font-weight:bold">import</span> <span style="color:#ce5c00;font-weight:bold">*</span>
 </span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">from</span> <span style="color:#000">typing</span> <span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">Iterable</span>
@@ -1253,7 +1253,7 @@ PongView &lt;|-d- ShowNothingPongView
 <h2 id="wiring-it-all-together">Wiring it all together</h2>
 
 <div class="container w-100 m-0 p-0">
-    <div class="row "><div class="col col-3" style="text-align: left;"><figure id="plantuml-figure-1769133905337065083" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
+    <div class="row "><div class="col col-3" style="text-align: left;"><figure id="plantuml-figure-1769638366955537060" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
 <p>top to bottom direction
 package “dpongpy” {
 class Settings {
@@ -1285,10 +1285,10 @@ Settings -d[hidden]- PongGame
 }</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1769133905337065083");
+    handlePlantumlFigureByID("plantuml-figure-1769638366955537060");
 </script>
 </div>
-<div class="col " style="text-align: center;"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">class</span> <span style="color:#000">PongGame</span><span style="color:#000;font-weight:bold">:</span>
+<div class="col " style="text-align: center;"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">class</span> <span style="color:#000">PongGame</span><span style="color:#000;font-weight:bold">:</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">__init__</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">settings</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">Settings</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#204a87;font-weight:bold">None</span><span style="color:#000;font-weight:bold">):</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">settings</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">settings</span> <span style="color:#204a87;font-weight:bold">or</span> <span style="color:#000">Settings</span><span style="color:#000;font-weight:bold">()</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">pong</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">Pong</span><span style="color:#000;font-weight:bold">(</span>
@@ -1359,7 +1359,7 @@ Settings -d[hidden]- PongGame
 <h1 id="pong-1">Pong</h1>
 <h2 id="lancing-the-game">Lancing the game</h2>
 <p>See the command line options via <code>poetry run python -m dpongpy -h</code>:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span>pygame 2.6.0 <span style="color:#ce5c00;font-weight:bold">(</span>SDL 2.28.4, Python 3.12.5<span style="color:#ce5c00;font-weight:bold">)</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span>pygame 2.6.0 <span style="color:#ce5c00;font-weight:bold">(</span>SDL 2.28.4, Python 3.12.5<span style="color:#ce5c00;font-weight:bold">)</span>
 </span></span><span style="display:flex;"><span>Hello from the pygame community. https://www.pygame.org/contribute.html
 </span></span><span style="display:flex;"><span>usage: python -m dpongpy <span style="color:#ce5c00;font-weight:bold">[</span>-h<span style="color:#ce5c00;font-weight:bold">]</span> <span style="color:#ce5c00;font-weight:bold">[</span>--mode <span style="color:#ce5c00;font-weight:bold">{</span>local<span style="color:#ce5c00;font-weight:bold">}]</span> <span style="color:#ce5c00;font-weight:bold">[</span>--side <span style="color:#ce5c00;font-weight:bold">{</span>none,left,up,right,down<span style="color:#ce5c00;font-weight:bold">}]</span> <span style="color:#ce5c00;font-weight:bold">[</span>--keys <span style="color:#ce5c00;font-weight:bold">{</span>wasd,arrows,ijkl,numpad<span style="color:#ce5c00;font-weight:bold">}]</span> <span style="color:#ce5c00;font-weight:bold">[</span>--debug<span style="color:#ce5c00;font-weight:bold">]</span> <span style="color:#ce5c00;font-weight:bold">[</span>--size SIZE SIZE<span style="color:#ce5c00;font-weight:bold">]</span> <span style="color:#ce5c00;font-weight:bold">[</span>--fps FPS<span style="color:#ce5c00;font-weight:bold">]</span>
 </span></span><span style="display:flex;"><span>
@@ -1896,7 +1896,7 @@ or
 <h2 id="distributed-pong-analysis-pt-1">Distributed Pong Analysis (pt. 1)</h2>
 <p>Let’s focus on the currently available implementation: <br> <a href="https://github.com/unibo-fc-isi-ds/dpongpy">https://github.com/unibo-fc-isi-ds/dpongpy</a></p>
 <h3 id="project-structure">Project structure</h3>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">package</span> <span style="color:#000">dpongpy</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">package</span> <span style="color:#000">dpongpy</span>
 </span></span><span style="display:flex;"><span><span style="color:#a40000">├──</span> <span style="color:#204a87;font-weight:bold">class</span> <span style="color:#000">PongGame</span>    <span style="color:#8f5902;font-style:italic">// entry point for local game
 </span></span></span><span style="display:flex;"><span><span style="color:#a40000">├──</span> <span style="color:#204a87;font-weight:bold">package</span> <span style="color:#000">dpongpy.model</span>
 </span></span><span style="display:flex;"><span><span style="color:#a40000">│</span>   <span style="color:#a40000">└──</span> <span style="color:#204a87;font-weight:bold">class</span> <span style="color:#000">Pong</span>
@@ -1974,7 +1974,7 @@ or
 <p>what if a <em>terminal</em> send inputs concerning the <em>wrong paddle</em>?</p>
 <ul>
 <li>Inject a bug into the terminal to force sending events for the same paddle. Start the coordinator and then 2 terminals. What happens?
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">class</span> <span style="color:#000">Controller</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">PongInputHandler</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">EventHandler</span><span style="color:#000;font-weight:bold">):</span>           <span style="color:#8f5902;font-style:italic"># dpongpy/remote/centralised/__init__.py, line 114</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">class</span> <span style="color:#000">Controller</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">PongInputHandler</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">EventHandler</span><span style="color:#000;font-weight:bold">):</span>           <span style="color:#8f5902;font-style:italic"># dpongpy/remote/centralised/__init__.py, line 114</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">post_event</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">event</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">Event</span> <span style="color:#ce5c00;font-weight:bold">|</span> <span style="color:#000">ControlEvent</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#ce5c00;font-weight:bold">**</span><span style="color:#000">kwargs</span><span style="color:#000;font-weight:bold">):</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#000">event</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#204a87">super</span><span style="color:#000;font-weight:bold">()</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">post_event</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">event</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#ce5c00;font-weight:bold">**</span><span style="color:#000">kwargs</span><span style="color:#000;font-weight:bold">)</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">ControlEvent</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">PADDLE_MOVE</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">matches</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">event</span><span style="color:#000;font-weight:bold">):</span>         <span style="color:#8f5902;font-style:italic"># this is how you can inject the bug</span>
@@ -2064,7 +2064,7 @@ or
 </section><section>
 <h1 id="lecture-is-over">Lecture is Over</h1>
 <br>
-<p>Compiled on: 2026-01-23
+<p>Compiled on: 2026-01-28
  — <a href="?print-pdf&amp;pdfSeparateFragments=false"><i class="fa fa-print" aria-hidden="true"></i> printable version</a></p>
 <p><a href="../#/toc"><i class="fa fa-undo" aria-hidden="true"></i> back to ToC</a></p>
 </section>

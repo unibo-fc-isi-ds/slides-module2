@@ -31,7 +31,7 @@
 <h3 id="hahahugoshortcode1s2hbhb"><a href="mailto:giovanni.ciatto@unibo.it">Giovanni Ciatto</a></h3>
 <br>
 <br>
-<p>Compiled on: 2026-01-23
+<p>Compiled on: 2026-01-28
  — <a href="?print-pdf&amp;pdfSeparateFragments=false"><i class="fa fa-print" aria-hidden="true"></i> printable version</a></p>
 <p><a href="../#/toc"><i class="fa fa-undo" aria-hidden="true"></i> back to ToC</a></p>
 </section><section>
@@ -254,7 +254,7 @@ this is why inexperienced programmers <em>often</em> don’t <em>notice</em> the
 </ul>
 </li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#000">s</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#4e9a06">"À l'école, l'élève étudiait l'histoire de la Révolution française et les événements marquants de l'été 1789."</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#000">s</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#4e9a06">"À l'école, l'élève étudiait l'histoire de la Révolution française et les événements marquants de l'été 1789."</span>
 </span></span><span style="display:flex;"><span><span style="color:#000">b</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">s</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">encode</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">'utf-8'</span><span style="color:#000;font-weight:bold">)</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#204a87">print</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">b</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#8f5902;font-style:italic"># b"\xc3\x80 l'\xc3\xa9cole, l'\xc3\xa9l\xc3\xa8ve \xc3\xa9tudiait l'histoire de la R\xc3\xa9volution fran\xc3\xa7aise et les \xc3\xa9v\xc3\xa9nements marquants de l'\xc3\xa9t\xc3\xa9 1789."</span>
@@ -305,13 +305,13 @@ this is why inexperienced programmers <em>often</em> don’t <em>notice</em> the
 </section><section>
 <h2 id="escape-sequences-in-python">Escape sequences in Python</h2>
 <p>Function to <em>escape</em> strings:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">escape</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">s</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#204a87">str</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">-&gt;</span> <span style="color:#204a87">str</span><span style="color:#000;font-weight:bold">:</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">escape</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">s</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#204a87">str</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">-&gt;</span> <span style="color:#204a87">str</span><span style="color:#000;font-weight:bold">:</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">s</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">encode</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">'unicode_escape'</span><span style="color:#000;font-weight:bold">)</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">decode</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">'ascii'</span><span style="color:#000;font-weight:bold">)</span>
 </span></span></code></pre></div><p>Function to <em>unescape</em> strings:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">unescape</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">s</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#204a87">str</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">-&gt;</span> <span style="color:#204a87">str</span><span style="color:#000;font-weight:bold">:</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">unescape</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">s</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#204a87">str</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">-&gt;</span> <span style="color:#204a87">str</span><span style="color:#000;font-weight:bold">:</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">s</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">encode</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">'ascii'</span><span style="color:#000;font-weight:bold">)</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">decode</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">'unicode_escape'</span><span style="color:#000;font-weight:bold">)</span>
 </span></span></code></pre></div><p>Usage example:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#000">s</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#4e9a06">"""
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#000">s</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#4e9a06">"""
 </span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">value1 \ value2
 </span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">value3 / value4
 </span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">"""</span>
@@ -337,7 +337,7 @@ this is why inexperienced programmers <em>often</em> don’t <em>notice</em> the
 </ul>
 <h3 id="example">Example:</h3>
 <div class="container w-100 m-0 p-0">
-    <div class="row "><div class="col " style="text-align: left;"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#000;font-weight:bold">{</span>
+    <div class="row "><div class="col " style="text-align: left;"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#000;font-weight:bold">{</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">"name"</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">"John Doe"</span><span style="color:#000;font-weight:bold">,</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">"age"</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#0000cf;font-weight:bold">42</span><span style="color:#000;font-weight:bold">,</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">"password"</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#204a87;font-weight:bold">null</span><span style="color:#000;font-weight:bold">,</span>
@@ -382,7 +382,7 @@ this is why inexperienced programmers <em>often</em> don’t <em>notice</em> the
 <p>Example of JSON parsing:</p>
 </li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#000">doc</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#204a87">str</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#4e9a06">'{"name": "John Doe", "age": 42, "password": null, "is_student": false, "is_teacher": true, "stats": {"height": 1.83, "weight": 82.5}, "working_hours": [{"mon": 8}, {"tue": 7}, {"wed": 7}, {"thu": 8}, {"fri": 6}], "address": {"street": "123 Main St", "city": "Springfield", "state": "IL", "zip": "62701"}}'</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#000">doc</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#204a87">str</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#4e9a06">'{"name": "John Doe", "age": 42, "password": null, "is_student": false, "is_teacher": true, "stats": {"height": 1.83, "weight": 82.5}, "working_hours": [{"mon": 8}, {"tue": 7}, {"wed": 7}, {"thu": 8}, {"fri": 6}], "address": {"street": "123 Main St", "city": "Springfield", "state": "IL", "zip": "62701"}}'</span>
 </span></span><span style="display:flex;"><span><span style="color:#000">obj</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#204a87">object</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">json</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">loads</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">doc</span><span style="color:#000;font-weight:bold">)</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#204a87">print</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87">type</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">obj</span><span style="color:#000;font-weight:bold">))</span> <span style="color:#8f5902;font-style:italic"># &lt;class 'dict'&gt;</span>
@@ -446,7 +446,7 @@ this is why inexperienced programmers <em>often</em> don’t <em>notice</em> the
 </ol>
 </section><section>
 <h2 id="modelling-classes">Modelling (classes)</h2>
-<figure id="plantuml-figure-1769133905298246012" class="plantuml" alt="" style="width: 100%;height: 50vh;max-width: 95vw;max-height: 80vh;">
+<figure id="plantuml-figure-1769638366906403087" class="plantuml" alt="" style="width: 100%;height: 50vh;max-width: 95vw;max-height: 80vh;">
 <p>package “users” {
 class User {
 +username: str
@@ -509,7 +509,7 @@ AuthenticationService &lt;|.. InMemoryAuthenticationService
 <p>}</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1769133905298246012");
+    handlePlantumlFigureByID("plantuml-figure-1769638366906403087");
 </script>
 <div class="container w-100 m-0 p-0">
     <div class="row "><div class="col " style="text-align: left;"><ul>
@@ -547,7 +547,7 @@ AuthenticationService &lt;|.. InMemoryAuthenticationService
 </section><section>
 <h2 id="exemplify-implementation">Exemplify implementation</h2>
 <p>(cf. <a href="https://github.com/unibo-fc-isi-ds/lab-snippets/blob/master/snippets/lab4/example0_users.py">https://github.com/unibo-fc-isi-ds/lab-snippets/blob/master/snippets/lab4/example0_users.py</a>)</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">from</span> <span style="color:#000">.users</span> <span style="color:#204a87;font-weight:bold">import</span> <span style="color:#ce5c00;font-weight:bold">*</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">from</span> <span style="color:#000">.users</span> <span style="color:#204a87;font-weight:bold">import</span> <span style="color:#ce5c00;font-weight:bold">*</span>
 </span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">from</span> <span style="color:#000">.users.impl</span> <span style="color:#204a87;font-weight:bold">import</span> <span style="color:#ce5c00;font-weight:bold">*</span>
 </span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">time</span>
 </span></span><span style="display:flex;"><span>
@@ -657,7 +657,7 @@ AuthenticationService &lt;|.. InMemoryAuthenticationService
 <li><strong>Deserialization</strong> $\equiv$ converting <strong>char</strong>/<em>byte</em> <strong>sequences</strong> back into <em>in-memory</em> <strong>objects</strong>, according to the <em>same</em> data interchange format</li>
 </ul>
 <div class="container w-100 m-0 p-0">
-    <div class="row "><div class="col col-5" style="text-align: left;"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">from</span> <span style="color:#000">snippets.lab4.users</span> <span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">User</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">Role</span>
+    <div class="row "><div class="col col-5" style="text-align: left;"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">from</span> <span style="color:#000">snippets.lab4.users</span> <span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">User</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">Role</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#000">User</span><span style="color:#000;font-weight:bold">(</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#000">username</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#4e9a06">'gciatto'</span><span style="color:#000;font-weight:bold">,</span>
@@ -673,7 +673,7 @@ AuthenticationService &lt;|.. InMemoryAuthenticationService
 <div class="col col-2" style="text-align: left;"><p>$\xrightarrow{\text{serialization}}$</p>
 <p>$\xleftarrow{\text{deserialization}}$</p>
 </div>
-<div class="col col-5" style="text-align: left;"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#000;font-weight:bold">{</span>
+<div class="col col-5" style="text-align: left;"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#000;font-weight:bold">{</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">"username"</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">"gciatto"</span><span style="color:#000;font-weight:bold">,</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">"emails"</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">[</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#4e9a06">"giovanni.ciatto@unibo.it"</span><span style="color:#000;font-weight:bold">,</span>
@@ -731,7 +731,7 @@ AuthenticationService &lt;|.. InMemoryAuthenticationService
 </li>
 </ul>
 <div class="container w-100 m-0 p-0">
-    <div class="row "><div class="col col-4" style="text-align: left;"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># Python object</span>
+    <div class="row "><div class="col col-4" style="text-align: left;"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># Python object</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#000">User</span><span style="color:#000;font-weight:bold">(</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#000">username</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#4e9a06">'gciatto'</span><span style="color:#000;font-weight:bold">,</span>
@@ -744,7 +744,7 @@ AuthenticationService &lt;|.. InMemoryAuthenticationService
 </span></span><span style="display:flex;"><span>  <span style="color:#000">password</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#4e9a06">'my secret password'</span><span style="color:#000;font-weight:bold">,</span>
 </span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">)</span>
 </span></span></code></pre></div></div>
-<div class="col col-4" style="text-align: left;"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">#&nbsp;Python dict (AST)</span>
+<div class="col col-4" style="text-align: left;"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">#&nbsp;Python dict (AST)</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#204a87">dict</span><span style="color:#000;font-weight:bold">(</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#000">username</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#4e9a06">'gciatto'</span><span style="color:#000;font-weight:bold">,</span>
@@ -757,7 +757,7 @@ AuthenticationService &lt;|.. InMemoryAuthenticationService
 </span></span><span style="display:flex;"><span>  <span style="color:#000">password</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#4e9a06">'my secret password'</span><span style="color:#000;font-weight:bold">,</span>
 </span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">)</span>
 </span></span></code></pre></div></div>
-<div class="col col-4" style="text-align: left;"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">// JSON document
+<div class="col col-4" style="text-align: left;"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">// JSON document
 </span></span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">{</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#204a87;font-weight:bold">"username"</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">"gciatto"</span><span style="color:#000;font-weight:bold">,</span>
@@ -790,7 +790,7 @@ AuthenticationService &lt;|.. InMemoryAuthenticationService
 </section><section>
 <h2 id="serialization-in-python-attempt-1">Serialization in Python (attempt 1)</h2>
 <div class="container w-100 m-0 p-0">
-    <div class="row "><div class="col col-5" style="text-align: left;"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">from</span> <span style="color:#000">snippets.lab4.users</span> <span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">User</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">Role</span>
+    <div class="row "><div class="col col-5" style="text-align: left;"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">from</span> <span style="color:#000">snippets.lab4.users</span> <span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">User</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">Role</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#000">to_serialize</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">User</span><span style="color:#000;font-weight:bold">(</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#000">username</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#4e9a06">'gciatto'</span><span style="color:#000;font-weight:bold">,</span>
@@ -805,7 +805,7 @@ AuthenticationService &lt;|.. InMemoryAuthenticationService
 </span></span></code></pre></div></div>
 <div class="col col-2" style="text-align: left;"><p>$\xrightarrow{\text{serialization}}$</p>
 </div>
-<div class="col col-5" style="text-align: left;"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#000;font-weight:bold">{</span>
+<div class="col col-5" style="text-align: left;"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#000;font-weight:bold">{</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#204a87;font-weight:bold">"username"</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">"gciatto"</span><span style="color:#000;font-weight:bold">,</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#204a87;font-weight:bold">"emails"</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">[</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#4e9a06">"giovanni.ciatto@unibo.it"</span><span style="color:#000;font-weight:bold">,</span>
@@ -820,7 +820,7 @@ AuthenticationService &lt;|.. InMemoryAuthenticationService
 </div>
 <p>Let’s implement a serializer:</p>
 <div class="container w-100 m-0 p-0">
-    <div class="row "><div class="col col-8" style="text-align: left;"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">class</span> <span style="color:#000">Serializer</span><span style="color:#000;font-weight:bold">:</span>
+    <div class="row "><div class="col col-8" style="text-align: left;"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">class</span> <span style="color:#000">Serializer</span><span style="color:#000;font-weight:bold">:</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">serialize</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">obj</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#204a87">object</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">-&gt;</span> <span style="color:#204a87">str</span><span style="color:#000;font-weight:bold">:</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">_ast_to_string</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">_to_ast</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">obj</span><span style="color:#000;font-weight:bold">))</span> <span style="color:#8f5902;font-style:italic"># objct -&gt; AST -&gt; JSON string</span>
 </span></span><span style="display:flex;"><span>
@@ -848,7 +848,7 @@ AuthenticationService &lt;|.. InMemoryAuthenticationService
 </span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">_role_to_ast</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">role</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">Role</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">-&gt;</span> <span style="color:#204a87">dict</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#8f5902;font-style:italic"># Role -&gt; AST</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">{</span><span style="color:#4e9a06">'name'</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">role</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">name</span><span style="color:#000;font-weight:bold">}</span>
 </span></span></code></pre></div></div>
-<div class="col " style="text-align: left;"><figure id="plantuml-figure-1769133905311359762" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
+<div class="col " style="text-align: left;"><figure id="plantuml-figure-1769638366922641815" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
 <p>class Serializer {
 +serialize(obj: object) : str
 -_ast_to_string(data) : str
@@ -858,17 +858,17 @@ AuthenticationService &lt;|.. InMemoryAuthenticationService
 }</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1769133905311359762");
+    handlePlantumlFigureByID("plantuml-figure-1769638366922641815");
 </script>
 </div>
 </div>
 </div>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#000">serializer</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">Serializer</span><span style="color:#000;font-weight:bold">()</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#000">serializer</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">Serializer</span><span style="color:#000;font-weight:bold">()</span>
 </span></span><span style="display:flex;"><span><span style="color:#204a87">print</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">serializer</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">serialize</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">to_serialize</span><span style="color:#000;font-weight:bold">))</span> <span style="color:#8f5902;font-style:italic"># prints the JSON document</span>
 </span></span></code></pre></div></section><section>
 <h2 id="deserialization-in-python-attempt-1">Deserialization in Python (attempt 1)</h2>
 <div class="container w-100 m-0 p-0">
-    <div class="row "><div class="col col-5" style="text-align: left;"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#000">to_deserialize</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#4e9a06">"""{
+    <div class="row "><div class="col col-5" style="text-align: left;"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#000">to_deserialize</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#4e9a06">"""{
 </span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">  "username": "gciatto",
 </span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">  "emails": [
 </span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">    "giovanni.ciatto@unibo.it",
@@ -881,7 +881,7 @@ AuthenticationService &lt;|.. InMemoryAuthenticationService
 </span></span></code></pre></div></div>
 <div class="col col-2" style="text-align: left;"><p>$\xrightarrow{\text{deserialization}}$</p>
 </div>
-<div class="col col-5" style="text-align: left;"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">from</span> <span style="color:#000">snippets.lab4.users</span> <span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">User</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">Role</span>
+<div class="col col-5" style="text-align: left;"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">from</span> <span style="color:#000">snippets.lab4.users</span> <span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">User</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">Role</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#000">result</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">User</span><span style="color:#000;font-weight:bold">(</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#000">username</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#4e9a06">'gciatto'</span><span style="color:#000;font-weight:bold">,</span>
@@ -897,7 +897,7 @@ AuthenticationService &lt;|.. InMemoryAuthenticationService
 </div>
 </div>
 <div class="container w-100 m-0 p-0">
-    <div class="row "><div class="col col-8" style="text-align: left;"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">class</span> <span style="color:#000">Deserializer</span><span style="color:#000;font-weight:bold">:</span>
+    <div class="row "><div class="col col-8" style="text-align: left;"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">class</span> <span style="color:#000">Deserializer</span><span style="color:#000;font-weight:bold">:</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">deserialize</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">string</span><span style="color:#000;font-weight:bold">):</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">_ast_to_obj</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">_string_to_ast</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">string</span><span style="color:#000;font-weight:bold">))</span> <span style="color:#8f5902;font-style:italic"># JSON string -&gt; AST -&gt; object</span>
 </span></span><span style="display:flex;"><span>
@@ -925,7 +925,7 @@ AuthenticationService &lt;|.. InMemoryAuthenticationService
 </span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">_role_from_ast</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">data</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">-&gt;</span> <span style="color:#000">Role</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#8f5902;font-style:italic"># AST -&gt; Role</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">Role</span><span style="color:#000;font-weight:bold">[</span><span style="color:#000">data</span><span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">'name'</span><span style="color:#000;font-weight:bold">]]</span>
 </span></span></code></pre></div></div>
-<div class="col " style="text-align: left;"><figure id="plantuml-figure-1769133905321266224" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
+<div class="col " style="text-align: left;"><figure id="plantuml-figure-1769638366926398295" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
 <p>class Deserializer {
 + deserialize(string) : object
 - _string_to_ast(string) : object
@@ -935,12 +935,12 @@ AuthenticationService &lt;|.. InMemoryAuthenticationService
 }</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1769133905321266224");
+    handlePlantumlFigureByID("plantuml-figure-1769638366926398295");
 </script>
 </div>
 </div>
 </div>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#000">deserializer</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">Deserializer</span><span style="color:#000;font-weight:bold">()</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#000">deserializer</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">Deserializer</span><span style="color:#000;font-weight:bold">()</span>
 </span></span><span style="display:flex;"><span><span style="color:#204a87">print</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">deserializer</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">deserialize</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">to_deserialize</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#000">result</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#8f5902;font-style:italic"># prints True</span>
 </span></span></code></pre></div></section><section>
 <h2 id="analysis-of-the-current-approach">Analysis of the current approach</h2>
@@ -981,7 +981,7 @@ AuthenticationService &lt;|.. InMemoryAuthenticationService
 <h2 id="deserialization-in-python-attempt-2">(De)Serialization in Python (attempt 2)</h2>
 <p><strong>Improvement</strong>: <em>explicitly</em> <em>tag</em> the <em>type</em> of the object to <em>serialize</em> in the <em>AST</em>, and use this tag to <em>select</em> the right method to <em><strong>de</strong>serialize</em></p>
 <div class="container w-100 m-0 p-0">
-    <div class="row "><div class="col col-5" style="text-align: left;"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">from</span> <span style="color:#000">snippets.lab4.users</span> <span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">User</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">Role</span>
+    <div class="row "><div class="col col-5" style="text-align: left;"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">from</span> <span style="color:#000">snippets.lab4.users</span> <span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">User</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">Role</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#000">User</span><span style="color:#000;font-weight:bold">(</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#000">username</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#4e9a06">'gciatto'</span><span style="color:#000;font-weight:bold">,</span>
@@ -997,7 +997,7 @@ AuthenticationService &lt;|.. InMemoryAuthenticationService
 <div class="col col-2" style="text-align: left;"><p>$\xrightarrow{\text{serialization}}$</p>
 <p>$\xleftarrow{\text{deserialization}}$</p>
 </div>
-<div class="col col-5" style="text-align: left;"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#000;font-weight:bold">{</span>
+<div class="col col-5" style="text-align: left;"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#000;font-weight:bold">{</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">"username"</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">"gciatto"</span><span style="color:#000;font-weight:bold">,</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">"emails"</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">[</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#4e9a06">"giovanni.ciatto@unibo.it"</span><span style="color:#000;font-weight:bold">,</span>
@@ -1016,7 +1016,7 @@ AuthenticationService &lt;|.. InMemoryAuthenticationService
 </div>
 <p>Apply these updates to the <code>Serializer</code> and <code>Deserializer</code> classes:</p>
 <div class="container w-100 m-0 p-0">
-    <div class="row "><div class="col " style="text-align: left;"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">class</span> <span style="color:#000">Serializer</span><span style="color:#000;font-weight:bold">:</span>
+    <div class="row "><div class="col " style="text-align: left;"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">class</span> <span style="color:#000">Serializer</span><span style="color:#000;font-weight:bold">:</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic"># rest of the class unchanged</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">_to_ast</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">obj</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#204a87">object</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">-&gt;</span> <span style="color:#204a87">object</span><span style="color:#000;font-weight:bold">:</span>
@@ -1029,7 +1029,7 @@ AuthenticationService &lt;|.. InMemoryAuthenticationService
 </span></span><span style="display:flex;"><span>        <span style="color:#000">result</span><span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">'$type'</span><span style="color:#000;font-weight:bold">]</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#204a87">type</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">obj</span><span style="color:#000;font-weight:bold">)</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">__name__</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">result</span>
 </span></span></code></pre></div></div>
-<div class="col " style="text-align: left;"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">class</span> <span style="color:#000">Deserializer</span><span style="color:#000;font-weight:bold">:</span>
+<div class="col " style="text-align: left;"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">class</span> <span style="color:#000">Deserializer</span><span style="color:#000;font-weight:bold">:</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic"># rest of the class unchanged</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">_ast_to_obj</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">data</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">-&gt;</span> <span style="color:#204a87">object</span><span style="color:#000;font-weight:bold">:</span>
@@ -1074,7 +1074,7 @@ AuthenticationService &lt;|.. InMemoryAuthenticationService
 </li>
 <li>
 <p>Try to figure out how the following object…</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">from</span> <span style="color:#000">snippets.lab4.example0_users</span> <span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">gc_credentials_wrong</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">from</span> <span style="color:#000">snippets.lab4.example0_users</span> <span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">gc_credentials_wrong</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#000">request</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">Request</span><span style="color:#000;font-weight:bold">(</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#000">name</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#4e9a06">'my_function'</span><span style="color:#000;font-weight:bold">,</span>
@@ -1089,7 +1089,7 @@ AuthenticationService &lt;|.. InMemoryAuthenticationService
 </span></span></code></pre></div></li>
 <li>
 <p>… would be serialized as the following JSON</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#000;font-weight:bold">{</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#000;font-weight:bold">{</span>
 </span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">"name"</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">"my_function"</span><span style="color:#000;font-weight:bold">,</span>
 </span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">"args"</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">[</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">{</span> <span style="color:#204a87;font-weight:bold">"id"</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">"giovanni.ciatto@unibo.it"</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">"password"</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">"wrong password"</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">"$type"</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">"Credentials"</span><span style="color:#000;font-weight:bold">},</span>
@@ -1110,7 +1110,7 @@ AuthenticationService &lt;|.. InMemoryAuthenticationService
 </span></span></code></pre></div></li>
 </ol>
 </div>
-<div class="col col-2" style="text-align: left;"><figure id="plantuml-figure-1769133905329929422" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
+<div class="col col-2" style="text-align: left;"><figure id="plantuml-figure-1769638366934139695" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
 <p>class Request {
 + name: str
 + args: tuple
@@ -1122,7 +1122,7 @@ AuthenticationService &lt;|.. InMemoryAuthenticationService
 }</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1769133905329929422");
+    handlePlantumlFigureByID("plantuml-figure-1769638366934139695");
 </script>
 <ol start="6">
 <li>Run with <code>python -m snippets -l 4 -e 1</code></li>
@@ -1226,7 +1226,7 @@ as if the procedure was <em>locally</em> executed, despite the <em>server</em> b
 </li>
 </ul>
 <div class="container w-100 m-0 p-0">
-    <div class="row "><div class="col col-3" style="text-align: left;"><figure id="plantuml-figure-1769133905333169990" class="plantuml" alt="" style="width: 100%;height: 50vh;max-width: 95vw;max-height: 80vh;">
+    <div class="row "><div class="col col-3" style="text-align: left;"><figure id="plantuml-figure-1769638366935751902" class="plantuml" alt="" style="width: 100%;height: 50vh;max-width: 95vw;max-height: 80vh;">
 <p>class Request {
 + name: str
 + args: tuple
@@ -1238,10 +1238,10 @@ as if the procedure was <em>locally</em> executed, despite the <em>server</em> b
 }</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1769133905333169990");
+    handlePlantumlFigureByID("plantuml-figure-1769638366935751902");
 </script>
 </div>
-<div class="col " style="text-align: left;"><figure id="plantuml-figure-1769133905333298289" class="plantuml" alt="" style="width: 100%;height: 50vh;max-width: 95vw;max-height: 80vh;">
+<div class="col " style="text-align: left;"><figure id="plantuml-figure-1769638366935820691" class="plantuml" alt="" style="width: 100%;height: 50vh;max-width: 95vw;max-height: 80vh;">
 <p>@startuml
 hide footbox</p>
 <p>actor Client
@@ -1277,7 +1277,7 @@ end
 @enduml</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1769133905333298289");
+    handlePlantumlFigureByID("plantuml-figure-1769638366935820691");
 </script>
 </div>
 </div>
@@ -1312,7 +1312,7 @@ end
 </ul>
 </li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">from</span> <span style="color:#000">snippets.lab3</span> <span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">Server</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">from</span> <span style="color:#000">snippets.lab3</span> <span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">Server</span>
 </span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">from</span> <span style="color:#000">snippets.lab4.users.impl</span> <span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">InMemoryUserDatabase</span>
 </span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">from</span> <span style="color:#000">snippets.lab4.example1_presentation</span> <span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">serialize</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">deserialize</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">Request</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">Response</span>
 </span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">traceback</span>
@@ -1395,7 +1395,7 @@ end
 </li>
 <li>the <code>RemoteUserDatabase</code> class implements the <code>UserDatabase</code> interface by <em>delegating</em> the <em>actual</em> work to the <code>rpc</code> method</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">from</span> <span style="color:#000">snippets.lab3</span> <span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">Client</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">address</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">from</span> <span style="color:#000">snippets.lab3</span> <span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">Client</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">address</span>
 </span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">from</span> <span style="color:#000">snippets.lab4.users</span> <span style="color:#204a87;font-weight:bold">import</span> <span style="color:#ce5c00;font-weight:bold">*</span>
 </span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">from</span> <span style="color:#000">snippets.lab4.example1_presentation</span> <span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">serialize</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">deserialize</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">Request</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">Response</span>
 </span></span><span style="display:flex;"><span>
@@ -1452,7 +1452,7 @@ end
 </li>
 <li>
 <p>Run the following Python script (cf. <a href="https://github.com/unibo-fc-isi-ds/lab-snippets/blob/master/snippets/lab4/example3_rpc_client.py"><code>snippets.lab4.example3_rpc_client</code> module</a>)</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">from</span> <span style="color:#000">snippets.lab4.example0_users</span> <span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">gc_user</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">gc_credentials_ok</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">gc_credentials_wrong</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">from</span> <span style="color:#000">snippets.lab4.example0_users</span> <span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">gc_user</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">gc_credentials_ok</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">gc_credentials_wrong</span>
 </span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">sys</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>
@@ -1513,7 +1513,7 @@ end
 </li>
 <li>
 <p>Play with the Python module <a href="https://github.com/unibo-fc-isi-ds/lab-snippets/blob/master/snippets/lab4/example4_rpc_client_cli.py"><code>snippets.lab4.example4_rpc_client_cli</code></a></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span>usage: python -m snippets -l 4 -e 4 [-h] [--user USER] [--email EMAIL [EMAIL ...]] [--name NAME] [--role {admin,user}] [--password PASSWORD]
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span>usage: python -m snippets -l 4 -e 4 [-h] [--user USER] [--email EMAIL [EMAIL ...]] [--name NAME] [--role {admin,user}] [--password PASSWORD]
 </span></span><span style="display:flex;"><span>                                    address {add,get,check}
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>RPC client for user database
@@ -1535,7 +1535,7 @@ end
 </span></span></code></pre></div></li>
 <li>
 <p>Consider the following sequence of commands:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span>python -m snippets -l <span style="color:#0000cf;font-weight:bold">4</span> -e <span style="color:#0000cf;font-weight:bold">4</span> SERVER_IP:PORT get -u gciatto
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span>python -m snippets -l <span style="color:#0000cf;font-weight:bold">4</span> -e <span style="color:#0000cf;font-weight:bold">4</span> SERVER_IP:PORT get -u gciatto
 </span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic"># [RuntimeError] User with ID gciatto not found</span>
 </span></span><span style="display:flex;"><span>python -m snippets -l <span style="color:#0000cf;font-weight:bold">4</span> -e <span style="color:#0000cf;font-weight:bold">4</span> SERVER_IP:PORT add -u gciatto -a giovanni.ciatto@unibo.it giovanni.ciatto@gmail.com -n <span style="color:#4e9a06">"Giovanni Ciatto"</span> -r admin -p <span style="color:#4e9a06">"my secret password"</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic"># None</span>
@@ -1647,7 +1647,7 @@ end
 </section><section>
 <h1 id="lecture-is-over">Lecture is Over</h1>
 <br>
-<p>Compiled on: 2026-01-23
+<p>Compiled on: 2026-01-28
  — <a href="?print-pdf&amp;pdfSeparateFragments=false"><i class="fa fa-print" aria-hidden="true"></i> printable version</a></p>
 <p><a href="../#/toc"><i class="fa fa-undo" aria-hidden="true"></i> back to ToC</a></p>
 </section>
